@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://frankgp.com/icon/icomoon/style.css" />
+    <link rel="stylesheet" href="https://frankgp.com/component/global.css" />
+    <link rel="stylesheet" href="https://frankgp.com/wp-assets/style/wp-content.css" />
+
+    <!-- JS -->
+    <script src="https://frankgp.com/component/head.js"></script>
+    <script src="https://frankgp.com/component/header.js"></script>
+    <script src="https://frankgp.com/component/social.js" defer></script>
+    <script src="https://frankgp.com/component/contact.js" defer></script>
+    <script src="https://frankgp.com/component/footer.js"></script>
+
+    <!-- stat -->
+    <script src="https://frankgp.com/stats/send.js" type="module"></script>
+
+    <!-- SEO -->
+    <title>Frank GP — Android Developer</title>
+    <meta name="description" content="Design and Developer Android" />
+    <meta property="og:image" content="https://i0.wp.com/fgp.one/media/fgp-fb-cover.webp" />
+  </head>
+
+  <body>
+    <script src="https://frankgp.com/lib/js/loader.js"></script>
+
+    <header-component></header-component>
+
+    <main class="wp-content dark">
+      <h1>Windows App</h1>
+      <style>
+        .linkContainer {
+          max-width: 30rem;
+          margin: auto;
+          /* text-align: left; */
+          display: flex;
+          flex-direction: column;
+          gap: 0.5em;
+        }
+      </style>
+      <section class="linkContainer"></section>
+      <script>
+        // Assuming you have an array of links
+        const array = [
+        "app", 
+        "Microsoft-Stream", 
+      ];
+
+        let base_url = "https://fgp555.com/";
+        array.forEach((item) => {
+          // Create the <a> element using template string
+          let url = base_url + item;
+          const anchor = `<a href="` + url + `">` + url + `</a>`;
+
+          // Append the <a> element to the container
+          document.querySelector(".linkContainer").insertAdjacentHTML("beforeend", anchor);
+        });
+      </script>
+    </main>
+
+    <section class="social"></section>
+    <!-- <section class="contact"></section> -->
+    <footer-component></footer-component>
+    <fgp-lib>
+      <!-- <script src="https://f-gp.github.io/js/highlight.js" type="module"></script> -->
+      <!-- <script src="https://frankgp.com/lib/js/clipboard.js" defer></script> -->
+      <!-- <script src="https://frankgp.com/web-component/youtube-embed.js"></script> -->
+    </fgp-lib>
+  </body>
+</html>
