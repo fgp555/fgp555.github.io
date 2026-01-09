@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>¿Quieres ser mi novia?</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(135deg, #ff6b9d, #c44569, #f8b500, #ff9ff3);
+        background-size: 400% 400%;
+        animation: gradientShift 8s ease infinite;
+        min-height: 100vh;
+        overflow: hidden;
+        cursor: none;
+      }
+
+      @keyframes gradientShift {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        text-align: center;
+        position: relative;
+        padding: 20px;
+      }
+
+      .hearts {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .heart {
+        position: absolute;
+        color: #fff;
+        font-size: 20px;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(100vh) rotate(0deg);
+          opacity: 0;
+        }
+        10%,
+        90% {
+          opacity: 1;
+        }
+        50% {
+          transform: translateY(-100px) rotate(180deg);
+        }
+      }
+
+      .question {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 40px;
+        border-radius: 25px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        margin-bottom: 50px;
+        position: relative;
+        z-index: 10;
+        max-width: 600px;
+      }
+
+      h1 {
+        color: #c44569;
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .subtitle {
+        color: #666;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+      }
+
+      .buttons-container {
+        display: flex;
+        justify-content: center;
+        gap: 100px;
+        margin-top: 30px;
+        position: relative;
+        height: 80px;
+        align-items: center;
+      }
+
+      .btn {
+        padding: 15px 40px;
+        font-size: 1.4em;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: absolute;
+        z-index: 5;
+      }
+
+      .btn-yes {
+        background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+        color: white;
+        box-shadow: 0 8px 25px rgba(86, 171, 47, 0.4);
+      }
+
+      .btn-yes:hover {
+        transform: translateY(-3px) scale(1.1);
+        box-shadow: 0 15px 35px rgba(86, 171, 47, 0.6);
+      }
+
+      .btn-no {
+        background: linear-gradient(45deg, #ff416c, #ff4757);
+        color: white;
+        box-shadow: 0 8px 25px rgba(255, 65, 108, 0.4);
+        transition: all 0.1s ease;
+      }
+
+      .custom-cursor {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        background: radial-gradient(circle, #ff6b9d, #c44569);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 20px rgba(255, 107, 157, 0.8);
+      }
+
+      .success-message {
+        display: none;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 50px;
+        border-radius: 25px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        text-align: center;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 100;
+        max-width: 500px;
+      }
+
+      .success-message h2 {
+        color: #56ab2f;
+        font-size: 2.5em;
+        margin-bottom: 20px;
+      }
+
+      .success-message p {
+        color: #666;
+        font-size: 1.3em;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 768px) {
+        .question {
+          padding: 30px 20px;
+          margin: 20px;
+        }
+
+        h1 {
+          font-size: 2em;
+        }
+
+        .buttons-container {
+          gap: 80px;
+        }
+
+        .btn {
+          padding: 12px 25px;
+          font-size: 1.1em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="custom-cursor" id="cursor"></div>
+
+    <div class="hearts" id="hearts"></div>
+
+    <div class="container">
+      <div class="question">
+        <h1>¿Quieres ser mi novia?</h1>
+        <p class="subtitle">Esta es la pregunta más importante de mi vida...</p>
+
+        <div class="buttons-container">
+          <button class="btn btn-yes" id="yesBtn">¡SÍ!</button>
+          <button class="btn btn-no" id="noBtn">No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="success-message" id="successMessage">
+      <h2>¡Qué lindo decir que sí! 💕✨</h2>
+      <p>
+        Gracias por animarte conmigo.<br />
+        Me hace muy feliz empezar esta nueva etapa juntos,<br />
+        con calma, risas y muchas ganas de ver qué construimos. 💛
+      </p>
+    </div>
+
+    <script>
+      // Cursor personalizado
+      const cursor = document.getElementById("cursor");
+      let mouseX = 0,
+        mouseY = 0;
+
+      document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursor.style.left = mouseX + "px";
+        cursor.style.top = mouseY + "px";
+      });
+
+      // Elementos de los botones
+      const yesBtn = document.getElementById("yesBtn");
+      const noBtn = document.getElementById("noBtn");
+      const successMessage = document.getElementById("successMessage");
+
+      // Posición inicial del botón No
+      noBtn.style.left = "200px";
+      noBtn.style.top = "0px";
+
+      // Posición inicial del botón Sí
+      yesBtn.style.left = "0px";
+      yesBtn.style.top = "0px";
+
+      // Función para mover el botón No cuando el mouse se acerca
+      document.addEventListener("mousemove", (e) => {
+        const rect = noBtn.getBoundingClientRect();
+        const btnCenterX = rect.left + rect.width / 2;
+        const btnCenterY = rect.top + rect.height / 2;
+
+        const distance = Math.sqrt(Math.pow(e.clientX - btnCenterX, 2) + Math.pow(e.clientY - btnCenterY, 2));
+
+        // Si el mouse está cerca del botón No (dentro de 150px)
+        if (distance < 150) {
+          const angle = Math.random() * 2 * Math.PI;
+          const moveDistance = 100 + Math.random() * 100;
+
+          let newX = Math.cos(angle) * moveDistance;
+          let newY = Math.sin(angle) * moveDistance;
+
+          // Mantener el botón dentro de los límites de la pantalla
+          const maxX = window.innerWidth - rect.width - 50;
+          const maxY = window.innerHeight - rect.height - 50;
+
+          newX = Math.max(-200, Math.min(newX, maxX - btnCenterX + rect.width / 2));
+          newY = Math.max(-100, Math.min(newY, maxY - btnCenterY + rect.height / 2));
+
+          noBtn.style.transform = `translate(${newX}px, ${newY}px)`;
+        }
+
+        // Hacer que el botón Sí se acerque al mouse
+        const yesRect = yesBtn.getBoundingClientRect();
+        const yesCenterX = yesRect.left + yesRect.width / 2;
+        const yesCenterY = yesRect.top + yesRect.height / 2;
+
+        const yesDistance = Math.sqrt(Math.pow(e.clientX - yesCenterX, 2) + Math.pow(e.clientY - yesCenterY, 2));
+
+        if (yesDistance < 200 && yesDistance > 50) {
+          const attractionX = (e.clientX - yesCenterX) * 0.1;
+          const attractionY = (e.clientY - yesCenterY) * 0.1;
+
+          yesBtn.style.transform = `translate(${attractionX}px, ${attractionY}px)`;
+        }
+      });
+
+      // Evento click del botón Sí
+      let heartsInterval; // variable global
+
+      yesBtn.addEventListener("click", () => {
+        document.body.style.background = "linear-gradient(135deg, #56ab2f, #a8e6cf, #ffeaa7, #fab1a0)";
+        successMessage.style.display = "block";
+
+        // Explosión inicial de corazones
+        for (let i = 0; i < 50; i++) {
+          setTimeout(() => createHeart(), i * 100);
+        }
+
+        // 💕 Corazones continuos SOLO después del "Sí"
+        heartsInterval = setInterval(createHeart, 800);
+      });
+
+      // Crear corazones flotantes
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = ["💖", "💕", "💗", "💘", "💝", "💟"][Math.floor(Math.random() * 6)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDelay = Math.random() * 6 + "s";
+        heart.style.fontSize = Math.random() * 20 + 15 + "px";
+
+        document.getElementById("hearts").appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 6000);
+      }
+
+      // Crear corazones iniciales
+      // setInterval(createHeart, 800);
+
+      // Intentar hacer clic en el botón No (será muy difícil)
+      noBtn.addEventListener("click", () => {
+        alert("¡Ups! Parece que el botón se movió justo a tiempo 😉");
+      });
+    </script>
+  </body>
+</html>

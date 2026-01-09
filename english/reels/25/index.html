@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Reels</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <section id="viewer">Cargando...</section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/5.1.1/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+      async function loadMarkdown() {
+        const viewer = document.getElementById("viewer");
+
+        // Lista manual de archivos
+        const filesData = ["10", "11"];
+
+        // URL: ?2510&17 → file="2510.md", section="17"
+        const params = window.location.search.substring(1).split("&").filter(Boolean);
+        const file = params[0]; // 2510
+        const section = params[1]; // 17 o undefined
+
+        // Cambiar el <title> dinámicamente
+        if (file && section) {
+          document.title = `${file}&${section} reels`;
+        } else if (file) {
+          document.title = `${file} reels`;
+        } else {
+          document.title = "reels";
+        }
+
+        // ✅ 1) No hay parámetros → mostrar lista de archivos
+        if (!file) {
+          viewer.innerHTML = `
+        <h2>Archivos disponibles</h2>
+        <ul>
+          ${filesData.map((f) => `<li><a href="?${f}">${f}.md</a></li>`).join("")}
+        </ul>
+        <hr>
+        <p>Para ver una sección específica:</p>
+        <code>?2510&1</code>
+      `;
+          return;
+        }
+
+        try {
+          // ✅ 2) Cargar archivo markdown: 2510.md
+          const res = await fetch(`${file}.md`);
+          const text = await res.text();
+
+          // ✅ 3) Si solo hay archivo (ej: ?2510) → mostrar completo
+          if (!section) {
+            marked.setOptions({
+              highlight: (code) => {
+                try {
+                  return hljs.highlightAuto(code).value;
+                } catch {
+                  return code;
+                }
+              },
+            });
+
+            viewer.innerHTML = marked.parse(text);
+            document.querySelectorAll("pre code").forEach((el) => hljs.highlightElement(el));
+            return;
+          }
+
+          // ✅ 4) Buscar sección específica (# 17)
+          const regex = new RegExp(`(^|\\n)# ${section}[\\s\\S]*?(?=\\n# |$)`);
+          const match = text.match(regex);
+
+          if (!match) {
+            viewer.innerHTML = `<p>No se encontró la sección <strong># ${section}</strong> en <code>${file}.md</code></p>`;
+            return;
+          }
+
+          const mdSection = match[0].trim();
+
+          marked.setOptions({
+            highlight: (code) => {
+              try {
+                return hljs.highlightAuto(code).value;
+              } catch {
+                return code;
+              }
+            },
+          });
+
+          viewer.innerHTML = marked.parse(mdSection);
+          document.querySelectorAll("pre code").forEach((el) => hljs.highlightElement(el));
+        } catch (e) {
+          viewer.innerHTML = `<p>Error cargando <code>${file}.md</code>: ${e}</p>`;
+        }
+      }
+
+      loadMarkdown();
+    </script>
+  </body>
+</html>

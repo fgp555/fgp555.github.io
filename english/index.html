@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Notes</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.min.css" />
+    <style>
+      body {
+        margin: 0;
+      }
+      main {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 45px;
+      }
+      nav {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        background-color: #f4f4f4;
+      }
+      nav a {
+        text-decoration: none;
+        color: #000;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body class="markdown-body">
+    <header>
+      <nav>
+        <a href="?file=readme.md">readme</a>
+      </nav>
+    </header>
+    <main id="markdown-content"></main>
+
+    <script>
+      marked.setOptions({
+        gfm: true,
+        breaks: true,
+        headerIds: true,
+      });
+
+      // --- Aquí se obtiene el parámetro 'file' de la URL ---
+      const params = new URLSearchParams(window.location.search);
+      const file = params.get("file") || "readme.md"; // usa parámetro o default
+
+      fetch(file + "?2025_04_29")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Archivo no encontrado");
+          }
+          return response.text();
+        })
+        .then((text) => {
+          const html = marked.parse(text);
+          document.getElementById("markdown-content").innerHTML = html;
+          import("https://frank-gp.github.io/lib/highlight.js");
+        })
+        .catch((error) => {
+          console.error("Error cargando el Markdown:", error);
+          document.getElementById("markdown-content").innerHTML =
+            "<p><strong>Error cargando el archivo Markdown.</strong></p>";
+        });
+    </script>
+  </body>
+</html>
