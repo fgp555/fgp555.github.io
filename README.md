@@ -1,15 +1,16 @@
 # fgp555.github.io
 
-# Reels
+```sh
+whisper video.mp4 --model medium --output_format srt --language English
+```
 
-> - https://note.frankgp.com/english/reels/26?01&10
-> - https://note.frankgp.com/english/reels/26?01&09
-> - https://note.frankgp.com/english/reels/26?01&08
-> - https://note.frankgp.com/english/reels/26?01&07
-> - https://note.frankgp.com/english/reels/26?01&06
-> - https://note.frankgp.com/english/reels/26?01&05
-> - https://note.frankgp.com/english/reels/26?01&04
+# Reels 2026
+
+> - https://note.frankgp.com/english/reels/26?02
 > - https://note.frankgp.com/english/reels/26?01
+
+# Reels 2025
+
 > - https://note.frankgp.com/english/reels/25?12
 > - https://note.frankgp.com/english/reels/25?11
 > - https://note.frankgp.com/english/reels/25?10
@@ -22,3 +23,7 @@
 # App
 
 > - https://note.frankgp.com/english/app/markdown-pdf.html
+
+# JSON
+
+> - https://note.frankgp.com/json/maintenance.json
