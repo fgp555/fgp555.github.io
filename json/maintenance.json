@@ -1,0 +1,6 @@
+{
+  "id": 6,
+  "key": "maintenance_status",
+  "type": "json",
+  "value": "{\"mode\":\"off\",\"title\":\"Aviso de mantenimiento\",\"message\":\"Estimado usuario, estaremos en mantenimiento el día 14 de marzo a las 3PM. Gracias por su comprensión.\"}"
+}
