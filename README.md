@@ -6,6 +6,7 @@ whisper video.mp4 --model medium --output_format srt --language English
 
 # Reels 2026
 
+> - https://note.frankgp.com/english/reels/26?03
 > - https://note.frankgp.com/english/reels/26?02
 > - https://note.frankgp.com/english/reels/26?01
 

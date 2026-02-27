@@ -1,0 +1,327 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial;
+  background: #0f172a;
+  color: #fff;
+  margin: 0;
+}
+
+.container {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+input,
+button {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 8px;
+  border: none;
+}
+
+input {
+  width: 100%;
+}
+#search {
+  margin: 1rem 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+.card {
+  position: relative;
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 12px;
+  width: 100%;
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: space-between;
+  p,
+  h3 {
+    margin: 0;
+    padding: 0;
+  }
+  p {
+    font-size: 0.8rem;
+  }
+}
+/* Ver */
+.btn-view:hover {
+  background: #0ea5e9;
+}
+.btn-view:active {
+  background: #0369a1;
+}
+
+/* User */
+.btn-user:hover {
+  background: #a78bfa;
+}
+.btn-user:active {
+  background: #6d28d9;
+}
+
+/* Password */
+.btn-pass:hover {
+  background: #22c55e;
+}
+.btn-pass:active {
+  background: #15803d;
+}
+
+/* URL */
+.btn-url:hover {
+  background: #38bdf8;
+}
+.btn-url:active {
+  background: #0284c7;
+}
+
+/* Editar */
+.btn-edit:hover {
+  background: #eab308;
+}
+.btn-edit:active {
+  background: #a16207;
+}
+
+/* Eliminar */
+.btn-delete:hover {
+  background: #ef4444;
+}
+.btn-delete:active {
+  background: #991b1b;
+}
+
+.actions button {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.actions button:hover {
+  background: #334155;
+  color: #fff;
+}
+
+.actions button:active {
+  transform: scale(0.9);
+}
+
+.btn-edit:hover {
+  color: #eab308;
+}
+.btn-delete:hover {
+  color: #ef4444;
+}
+
+.actions {
+  opacity: 0;
+}
+
+.card:hover .actions {
+  opacity: 1;
+}
+
+.flex {
+  display: flex;
+  gap: 10px;
+}
+
+.topbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+}
+
+.actions {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 5px;
+  button {
+    font-size: 0.7rem;
+    padding: 0.5rem;
+    opacity: 0.8;
+  }
+  button:hover {
+    opacity: 1;
+  }
+}
+
+/* 🔐 Password input */
+.input-group {
+  position: relative;
+}
+
+.input-group input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.input-group i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #94a3b8;
+  transition: 0.2s;
+}
+
+.input-group i:hover {
+  color: #fff;
+}
+
+/* 📊 GRID 2 COLUMNAS A LA DERECHA */
+#list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 15px;
+}
+
+.url {
+  display: inline-block;
+  max-width: 40ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  color: #38bdf8;
+}
+
+input[type="file"] {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  width: initial;
+}
+
+input[type="file"]::file-selector-button {
+  background: #1e293b;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: 0.2s;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background: #38bdf8;
+}
+
+input[type="file"]::file-selector-button:active {
+  background: #0284c7;
+  transform: scale(0.97);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.icon-btn:hover {
+  background: #334155;
+  color: #fff;
+}
+
+.icon-btn:active {
+  transform: scale(0.9);
+}
+
+/* Colores específicos */
+.btn-user:hover {
+  color: #a78bfa;
+}
+.btn-pass:hover {
+  color: #22c55e;
+}
+.btn-view:hover {
+  color: #38bdf8;
+}
+.btn-url:hover {
+  color: #0ea5e9;
+}
+
+.date {
+  text-align: right;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-top: 8px;
+}
+
+.click-copy {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.click-copy:hover {
+  color: #38bdf8;
+}
+
+.file-label {
+  background: #1e293b;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  display: inline-block;
+}
+
+.file-label:hover {
+  background: #38bdf8;
+}
+
+.file-label:active {
+  background: #0284c7;
+  transform: scale(0.97);
+}
+
+.editing {
+  outline: 2px solid #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
+  transition: 0.3s;
+}
+
+.highlight {
+  outline: 2px solid #22c55e;
+  box-shadow: 0 0 12px #22c55e;
+  transition: 0.3s;
+}
+
+h3.click-copy:hover {
+  color: #38bdf8;
+}
+
+/* 📱 Responsive */
+@media (max-width: 600px) {
+  #list {
+    grid-template-columns: 1fr;
+  }
+}
