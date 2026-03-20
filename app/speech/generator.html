@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Generador de Speech Call Center</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #0f172a;
+        color: #fff;
+        padding: 20px;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: #1e293b;
+        padding: 20px;
+        border-radius: 10px;
+      }
+      input,
+      textarea,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 6px;
+        border: none;
+      }
+      button {
+        background: #22c55e;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      button:hover {
+        background: #16a34a;
+      }
+      #output {
+        margin-top: 20px;
+        background: #020617;
+        padding: 15px;
+        border-radius: 8px;
+        white-space: pre-line;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>📞 Generador de Speech</h2>
+
+      <input type="text" id="asesor" placeholder="Nombre del asesor" />
+      <input type="text" id="cliente" placeholder="Nombre del cliente" />
+      <input type="text" id="problema" placeholder="Problema del cliente" />
+      <textarea id="solucion" placeholder="Solución"></textarea>
+
+      <button onclick="generarSpeech()">Generar Speech</button>
+
+      <div id="output"></div>
+    </div>
+
+    <script>
+      function generarSpeech() {
+        const asesor = document.getElementById("asesor").value;
+        const cliente = document.getElementById("cliente").value;
+        const problema = document.getElementById("problema").value;
+        const solucion = document.getElementById("solucion").value;
+
+        const speech = `
+📞 BIENVENIDA
+Buenos días/tardes/noches, le saluda ${asesor} y estaré a cargo de su atención.
+Encantado de saludarle ${cliente}, ¿en qué lo puedo ayudar?
+
+🔎 SONDEO
+Entonces, usted me indica que ${problema}, ¿correcto?
+
+🤝 EMPATÍA
+Comprendo la molestia que esto le genera, no se preocupe, estoy aquí para ayudarle.
+
+🛠️ SOLUCIÓN
+${solucion}
+
+💬 VALIDACIÓN
+¿La información brindada ha sido clara?
+
+👋 DESPEDIDA
+Espero haberle ayudado con su consulta.
+Gracias por comunicarse, que tenga un excelente día.
+`;
+
+        document.getElementById("output").textContent = speech;
+      }
+    </script>
+  </body>
+</html>
