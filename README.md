@@ -4,6 +4,10 @@
 whisper video.mp4 --model medium --output_format srt --language English
 ```
 
+# Guion Youtube - Frank & Ivana
+
+> - https://note.frankgp.com/videos/260401-git-flow
+
 # Reels 2026
 
 > - https://note.frankgp.com/english/reels/26?03
