@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Video Player Pro</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.8.3/plyr.min.css" />
+
+    <style>
+      body {
+        background: #0f172a;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 15px;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: auto;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 20px;
+      }
+
+      .player-container video {
+        width: 100%;
+        max-height: 50rem;
+        border-radius: 10px;
+      }
+
+      /* 🔥 INFO VIDEO */
+      .video-info {
+        margin-top: 15px;
+        background: #1e293b;
+        padding: 15px;
+        border-radius: 10px;
+      }
+
+      .video-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .video-description {
+        font-size: 14px;
+        color: #cbd5f5;
+        line-height: 1.5;
+      }
+
+      .playlist {
+        max-height: 50rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .card {
+        background: #1e293b;
+        border-radius: 10px;
+        padding: 12px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .card:hover {
+        background: #334155;
+      }
+
+      .card.active {
+        background: #475569;
+        border-left: 4px solid #38bdf8;
+      }
+
+      .title {
+        font-size: 15px;
+        font-weight: bold;
+      }
+
+      .description {
+        font-size: 13px;
+        color: #cbd5f5;
+      }
+
+      /* 📱 MOBILE */
+      @media (max-width: 768px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .playlist {
+          max-height: none;
+        }
+
+        .player-container video {
+          max-height: 60vh;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="layout">
+        <!-- 🎬 PLAYER + INFO -->
+        <div>
+          <div class="player-container">
+            <video id="player" playsinline controls></video>
+          </div>
+
+          <div class="video-info">
+            <div id="videoTitle" class="video-title"></div>
+            <div id="videoDescription" class="video-description"></div>
+          </div>
+        </div>
+
+        <!-- 📺 PLAYLIST -->
+        <div class="playlist" id="playlist"></div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.8.3/plyr.min.js"></script>
+
+    <script>
+      // 🔥 ARRAY CON ID + DESCRIPCIÓN LARGA
+      const videos = [
+        {
+          id: "video1",
+          title: "Video 1 - Demo",
+          description: "Resumen corto del video",
+          longDescription:
+            "Esta es una descripción larga del video 1. Aquí puedes explicar detalles, contenido, pasos, enlaces, etc.",
+          src: "https://pub-c96c7ca6a3074d61ac04fdf647a50a8e.r2.dev/videos/uploadclothes.mp4",
+        },
+        {
+          id: "cambiar-pass-inicial",
+          title: "Cómo cambiar tu contraseña temporal",
+          description: "Cómo actualizar tu contraseña inicial de forma segura",
+          longDescription:
+            "En este tutorial te muestro paso a paso cómo actualizar tu contraseña en tu primer inicio de sesión, de forma rápida y segura. Ideal si acabas de crear una cuenta o te asignaron un acceso nuevo.",
+          src: "https://pub-58f262c124f742b7af87394003f8ffd8.r2.dev/tutoriales/fgp_cambio_de_clave_unica.mp4",
+        },
+      ];
+
+      const player = new Plyr("#player");
+      const playlist = document.getElementById("playlist");
+
+      const titleEl = document.getElementById("videoTitle");
+      const descEl = document.getElementById("videoDescription");
+
+      let activeIndex = 0;
+
+      function loadVideo(index, updateURL = true) {
+        const video = videos[index];
+        activeIndex = index;
+
+        player.source = {
+          type: "video",
+          sources: [{ src: video.src, type: "video/mp4" }],
+        };
+
+        // 🔥 actualizar info
+        titleEl.textContent = video.title;
+        descEl.textContent = video.longDescription;
+
+        // 🔥 actualizar URL
+        if (updateURL) {
+          const url = new URL(window.location);
+          url.searchParams.set("id", video.id);
+          window.history.replaceState({}, "", url);
+        }
+
+        // UI activa
+        document.querySelectorAll(".card").forEach((card, i) => {
+          card.classList.toggle("active", i === index);
+        });
+
+        player.play();
+      }
+
+      // 🎯 leer ID desde URL
+      function getVideoFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
+
+        if (!id) return 0;
+
+        const index = videos.findIndex((v) => v.id === id);
+        return index !== -1 ? index : 0;
+      }
+
+      // render lista
+      videos.forEach((video, index) => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+      <div class="title">${video.title}</div>
+      <div class="description">${video.description}</div>
+    `;
+
+        card.onclick = () => loadVideo(index);
+
+        playlist.appendChild(card);
+      });
+
+      // autoplay siguiente
+      player.on("ended", () => {
+        let next = activeIndex + 1;
+        if (next < videos.length) {
+          loadVideo(next);
+        }
+      });
+
+      // 🔥 cargar desde URL o default
+      const startIndex = getVideoFromURL();
+      loadVideo(startIndex, false);
+    </script>
+  </body>
+</html>

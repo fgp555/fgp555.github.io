@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Video Player Pro</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.8.3/plyr.min.css" />
+
+    <style>
+      body {
+        background: #0f172a;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 15px;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: auto;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 20px;
+      }
+
+      /* PLAYER */
+      .video-wrapper {
+        position: relative;
+      }
+
+      .player-container video {
+        width: 100%;
+        max-height: 50rem;
+        border-radius: 10px;
+      }
+
+      /* 🔥 LOADER */
+      .loader {
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(255, 255, 255, 0.2);
+        border-top: 4px solid #38bdf8;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* INFO */
+      .video-info {
+        margin-top: 15px;
+        background: #1e293b;
+        padding: 15px;
+        border-radius: 10px;
+      }
+
+      .video-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .video-description {
+        font-size: 14px;
+        color: #cbd5f5;
+      }
+
+      /* PLAYLIST */
+      .playlist {
+        max-height: 50rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .card {
+        background: #1e293b;
+        border-radius: 10px;
+        padding: 12px;
+        cursor: pointer;
+      }
+
+      .card.active {
+        background: #475569;
+        border-left: 4px solid #38bdf8;
+      }
+
+      /* 🔥 SKELETON */
+      .skeleton {
+        background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: 6px;
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: -200% 0;
+        }
+        100% {
+          background-position: 200% 0;
+        }
+      }
+
+      .skeleton-text {
+        height: 12px;
+        margin-bottom: 8px;
+      }
+
+      .skeleton-title {
+        height: 16px;
+        width: 70%;
+        margin-bottom: 10px;
+      }
+
+      .categories {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+        overflow-x: auto;
+      }
+
+      .cat-btn {
+        padding: 6px 12px;
+        background: #1e293b;
+        border-radius: 20px;
+        cursor: pointer;
+        white-space: nowrap;
+        font-size: 13px;
+      }
+
+      .cat-btn.active {
+        background: #38bdf8;
+        color: #000;
+      }
+
+      /* MOBILE */
+      @media (max-width: 768px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div id="categories" class="categories"></div>
+      <div class="layout">
+        <!-- PLAYER -->
+        <div>
+          <div class="player-container">
+            <div class="video-wrapper">
+              <video id="player" playsinline controls></video>
+
+              <div id="loader" class="loader">
+                <div class="spinner"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- INFO -->
+          <div class="video-info" id="videoInfo">
+            <div id="videoTitle" class="video-title skeleton skeleton-title"></div>
+            <div id="videoDescription">
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PLAYLIST -->
+        <div class="playlist" id="playlist"></div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.8.3/plyr.min.js"></script>
+
+    <script>
+      const videos = [
+        {
+          id: "video1",
+          category: "General",
+          title: "Video 1 - Demo",
+          description: "Resumen corto",
+          longDescription: "Descripción larga del video 1.",
+          src: "https://pub-c96c7ca6a3074d61ac04fdf647a50a8e.r2.dev/videos/uploadclothes.mp4",
+        },
+        {
+          id: "cambiar-pass-inicial",
+          category: "Tutoriales",
+          title: "Cómo cambiar tu contraseña temporal",
+          description: "Cómo actualizar tu contraseña",
+          longDescription: "Tutorial completo paso a paso.",
+          src: "https://pub-58f262c124f742b7af87394003f8ffd8.r2.dev/tutoriales/fgp_cambio_de_clave_unica.mp4",
+        },
+      ];
+
+      const player = new Plyr("#player");
+      const videoEl = document.querySelector("#player");
+
+      const playlist = document.getElementById("playlist");
+      const loader = document.getElementById("loader");
+
+      const titleEl = document.getElementById("videoTitle");
+      const descEl = document.getElementById("videoDescription");
+
+      const categoriesEl = document.getElementById("categories");
+
+      let activeIndex = 0;
+      let activeCategory = "All";
+      let filteredVideos = [...videos];
+      let loaderTimeout;
+
+      /* =========================
+   🔥 LOADER
+========================= */
+      function showLoader() {
+        loader.classList.remove("hidden");
+
+        clearTimeout(loaderTimeout);
+        loaderTimeout = setTimeout(hideLoader, 4000);
+      }
+
+      function hideLoader() {
+        loader.classList.add("hidden");
+      }
+
+      /* =========================
+   🔥 VIDEO STATE
+========================= */
+      function checkReady() {
+        if (videoEl.readyState >= 3 && !videoEl.paused && videoEl.currentTime > 0) {
+          hideLoader();
+        }
+      }
+
+      videoEl.addEventListener("playing", hideLoader);
+      videoEl.addEventListener("canplay", hideLoader);
+      videoEl.addEventListener("loadeddata", hideLoader);
+
+      videoEl.addEventListener("waiting", () => {
+        if (videoEl.readyState < 3) showLoader();
+      });
+
+      videoEl.addEventListener("timeupdate", checkReady);
+
+      /* =========================
+   🔥 INFO
+========================= */
+      function fillInfo(video) {
+        titleEl.classList.remove("skeleton", "skeleton-title");
+        titleEl.textContent = video.title;
+        descEl.innerHTML = video.longDescription;
+      }
+
+      /* =========================
+   🔥 LOAD VIDEO
+========================= */
+      function loadVideo(index, updateURL = true) {
+        const video = filteredVideos[index];
+        activeIndex = index;
+
+        showLoader();
+
+        videoEl.pause();
+        videoEl.removeAttribute("src");
+        videoEl.load();
+
+        titleEl.className = "video-title skeleton skeleton-title";
+        descEl.innerHTML = `
+    <div class="skeleton skeleton-text"></div>
+    <div class="skeleton skeleton-text"></div>
+  `;
+
+        player.source = {
+          type: "video",
+          sources: [{ src: video.src, type: "video/mp4" }],
+        };
+
+        if (updateURL) {
+          const url = new URL(window.location);
+          url.searchParams.set("id", video.id);
+          url.searchParams.set("cat", activeCategory);
+          window.history.replaceState({}, "", url);
+        }
+
+        document.querySelectorAll(".card").forEach((card, i) => {
+          card.classList.toggle("active", i === index);
+        });
+
+        player.once("playing", hideLoader);
+        player.play().catch(() => {});
+
+        setTimeout(() => fillInfo(video), 300);
+      }
+
+      /* =========================
+   🔥 CATEGORÍAS
+========================= */
+      function renderCategories() {
+        const cats = ["All", ...new Set(videos.map((v) => v.category))];
+
+        categoriesEl.innerHTML = "";
+
+        cats.forEach((cat) => {
+          const btn = document.createElement("div");
+          btn.className = "cat-btn";
+          btn.textContent = cat;
+
+          if (cat === activeCategory) btn.classList.add("active");
+
+          btn.onclick = () => {
+            activeCategory = cat;
+            filterVideos();
+            renderCategories();
+          };
+
+          categoriesEl.appendChild(btn);
+        });
+      }
+
+      function filterVideos() {
+        filteredVideos = activeCategory === "All" ? [...videos] : videos.filter((v) => v.category === activeCategory);
+
+        renderList();
+
+        if (filteredVideos.length > 0) {
+          loadVideo(0);
+        }
+      }
+
+      /* =========================
+   🔥 PLAYLIST
+========================= */
+      function renderList() {
+        playlist.innerHTML = "";
+
+        filteredVideos.forEach((video, index) => {
+          const card = document.createElement("div");
+          card.className = "card";
+
+          card.innerHTML = `
+      <div class="title">${video.title}</div>
+      <div class="description">${video.description}</div>
+    `;
+
+          card.onclick = () => loadVideo(index);
+
+          playlist.appendChild(card);
+        });
+      }
+
+      /* =========================
+   🔥 URL
+========================= */
+      function initFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
+        const cat = params.get("cat");
+
+        if (cat) activeCategory = cat;
+
+        filterVideos();
+
+        const index = filteredVideos.findIndex((v) => v.id === id);
+        loadVideo(index !== -1 ? index : 0, false);
+      }
+
+      /* =========================
+   🔥 INIT
+========================= */
+      renderCategories();
+      initFromURL();
+
+      /* =========================
+   🔥 AUTOPLAY
+========================= */
+      player.on("ended", () => {
+        let next = activeIndex + 1;
+        if (next < filteredVideos.length) {
+          loadVideo(next);
+        }
+      });
+    </script>
+  </body>
+</html>
