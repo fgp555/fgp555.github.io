@@ -18,3 +18,5 @@ node_modules
 prepros.config
 dev.html
 *dev.*
+
+*.private*

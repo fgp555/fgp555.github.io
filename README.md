@@ -4,6 +4,11 @@
 whisper video.mp4 --model medium --output_format srt --language English
 ```
 
+# Speech
+
+> - https://note.frankgp.com/speech/mario-v-elogio
+> - https://note.frankgp.com/speech/260401-danzel-en
+
 # Guion Youtube - Frank & Ivana
 
 > - https://note.frankgp.com/videos/260401-git-flow
@@ -14,20 +19,9 @@ whisper video.mp4 --model medium --output_format srt --language English
 > - https://note.frankgp.com/english/reels/26?02
 > - https://note.frankgp.com/english/reels/26?01
 
-# Reels 2025
-
-> - https://note.frankgp.com/english/reels/25?12
-> - https://note.frankgp.com/english/reels/25?11
-> - https://note.frankgp.com/english/reels/25?10
-> - https://note.frankgp.com/english/reels
-
-# Music
-
-> - https://note.frankgp.com/english/music/all-of-me
-
 # App
 
-> - https://note.frankgp.com/english/app/markdown-pdf.html
+> - https://note.frankgp.com/app/markdown-pdf.html
 
 # JSON
 
