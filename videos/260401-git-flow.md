@@ -2,61 +2,56 @@
 
 ## Git Flow
 
-💡 Concepto de Git Flow
+### Files & Directory
 
-Git Flow es una forma de organizar el trabajo en equipo usando ramas (branches) en Git, para que varias personas puedan desarrollar sin romper el proyecto.
-
-En lugar de que todos trabajen sobre una sola versión del código, cada persona trabaja en su propia rama y luego se integran los cambios de forma ordenada.
-
-🧠 En palabras simples
-
-Git Flow es un flujo de trabajo que te dice:
-dónde trabajar, cuándo integrar cambios y cómo evitar errores en equipo
+```sh
+# Ctrl + L                         # Clear terminal
+cd myfolder                        # Change directory to "myfolder"
+cd ..                              # Move up one directory level
+ls                                 # List files and directories in the current folder
+ls -a                              # List all files, including hidden ones (starting with .)
+```
 
 ### Git
 
 ```sh
 git init                              # Initialize a new Git repository
-git add .                             # Stage all files (prepare them for commit)
-git commit -m "my first commit"       # Save changes with a descriptive message
-
 git status                            # Show the current state of the working directory and staging area
+git restore .                         # Discard unstaged changes in tracked files (restore to last commit)
+git clean -fd                         # Remove untracked files and directories ⚠️ irreversible
+
+git add .                             # Stage all files (prepare them for commit)
+git commit -m "my first commit"       # Create a commit with a descriptive message
 git log --oneline -3                  # Show the last 3 commits in a compact format
+git commit --amend --no-edit          # Modify the last commit without changing its message
+
+git checkout HEAD~1                   # Checkout the previous commit (detached HEAD state)
+git checkout 5edd0a2                  # Checkout a specific commit by hash (detached HEAD)
 
 git checkout -b mybranch              # Create and switch to a new branch
-git checkout mybranch                 # Switch to an existing branch
 git branch                            # List all local branches
+git checkout mybranch                 # Switch to an existing branch
 
-git branch -m master main             # Rename a branch (e.g. master → main)
+git branch -m master main             # Rename a branch (e.g. master → main), fails if "main" exists
 git branch -M main                    # Force rename current branch to "main" (overwrite if exists)
 
 git branch -d mybranch                # Delete a branch (only if already merged)
 git branch -D mybranch                # Force delete a branch (even if not merged ⚠️)
 
+rm -rf .git                           # Delete the entire Git repository (removes version control history ⚠️)
 ```
-
-💡 Concepto de GitHub
-
-GitHub es una plataforma en la nube donde puedes guardar, compartir y colaborar en proyectos de código usando Git.
-
-🧠 En palabras simples
-
-GitHub es como “la nube de tus proyectos”,
-donde tu equipo puede ver, descargar y trabajar sobre el mismo código.
 
 ### GitHub
 
 ```sh
 git clone https://github.com/fgp555/myrepo.git                  # Clone a remote repository to your local machine
-git remote add origin https://github.com/fgp555/myrepo.git      # Add a remote repository named "origin"
 git remote set-url origin https://github.com/fgp555/myrepo.git  # Update the URL of the existing remote "origin"
 git remote -v                      # Show all configured remote repositories and their URLs
-git remote remove origin           # Remove the remote connection named "origin"
 
 git push -u origin main            # Push "main" to remote and set upstream tracking
-git push origin main --force       # Force push (overwrites history ⚠️ use carefully)
-
 git pull                           # Fetch and merge changes from remote
+
+git push --force                   # Force push (overwrites history ⚠️ use carefully)
 git pull --rebase                  # Fetch changes and reapply local commits (cleaner history)
 ```
 
@@ -71,3 +66,45 @@ git merge origin/remotebranch      # Merge a remote-tracking branch into the cur
 
 git merge --abort                  # Abort an ongoing merge (e.g. when conflicts occur)
 ```
+
+---
+
+# 🧠 Los 3 estados (modelo mental correcto)
+
+| Estado                   | Descripción                                                          |
+| ------------------------ | -------------------------------------------------------------------- |
+| **Working Directory**    | Donde editas y modificas los archivos en tu sistema                  |
+| **Staging Area (Index)** | Donde seleccionas exactamente qué cambios vas a incluir en el commit |
+| **Repository (HEAD)**    | Donde se guarda el historial confirmado de commits                   |
+
+📁 Ubicación de los 3 estados
+
+| Estado                   | Ubicación física                        | Detalle técnico                                      |
+| ------------------------ | --------------------------------------- | ---------------------------------------------------- |
+| **Working Directory**    | Fuera de `.git/`                        | Son los archivos reales del proyecto                 |
+| **Staging Area (Index)** | Dentro de `.git/index`                  | Archivo binario que actúa como “snapshot intermedio” |
+| **Repository (HEAD)**    | Dentro de `.git/` (`objects/`, `refs/`) | Base de datos de commits, árboles (trees) y blobs    |
+
+---
+
+# 💡 Concepto de Git Flow
+
+Git Flow es una forma de organizar el trabajo en equipo usando ramas (branches) en Git, para que varias personas puedan desarrollar sin romper el proyecto.
+
+En lugar de que todos trabajen sobre una sola versión del código, cada persona trabaja en su propia rama y luego se integran los cambios de forma ordenada.
+
+🧠 En palabras simples
+
+Git Flow es un flujo de trabajo que te dice:
+dónde trabajar, cuándo integrar cambios y cómo evitar errores en equipo
+
+---
+
+# 💡 Concepto de GitHub
+
+GitHub es una plataforma en la nube donde puedes guardar, compartir y colaborar en proyectos de código usando Git.
+
+🧠 En palabras simples
+
+GitHub es como “la nube de tus proyectos”,
+donde tu equipo puede ver, descargar y trabajar sobre el mismo código.
