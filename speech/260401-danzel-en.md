@@ -3,7 +3,7 @@
 [https://downsub.com/]
 [https://youtu.be/vP0TM1kz6Vs]
 
-```sh
+```md
 Let me ask you something.
 What if I told you that just 1 hour a day, 60 minutes,
 could completely change the direction of your life?
@@ -18,80 +18,75 @@ It starts with one hour. Just one.
 one hour where you decide to work on you
 instead of watching someone else live their life.
 See, most people are busy. But very few are growing.
-
 They scroll, they rush, they repeat,
 but they don't stop and they don't think.
 And because they don't think, they don't change.
+
 But you, if you're still listening, you're different.
 You're searching. You're ready.
-
 And today we're going to talk about the hour that can reshape your habits,
 your income, your relationships, and yes, even your legacy.
 Because success is not an accident. It's a daily decision.
 And the best part, you don't need a new year.
 You don't need permission. And you don't need a big break.
+All you need is 1 hour a day.
 
-All you need is 1 hour a day. Let's begin.
-Take back the first hour.
+Let's begin. Take back the first hour.
 Let me tell you something powerful.
 How you start your day determines how you live your life.
-It's not just a routine.
-It's a ritual.
-And that first hour, that's your window, your launchpad, your foundation.
+It's not just a routine. It's a ritual.
+And that first hour, that's your window,
+your launchpad, your foundation.
+
 Now, most people, they give it away.
 They wake up and they reach for the phone.
-They check messages.
-They check the news.
+They check messages.They check the news.
 They check what everyone else is doing.
 But what they don't check is themselves.
 They don't ask what do I want today?
 What do I need to become?
 What am I building?
+
 You see, if you don't program your mind in the first hour,
 the world will do it for you.
 And let me warn you,
 the world doesn't always have your best interest in mind.
 It'll feed you drama, distraction, noise,
 and before you know it, you're reacting to life instead of designing it.
+
 So, here's the challenge.
 Take back that first hour.
 Make it yours before the emails, before the scrolling, before the chaos.
 Get up a little earlier, not because it's trendy,
 but because it's transformational.
 And use that hour to build you.
+
 Read 10 pages of a good book.
 Write down three things you're grateful for.
-Plan your day.
-Visualize your goals.
-Move your body.
-Drink water.
-Sit in silence.
+Plan your day. Visualize your goals.
+Move your body. Drink water. Sit in silence.
 Do what the old you never made time for.
-Because here's the truth, my friend.
-If you can win the first hour, you can win the day.
+Because here's the truth,
+my friend. If you can win the first hour, you can win the day.
 And if you win enough days, you win your life.
-Now, I know what some people say.
-I'm not a morning person.
+Now, I know what some people say. I'm not a morning person.
+
 But listen, success doesn't care.
 Discipline doesn't ask how you feel.
 You think the winners of this world leap out of bed with fireworks and fanfare.
-No, they decide.
-They train.
-They build the habit.
+No, they decide. They train. They build the habit.
 And so can you.
 So, starting tomorrow, make a new deal with yourself.
 Before you touch the world, touch your future.
+
 Use that first hour not to consume, but to create.
-Don't just wake up.
-Rise up.
-Because your future isn't waiting at 11:00 a.m.
-It's waiting at 6:00.
-So take it back.
-Build it strong.
-And when the day begins, you'll already be ahead mentally, spiritually, and emotionally.
-You won't just be prepared.
-You'll be powerful.
+Don't just wake up. Rise up.
+Because your future isn't waiting at 11:00 a.m. It's waiting at 6:00.
+So take it back. Build it strong. And when the day begins,
+you'll already be ahead mentally, spiritually, and emotionally.
+You won't just be prepared. You'll be powerful.
 And that is how the transformation begins.
+
 Guard the hour like treasure.
 Now that you've taken back the first hour, the next step is to guard it like treasure.
 Because let me tell you, people will try to steal it.
@@ -99,27 +94,25 @@ Not with a gun, but with a notification, a favor,
 a meaningless task, a little,
 "Hey, can I just and suddenly your hour is gone, banished,
 given away to something that builds their life, not yours."
+
 You've got to understand this hour is not free.
-It's not casual.
-It's not for leftovers.
-It is sacred.
-It is strategic.
+It's not casual. It's not for leftovers.
+It is sacred. It is strategic.
 And if you don't protect it, no one else will.
 You see, time is like money, but even more dangerous to lose.
 You can always earn another dollar, but you'll never get back that hour.
-So, what do we do?
-We put up a fence.
+So, what do we do? We put up a fence. 
 We say, "This is my hour.
 No calls, no emails, no scrolling, no distractions.
 Not because we're rude, but because we're serious."
+
 You've got to get serious about your hour.
 Like a builder is serious about his tools.
 Like a farmer is serious about his soil.
-Because this hour, if you use it right, will pay you back a hundfold.
-In clarity, in skill, in results, in income,
-in confidence, but only if you don't trade it for crumbs.
-Let me say that again.
-Don't trade gold for crumbs.
+Because this hour, if you use it right, will pay you back 100 fold.
+In clarity, in skill, in results, in income, in confidence, 
+but only if you don't trade it for crumbs.
+Let me say that again. Don't trade gold for crumbs.
 That's what people do when they say,
 "I'll just check this one thing." Let me reply real quick.
 This won't take long.
