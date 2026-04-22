@@ -33,7 +33,7 @@ All you need is 1 hour a day.
 
 Let's begin. Take back the first hour.
 Let me tell you something powerful.
-How you start your day determines how you live your life.
+How you start your day, determines how you live your life.
 It's not just a routine. It's a ritual.
 And that first hour, that's your window,
 your launchpad, your foundation.
@@ -46,6 +46,8 @@ But what they don't check is themselves.
 They don't ask what do I want today?
 What do I need to become?
 What am I building?
+
+### 01:56
 
 You see, if you don't program your mind in the first hour,
 the world will do it for you.
@@ -71,6 +73,8 @@ my friend. If you can win the first hour, you can win the day.
 And if you win enough days, you win your life.
 Now, I know what some people say. I'm not a morning person.
 
+### 02:53
+
 But listen, success doesn't care.
 Discipline doesn't ask how you feel.
 You think the winners of this world leap out of bed with fireworks and fanfare.
@@ -95,13 +99,15 @@ a meaningless task, a little,
 "Hey, can I just and suddenly your hour is gone, banished,
 given away to something that builds their life, not yours."
 
+<!-- ### 04:02 -->
+
 You've got to understand this hour is not free.
 It's not casual. It's not for leftovers.
 It is sacred. It is strategic.
 And if you don't protect it, no one else will.
 You see, time is like money, but even more dangerous to lose.
 You can always earn another dollar, but you'll never get back that hour.
-So, what do we do? We put up a fence. 
+So, what do we do? We put up a fence.
 We say, "This is my hour.
 No calls, no emails, no scrolling, no distractions.
 Not because we're rude, but because we're serious."
@@ -110,33 +116,33 @@ You've got to get serious about your hour.
 Like a builder is serious about his tools.
 Like a farmer is serious about his soil.
 Because this hour, if you use it right, will pay you back 100 fold.
-In clarity, in skill, in results, in income, in confidence, 
+In clarity, in skill, in results, in income, in confidence,
 but only if you don't trade it for crumbs.
 Let me say that again. Don't trade gold for crumbs.
-That's what people do when they say,
-"I'll just check this one thing." Let me reply real quick.
-This won't take long.
+
+### 04:58
+
+That's what people do when they say, "I'll just check this one thing."
+Let me reply real quick. This won't take long.
 and they end up spending their best hour reacting to the world instead of rebuilding their world.
-So, here's the habit.
-Every night, schedule your hour.
-Label it.
-Set it in stone.
-No flexibility, no negotiations.
+So, here's the habit. Every night, schedule your hour.
+Label it. Set it in stone. No flexibility, no negotiations.
 Tell your family, your friends, even yourself.
 This is your time to grow, to think, to create, to build.
 And if they don't respect it, teach them to.
 Not with anger, but with consistency.
+
 Because when you value your time, people begin to value you.
-So the rule is simple.
-If it doesn't grow you, it doesn't get your hour.
-Period.
-This isn't just about productivity.
-It's about priority.
+So the rule is simple. If it doesn't grow you, it doesn't get your hour. Period.
+This isn't just about productivity. It's about priority.
 It's about saying, "My future matters enough to defend it."
 And that first hour, that's your front line.
 So guard it like it's rare, because it is.
 It's the hour that separates the average from the excellent,
 the wanderer from the leader, the talker from the doer.
+
+### 06:02
+
 And if you guard it today, you'll celebrate it tomorrow.
 Direction before action.
 You know, it's not enough to take the hour,
