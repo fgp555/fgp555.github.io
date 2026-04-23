@@ -4,6 +4,10 @@
 whisper video.mp4 --model medium --output_format srt --language English
 ```
 
+# budgets
+
+> - https://note.frankgp.com/budgets/202604-marketplace
+
 # Speech
 
 > - https://note.frankgp.com/speech/mario-v-elogio
