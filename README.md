@@ -11,7 +11,7 @@ whisper video.mp4 --model medium --output_format srt --language English
 # Speech
 
 > - https://note.frankgp.com/speech/mario-v-elogio
-> - https://note.frankgp.com/speech/260401-danzel-en
+> - https://note.frankgp.com/speech/260401-danzel
 
 # Guion Youtube - Frank & Ivana
 
