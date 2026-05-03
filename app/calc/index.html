@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Calculadora Inteligente</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>🚀 Configura tu Proyecto</h1>
+
+    <!-- OBJETIVO -->
+    <div class="section">
+      <h2>🎯 Objetivo</h2>
+      <label><input type="radio" name="tipo" value="mvp" /> Validar idea (MVP)</label>
+      <label><input type="radio" name="tipo" value="pro" /> Escalar</label>
+    </div>
+
+    <!-- PLANTILLAS -->
+    <div class="section">
+      <h2>📦 Plantilla</h2>
+      <label><input type="radio" name="template" value="ecommerce" /> Ecommerce</label>
+      <label><input type="radio" name="template" value="academia" /> Academia</label>
+      <label><input type="radio" name="template" value="landing" /> Landing</label>
+    </div>
+
+    <!-- CONFIG -->
+    <div id="configuracion">
+      <div class="section">
+        <h2>🌐 Web</h2>
+        <div id="web"></div>
+      </div>
+
+      <div class="section">
+        <h2>⚙️ Backend</h2>
+        <div id="backend"></div>
+      </div>
+
+      <div class="section">
+        <h2>📱 Mobile</h2>
+        <div id="mobile"></div>
+      </div>
+
+      <div class="section">
+        <h2>🤖 Automatización</h2>
+        <div id="auto"></div>
+      </div>
+
+      <div class="section">
+        <h2>🎨 UX/UI</h2>
+        <div id="ux"></div>
+      </div>
+
+      <div class="section">
+        <h2>🚀 DevOps</h2>
+        <div id="devops"></div>
+      </div>
+    </div>
+
+    <!-- TOTAL FLOAT -->
+    <div class="total-box">
+      <h3>Presupuesto</h3>
+      <div class="amount">$<span id="total">0</span></div>
+      <br />
+      <button class="btn-reset" onclick="limpiar()">Limpiar</button>
+      <button onclick="enviar()">Solicitar Cotización</button>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
