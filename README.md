@@ -1,6 +1,7 @@
 # fgp555.github.io
 
 ```sh
+# generate subtitle
 whisper video.mp4 --model medium --output_format srt --language English
 ```
 
@@ -12,6 +13,7 @@ whisper video.mp4 --model medium --output_format srt --language English
 
 > - https://note.frankgp.com/speech/mario-v-elogio
 > - https://note.frankgp.com/speech/260401-danzel
+> - https://note.frankgp.com/speech/260517-SimonSquibb
 
 # Guion Youtube - Frank & Ivana
 

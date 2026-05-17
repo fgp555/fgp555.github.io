@@ -5,8 +5,8 @@
 	<InputDev index='1' type='4' name="Line 1 Out (Virtual Audio Cable)" />
 	<InputDev index='2' type='4' name="Microphone (Jabra EVOLVE 20)" />
 	<InputDev index='3' type='4' name="Microphone (USBAudio1.0)" />
-	<OutputDev index='1' type='4' name="Speakers (Realtek(R) Audio)" />
-	<OutputDev index='2' type='4' name="Speakers (Jabra EVOLVE 20)" />
+	<OutputDev index='1' type='4' name="Speakers (Jabra EVOLVE 20)" />
+	<OutputDev index='2' type='4' name="Speakers (Realtek(R) Audio)" />
 	<OutputDev index='3' type='4' name="CABLE Input (VB-Audio Virtual Cable)" />
 	<MIDIDevIn index='1' name="-" />
 	<MIDIDevIn index='2' name="-" />
@@ -25,11 +25,11 @@
 	<StripComp index='1' gainin='0.00' attack='10.0' release='50.0' knee='0.50' comprate='1.000' threshold='-40.00' automakeup='1' gainout='0.00' />
 	<StripGate index='1' thresin='-60.00' damping='-60.00' bpsidechain='100' attack='10.0' hold='200.0' release='1250.0' />
 	<Strip index='1' paneltype='1' Panel3Dx='0.000' Panel3Dy='0.000' ColorPanelx='0.000' ColorPanely='0.000' ModPanelx='0.000' ModPanely='0.000' audibility_c='0.00' audibility_g='0.00' />
-	<Strip index='2' mute='1' vaio='0' solo='0' mono='0' muc='0' prg_c='0' prg_g='0' busa='0' busa2='0' busa3='1' busb='1' busb2='1' karaoke='0' dblevel='6.00' dblimit='12.00' />
+	<Strip index='2' mute='0' vaio='0' solo='0' mono='0' muc='0' prg_c='0' prg_g='0' busa='0' busa2='0' busa3='1' busb='1' busb2='1' karaoke='0' dblevel='6.00' dblimit='12.00' />
 	<StripComp index='2' gainin='0.00' attack='10.0' release='50.0' knee='0.50' comprate='1.000' threshold='-40.00' automakeup='1' gainout='0.00' />
 	<StripGate index='2' thresin='-60.00' damping='-60.00' bpsidechain='100' attack='10.0' hold='200.0' release='1250.0' />
 	<Strip index='2' paneltype='1' Panel3Dx='0.000' Panel3Dy='0.000' ColorPanelx='0.000' ColorPanely='0.000' ModPanelx='0.000' ModPanely='0.000' audibility_c='0.00' audibility_g='0.00' />
-	<Strip index='3' mute='1' vaio='0' solo='0' mono='0' muc='0' prg_c='0' prg_g='0' busa='0' busa2='0' busa3='1' busb='1' busb2='1' karaoke='0' dblevel='0.00' dblimit='12.00' />
+	<Strip index='3' mute='1' vaio='0' solo='0' mono='0' muc='0' prg_c='0' prg_g='0' busa='0' busa2='0' busa3='1' busb='1' busb2='1' karaoke='0' dblevel='12.00' dblimit='12.00' />
 	<StripComp index='3' gainin='0.00' attack='10.0' release='50.0' knee='0.50' comprate='1.000' threshold='-40.00' automakeup='1' gainout='0.00' />
 	<StripGate index='3' thresin='-60.00' damping='-60.00' bpsidechain='100' attack='10.0' hold='200.0' release='1250.0' />
 	<Strip index='3' paneltype='1' Panel3Dx='0.000' Panel3Dy='0.000' ColorPanelx='0.000' ColorPanely='0.000' ModPanelx='0.000' ModPanely='0.000' audibility_c='0.00' audibility_g='0.00' />
@@ -37,7 +37,7 @@
 	<StripComp index='4' gainin='0.00' attack='10.0' release='50.0' knee='0.50' comprate='1.000' threshold='-40.00' automakeup='1' gainout='0.00' />
 	<StripGate index='4' thresin='-60.00' damping='-60.00' bpsidechain='100' attack='20.0' hold='200.0' release='1250.0' />
 	<Strip index='4' EQGain1='0.00' EQGain2='0.00' EQGain3='0.00' Panel3Dx='0.000' Panel3Dy='0.000' />
-	<Strip index='5' mute='0' vaio='0' solo='0' mono='0' muc='0' prg_c='0' prg_g='0' busa='1' busa2='1' busa3='1' busb='1' busb2='0' karaoke='0' dblevel='0.00' dblimit='12.00' />
+	<Strip index='5' mute='0' vaio='0' solo='0' mono='0' muc='0' prg_c='0' prg_g='0' busa='0' busa2='1' busa3='1' busb='1' busb2='0' karaoke='0' dblevel='0.00' dblimit='12.00' />
 	<StripComp index='5' gainin='0.00' attack='10.0' release='50.0' knee='0.50' comprate='1.000' threshold='-40.00' automakeup='1' gainout='0.00' />
 	<StripGate index='5' thresin='-60.00' damping='-60.00' bpsidechain='100' attack='20.0' hold='200.0' release='1250.0' />
 	<Strip index='5' EQGain1='0.00' EQGain2='0.00' EQGain3='0.00' Panel3Dx='0.000' Panel3Dy='0.000' />
@@ -46,8 +46,8 @@
 	<Bus index='3' mute='0' vaio='0' mono='0' cross='0' BusMode='0' EQon='0' SEL='0' monitor='0' dblevel='0.00' />
 	<Bus index='4' mute='0' vaio='0' mono='0' cross='0' BusMode='0' EQon='0' SEL='0' monitor='0' dblevel='0.00' />
 	<Bus index='5' mute='0' vaio='0' mono='0' cross='0' BusMode='0' EQon='0' SEL='0' monitor='0' dblevel='0.00' />
-	<LabelBus1>Speaker</LabelBus1>
-	<LabelBus2>Jabra</LabelBus2>
+	<LabelBus1>Jabra</LabelBus1>
+	<LabelBus2>Speaker</LabelBus2>
 	<LabelBus3>Cable Input</LabelBus3>
 	<LabelVirtualBus1>B1 main</LabelVirtualBus1>
 	<LabelVirtualBus2>B2 meet</LabelVirtualBus2>
