@@ -1,34 +1,16 @@
 # fgp555.github.io
 
-```sh
-# generate subtitle
-whisper video.mp4 --model medium --output_format srt --language English
-```
-
-# budgets
-
-> - https://note.frankgp.com/budgets/202604-marketplace
+> - https://me.frankgp.com
 
 # Speech
 
-> - https://note.frankgp.com/speech/mario-v-elogio
-> - https://note.frankgp.com/speech/260401-danzel
-> - https://note.frankgp.com/speech/260517-SimonSquibb
-
-# Guion Youtube - Frank & Ivana
-
-> - https://note.frankgp.com/videos/260401-git-flow
-
-# Reels 2026
-
-> - https://note.frankgp.com/english/reels/26?03
-> - https://note.frankgp.com/english/reels/26?02
-> - https://note.frankgp.com/english/reels/26?01
+> - https://me.frankgp.com/speech/260401-danzel
+> - https://me.frankgp.com/speech/mario-v-elogio
+> - https://me.frankgp.com/speech/260517-SimonSquibb
 
 # App
 
-> - https://note.frankgp.com/app/markdown-pdf.html
-
-# JSON
-
-> - https://note.frankgp.com/json/maintenance.json
+> - https://me.frankgp.com/app/md-to-pdf
+> - https://me.frankgp.com/app/password-manager
+> - https://me.frankgp.com/app/proyect-calc
+> - https://me.frankgp.com/app/video-player

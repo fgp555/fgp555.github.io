@@ -93,16 +93,29 @@ function clearForm() {
 function render() {
   const search = document.getElementById("search").value.toLowerCase();
   const list = document.getElementById("list");
+  const emptyState = document.getElementById("empty-state");
   list.innerHTML = "";
 
-  data
+  const filtered = data
     .map((item, index) => ({ item, index })) // 👈 mantener índice real
     .filter(({ item }) => {
       const text = [item.title, item.username, item.url].filter(Boolean).join(" ").toLowerCase();
 
       return text.includes(search);
-    })
-    .forEach(({ item, index }) => {
+    });
+
+  if (emptyState) {
+    const noResults = filtered.length === 0 && search.length > 0;
+    emptyState.hidden = filtered.length !== 0;
+    emptyState.querySelector(".empty-title").textContent = noResults
+      ? "Sin resultados"
+      : "Tu bóveda está vacía";
+    emptyState.querySelector(".empty-sub").textContent = noResults
+      ? "Prueba con otro título, usuario o URL."
+      : "Añade tu primera contraseña con el formulario de abajo.";
+  }
+
+  filtered.forEach(({ item, index }) => {
       const div = document.createElement("div");
       div.className = "card";
       div.draggable = true;

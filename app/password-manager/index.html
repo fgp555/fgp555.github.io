@@ -5,103 +5,94 @@
     <title>Password Manager</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
-    <link rel="stylesheet" href="style.css?2026_03_005" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css?2026_08_001" />
   </head>
 
   <body>
-    <div class="container">
-      <h2>🔐 Password Manager</h2>
-      <input id="search" placeholder="Buscar..." />
+    <div class="app">
+      <header class="app-header">
+        <div class="brand">
+          <span class="brand-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4.5" y="10.5" width="15" height="10" rx="2.4" stroke="currentColor" stroke-width="1.6" />
+              <path class="shackle" d="M8 10.5V7.6a4 4 0 0 1 8 0v2.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              <circle cx="12" cy="15" r="1.5" fill="currentColor" />
+              <path d="M12 16.5v1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            </svg>
+          </span>
+          <div class="brand-text">
+            <h1>Password Manager</h1>
+            <p class="tagline">Tu bóveda local — todo se guarda cifrado en este navegador</p>
+          </div>
+        </div>
+      </header>
 
-      <div id="list"></div>
+      <main class="container">
+        <div class="search-bar">
+          <i class="fa fa-search"></i>
+          <input id="search" placeholder="Buscar por título, usuario o URL…" />
+        </div>
 
-      <hr />
+        <div id="list"></div>
+        <div id="empty-state" class="empty-state" hidden>
+          <i class="fa fa-lock"></i>
+          <p class="empty-title">Tu bóveda está vacía</p>
+          <p class="empty-sub">Añade tu primera contraseña con el formulario de abajo.</p>
+        </div>
 
-      <h3>➕ Nuevo / Editar</h3>
+        <section class="panel">
+          <h2 class="panel-title"><span class="panel-eyebrow">Nuevo registro</span>Añadir o editar</h2>
 
-      <input id="title" placeholder="Título" />
-      <input id="username" placeholder="Usuario / Email / ID" />
+          <div class="form-grid">
+            <input id="title" placeholder="Título" />
+            <input id="username" placeholder="Usuario / Email / ID" />
 
-      <div class="input-group">
-        <input id="password" type="password" placeholder="Password" />
-        <i class="fa fa-eye" id="togglePass" onclick="toggleInputPassword()"></i>
-      </div>
+            <div class="input-group">
+              <input id="password" type="password" placeholder="Password" />
+              <i class="fa fa-eye" id="togglePass" onclick="toggleInputPassword()"></i>
+            </div>
 
-      <input id="url" placeholder="URL" />
+            <input id="url" placeholder="URL" />
+          </div>
 
-      <div class="flex">
-        <button onclick="generatePassword()">Generar</button>
-        <button onclick="save()">Guardar</button>
-      </div>
+          <div class="flex form-actions">
+            <button class="btn-ghost" onclick="generatePassword()"><i class="fa fa-dice"></i> Generar</button>
+            <button class="btn-primary" onclick="save()"><i class="fa fa-check"></i> Guardar</button>
+          </div>
+        </section>
 
-      <hr />
+        <section class="panel">
+          <h2 class="panel-title"><span class="panel-eyebrow">Datos</span>Exportar / importar</h2>
 
-      <div class="topbar">
-        <button onclick="exportData()">Exportar CSV</button>
+          <div class="topbar">
+            <button class="btn-ghost" onclick="exportData()"><i class="fa fa-file-export"></i> Exportar CSV</button>
 
-        <label class="file-label">
-          Import CSV
-          <input type="file" accept=".csv" onchange="importData(event)" hidden />
-        </label>
-        <button onclick="clearAll()">Borrar todo</button>
-      </div>
+            <label class="file-label">
+              <i class="fa fa-file-import"></i> Importar CSV
+              <input type="file" accept=".csv" onchange="importData(event)" hidden />
+            </label>
+
+            <button class="btn-danger-ghost" onclick="clearAll()"><i class="fa fa-trash"></i> Borrar todo</button>
+          </div>
+        </section>
+      </main>
     </div>
 
     <footer class="footer">
-      <style>
-        .footer {
-          text-align: center;
-          padding: 20px;
-          color: #94a3b8;
-          font-size: 0.8rem;
-        }
-
-        .footer a {
-          color: #38bdf8;
-          text-decoration: none;
-          transition: 0.2s;
-        }
-
-        .footer a:hover {
-          color: #0ea5e9;
-        }
-
-        .footer a:active {
-          color: #0284c7;
-        }
-      </style>
       <p>
         © 2026
         <a href="http://frankgp.com/" target="_blank">frankgp.com</a>
       </p>
     </footer>
-    <section>
-      <style>
-        #toast {
-          position: fixed;
-          bottom: 20px;
-          right: 20px;
-          background: #1e293b;
-          color: #fff;
-          padding: 12px 16px;
-          border-radius: 10px;
-          font-size: 0.85rem;
-          opacity: 0;
-          transform: translateY(20px);
-          pointer-events: none;
-          transition: all 0.3s ease;
-          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-          z-index: 9999;
-        }
 
-        #toast.show {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      </style>
-      <div id="toast"></div>
-    </section>
+    <div id="toast"></div>
 
-    <script src="script.js?2026_03_005"></script>
+    <script src="./script.js?2026_08_001"></script>
   </body>
 </html>
