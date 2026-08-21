@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CallApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.8.3/plyr.min.css" />
+    <script src="https://frank-gp.github.io/component/stat.js" type="module"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #0f172a;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* =========================
+         🔒 AUTH GATE
+      ========================= */
+      #authGate {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .auth-card {
+        background: #1e293b;
+        border-radius: 14px;
+        padding: 40px 36px;
+        max-width: 380px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.6);
+      }
+
+      .auth-card h1 {
+        font-size: 20px;
+        margin-bottom: 6px;
+      }
+
+      .auth-card p {
+        color: #94a3b8;
+        font-size: 14px;
+        margin-bottom: 26px;
+      }
+
+      #googleBtn {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 14px;
+        min-height: 44px;
+      }
+
+      .auth-error {
+        display: none;
+        background: rgba(248, 113, 113, 0.12);
+        border: 1px solid rgba(248, 113, 113, 0.35);
+        color: #fca5a5;
+        font-size: 13px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        margin-top: 16px;
+        text-align: left;
+        line-height: 1.5;
+      }
+
+      .auth-error.show {
+        display: block;
+      }
+
+      .auth-loading {
+        color: #64748b;
+        font-size: 13px;
+      }
+
+      /* =========================
+         🧭 DASHBOARD HEADER
+      ========================= */
+      #dashboard {
+        display: none;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 20px;
+        background: #1e293b;
+        border-bottom: 1px solid #334155;
+      }
+
+      .topbar .brand {
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .user-chip {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .user-chip img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1px solid #334155;
+      }
+
+      .user-chip .user-meta {
+        text-align: right;
+        line-height: 1.2;
+      }
+
+      .user-chip .user-name {
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      .user-chip .user-email {
+        font-size: 11.5px;
+        color: #94a3b8;
+      }
+
+      .logout-btn {
+        background: #334155;
+        color: #fff;
+        border: none;
+        padding: 7px 14px;
+        border-radius: 8px;
+        font-size: 12.5px;
+        cursor: pointer;
+      }
+
+      .logout-btn:hover {
+        background: #475569;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: auto;
+        padding: 15px;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 20px;
+      }
+
+      /* PLAYER */
+      .video-wrapper {
+        position: relative;
+      }
+
+      .player-container video {
+        width: 100%;
+        max-height: 50rem;
+        border-radius: 10px;
+      }
+
+      .loader {
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(255, 255, 255, 0.2);
+        border-top: 4px solid #38bdf8;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* INFO */
+      .video-info {
+        margin-top: 15px;
+        background: #1e293b;
+        padding: 15px;
+        border-radius: 10px;
+      }
+
+      .video-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .video-description {
+        font-size: 14px;
+        color: #cbd5f5;
+      }
+
+      /* PLAYLIST */
+      .playlist {
+        max-height: 50rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .card {
+        background: #1e293b;
+        border-radius: 10px;
+        padding: 12px;
+        cursor: pointer;
+      }
+
+      .card.active {
+        background: #475569;
+        border-left: 4px solid #38bdf8;
+      }
+
+      /* SKELETON */
+      .skeleton {
+        background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: 6px;
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: -200% 0;
+        }
+        100% {
+          background-position: 200% 0;
+        }
+      }
+
+      .skeleton-text {
+        height: 12px;
+        margin-bottom: 8px;
+      }
+
+      .skeleton-title {
+        height: 16px;
+        width: 70%;
+        margin-bottom: 10px;
+      }
+
+      .categories {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+        overflow-x: auto;
+      }
+
+      .cat-btn {
+        padding: 6px 12px;
+        background: #1e293b;
+        border-radius: 20px;
+        cursor: pointer;
+        white-space: nowrap;
+        font-size: 13px;
+      }
+
+      .cat-btn.active {
+        background: #38bdf8;
+        color: #000;
+      }
+
+      @media (max-width: 768px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .topbar {
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+      }
+
+      /* FOOTER */
+      .app-footer {
+        text-align: center;
+        padding: 24px 15px 30px;
+        font-size: 13px;
+        color: #64748b;
+        border-top: 1px solid #1e293b;
+        margin-top: 10px;
+      }
+
+      .app-footer a {
+        color: #38bdf8;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .app-footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================
+         🔒 PANTALLA DE LOGIN
+    ========================= -->
+    <div id="authGate">
+      <div class="auth-card">
+        <h1>CallApp</h1>
+        <p>Inicia sesión con tu cuenta de Google autorizada para ver el contenido de formación.</p>
+        <div id="googleBtn"></div>
+        <div class="auth-loading" id="authLoading">Cargando Google Sign-In...</div>
+        <div class="auth-error" id="authError"></div>
+      </div>
+    </div>
+
+    <!-- =========================
+         🧭 DASHBOARD (protegido)
+    ========================= -->
+    <div id="dashboard">
+      <div class="topbar">
+        <div class="brand">🎓 CallApp</div>
+        <div class="user-chip">
+          <img id="userAvatar" src="" alt="" />
+          <div class="user-meta">
+            <div class="user-name" id="userName"></div>
+            <div class="user-email" id="userEmail"></div>
+          </div>
+          <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
+        </div>
+      </div>
+
+      <div class="container">
+        <div id="categories" class="categories"></div>
+        <div class="layout">
+          <!-- PLAYER -->
+          <div>
+            <div class="player-container">
+              <div class="video-wrapper">
+                <video id="player" playsinline controls></video>
+                <div id="loader" class="loader">
+                  <div class="spinner"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- INFO -->
+            <div class="video-info" id="videoInfo">
+              <div id="videoTitle" class="video-title skeleton skeleton-title"></div>
+              <div id="videoDescription">
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PLAYLIST -->
+          <div class="playlist" id="playlist"></div>
+        </div>
+      </div>
+
+      <footer class="app-footer">
+        CallApp · un proyecto de
+        <a href="https://web.frankgp.com" target="_blank" rel="noopener">web.frankgp.com</a>
+      </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.8.3/plyr.min.js"></script>
+
+    <script>
+      /* =========================================================
+         🔒 CONFIGURACIÓN DE ACCESO
+         Reemplaza CLIENT_ID por el tuyo de Google Cloud Console
+         y agrega/quita correos de la whitelist.
+      ========================================================= */
+      const CLIENT_ID = "157768130286-ab04vut0tqqk7nmtvagued0rpe82oea2.apps.googleusercontent.com";
+
+      // true  -> cualquier cuenta de Google puede entrar (ignora ALLOWED_EMAILS)
+      // false -> solo entran los correos listados en ALLOWED_EMAILS
+      const ALLOW_ALL = true;
+
+      const ALLOWED_EMAILS = ["user1@gmail.com", "fgp555@gmail.com"].map((e) => e.toLowerCase());
+
+      /* =========================================================
+         🔒 GOOGLE SIGN-IN
+      ========================================================= */
+      function waitForGoogle(callback) {
+        const interval = setInterval(() => {
+          if (window.google && google.accounts && google.accounts.id) {
+            clearInterval(interval);
+            callback();
+          }
+        }, 100);
+      }
+
+      function renderGoogleButton() {
+        const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = isDark ? "filled_black" : "outline";
+
+        const container = document.getElementById("googleBtn");
+        container.innerHTML = "";
+
+        google.accounts.id.renderButton(container, {
+          theme,
+          size: "large",
+          shape: "pill",
+          text: "continue_with",
+          width: 250,
+        });
+      }
+
+      function parseJwt(token) {
+        const base64Url = token.split(".")[1];
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+
+        const jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split("")
+            .map((char) => "%" + ("00" + char.charCodeAt(0).toString(16)).slice(-2))
+            .join(""),
+        );
+
+        return JSON.parse(jsonPayload);
+      }
+
+      function isAllowed(email) {
+        if (ALLOW_ALL) return !!email;
+        return !!email && ALLOWED_EMAILS.includes(email.toLowerCase());
+      }
+
+      function showAuthError(message) {
+        const errEl = document.getElementById("authError");
+        errEl.textContent = message;
+        errEl.classList.add("show");
+      }
+
+      function hideAuthError() {
+        document.getElementById("authError").classList.remove("show");
+      }
+
+      function handleCredentialResponse(response) {
+        try {
+          const userData = parseJwt(response.credential);
+
+          if (!isAllowed(userData.email)) {
+            showAuthError(`El correo "${userData.email}" no tiene acceso a este dashboard.`);
+            // no guardamos sesión y evitamos que vuelva a auto-loguearse con esa cuenta
+            google.accounts.id.disableAutoSelect();
+            return;
+          }
+
+          hideAuthError();
+          localStorage.setItem("dash_user", JSON.stringify(userData));
+
+          google.accounts.id.cancel();
+          enterDashboard(userData);
+        } catch (err) {
+          console.error("Login error:", err);
+          showAuthError("Ocurrió un error al procesar el inicio de sesión.");
+        }
+      }
+
+      function logout() {
+        localStorage.removeItem("dash_user");
+        google.accounts.id.disableAutoSelect();
+        location.reload();
+      }
+
+      /* =========================================================
+         🧭 MOSTRAR DASHBOARD TRAS LOGIN VÁLIDO
+      ========================================================= */
+      function enterDashboard(userData) {
+        document.getElementById("authGate").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+
+        document.getElementById("userAvatar").src = userData.picture || "";
+        document.getElementById("userName").textContent = userData.name || "";
+        document.getElementById("userEmail").textContent = userData.email || "";
+
+        initDashboard();
+      }
+
+      window.onload = () => {
+        waitForGoogle(() => {
+          google.accounts.id.initialize({
+            client_id: CLIENT_ID,
+            callback: handleCredentialResponse,
+            auto_select: false,
+          });
+
+          renderGoogleButton();
+          document.getElementById("authLoading").style.display = "none";
+
+          const savedRaw = localStorage.getItem("dash_user");
+
+          if (savedRaw) {
+            const savedUser = JSON.parse(savedRaw);
+
+            // 🔒 revalidamos contra la whitelist actual, no confiamos ciegamente en localStorage
+            if (isAllowed(savedUser.email)) {
+              google.accounts.id.cancel();
+              enterDashboard(savedUser);
+              return;
+            }
+
+            // la whitelist cambió o el dato es inválido: limpiamos sesión
+            localStorage.removeItem("dash_user");
+          }
+
+          google.accounts.id.prompt();
+        });
+      };
+
+      /* =========================================================
+         🎬 DASHBOARD: VIDEO PLAYER + PLAYLIST
+         (se inicializa solo después de un login válido)
+      ========================================================= */
+      const videos = [
+        // {
+        //   id: "video1",
+        //   category: "General",
+        //   title: "Video 1 - Demo",
+        //   description: "Resumen corto",
+        //   longDescription: "Descripción larga del video 1.",
+        //   src: "https://pub-c96c7ca6a3074d61ac04fdf647a50a8e.r2.dev/videos/uploadclothes.mp4",
+        // },
+        {
+          id: "pasos-fibra-optica",
+          category: "Videos",
+          title: "Agendamiento Fibra Optica",
+          description: "pasos para agendar la fibra optica",
+          longDescription: null,
+          src: "https://pub-58f262c124f742b7af87394003f8ffd8.r2.dev/tutoriales/pasos-fibra-optica.mp4",
+        },
+        {
+          id: "emitir-rxh-web",
+          category: "Videos",
+          title: "Recibo por hororatio en la web",
+          description: "Cómo Emitir recibo por hororatio en la web",
+          longDescription: null,
+          src: "https://pub-58f262c124f742b7af87394003f8ffd8.r2.dev/tutoriales/emitir-rxh.mp4",
+        },
+        {
+          id: "cambiar-pass-inicial",
+          category: "Videos",
+          title: "Cómo cambiar tu contraseña temporal",
+          description: "Cómo actualizar tu contraseña",
+          longDescription: "Tutorial completo paso a paso.",
+          src: "https://pub-58f262c124f742b7af87394003f8ffd8.r2.dev/tutoriales/fgp_cambio_de_clave_unica.mp4",
+        },
+      ];
+
+      let player, videoEl, playlist, loader, titleEl, descEl, categoriesEl;
+      let activeIndex = 0;
+      let activeCategory = "All";
+      let filteredVideos = [...videos];
+      let loaderTimeout;
+      let dashboardInitialized = false;
+
+      function initDashboard() {
+        if (dashboardInitialized) return; // evita doble inicialización si ya hay sesión guardada
+        dashboardInitialized = true;
+
+        player = new Plyr("#player");
+        videoEl = document.querySelector("#player");
+        playlist = document.getElementById("playlist");
+        loader = document.getElementById("loader");
+        titleEl = document.getElementById("videoTitle");
+        descEl = document.getElementById("videoDescription");
+        categoriesEl = document.getElementById("categories");
+
+        function showLoader() {
+          loader.classList.remove("hidden");
+          clearTimeout(loaderTimeout);
+          loaderTimeout = setTimeout(hideLoader, 4000);
+        }
+
+        function hideLoader() {
+          loader.classList.add("hidden");
+        }
+
+        function checkReady() {
+          if (videoEl.readyState >= 3 && !videoEl.paused && videoEl.currentTime > 0) {
+            hideLoader();
+          }
+        }
+
+        videoEl.addEventListener("playing", hideLoader);
+        videoEl.addEventListener("canplay", hideLoader);
+        videoEl.addEventListener("loadeddata", hideLoader);
+        videoEl.addEventListener("waiting", () => {
+          if (videoEl.readyState < 3) showLoader();
+        });
+        videoEl.addEventListener("timeupdate", checkReady);
+
+        function fillInfo(video) {
+          titleEl.classList.remove("skeleton", "skeleton-title");
+          titleEl.textContent = video.title;
+          descEl.innerHTML = video.longDescription;
+        }
+
+        function loadVideo(index, updateURL = true) {
+          const video = filteredVideos[index];
+          activeIndex = index;
+
+          showLoader();
+
+          videoEl.pause();
+          videoEl.removeAttribute("src");
+          videoEl.load();
+
+          titleEl.className = "video-title skeleton skeleton-title";
+          descEl.innerHTML = `
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+          `;
+
+          player.source = {
+            type: "video",
+            sources: [{ src: video.src, type: "video/mp4" }],
+          };
+
+          if (updateURL) {
+            const url = new URL(window.location);
+            url.searchParams.set("id", video.id);
+            url.searchParams.set("cat", activeCategory);
+            window.history.replaceState({}, "", url);
+          }
+
+          document.querySelectorAll(".card").forEach((card, i) => {
+            card.classList.toggle("active", i === index);
+          });
+
+          player.once("playing", hideLoader);
+          player.play().catch(() => {});
+
+          setTimeout(() => fillInfo(video), 300);
+        }
+
+        function renderCategories() {
+          const cats = ["All", ...new Set(videos.map((v) => v.category))];
+          categoriesEl.innerHTML = "";
+
+          cats.forEach((cat) => {
+            const btn = document.createElement("div");
+            btn.className = "cat-btn";
+            btn.textContent = cat;
+
+            if (cat === activeCategory) btn.classList.add("active");
+
+            btn.onclick = () => {
+              activeCategory = cat;
+              filterVideos();
+              renderCategories();
+            };
+
+            categoriesEl.appendChild(btn);
+          });
+        }
+
+        function filterVideos() {
+          filteredVideos = activeCategory === "All" ? [...videos] : videos.filter((v) => v.category === activeCategory);
+          renderList();
+          if (filteredVideos.length > 0) {
+            loadVideo(0);
+          }
+        }
+
+        function renderList() {
+          playlist.innerHTML = "";
+
+          filteredVideos.forEach((video, index) => {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.innerHTML = `
+              <div class="title">${video.title}</div>
+              <div class="description">${video.description}</div>
+            `;
+            card.onclick = () => loadVideo(index);
+            playlist.appendChild(card);
+          });
+        }
+
+        function initFromURL() {
+          const params = new URLSearchParams(window.location.search);
+          const id = params.get("id");
+          const cat = params.get("cat");
+
+          if (cat) activeCategory = cat;
+
+          filterVideos();
+
+          const index = filteredVideos.findIndex((v) => v.id === id);
+          loadVideo(index !== -1 ? index : 0, false);
+        }
+
+        renderCategories();
+        initFromURL();
+
+        player.on("ended", () => {
+          let next = activeIndex + 1;
+          if (next < filteredVideos.length) {
+            loadVideo(next);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
