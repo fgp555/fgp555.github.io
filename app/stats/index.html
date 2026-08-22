@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://stats.frankgp.com/tracker.js" data-site="xpkveqec" async></script>
+
+    <title>site-analytics · panel</title>
+    <style>
+      :root {
+        --bg: #0d1117;
+        --panel: #161b22;
+        --panel-border: #262c36;
+        --text: #e6edf3;
+        --muted: #8b949e;
+        --accent: #5ec2a3;
+        --accent-dim: #2f5a4d;
+        --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        padding: 32px 24px 80px;
+      }
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-family: var(--mono);
+        font-size: 15px;
+        letter-spacing: 0.04em;
+        color: var(--accent);
+        margin: 0 0 4px;
+        text-transform: uppercase;
+      }
+      .subtitle {
+        color: var(--muted);
+        font-size: 13px;
+        margin: 0 0 24px;
+      }
+
+      .topbar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        margin-bottom: 20px;
+      }
+      label {
+        font-size: 12px;
+        color: var(--muted);
+        display: block;
+        margin-bottom: 4px;
+      }
+      input,
+      select {
+        background: #0d1117;
+        border: 1px solid var(--panel-border);
+        color: var(--text);
+        border-radius: 6px;
+        padding: 8px 10px;
+        font-size: 13px;
+        font-family: var(--mono);
+      }
+      button {
+        background: var(--accent-dim);
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        padding: 8px 14px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button:hover {
+        background: var(--accent);
+        color: #06231c;
+      }
+      button.ghost {
+        background: transparent;
+        color: var(--muted);
+        border-color: var(--panel-border);
+      }
+
+      .live-dot {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        margin-right: 6px;
+        animation: pulse 1.6s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.25;
+        }
+      }
+      .live-label {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--panel-border);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 18px;
+      }
+      .panel h2 {
+        font-family: var(--mono);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        margin: 0 0 14px;
+      }
+
+      .kpis {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+      .kpi {
+        background: var(--panel);
+        border: 1px solid var(--panel-border);
+        border-radius: 10px;
+        padding: 16px;
+      }
+      .kpi .value {
+        font-family: var(--mono);
+        font-size: 28px;
+        color: var(--accent);
+      }
+      .kpi .label {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+
+      .grid2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      @media (max-width: 720px) {
+        .grid2 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .bar-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        margin-bottom: 6px;
+      }
+      .bar-label {
+        width: 140px;
+        flex: none;
+        color: var(--text);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: var(--mono);
+      }
+      .bar-track {
+        flex: 1;
+        background: #0d1117;
+        border-radius: 4px;
+        height: 14px;
+        overflow: hidden;
+      }
+      .bar-fill {
+        height: 100%;
+        background: var(--accent-dim);
+        border-left: 2px solid var(--accent);
+      }
+      .bar-count {
+        width: 34px;
+        flex: none;
+        text-align: right;
+        color: var(--muted);
+        font-family: var(--mono);
+      }
+
+      .heatmap {
+        display: grid;
+        grid-template-columns: repeat(24, 1fr);
+        gap: 3px;
+      }
+      .heat-cell {
+        aspect-ratio: 1;
+        border-radius: 3px;
+        background: #0d1117;
+        position: relative;
+      }
+      .heat-cell[data-level="1"] {
+        background: #1d3a32;
+      }
+      .heat-cell[data-level="2"] {
+        background: #2f5a4d;
+      }
+      .heat-cell[data-level="3"] {
+        background: #3f7a67;
+      }
+      .heat-cell[data-level="4"] {
+        background: var(--accent);
+      }
+      .heat-labels {
+        display: grid;
+        grid-template-columns: repeat(24, 1fr);
+        gap: 3px;
+        margin-top: 4px;
+      }
+      .heat-labels span {
+        font-family: var(--mono);
+        font-size: 8px;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 6px 8px;
+        border-bottom: 1px solid var(--panel-border);
+      }
+      th {
+        color: var(--muted);
+        font-family: var(--mono);
+        text-transform: uppercase;
+        font-size: 10px;
+      }
+      td.path {
+        font-family: var(--mono);
+      }
+      td.muted {
+        color: var(--muted);
+      }
+
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        align-items: center;
+        justify-content: center;
+        z-index: 50;
+        padding: 20px;
+      }
+      .modal-overlay.open {
+        display: flex;
+      }
+      .modal {
+        background: var(--panel);
+        border: 1px solid var(--panel-border);
+        border-radius: 10px;
+        padding: 22px;
+        max-width: 480px;
+        width: 100%;
+      }
+      .modal h3 {
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--accent);
+        margin: 0 0 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .modal p {
+        font-size: 12px;
+        color: var(--muted);
+        margin: 0 0 12px;
+      }
+      .modal textarea {
+        width: 100%;
+        min-height: 70px;
+        background: #0d1117;
+        border: 1px solid var(--panel-border);
+        color: var(--text);
+        border-radius: 6px;
+        padding: 10px;
+        font-family: var(--mono);
+        font-size: 12px;
+        resize: vertical;
+      }
+      .modal-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+        justify-content: flex-end;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>site-analytics</h1>
+      <p class="subtitle">Panel de visitas estilo Jetpack Stats. Se actualiza solo cada 5 segundos.</p>
+
+      <div class="panel">
+        <h2>Conexión</h2>
+        <div class="topbar">
+          <div>
+            <label for="apiBase">API base URL</label>
+            <input type="url" id="apiBase" placeholder="https://stats.frankgp.com" style="width: 260px" />
+          </div>
+          <div>
+            <label for="apiKey">x-api-key</label>
+            <input type="password" id="apiKey" style="width: 220px" />
+          </div>
+          <button id="saveConfig">Guardar</button>
+          <button id="newSiteBtn" class="ghost">+ Registrar sitio</button>
+          <span
+            class="status-line"
+            id="configStatus"
+            style="font-family: var(--mono); font-size: 12px; color: var(--muted)"
+          ></span>
+        </div>
+      </div>
+
+      <div class="topbar">
+        <div>
+          <label for="siteSelect">Sitio</label>
+          <select id="siteSelect" style="width: 220px"></select>
+        </div>
+        <button class="ghost" id="viewSnippetBtn">Ver snippet</button>
+        <button class="ghost" id="editSiteBtn">Editar</button>
+        <button class="ghost" id="deleteSiteBtn" style="color: #e5534b; border-color: #e5534b">Borrar</button>
+        <div>
+          <label for="rangeSelect">Rango</label>
+          <select id="rangeSelect">
+            <option value="today">Hoy</option>
+            <option value="7d">Últimos 7 días</option>
+            <option value="30d">Últimos 30 días</option>
+          </select>
+        </div>
+        <span class="live-label"><span class="live-dot"></span>en vivo (cada 5s)</span>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi">
+          <div class="value" id="kpiTotal">–</div>
+          <div class="label">Vistas totales</div>
+        </div>
+        <div class="kpi">
+          <div class="value" id="kpiUnique">–</div>
+          <div class="label">Visitantes únicos</div>
+        </div>
+        <div class="kpi">
+          <div class="value" id="kpiTopPage">–</div>
+          <div class="label">Página top</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Vistas por hora (UTC)</h2>
+        <div class="heatmap" id="heatmap"></div>
+        <div class="heat-labels" id="heatLabels"></div>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <h2>Páginas más vistas</h2>
+          <div id="topPages"></div>
+        </div>
+        <div class="panel">
+          <h2>Referrers</h2>
+          <div id="topReferrers"></div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <h2>Países</h2>
+          <div id="countries"></div>
+        </div>
+        <div class="panel">
+          <h2>Actividad reciente</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Hora</th>
+                <th>Página</th>
+                <th>País</th>
+                <th>Origen</th>
+              </tr>
+            </thead>
+            <tbody id="recentTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="snippetModal">
+      <div class="modal">
+        <h3 id="snippetModalTitle">Sitio creado</h3>
+        <p>Pega este snippet en el &lt;head&gt; de tu sitio:</p>
+        <textarea id="snippetText" readonly onclick="this.select()"></textarea>
+        <div class="modal-actions">
+          <button class="ghost" id="closeModalBtn">Cerrar</button>
+          <button id="copySnippetBtn">Copiar</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const $ = (id) => document.getElementById(id);
+
+      function getConfig() {
+        return {
+          base: (localStorage.getItem("sa_base") || "").replace(/\/$/, ""),
+          key: localStorage.getItem("sa_key") || "",
+        };
+      }
+
+      $("apiBase").value = getConfig().base;
+      $("apiKey").value = getConfig().key;
+
+      $("saveConfig").addEventListener("click", () => {
+        localStorage.setItem("sa_base", $("apiBase").value.trim());
+        localStorage.setItem("sa_key", $("apiKey").value.trim());
+        $("configStatus").textContent = "Guardado.";
+        loadSites();
+      });
+
+      async function apiFetch(path, options = {}) {
+        const { base, key } = getConfig();
+        if (!base || !key) throw new Error("Configura API base URL y x-api-key primero");
+        const res = await fetch(base + path, {
+          ...options,
+          headers: {
+            "x-api-key": key,
+            ...(options.body ? { "Content-Type": "application/json" } : {}),
+            ...(options.headers || {}),
+          },
+        });
+        const text = await res.text();
+        let data;
+        try {
+          data = text ? JSON.parse(text) : {};
+        } catch {
+          data = { raw: text };
+        }
+        if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+        return data;
+      }
+
+      // ---------- Sitios ----------
+      $("newSiteBtn").addEventListener("click", async () => {
+        const name = prompt("Nombre del sitio (ej: Mi Blog):");
+        if (!name) return;
+        const domain = prompt("Dominio (opcional, ej: miblog.com):") || "";
+        try {
+          const site = await apiFetch("/sites", {
+            method: "POST",
+            body: JSON.stringify({ name, domain }),
+          });
+          showSnippetModal(`Sitio creado: ${site.name}`, site.snippet);
+          await loadSites();
+          $("siteSelect").value = site.siteId;
+        } catch (err) {
+          alert("Error: " + err.message);
+        }
+      });
+
+      function showSnippetModal(title, snippet) {
+        $("snippetModalTitle").textContent = title;
+        $("snippetText").value = snippet;
+        $("snippetModal").classList.add("open");
+        $("snippetText").focus();
+        $("snippetText").select();
+      }
+
+      $("editSiteBtn").addEventListener("click", async () => {
+        const select = $("siteSelect");
+        const siteId = select.value;
+        if (!siteId) {
+          alert("Primero selecciona un sitio.");
+          return;
+        }
+        const currentName = select.options[select.selectedIndex]?.textContent.split(" (")[0] || "";
+
+        const newName = prompt("Nuevo nombre:", currentName);
+        if (newName === null) return; // canceló
+        const newDomain = prompt("Nuevo dominio (opcional, deja vacío para no cambiarlo):", "");
+
+        const body = {};
+        if (newName) body.name = newName;
+        if (newDomain) body.domain = newDomain;
+        if (Object.keys(body).length === 0) return;
+
+        try {
+          await apiFetch(`/sites/${siteId}`, {
+            method: "PUT",
+            body: JSON.stringify(body),
+          });
+          await loadSites();
+          select.value = siteId;
+        } catch (err) {
+          alert("Error al editar: " + err.message);
+        }
+      });
+
+      $("deleteSiteBtn").addEventListener("click", async () => {
+        const select = $("siteSelect");
+        const siteId = select.value;
+        if (!siteId) {
+          alert("Primero selecciona un sitio.");
+          return;
+        }
+        const siteName = select.options[select.selectedIndex]?.textContent || siteId;
+
+        if (!confirm(`¿Borrar "${siteName}"? Esto también borra TODOS sus eventos guardados. No se puede deshacer.`))
+          return;
+
+        try {
+          const result = await apiFetch(`/sites/${siteId}`, {
+            method: "DELETE",
+          });
+          alert(`Sitio borrado. Eventos eliminados: ${result.deletedEvents}`);
+          if (pollTimer) clearInterval(pollTimer);
+          await loadSites();
+          if ($("siteSelect").value) startPolling();
+          else clearStatsView();
+        } catch (err) {
+          alert("Error al borrar: " + err.message);
+        }
+      });
+
+      function clearStatsView() {
+        $("kpiTotal").textContent = "–";
+        $("kpiUnique").textContent = "–";
+        $("kpiTopPage").textContent = "–";
+        $("heatmap").innerHTML = "";
+        $("heatLabels").innerHTML = "";
+        $("topPages").innerHTML = "";
+        $("topReferrers").innerHTML = "";
+        $("countries").innerHTML = "";
+        $("recentTable").innerHTML = "";
+      }
+
+      $("viewSnippetBtn").addEventListener("click", () => {
+        const select = $("siteSelect");
+        const siteId = select.value;
+        if (!siteId) {
+          alert("Primero selecciona o registra un sitio.");
+          return;
+        }
+        const siteName = select.options[select.selectedIndex]?.textContent || siteId;
+        const { base } = getConfig();
+        const snippet = `<script src="${base}/tracker.js" data-site="${siteId}" async><\/script>`;
+        showSnippetModal(`Snippet: ${siteName}`, snippet);
+      });
+
+      $("closeModalBtn").addEventListener("click", () => $("snippetModal").classList.remove("open"));
+      $("snippetModal").addEventListener("click", (e) => {
+        if (e.target.id === "snippetModal") $("snippetModal").classList.remove("open");
+      });
+
+      $("copySnippetBtn").addEventListener("click", async () => {
+        const text = $("snippetText").value;
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          $("snippetText").select();
+          document.execCommand("copy");
+        }
+        $("copySnippetBtn").textContent = "¡Copiado!";
+        setTimeout(() => {
+          $("copySnippetBtn").textContent = "Copiar";
+        }, 1500);
+      });
+
+      async function loadSites() {
+        try {
+          const data = await apiFetch("/sites");
+          const select = $("siteSelect");
+          const current = select.value;
+          select.innerHTML = "";
+          (data.sites || []).forEach((s) => {
+            const opt = document.createElement("option");
+            opt.value = s.siteId;
+            opt.textContent = `${s.name} (${s.siteId})`;
+            select.appendChild(opt);
+          });
+          if (current && [...select.options].some((o) => o.value === current)) select.value = current;
+        } catch {
+          // silencioso hasta que se configure la conexión
+        }
+      }
+
+      // ---------- Stats (polling) ----------
+      let pollTimer = null;
+
+      function startPolling() {
+        if (pollTimer) clearInterval(pollTimer);
+        refreshStats();
+        pollTimer = setInterval(refreshStats, 5000);
+      }
+
+      $("siteSelect").addEventListener("change", startPolling);
+      $("rangeSelect").addEventListener("change", startPolling);
+
+      async function refreshStats() {
+        const siteId = $("siteSelect").value;
+        if (!siteId) return;
+        const range = $("rangeSelect").value;
+        try {
+          const stats = await apiFetch(`/stats/${siteId}?range=${range}`);
+          renderStats(stats);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
+      function renderStats(stats) {
+        $("kpiTotal").textContent = stats.totalViews;
+        $("kpiUnique").textContent = stats.uniqueViews;
+        $("kpiTopPage").textContent = stats.topPages[0]?.value || "–";
+
+        renderHeatmap(stats.hourly);
+        renderBars("topPages", stats.topPages);
+        renderBars("topReferrers", stats.topReferrers);
+        renderBars("countries", stats.countries, countryLabel);
+        renderRecent(stats.recent);
+      }
+
+      function renderHeatmap(hourly) {
+        const max = Math.max(1, ...hourly.map((h) => h.views));
+        const heatmap = $("heatmap");
+        const labels = $("heatLabels");
+        heatmap.innerHTML = "";
+        labels.innerHTML = "";
+        hourly.forEach((h) => {
+          const level = h.views === 0 ? 0 : Math.min(4, Math.ceil((h.views / max) * 4));
+          const cell = document.createElement("div");
+          cell.className = "heat-cell";
+          cell.dataset.level = level;
+          cell.title = `${h.hour}:00 UTC — ${h.views} vistas`;
+          heatmap.appendChild(cell);
+
+          const label = document.createElement("span");
+          label.textContent = h.hour;
+          labels.appendChild(label);
+        });
+      }
+
+      function renderBars(containerId, items, labelFn) {
+        const container = $(containerId);
+        container.innerHTML = "";
+        if (!items || items.length === 0) {
+          container.innerHTML = '<p class="empty">Sin datos todavía</p>';
+          return;
+        }
+        const max = Math.max(...items.map((i) => i.count));
+        items.forEach((item) => {
+          const row = document.createElement("div");
+          row.className = "bar-row";
+          const pct = Math.max(4, (item.count / max) * 100);
+          row.innerHTML = `
+      <div class="bar-label" title="${escapeHtml(item.value)}">${escapeHtml(labelFn ? labelFn(item.value) : item.value)}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+      <div class="bar-count">${item.count}</div>
+    `;
+          container.appendChild(row);
+        });
+      }
+
+      function renderRecent(recent) {
+        const tbody = $("recentTable");
+        tbody.innerHTML = "";
+        if (!recent || recent.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="4" class="empty">Sin actividad todavía</td></tr>';
+          return;
+        }
+        recent.forEach((e) => {
+          const tr = document.createElement("tr");
+          const time = (e.ts || "").split("T")[1]?.split(".")[0] || "";
+          tr.innerHTML = `
+      <td class="muted">${time}</td>
+      <td class="path">${escapeHtml(e.path)}</td>
+      <td>${countryLabel(e.country)}</td>
+      <td class="muted">${escapeHtml(e.referrer)}</td>
+    `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function countryLabel(code) {
+        if (!code || code === "XX") return "🏳️ Desconocido";
+        try {
+          const flag = code.toUpperCase().replace(/./g, (c) => String.fromCodePoint(127397 + c.charCodeAt(0)));
+          return `${flag} ${code}`;
+        } catch {
+          return code;
+        }
+      }
+
+      function escapeHtml(s) {
+        return String(s ?? "").replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      }
+
+      // ---------- Init ----------
+      if (getConfig().base && getConfig().key) {
+        loadSites().then(startPolling);
+      }
+    </script>
+  </body>
+</html>
