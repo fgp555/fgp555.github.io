@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Guía de Diseño — FGP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="theme.css" />
+    <style>
+      /* Los tokens (:root) viven en /theme.css — fuente única de verdad.
+         Cambia un color ahí y se actualiza en todo el sitio. */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        line-height: 1.6;
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .wrap {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 28px;
+      }
+
+      /* ---------- doc-only chrome ---------- */
+      .doc-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(10, 14, 20, 0.9);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-soft);
+      }
+      .doc-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 28px;
+        max-width: 1120px;
+        margin: 0 auto;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .doc-logo {
+        font-family: var(--mono);
+        font-weight: 700;
+        font-size: 15px;
+      }
+      .doc-logo span {
+        color: var(--cyan);
+      }
+      .doc-links {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--text-dim);
+      }
+      .doc-links a:hover {
+        color: var(--cyan);
+      }
+
+      .doc-hero {
+        padding: 56px 0 40px;
+        border-bottom: 1px solid var(--border-soft);
+      }
+      .doc-hero h1 {
+        font-family: var(--mono);
+        font-size: clamp(26px, 4vw, 38px);
+        margin-bottom: 12px;
+      }
+      .doc-hero p {
+        color: var(--text-dim);
+        max-width: 640px;
+        font-size: 15.5px;
+      }
+      .doc-hero .warn {
+        margin-top: 20px;
+        display: inline-flex;
+        gap: 10px;
+        align-items: flex-start;
+        background: var(--amber-dim);
+        border: 1px solid rgba(245, 166, 35, 0.3);
+        color: var(--amber);
+        font-size: 13px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        max-width: 640px;
+        font-family: var(--sans);
+        line-height: 1.5;
+      }
+
+      .doc-section {
+        padding: 56px 0;
+        border-bottom: 1px solid var(--border-soft);
+      }
+      .doc-eyebrow {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: var(--cyan);
+        text-transform: lowercase;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+      .doc-eyebrow::before {
+        content: "//";
+        color: var(--text-faint);
+      }
+      .doc-section h2 {
+        font-family: var(--mono);
+        font-size: clamp(20px, 2.6vw, 26px);
+        margin-bottom: 6px;
+      }
+      .doc-section > p.desc {
+        color: var(--text-dim);
+        font-size: 14.5px;
+        max-width: 640px;
+        margin-bottom: 30px;
+      }
+      .doc-block {
+        margin-bottom: 34px;
+      }
+      .doc-block:last-child {
+        margin-bottom: 0;
+      }
+      .doc-block h3 {
+        font-family: var(--mono);
+        font-size: 14px;
+        color: var(--text-dim);
+        font-weight: 600;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .demo {
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 26px;
+        margin-bottom: 10px;
+      }
+      pre.code {
+        background: #060809;
+        border: 1px solid var(--border);
+        border-top: none;
+        border-radius: 0 0 12px 12px;
+        padding: 16px 20px;
+        overflow-x: auto;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        line-height: 1.7;
+        color: var(--text-dim);
+      }
+      pre.code .tag-name {
+        color: var(--cyan);
+      }
+      pre.code .attr {
+        color: var(--amber);
+      }
+      .demo + pre.code {
+        margin-top: -10px;
+        margin-bottom: 24px;
+      }
+
+      /* ---------- color swatches ---------- */
+      .swatch-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+        gap: 14px;
+      }
+      .swatch {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        background: var(--bg-elev);
+      }
+      .swatch-color {
+        height: 64px;
+      }
+      .swatch-meta {
+        padding: 10px 12px;
+        font-family: var(--mono);
+        font-size: 12px;
+      }
+      .swatch-name {
+        color: var(--text);
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+      .swatch-hex {
+        color: var(--text-faint);
+      }
+
+      /* ---------- type samples ---------- */
+      .type-row {
+        display: flex;
+        align-items: baseline;
+        gap: 20px;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border-soft);
+      }
+      .type-row:last-child {
+        border-bottom: none;
+      }
+      .type-label {
+        font-family: var(--mono);
+        font-size: 11.5px;
+        color: var(--text-faint);
+        width: 150px;
+        flex-shrink: 0;
+      }
+
+      /* ---------- spacing scale ---------- */
+      .space-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 10px;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--text-dim);
+      }
+      .space-bar {
+        height: 14px;
+        background: var(--cyan);
+        border-radius: 3px;
+      }
+      .space-label {
+        width: 60px;
+        flex-shrink: 0;
+      }
+
+      /* ---------- reused component CSS (from index.html) ---------- */
+      .btn {
+        font-family: var(--mono);
+        font-size: 14px;
+        font-weight: 600;
+        padding: 13px 20px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+        border: 1px solid transparent;
+        cursor: pointer;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+      .btn-primary {
+        background: var(--green);
+        color: #03150e;
+      }
+      .btn-primary:hover {
+        background: #57e6ac;
+      }
+      .btn-outline {
+        background: transparent;
+        border-color: var(--border);
+        color: var(--text);
+      }
+      .btn-outline:hover {
+        border-color: var(--cyan);
+        color: var(--cyan);
+      }
+      .btn-lg {
+        padding: 15px 26px;
+        font-size: 15px;
+      }
+
+      .badge {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        padding: 3px 8px;
+        border-radius: 5px;
+      }
+      .badge-live {
+        background: var(--green-dim);
+        color: var(--green);
+      }
+      .badge-cyan {
+        background: var(--cyan-dim);
+        color: var(--cyan);
+      }
+      .badge-amber {
+        background: var(--amber-dim);
+        color: var(--amber);
+      }
+
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--green);
+        background: var(--green-dim);
+        border: 1px solid rgba(61, 220, 151, 0.25);
+        padding: 6px 12px;
+        border-radius: 999px;
+      }
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--green);
+      }
+
+      .tag {
+        background: var(--bg-elev-2);
+        border: 1px solid var(--border);
+        color: var(--text-dim);
+        font-size: 12px;
+        padding: 5px 10px;
+        border-radius: 6px;
+        font-family: var(--mono);
+        display: inline-block;
+      }
+
+      .card {
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px;
+      }
+      .card-title {
+        font-family: var(--mono);
+        font-weight: 700;
+        font-size: 14.5px;
+        margin-bottom: 6px;
+      }
+      .card-desc {
+        font-size: 13.5px;
+        color: var(--text-dim);
+      }
+
+      .terminal {
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .term-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 11px 14px;
+        background: var(--bg-elev-2);
+        border-bottom: 1px solid var(--border);
+      }
+      .term-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .term-bar span:nth-child(1) {
+        background: #ff5f56;
+      }
+      .term-bar span:nth-child(2) {
+        background: #ffbd2e;
+      }
+      .term-bar span:nth-child(3) {
+        background: #27c93f;
+      }
+      .term-title {
+        margin-left: 8px;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--text-faint);
+      }
+      .term-body {
+        padding: 18px 20px 22px;
+        font-family: var(--mono);
+        font-size: 13.5px;
+        line-height: 1.9;
+      }
+      .term-prompt {
+        color: var(--green);
+      }
+      .term-cyan {
+        color: var(--cyan);
+      }
+      .term-out {
+        color: var(--text);
+      }
+
+      .timeline {
+        display: flex;
+        flex-direction: column;
+        border-left: 2px solid var(--border);
+        margin-left: 6px;
+      }
+      .tl-item {
+        position: relative;
+        padding: 0 0 26px 30px;
+      }
+      .tl-item:last-child {
+        padding-bottom: 0;
+      }
+      .tl-item::before {
+        content: "";
+        position: absolute;
+        left: -7px;
+        top: 4px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--bg-elev);
+        border: 2px solid var(--cyan);
+      }
+      .tl-date {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--cyan);
+        margin-bottom: 5px;
+      }
+      .tl-role {
+        font-family: var(--mono);
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 3px;
+      }
+      .tl-desc {
+        font-size: 13.5px;
+        color: var(--text-dim);
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+      .row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .dos-donts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .dos,
+      .donts {
+        border-radius: 10px;
+        padding: 16px 18px;
+        font-size: 13.5px;
+        line-height: 1.7;
+      }
+      .dos {
+        background: var(--green-dim);
+        border: 1px solid rgba(61, 220, 151, 0.25);
+      }
+      .donts {
+        background: rgba(255, 90, 90, 0.08);
+        border: 1px solid rgba(255, 90, 90, 0.25);
+      }
+      .dos h4,
+      .donts h4 {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        margin-bottom: 8px;
+      }
+      .dos h4 {
+        color: var(--green);
+      }
+      .donts h4 {
+        color: #ff8a8a;
+      }
+
+      footer.doc-foot {
+        padding: 30px 0 50px;
+        text-align: center;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--text-faint);
+      }
+
+      @media (max-width: 800px) {
+        .grid-3,
+        .dos-donts {
+          grid-template-columns: 1fr;
+        }
+        .doc-links {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="doc-header">
+      <div class="doc-nav">
+        <div class="doc-logo">FGP<span>_</span> · guía de diseño</div>
+        <nav class="doc-links">
+          <a href="#colores">Colores</a>
+          <a href="#tipografia">Tipografía</a>
+          <a href="#espaciado">Espaciado</a>
+          <a href="#botones">Botones</a>
+          <a href="#badges">Badges &amp; tags</a>
+          <a href="#cards">Cards</a>
+          <a href="#terminal">Terminal</a>
+          <a href="#timeline">Timeline</a>
+          <a href="#reglas">Reglas</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="doc-hero">
+        <p class="doc-eyebrow">design system</p>
+        <h1>Guía de diseño — frankgp.com</h1>
+        <p>
+          Sistema visual "terminal / dev" extraído de <code>index.html</code>: fondo oscuro, acentos cian/verde/ámbar,
+          tipografía monoespaciada para títulos y datos, Inter para texto de lectura. Úsalo como referencia al crear
+          cualquier página nueva del dominio para mantener consistencia.
+        </p>
+        <div class="warn">
+          ⚠ <span><code>404.html</code> actualmente usa un sistema distinto (acento morado, fondo #0f1115, fuente
+          system-ui). Pendiente migrarlo a estos tokens para que todo el sitio comparta un mismo lenguaje visual.</span>
+        </div>
+      </section>
+
+      <!-- COLORES -->
+      <section class="doc-section" id="colores">
+        <p class="doc-eyebrow">tokens</p>
+        <h2>Colores</h2>
+        <p class="desc">
+          Todos definidos como variables CSS en <code>:root</code>. Nunca hardcodear hex en componentes — siempre
+          referenciar la variable.
+        </p>
+        <div class="swatch-grid">
+          <div class="swatch">
+            <div class="swatch-color" style="background: var(--bg)"></div>
+            <div class="swatch-meta"><div class="swatch-name">--bg</div><div class="swatch-hex">#0a0e14</div></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: var(--bg-elev)"></div>
+            <div class="swatch-meta"><div class="swatch-name">--bg-elev</div><div class="swatch-hex">#10151d</div></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: var(--bg-elev-2)"></div>
+            <div class="swatch-meta"><div class="swatch-name">--bg-elev-2</div><div class="swatch-hex">#161d27</div></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: var(--border)"></div>
+            <div class="swatch-meta"><div class="swatch-name">--border</div><div class="swatch-hex">#212a35</div></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: var(--text)"></div>
+            <div class="swatch-meta"><div class="swatch-name">--text</div><div class="swatch-hex">#e8edf2</div></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: var(--text-dim)"></div>
+            <div class="swatch-meta"><div class="swatch-name">--text-dim</div><div class="swatch-hex">#95a3b3</div></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: var(--text-faint)"></div>
+            <div class="swatch-meta"><div class="swatch-name">--text-faint</div><div class="swatch-hex">#576474</div></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: var(--cyan)"></div>
+            <div class="swatch-meta"><div class="swatch-name">--cyan</div><div class="swatch-hex">#22d3ee</div></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: var(--green)"></div>
+            <div class="swatch-meta"><div class="swatch-name">--green</div><div class="swatch-hex">#3ddc97</div></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: var(--amber)"></div>
+            <div class="swatch-meta"><div class="swatch-name">--amber</div><div class="swatch-hex">#f5a623</div></div>
+          </div>
+        </div>
+        <div class="doc-block" style="margin-top: 30px">
+          <div class="dos-donts">
+            <div class="dos">
+              <h4>✓ uso de acentos</h4>
+              cian = enlaces/foco/hover principal · verde = estado "disponible"/CTA primario/éxito · ámbar = métricas
+              destacadas o advertencias, con moderación.
+            </div>
+            <div class="donts">
+              <h4>✗ evitar</h4>
+              No introducir colores nuevos por página (como el morado de 404.html). No usar los tres acentos juntos
+              en un mismo componente pequeño.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TIPOGRAFÍA -->
+      <section class="doc-section" id="tipografia">
+        <p class="doc-eyebrow">tokens</p>
+        <h2>Tipografía</h2>
+        <p class="desc">
+          Dos familias, roles fijos: <strong style="color: var(--text)">JetBrains Mono</strong> para títulos, datos,
+          etiquetas y CTAs (identidad "dev"); <strong style="color: var(--text)">Inter</strong> para párrafos de
+          lectura.
+        </p>
+        <div class="demo">
+          <div class="type-row">
+            <span class="type-label">h1 · --mono 700</span>
+            <span style="font-family: var(--mono); font-weight: 700; font-size: clamp(28px, 4vw, 42px)">Título hero</span>
+          </div>
+          <div class="type-row">
+            <span class="type-label">h2 · --mono 700</span>
+            <span style="font-family: var(--mono); font-weight: 700; font-size: 26px">Título de sección</span>
+          </div>
+          <div class="type-row">
+            <span class="type-label">eyebrow · --mono 600</span>
+            <span class="doc-eyebrow" style="margin: 0">etiqueta de sección</span>
+          </div>
+          <div class="type-row">
+            <span class="type-label">body · --sans 400</span>
+            <span style="font-family: var(--sans); color: var(--text-dim)">Texto de párrafo estándar, 15.5–16px, color --text-dim.</span>
+          </div>
+          <div class="type-row">
+            <span class="type-label">mono data · --mono 500</span>
+            <span style="font-family: var(--mono); font-size: 13.5px; color: var(--text-dim)">nombres de servicio, tags, fechas, métricas</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ESPACIADO -->
+      <section class="doc-section" id="espaciado">
+        <p class="doc-eyebrow">tokens</p>
+        <h2>Espaciado &amp; layout</h2>
+        <p class="desc">Escala aproximada en múltiplos de 4px. Contenedor y ritmo de secciones fijos en todo el sitio.</p>
+        <div class="demo">
+          <div class="space-row"><span class="space-label">8px</span><span class="space-bar" style="width: 8px"></span></div>
+          <div class="space-row"><span class="space-label">12px</span><span class="space-bar" style="width: 12px"></span></div>
+          <div class="space-row"><span class="space-label">16px</span><span class="space-bar" style="width: 16px"></span></div>
+          <div class="space-row"><span class="space-label">20px</span><span class="space-bar" style="width: 20px"></span></div>
+          <div class="space-row"><span class="space-label">28px</span><span class="space-bar" style="width: 28px"></span></div>
+          <div class="space-row"><span class="space-label">40px</span><span class="space-bar" style="width: 40px"></span></div>
+          <div class="space-row"><span class="space-label">56px</span><span class="space-bar" style="width: 56px"></span></div>
+          <div class="space-row"><span class="space-label">74px</span><span class="space-bar" style="width: 74px"></span></div>
+        </div>
+        <div class="doc-block">
+          <ul style="list-style: none; font-family: var(--mono); font-size: 13px; color: var(--text-dim); line-height: 2">
+            <li><span style="color: var(--cyan)">.wrap</span> → max-width: 1120px, padding: 0 28px</li>
+            <li><span style="color: var(--cyan)">section</span> → padding: 74px 0, border-top: 1px solid var(--border-soft)</li>
+            <li><span style="color: var(--cyan)">--radius</span> → 10px (cards) · 12px (paneles grandes / terminal) · 8px (botones)</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- BOTONES -->
+      <section class="doc-section" id="botones">
+        <p class="doc-eyebrow">componentes</p>
+        <h2>Botones</h2>
+        <p class="desc">Primario = acción principal (contacto/CTA). Outline = acción secundaria. Máximo un primario visible por bloque.</p>
+        <div class="demo row">
+          <a class="btn btn-primary" href="#">→ Acción primaria</a>
+          <a class="btn btn-outline" href="#">Acción secundaria</a>
+          <a class="btn btn-primary btn-lg" href="#">→ Primario grande</a>
+        </div>
+        <pre class="code"><span class="tag-name">&lt;a</span> <span class="attr">class</span>="btn btn-primary" <span class="attr">href</span>="#"&gt;→ Texto&lt;/a&gt;
+<span class="tag-name">&lt;a</span> <span class="attr">class</span>="btn btn-outline" <span class="attr">href</span>="#"&gt;Texto&lt;/a&gt;
+<span class="tag-name">&lt;a</span> <span class="attr">class</span>="btn btn-primary btn-lg" <span class="attr">href</span>="#"&gt;→ Texto&lt;/a&gt;</pre>
+      </section>
+
+      <!-- BADGES / TAGS -->
+      <section class="doc-section" id="badges">
+        <p class="doc-eyebrow">componentes</p>
+        <h2>Badges, pills &amp; tags</h2>
+        <p class="desc">Badges para estado (LIVE, PUBLICADO). Pill para disponibilidad. Tags para stack tecnológico / keywords.</p>
+        <div class="demo row">
+          <span class="badge badge-live">LIVE</span>
+          <span class="badge badge-cyan">BETA</span>
+          <span class="badge badge-amber">WIP</span>
+          <span class="status-pill"><span class="dot"></span>disponible</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">NestJS</span>
+          <span class="tag">AWS</span>
+        </div>
+        <pre class="code"><span class="tag-name">&lt;span</span> <span class="attr">class</span>="badge badge-live"&gt;LIVE&lt;/span&gt;
+<span class="tag-name">&lt;span</span> <span class="attr">class</span>="tag"&gt;TypeScript&lt;/span&gt;</pre>
+      </section>
+
+      <!-- CARDS -->
+      <section class="doc-section" id="cards">
+        <p class="doc-eyebrow">componentes</p>
+        <h2>Cards</h2>
+        <p class="desc">Patrón base para servicios, proyectos, educación, "why hire me": fondo elevado, borde sutil, radio 10px.</p>
+        <div class="demo">
+          <div class="grid-3">
+            <div class="card">
+              <div class="card-title">nombre-servicio</div>
+              <div class="card-desc">Descripción corta del bloque, 13.5px, color --text-dim.</div>
+            </div>
+            <div class="card">
+              <div class="card-title">otro-bloque</div>
+              <div class="card-desc">Las cards pueden llevar badge, métrica o tags dentro, ver index.html.</div>
+            </div>
+            <div class="card">
+              <div class="card-title">tercer-bloque</div>
+              <div class="card-desc">Hover opcional: border-color → var(--cyan), translateY(-3px).</div>
+            </div>
+          </div>
+        </div>
+        <pre class="code"><span class="tag-name">&lt;div</span> <span class="attr">class</span>="card"&gt;
+  &lt;div <span class="attr">class</span>="card-title"&gt;nombre&lt;/div&gt;
+  &lt;div <span class="attr">class</span>="card-desc"&gt;Descripción…&lt;/div&gt;
+&lt;/div&gt;</pre>
+      </section>
+
+      <!-- TERMINAL -->
+      <section class="doc-section" id="terminal">
+        <p class="doc-eyebrow">componentes</p>
+        <h2>Ventana terminal</h2>
+        <p class="desc">Motivo visual de marca (hero, bloque de stack). Barra con 3 dots + título, cuerpo monoespaciado.</p>
+        <div class="demo" style="padding: 0">
+          <div class="terminal">
+            <div class="term-bar">
+              <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+              <span class="term-title">usuario@remote — zsh</span>
+            </div>
+            <div class="term-body">
+              <div><span class="term-prompt">$ </span><span class="term-cyan">whoami</span></div>
+              <div class="term-out">resultado del comando</div>
+            </div>
+          </div>
+        </div>
+        <pre class="code"><span class="tag-name">&lt;div</span> <span class="attr">class</span>="terminal"&gt;
+  &lt;div <span class="attr">class</span>="term-bar"&gt;…dots… &lt;span <span class="attr">class</span>="term-title"&gt;titulo&lt;/span&gt;&lt;/div&gt;
+  &lt;div <span class="attr">class</span>="term-body"&gt;…&lt;/div&gt;
+&lt;/div&gt;</pre>
+      </section>
+
+      <!-- TIMELINE -->
+      <section class="doc-section" id="timeline">
+        <p class="doc-eyebrow">componentes</p>
+        <h2>Timeline</h2>
+        <p class="desc">Para experiencia / historial cronológico. Línea vertical + punto con borde cian.</p>
+        <div class="demo">
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-date">2025 — ACTUALIDAD</div>
+              <div class="tl-role">Rol o hito</div>
+              <div class="tl-desc">Descripción breve del periodo.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-date">2024</div>
+              <div class="tl-role">Rol anterior</div>
+              <div class="tl-desc">Descripción breve del periodo.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- REGLAS -->
+      <section class="doc-section" id="reglas" style="border-bottom: none">
+        <p class="doc-eyebrow">checklist</p>
+        <h2>Reglas al crear una página nueva</h2>
+        <div class="doc-block">
+          <ol style="padding-left: 20px; color: var(--text-dim); font-size: 14.5px; line-height: 2">
+            <li>Copiar el bloque <code>:root</code> de tokens tal cual — no redefinir colores por página.</li>
+            <li>Cargar las mismas fuentes (JetBrains Mono + Inter) con el mismo <code>&lt;link&gt;</code>.</li>
+            <li>Títulos en <code>--mono</code>, texto de lectura en <code>--sans</code>.</li>
+            <li>Contenedor <code>.wrap</code> a 1120px máx, secciones con padding vertical 74px.</li>
+            <li>Reusar componentes de esta guía (botones, badges, cards, terminal) antes de inventar uno nuevo.</li>
+            <li>Respetar <code>prefers-reduced-motion</code> igual que en <code>index.html</code>.</li>
+            <li>Antes de publicar, comparar visualmente contra <a href="/index.html" style="color: var(--cyan)">index.html</a> para confirmar consistencia.</li>
+          </ol>
+        </div>
+      </section>
+    </main>
+
+    <footer class="doc-foot">Guía de diseño interna · no indexada · frankgp.com</footer>
+  </body>
+</html>
