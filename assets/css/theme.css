@@ -1,0 +1,110 @@
+/* ============================================================
+   DESIGN TOKENS — frankgp.com
+   Fuente única de verdad para colores, tipografía y radios.
+   Cambiar un valor aquí lo actualiza en todo el sitio
+   (index.html, styleguide.html, y cualquier página futura
+   que incluya este archivo).
+   Referencia visual: /styleguide.html
+
+   MODO CLARO/OSCURO
+   - Por defecto sigue prefers-color-scheme del sistema.
+   - El botón .theme-toggle fuerza un modo escribiendo
+     data-theme="light" | "dark" en <html>, guardado en
+     localStorage. Ver el <script> de tema en index.html /
+     styleguide.html (debe ir en <head>, antes del render,
+     para evitar parpadeo).
+============================================================ */
+:root {
+  color-scheme: dark;
+
+  --bg: #0a0e14;
+  --bg-elev: #10151d;
+  --bg-elev-2: #161d27;
+  --border: #212a35;
+  --border-soft: #1a212a;
+  --text: #e8edf2;
+  --text-dim: #95a3b3;
+  --text-faint: #576474;
+  --cyan: #22d3ee;
+  --cyan-dim: rgba(34, 211, 238, 0.12);
+  --green: #3ddc97;
+  --green-dim: rgba(61, 220, 151, 0.12);
+  --amber: #f5a623;
+  --amber-dim: rgba(245, 166, 35, 0.12);
+  --cyan-border: rgba(34, 211, 238, 0.25);
+  --green-border: rgba(61, 220, 151, 0.25);
+  --amber-border: rgba(245, 166, 35, 0.25);
+  --glow-1: rgba(34, 211, 238, 0.08);
+  --glow-2: rgba(245, 166, 35, 0.05);
+  --header-bg: rgba(10, 14, 20, 0.82);
+  --header-bg-strong: rgba(10, 14, 20, 0.9);
+  --danger: #ff8a8a;
+
+  /* colores de marca fijos: para fondos sólidos de botones (con texto
+     oscuro fijo encima) que deben verse igual en ambos temas — no
+     redefinir en los bloques claro/oscuro de abajo. */
+  --brand-cyan: #22d3ee;
+  --brand-green: #3ddc97;
+
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --radius: 10px;
+}
+
+/* sigue al sistema operativo cuando no hay elección manual guardada */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+
+    --bg: #f6f8fa;
+    --bg-elev: #ffffff;
+    --bg-elev-2: #eef1f5;
+    --border: #d9dfe6;
+    --border-soft: #e6eaef;
+    --text: #10151d;
+    --text-dim: #495363;
+    --text-faint: #8a94a3;
+    --cyan: #0e7490;
+    --cyan-dim: rgba(14, 116, 144, 0.1);
+    --green: #047857;
+    --green-dim: rgba(4, 120, 87, 0.1);
+    --amber: #b45309;
+    --amber-dim: rgba(180, 83, 9, 0.1);
+    --cyan-border: rgba(14, 116, 144, 0.25);
+    --green-border: rgba(4, 120, 87, 0.25);
+    --amber-border: rgba(180, 83, 9, 0.25);
+    --glow-1: rgba(14, 116, 144, 0.06);
+    --glow-2: rgba(180, 83, 9, 0.04);
+    --header-bg: rgba(246, 248, 250, 0.82);
+    --header-bg-strong: rgba(246, 248, 250, 0.9);
+    --danger: #b91c1c;
+  }
+}
+
+/* modo forzado manualmente por el botón .theme-toggle */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #f6f8fa;
+  --bg-elev: #ffffff;
+  --bg-elev-2: #eef1f5;
+  --border: #d9dfe6;
+  --border-soft: #e6eaef;
+  --text: #10151d;
+  --text-dim: #495363;
+  --text-faint: #8a94a3;
+  --cyan: #0e7490;
+  --cyan-dim: rgba(14, 116, 144, 0.1);
+  --green: #047857;
+  --green-dim: rgba(4, 120, 87, 0.1);
+  --amber: #b45309;
+  --amber-dim: rgba(180, 83, 9, 0.1);
+  --cyan-border: rgba(14, 116, 144, 0.25);
+  --green-border: rgba(4, 120, 87, 0.25);
+  --amber-border: rgba(180, 83, 9, 0.25);
+  --glow-1: rgba(14, 116, 144, 0.06);
+  --glow-2: rgba(180, 83, 9, 0.04);
+  --header-bg: rgba(246, 248, 250, 0.82);
+  --header-bg-strong: rgba(246, 248, 250, 0.9);
+  --danger: #b91c1c;
+}

@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV — Franklin Gomez Pacoricona</title>
+    <script>
+      // Aplica el tema guardado antes del primer render para evitar parpadeo.
+      (function () {
+        var saved = localStorage.getItem("theme");
+        if (saved === "light" || saved === "dark") {
+          document.documentElement.setAttribute("data-theme", saved);
+        }
+      })();
+    </script>
+    <meta
+      name="description"
+      content="Currículum de Franklin Gomez Pacoricona — Full Stack & Mobile Developer. Experiencia, formación y stack técnico."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/theme.css" />
+    <link rel="stylesheet" href="../assets/css/components.css" />
+    <script src="../assets/js/data.js"></script>
+    <style>
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 900px 500px at 15% -5%, var(--glow-1), transparent 60%),
+          radial-gradient(ellipse 700px 500px at 100% 10%, var(--glow-2), transparent 60%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* ---------- HEADER (no imprime) ---------- */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: var(--header-bg);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-soft);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 28px;
+        max-width: 860px;
+        margin: 0 auto;
+      }
+      .logo {
+        font-family: var(--mono);
+        font-weight: 700;
+        font-size: 16px;
+      }
+      .logo span {
+        color: var(--cyan);
+      }
+      .print-btn {
+        font-family: var(--mono);
+        font-size: 13px;
+        font-weight: 600;
+        background: var(--brand-green);
+        color: #03150e;
+        padding: 9px 16px;
+        border-radius: 7px;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border: none;
+        cursor: pointer;
+      }
+      .print-btn:hover {
+        background: #57e6ac;
+      }
+      .print-btn svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      main {
+        position: relative;
+        z-index: 1;
+        padding: 48px 0 80px;
+      }
+      .cv-wrap {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 0 28px;
+      }
+
+      /* ---------- SHEET ---------- */
+      .sheet {
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 44px 44px 50px;
+      }
+
+      /* ---------- IDENTITY ---------- */
+      .cv-name {
+        font-size: clamp(24px, 3.4vw, 32px);
+        margin-bottom: 4px;
+      }
+      .cv-title {
+        font-family: var(--mono);
+        color: var(--cyan);
+        font-size: 15px;
+        margin-bottom: 16px;
+      }
+      .cv-contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 16px;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--text-dim);
+        margin-bottom: 28px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--border-soft);
+      }
+      .cv-contact a:hover {
+        color: var(--cyan);
+      }
+
+      .cv-summary {
+        color: var(--text-dim);
+        font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 34px;
+      }
+
+      /* ---------- SECTIONS ---------- */
+      .cv-section {
+        margin-bottom: 32px;
+      }
+      .cv-section:last-child {
+        margin-bottom: 0;
+      }
+      .cv-section h2 {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-faint);
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border-soft);
+      }
+
+      /* ---------- SKILLS ---------- */
+      .cv-skills-grid {
+        display: grid;
+        grid-template-columns: 130px 1fr;
+        gap: 10px 16px;
+      }
+      .cv-skills-grid dt {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--text-faint);
+        padding-top: 2px;
+      }
+      .cv-skills-grid dd {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      /* ---------- EXPERIENCE / EDUCATION (reusa .timeline de components.css) ---------- */
+      .cv-section .timeline {
+        margin-left: 4px;
+      }
+      .cv-edu-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .cv-edu-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .cv-edu-name {
+        font-family: var(--mono);
+        font-weight: 700;
+        font-size: 14.5px;
+      }
+      .cv-edu-org {
+        font-size: 13.5px;
+        color: var(--text-dim);
+      }
+      .cv-edu-year {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--text-faint);
+        white-space: nowrap;
+      }
+
+      footer {
+        border-top: 1px solid var(--border-soft);
+        padding: 26px 0;
+        position: relative;
+        z-index: 1;
+      }
+      .foot-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 14px;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--text-faint);
+      }
+      .foot-row a:hover {
+        color: var(--cyan);
+      }
+
+      /* ---------- PRINT ---------- */
+      @media print {
+        :root {
+          --bg: #ffffff;
+          --bg-elev: #ffffff;
+          --bg-elev-2: #f4f4f4;
+          --border: #dcdcdc;
+          --border-soft: #e6e6e6;
+          --text: #111111;
+          --text-dim: #333333;
+          --text-faint: #666666;
+          --cyan: #0e7490;
+          --cyan-dim: #eef6f8;
+          --green: #047857;
+          --green-dim: #eefaf4;
+          --amber: #b45309;
+          --amber-dim: #fdf3e7;
+        }
+        body::before,
+        header,
+        footer,
+        .theme-toggle {
+          display: none !important;
+        }
+        main {
+          padding: 0;
+        }
+        .sheet {
+          border: none;
+          border-radius: 0;
+          padding: 0;
+        }
+        .cv-wrap {
+          max-width: 100%;
+          padding: 0;
+        }
+        .cv-section {
+          break-inside: avoid;
+        }
+        a {
+          color: inherit !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav">
+        <a href="/" class="logo">FGP<span>_</span></a>
+        <div style="display: flex; align-items: center; gap: 14px">
+          <button class="theme-toggle" type="button" aria-label="Cambiar tema claro/oscuro" aria-pressed="false">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+          <a class="print-btn" id="cvPdfLink" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" x2="12" y1="15" y2="3"></line>
+            </svg>
+            Descargar PDF
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="cv-wrap">
+        <div class="sheet">
+          <!-- IDENTIDAD (renderizado desde assets/js/data.js) -->
+          <h1 class="cv-name" id="cvName"></h1>
+          <p class="cv-title" id="cvTitle"></p>
+          <div class="cv-contact" id="cvContact"></div>
+
+          <p class="cv-summary" id="cvSummary"></p>
+
+          <!-- STACK -->
+          <div class="cv-section">
+            <h2>Stack técnico</h2>
+            <dl class="cv-skills-grid" id="cvSkills"></dl>
+          </div>
+
+          <!-- EXPERIENCIA -->
+          <div class="cv-section">
+            <h2>Experiencia</h2>
+            <div class="timeline" id="cvExperience"></div>
+          </div>
+
+          <!-- EDUCACIÓN -->
+          <div class="cv-section">
+            <h2>Educación</h2>
+            <div class="cv-edu-list" id="cvEducation"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="cv-wrap foot-row">
+        <span>© 2026 Franklin Gomez Pacoricona</span>
+        <div style="display: flex; gap: 20px">
+          <a href="/">← Portafolio</a>
+          <a href="/portfolio/">Ver proyectos</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Toggle de tema claro/oscuro
+      (function () {
+        const btn = document.querySelector(".theme-toggle");
+        const mql = window.matchMedia("(prefers-color-scheme: light)");
+
+        function isLightActive() {
+          const current = document.documentElement.getAttribute("data-theme");
+          return current === "light" || (!current && mql.matches);
+        }
+        function syncAria() {
+          btn.setAttribute("aria-pressed", String(isLightActive()));
+        }
+
+        syncAria();
+        btn.addEventListener("click", function () {
+          const next = isLightActive() ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+          syncAria();
+        });
+        mql.addEventListener("change", function () {
+          if (!localStorage.getItem("theme")) syncAria();
+        });
+      })();
+    </script>
+
+    <script>
+      // Renderiza el CV completo desde SITE_DATA (assets/js/data.js) — única
+      // fuente de verdad compartida con index.html y portfolio/index.html.
+      const lang = "es";
+
+      document.getElementById("cvName").textContent = SITE_DATA.name;
+      document.getElementById("cvTitle").textContent = SITE_DATA.title;
+      document.getElementById("cvSummary").textContent = pick(SITE_DATA.summary, lang);
+      document.getElementById("cvPdfLink").href = SITE_DATA.links.cvPdf;
+
+      const email = SITE_DATA.email.user + "@" + SITE_DATA.email.domain;
+      document.getElementById("cvContact").innerHTML = `
+        <a href="mailto:${email}">${email}</a>
+        <a href="https://wa.me/${SITE_DATA.whatsappNumber}" target="_blank" rel="noopener">+${SITE_DATA.whatsappNumber.replace(/^51/, "51 ")}</a>
+        <a href="${SITE_DATA.links.linkedin}" target="_blank" rel="noopener">linkedin.com/in/franklingp</a>
+        <a href="${SITE_DATA.links.github}" target="_blank" rel="noopener">github.com/fgp555</a>
+        <span>${pick(SITE_DATA.location, lang)}</span>
+      `;
+
+      document.getElementById("cvSkills").innerHTML = SITE_DATA.skills
+        .map(
+          (group) => `
+            <dt>${pick(group.label, lang)}</dt>
+            <dd>${group.items.map((item) => `<span class="tag">${pick(item, lang)}</span>`).join("")}</dd>
+          `,
+        )
+        .join("");
+
+      document.getElementById("cvExperience").innerHTML = SITE_DATA.experience
+        .map(
+          (job) => `
+            <div class="tl-item">
+              <div class="tl-date">${pick(job.date, lang)}</div>
+              <div class="tl-role">${pick(job.role, lang)}</div>
+              <div class="tl-org">${pick(job.org, lang)}</div>
+              <p class="tl-desc">${pick(job.desc, lang)}</p>
+            </div>
+          `,
+        )
+        .join("");
+
+      document.getElementById("cvEducation").innerHTML = SITE_DATA.education
+        .map(
+          (edu) => `
+            <div class="cv-edu-item">
+              <div>
+                <div class="cv-edu-name">${pick(edu.name, lang)}</div>
+                <div class="cv-edu-org">${pick(edu.org, lang)}</div>
+              </div>
+              <div class="cv-edu-year">${edu.year}</div>
+            </div>
+          `,
+        )
+        .join("");
+    </script>
+  </body>
+</html>

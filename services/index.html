@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Franklin Gomez — Desarrollo de Apps y Páginas Web</title>
+    <script>
+      // Aplica el tema guardado antes del primer render para evitar parpadeo.
+      (function () {
+        var saved = localStorage.getItem("theme");
+        if (saved === "light" || saved === "dark") {
+          document.documentElement.setAttribute("data-theme", saved);
+        }
+      })();
+    </script>
+    <meta
+      name="description"
+      content="Desarrollo tu aplicación móvil o página web a medida, lista para usar. Más de 2 años ayudando a negocios a tener presencia digital."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/theme.css" />
+    <link rel="stylesheet" href="../assets/css/components.css" />
+    <script src="../assets/js/data.js"></script>
+    <style>
+      /* Look "suavizado": misma paleta y componentes base, pero títulos en
+         --sans (no mono) y sin el motivo visual de terminal/código, para un
+         público no técnico. */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 900px 500px at 15% -5%, var(--glow-1), transparent 60%),
+          radial-gradient(ellipse 700px 500px at 100% 10%, var(--glow-2), transparent 60%);
+        pointer-events: none;
+        z-index: 0;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: var(--sans);
+        letter-spacing: -0.01em;
+      }
+
+      /* ---------- HEADER ---------- */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: var(--header-bg);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-soft);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 28px;
+        max-width: 1080px;
+        margin: 0 auto;
+      }
+      .logo {
+        font-family: var(--mono);
+        font-weight: 700;
+        font-size: 16px;
+      }
+      .logo span {
+        color: var(--cyan);
+      }
+      .nav-cta {
+        font-family: var(--sans);
+        font-size: 14px;
+        font-weight: 700;
+        background: var(--brand-green);
+        color: #03150e;
+        padding: 9px 18px;
+        border-radius: 7px;
+      }
+      .nav-cta:hover {
+        background: #57e6ac;
+      }
+
+      main {
+        position: relative;
+        z-index: 1;
+      }
+      .wrap-sm {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 28px;
+      }
+
+      /* ---------- HERO ---------- */
+      .hero {
+        padding: 80px 0 64px;
+        text-align: center;
+      }
+      .kicker {
+        display: inline-block;
+        font-family: var(--sans);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--cyan);
+        background: var(--cyan-dim);
+        border: 1px solid var(--cyan-border);
+        padding: 6px 14px;
+        border-radius: 999px;
+        margin-bottom: 20px;
+      }
+      .hero h1 {
+        font-size: clamp(30px, 5vw, 48px);
+        line-height: 1.15;
+        max-width: 780px;
+        margin: 0 auto 20px;
+      }
+      .hero h1 .hl {
+        color: var(--cyan);
+      }
+      .hero-sub {
+        font-size: 18px;
+        color: var(--text-dim);
+        max-width: 600px;
+        margin: 0 auto 34px;
+      }
+      .cta-row {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* ---------- TRUST STRIP ---------- */
+      .trust {
+        padding: 6px 0 70px;
+      }
+      .trust-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .trust-item {
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 24px 20px;
+        text-align: center;
+      }
+      .trust-num {
+        font-family: var(--sans);
+        font-size: 26px;
+        font-weight: 800;
+        color: var(--green);
+        margin-bottom: 6px;
+      }
+      .trust-label {
+        font-size: 14px;
+        color: var(--text-dim);
+      }
+
+      /* ---------- SECTION SHARED ---------- */
+      .section {
+        padding: 64px 0;
+        border-top: 1px solid var(--border-soft);
+      }
+      .section-head {
+        text-align: center;
+        max-width: 620px;
+        margin: 0 auto 44px;
+      }
+      .section-head h2 {
+        font-size: clamp(26px, 3.4vw, 34px);
+        margin-bottom: 12px;
+      }
+      .section-head p {
+        color: var(--text-dim);
+        font-size: 16px;
+      }
+
+      /* ---------- SERVICES ---------- */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .svc-card {
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 28px 24px;
+        transition:
+          border-color 0.2s ease,
+          transform 0.2s ease;
+      }
+      .svc-card:hover {
+        border-color: var(--cyan);
+        transform: translateY(-3px);
+      }
+      .svc-icon {
+        width: 30px;
+        height: 30px;
+        margin-bottom: 16px;
+        color: var(--cyan);
+      }
+      .btn .icon-msg {
+        width: 17px;
+        height: 17px;
+        vertical-align: -3px;
+        margin-right: 2px;
+      }
+      .svc-card h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+      .svc-card p {
+        color: var(--text-dim);
+        font-size: 14.5px;
+        line-height: 1.65;
+      }
+
+      /* ---------- PROCESS ---------- */
+      .process-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+      .process-item {
+        text-align: center;
+      }
+      .process-num {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--green-dim);
+        color: var(--green);
+        border: 1px solid var(--green-border);
+        border-radius: 50%;
+        font-family: var(--sans);
+        font-weight: 800;
+        font-size: 15px;
+      }
+      .process-item h3 {
+        font-size: 15.5px;
+        margin-bottom: 8px;
+      }
+      .process-item p {
+        color: var(--text-dim);
+        font-size: 13.5px;
+        line-height: 1.6;
+      }
+
+      /* ---------- FAQ ---------- */
+      .faq-list {
+        max-width: 720px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .faq-item {
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px 22px;
+      }
+      .faq-item h3 {
+        font-size: 15.5px;
+        margin-bottom: 8px;
+      }
+      .faq-item p {
+        color: var(--text-dim);
+        font-size: 14.5px;
+        line-height: 1.6;
+      }
+
+      /* ---------- FINAL CTA ---------- */
+      .final-cta {
+        text-align: center;
+        padding: 76px 0 88px;
+        border-top: 1px solid var(--border-soft);
+      }
+      .final-cta h2 {
+        font-size: clamp(26px, 4vw, 38px);
+        margin-bottom: 14px;
+      }
+      .final-cta p {
+        color: var(--text-dim);
+        max-width: 480px;
+        margin: 0 auto 30px;
+        font-size: 16px;
+      }
+      .btn-outline {
+        font-family: var(--sans);
+      }
+      .btn-primary {
+        font-family: var(--sans);
+      }
+
+      footer {
+        border-top: 1px solid var(--border-soft);
+        padding: 26px 0;
+      }
+      .foot-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 14px;
+        font-size: 13px;
+        color: var(--text-faint);
+      }
+      .foot-row a:hover {
+        color: var(--cyan);
+      }
+
+      @media (max-width: 900px) {
+        .trust-grid,
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+        .process-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 480px) {
+        .process-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav">
+        <a href="/" class="logo">FGP<span>_</span></a>
+        <div style="display: flex; align-items: center; gap: 14px">
+          <button class="theme-toggle" type="button" aria-label="Cambiar tema claro/oscuro" aria-pressed="false">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+          <a class="nav-cta wa-link" href="#" target="_blank" rel="noopener">Escríbeme</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero wrap-sm">
+        <span class="kicker">Desarrollo de apps y páginas web</span>
+        <h1>Convierto tu idea en una app o página web <span class="hl">que funciona de verdad</span></h1>
+        <p class="hero-sub">
+          Diseño y construyo aplicaciones móviles y páginas web a la medida de tu negocio, listas para que tus
+          clientes las usen desde el primer día.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg wa-link" href="#" target="_blank" rel="noopener"
+            ><svg class="icon-msg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg
+            >Escríbeme por WhatsApp</a
+          >
+          <a class="btn btn-outline btn-lg" href="#servicios">Ver qué puedo hacer por ti</a>
+        </div>
+      </section>
+
+      <!-- TRUST STRIP -->
+      <section class="trust wrap-sm">
+        <div class="trust-grid">
+          <div class="trust-item">
+            <div class="trust-num">+10,000</div>
+            <div class="trust-label">personas ya usan una app que desarrollé</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-num">+2 años</div>
+            <div class="trust-label">ayudando a negocios a tener presencia digital</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-num">24/7</div>
+            <div class="trust-label">tus proyectos funcionando todos los días, a toda hora</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICIOS -->
+      <section class="section wrap-sm" id="servicios">
+        <div class="section-head">
+          <h2>¿Qué puedo hacer por tu negocio?</h2>
+          <p>Tres formas de ayudarte a llegar a más clientes y ordenar tu negocio.</p>
+        </div>
+        <div class="services-grid">
+          <div class="svc-card">
+            <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect>
+              <path d="M12 18h.01"></path>
+            </svg>
+            <h3>Apps para celular</h3>
+            <p>
+              Tu negocio en el bolsillo de tus clientes. Desarrollo tu aplicación para Android y iPhone, lista para
+              publicar en las tiendas oficiales.
+            </p>
+          </div>
+          <div class="svc-card">
+            <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="14" x="2" y="3" rx="2"></rect>
+              <line x1="8" x2="16" y1="21" y2="21"></line>
+              <line x1="12" x2="12" y1="17" y2="21"></line>
+            </svg>
+            <h3>Páginas y sistemas web</h3>
+            <p>
+              Desde una página de presentación hasta un sistema completo para gestionar ventas, reservas o
+              clientes — hecho a la medida de lo que necesitas.
+            </p>
+          </div>
+          <div class="svc-card">
+            <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
+              <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
+              <line x1="6" x2="6.01" y1="6" y2="6"></line>
+              <line x1="6" x2="6.01" y1="18" y2="18"></line>
+            </svg>
+            <h3>Todo funcionando siempre</h3>
+            <p>
+              Me encargo de que tu app o página esté disponible las 24 horas, todos los días, sin caídas ni dolores
+              de cabeza técnicos de por medio.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CÓMO TRABAJO -->
+      <section class="section wrap-sm">
+        <div class="section-head">
+          <h2>¿Cómo trabajamos juntos?</h2>
+          <p>Un proceso simple y claro, sin sorpresas.</p>
+        </div>
+        <div class="process-grid">
+          <div class="process-item">
+            <div class="process-num">1</div>
+            <h3>Conversamos</h3>
+            <p>Me cuentas tu idea y lo que necesitas, sin compromiso.</p>
+          </div>
+          <div class="process-item">
+            <div class="process-num">2</div>
+            <h3>Te propongo una solución</h3>
+            <p>Te explico cómo lo resolvería y cuánto tomaría, en palabras simples.</p>
+          </div>
+          <div class="process-item">
+            <div class="process-num">3</div>
+            <h3>Construyo y te muestro avances</h3>
+            <p>Vas viendo tu proyecto tomar forma, con actualizaciones claras.</p>
+          </div>
+          <div class="process-item">
+            <div class="process-num">4</div>
+            <h3>Entrego y te acompaño</h3>
+            <p>Tu app o página queda funcionando, y sigo disponible si necesitas ajustes.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section wrap-sm">
+        <div class="section-head">
+          <h2>Preguntas frecuentes</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <h3>¿Cuánto cuesta?</h3>
+            <p>
+              Cada proyecto es distinto. Cuéntame qué necesitas y te doy una cotización a tu medida, sin compromiso.
+            </p>
+          </div>
+          <div class="faq-item">
+            <h3>¿Cuánto se demora?</h3>
+            <p>Depende del tamaño del proyecto. Antes de empezar te doy un tiempo estimado claro.</p>
+          </div>
+          <div class="faq-item">
+            <h3>¿Tengo que saber de tecnología?</h3>
+            <p>No. Yo me encargo de toda la parte técnica; tú solo me cuentas qué necesitas para tu negocio.</p>
+          </div>
+          <div class="faq-item">
+            <h3>¿Qué pasa después de la entrega?</h3>
+            <p>Sigo disponible por WhatsApp para ajustes, dudas o si más adelante quieres agregar algo nuevo.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA FINAL -->
+      <section class="final-cta wrap-sm">
+        <h2>¿Listo para empezar tu proyecto?</h2>
+        <p>Escríbeme y conversemos sobre tu idea. Respondo por WhatsApp en menos de 24h.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg wa-link" href="#" target="_blank" rel="noopener"
+            ><svg class="icon-msg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg
+            >Escríbeme por WhatsApp</a
+          >
+          <a class="btn btn-outline btn-lg email-link" href="#"
+            ><span class="email-text">correo no disponible sin JS</span></a
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap-sm foot-row">
+        <span>© 2026 Franklin Gomez Pacoricona</span>
+        <a href="/">Ver portafolio técnico →</a>
+      </div>
+    </footer>
+
+    <script>
+      // Toggle de tema claro/oscuro
+      (function () {
+        const btn = document.querySelector(".theme-toggle");
+        const mql = window.matchMedia("(prefers-color-scheme: light)");
+
+        function isLightActive() {
+          const current = document.documentElement.getAttribute("data-theme");
+          return current === "light" || (!current && mql.matches);
+        }
+        function syncAria() {
+          btn.setAttribute("aria-pressed", String(isLightActive()));
+        }
+
+        syncAria();
+        btn.addEventListener("click", function () {
+          const next = isLightActive() ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+          syncAria();
+        });
+        mql.addEventListener("change", function () {
+          if (!localStorage.getItem("theme")) syncAria();
+        });
+      })();
+    </script>
+
+    <script>
+      // Links centralizados desde assets/js/data.js
+      const email = SITE_DATA.email.user + "@" + SITE_DATA.email.domain;
+      document.querySelectorAll(".email-link").forEach(function (el) {
+        el.href = "mailto:" + email;
+        const span = el.querySelector(".email-text");
+        if (span) span.textContent = email;
+      });
+      document.querySelectorAll(".wa-link").forEach(function (el) {
+        el.href = "https://wa.me/" + SITE_DATA.whatsappNumber;
+      });
+    </script>
+  </body>
+</html>

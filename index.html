@@ -4,10 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Franklin Gomez Pacoricona — Full Stack & Mobile Developer</title>
+    <script>
+      // Aplica el tema guardado antes del primer render para evitar parpadeo.
+      (function () {
+        var saved = localStorage.getItem("theme");
+        if (saved === "light" || saved === "dark") {
+          document.documentElement.setAttribute("data-theme", saved);
+        }
+      })();
+    </script>
     <script src="https://frank-gp.github.io/component/stat.js" type="module"></script>
     <script src="https://stats.frankgp.com/tracker.js" data-site="xpkveqec" async></script>
 
     <meta
+      id="metaDescription"
       name="description"
       content="Full Stack & Mobile Developer especializado en TypeScript, React, React Native, NestJS y despliegue en AWS. Disponible para proyectos freelance y remoto."
     />
@@ -17,80 +27,19 @@
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <script src="assets/js/data.js"></script>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        background: var(--bg);
-        color: var(--text);
-        font-family: var(--sans);
-        line-height: 1.6;
-        font-size: 16px;
-        -webkit-font-smoothing: antialiased;
-      }
-
       body::before {
         content: "";
         position: fixed;
         inset: 0;
         background:
-          radial-gradient(ellipse 900px 500px at 15% -5%, rgba(34, 211, 238, 0.08), transparent 60%),
-          radial-gradient(ellipse 700px 500px at 100% 10%, rgba(245, 166, 35, 0.05), transparent 60%);
+          radial-gradient(ellipse 900px 500px at 15% -5%, var(--glow-1), transparent 60%),
+          radial-gradient(ellipse 700px 500px at 100% 10%, var(--glow-2), transparent 60%);
         pointer-events: none;
         z-index: 0;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-      ul {
-        list-style: none;
-      }
-      img {
-        max-width: 100%;
-        display: block;
-      }
-
-      .wrap {
-        max-width: 1120px;
-        margin: 0 auto;
-        padding: 0 28px;
-        position: relative;
-        z-index: 1;
-      }
-
-      .eyebrow {
-        font-family: var(--mono);
-        font-size: 12.5px;
-        font-weight: 600;
-        letter-spacing: 0.06em;
-        color: var(--cyan);
-        text-transform: lowercase;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 14px;
-      }
-      .eyebrow::before {
-        content: "//";
-        color: var(--text-faint);
-      }
-
-      h1,
-      h2,
-      h3 {
-        font-family: var(--mono);
-        font-weight: 700;
-        letter-spacing: -0.01em;
       }
 
       /* ---------- HEADER ---------- */
@@ -98,7 +47,7 @@
         position: sticky;
         top: 0;
         z-index: 50;
-        background: rgba(10, 14, 20, 0.82);
+        background: var(--header-bg);
         backdrop-filter: blur(10px);
         border-bottom: 1px solid var(--border-soft);
       }
@@ -130,42 +79,11 @@
       .nav-links a:hover {
         color: var(--cyan);
       }
-      .status-pill {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        font-family: var(--mono);
-        font-size: 12.5px;
-        color: var(--green);
-        background: var(--green-dim);
-        border: 1px solid rgba(61, 220, 151, 0.25);
-        padding: 6px 12px;
-        border-radius: 999px;
-      }
-      .dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: var(--green);
-        box-shadow: 0 0 0 0 rgba(61, 220, 151, 0.6);
-        animation: pulse 2s infinite;
-      }
-      @keyframes pulse {
-        0% {
-          box-shadow: 0 0 0 0 rgba(61, 220, 151, 0.5);
-        }
-        70% {
-          box-shadow: 0 0 0 7px rgba(61, 220, 151, 0);
-        }
-        100% {
-          box-shadow: 0 0 0 0 rgba(61, 220, 151, 0);
-        }
-      }
       .nav-cta {
         font-family: var(--mono);
         font-size: 13px;
         font-weight: 600;
-        background: var(--cyan);
+        background: var(--brand-cyan);
         color: #04141a;
         padding: 9px 16px;
         border-radius: 7px;
@@ -209,41 +127,6 @@
         flex-wrap: wrap;
         margin-bottom: 30px;
       }
-      .btn {
-        font-family: var(--mono);
-        font-size: 14px;
-        font-weight: 600;
-        padding: 13px 20px;
-        border-radius: 8px;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        transition:
-          transform 0.15s ease,
-          background 0.15s ease,
-          border-color 0.15s ease;
-        border: 1px solid transparent;
-        cursor: pointer;
-      }
-      .btn:hover {
-        transform: translateY(-2px);
-      }
-      .btn-primary {
-        background: var(--green);
-        color: #03150e;
-      }
-      .btn-primary:hover {
-        background: #57e6ac;
-      }
-      .btn-outline {
-        background: transparent;
-        border-color: var(--border);
-        color: var(--text);
-      }
-      .btn-outline:hover {
-        border-color: var(--cyan);
-        color: var(--cyan);
-      }
 
       .quick-links {
         display: flex;
@@ -261,74 +144,12 @@
         border-color: var(--cyan);
       }
 
-      /* terminal window */
+      /* terminal window — estilos base en components.css, aquí solo overrides del hero */
       .terminal {
-        background: var(--bg-elev);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        overflow: hidden;
         box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
       }
-      .term-bar {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 11px 14px;
-        background: var(--bg-elev-2);
-        border-bottom: 1px solid var(--border);
-      }
-      .term-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-      }
-      .term-bar span:nth-child(1) {
-        background: #ff5f56;
-      }
-      .term-bar span:nth-child(2) {
-        background: #ffbd2e;
-      }
-      .term-bar span:nth-child(3) {
-        background: #27c93f;
-      }
-      .term-title {
-        margin-left: 8px;
-        font-family: var(--mono);
-        font-size: 12px;
-        color: var(--text-faint);
-      }
       .term-body {
-        padding: 22px 20px 26px;
-        font-family: var(--mono);
-        font-size: 13.5px;
-        line-height: 1.9;
         min-height: 230px;
-      }
-      .term-line {
-        color: var(--text-dim);
-      }
-      .term-prompt {
-        color: var(--green);
-      }
-      .term-out {
-        color: var(--text);
-        padding-left: 0;
-      }
-      .term-cyan {
-        color: var(--cyan);
-      }
-      .cursor {
-        display: inline-block;
-        width: 7px;
-        height: 15px;
-        background: var(--cyan);
-        vertical-align: middle;
-        animation: blink 1s step-end infinite;
-      }
-      @keyframes blink {
-        50% {
-          opacity: 0;
-        }
       }
 
       /* ---------- STATUS / SERVICES PANEL ---------- */
@@ -375,18 +196,6 @@
         font-size: 13.5px;
         font-weight: 600;
       }
-      .badge {
-        font-family: var(--mono);
-        font-size: 10.5px;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        padding: 3px 8px;
-        border-radius: 5px;
-      }
-      .badge-live {
-        background: var(--green-dim);
-        color: var(--green);
-      }
       .service-desc {
         font-size: 13.5px;
         color: var(--text-dim);
@@ -399,22 +208,6 @@
         display: flex;
         align-items: center;
         gap: 6px;
-      }
-
-      /* ---------- SECTION SHARED ---------- */
-      section {
-        padding: 74px 0;
-        border-top: 1px solid var(--border-soft);
-      }
-      .sec-title {
-        font-size: clamp(24px, 3vw, 32px);
-        margin-bottom: 8px;
-      }
-      .sec-sub {
-        color: var(--text-dim);
-        font-size: 15.5px;
-        margin-bottom: 40px;
-        max-width: 560px;
       }
 
       /* ---------- STACK / SKILLS ---------- */
@@ -450,15 +243,6 @@
         gap: 7px;
         margin-top: 6px;
         padding-left: 18px;
-      }
-      .tag {
-        background: var(--bg-elev-2);
-        border: 1px solid var(--border);
-        color: var(--text-dim);
-        font-size: 12px;
-        padding: 5px 10px;
-        border-radius: 6px;
-        font-family: var(--mono);
       }
 
       /* ---------- PROJECTS ---------- */
@@ -510,7 +294,7 @@
         font-size: 12.5px;
         color: var(--amber);
         background: var(--amber-dim);
-        border: 1px solid rgba(245, 166, 35, 0.25);
+        border: 1px solid var(--amber-border);
         padding: 6px 10px;
         border-radius: 7px;
         display: inline-flex;
@@ -524,55 +308,6 @@
       .project-tags .tag {
         font-size: 11px;
         padding: 4px 8px;
-      }
-
-      /* ---------- EXPERIENCE TIMELINE ---------- */
-      .timeline {
-        display: flex;
-        flex-direction: column;
-        border-left: 2px solid var(--border);
-        margin-left: 6px;
-      }
-      .tl-item {
-        position: relative;
-        padding: 0 0 34px 30px;
-      }
-      .tl-item:last-child {
-        padding-bottom: 0;
-      }
-      .tl-item::before {
-        content: "";
-        position: absolute;
-        left: -7px;
-        top: 4px;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: var(--bg);
-        border: 2px solid var(--cyan);
-      }
-      .tl-date {
-        font-family: var(--mono);
-        font-size: 12px;
-        color: var(--cyan);
-        margin-bottom: 5px;
-        letter-spacing: 0.02em;
-      }
-      .tl-role {
-        font-family: var(--mono);
-        font-size: 15.5px;
-        font-weight: 700;
-        margin-bottom: 3px;
-      }
-      .tl-org {
-        font-size: 13.5px;
-        color: var(--text-faint);
-        margin-bottom: 8px;
-      }
-      .tl-desc {
-        font-size: 14px;
-        color: var(--text-dim);
-        max-width: 640px;
       }
 
       /* ---------- EDUCATION ---------- */
@@ -624,7 +359,7 @@
         font-size: 14px;
         flex-shrink: 0;
         background: var(--cyan-dim);
-        border: 1px solid rgba(34, 211, 238, 0.25);
+        border: 1px solid var(--cyan-border);
         width: 34px;
         height: 34px;
         display: flex;
@@ -664,10 +399,6 @@
         gap: 14px;
         justify-content: center;
         flex-wrap: wrap;
-      }
-      .btn-lg {
-        padding: 15px 26px;
-        font-size: 15px;
       }
 
       footer {
@@ -714,13 +445,6 @@
           display: none;
         }
       }
-
-      @media (prefers-reduced-motion: reduce) {
-        * {
-          animation: none !important;
-          transition: none !important;
-        }
-      }
     </style>
   </head>
   <body>
@@ -729,13 +453,18 @@
         <div class="logo">FGP<span>_</span></div>
         <nav class="nav-links">
           <a href="#stack">Stack</a>
-          <a href="#proyectos">Proyectos</a>
-          <a href="#experiencia">Experiencia</a>
-          <a href="#educacion">Educación</a>
+          <a href="#proyectos" data-i18n="nav_projects">Proyectos</a>
+          <a href="#experiencia" data-i18n="nav_experience">Experiencia</a>
+          <a href="#educacion" data-i18n="nav_education">Educación</a>
         </nav>
         <div style="display: flex; align-items: center; gap: 14px">
-          <span class="status-pill"><span class="dot"></span>disponible</span>
-          <a class="nav-cta" href="https://wa.me/51918221790" target="_blank" rel="noopener">Contactar</a>
+          <span class="status-pill"><span class="dot"></span><span data-i18n="nav_available">disponible</span></span>
+          <button class="lang-toggle" type="button" aria-label="Switch to English" aria-pressed="false">EN</button>
+          <button class="theme-toggle" type="button" aria-label="Cambiar tema claro/oscuro" aria-pressed="false">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+          <a class="nav-cta wa-link" href="#" target="_blank" rel="noopener" data-i18n="nav_contact">Contactar</a>
         </div>
       </div>
     </header>
@@ -745,25 +474,26 @@
       <section class="hero" style="border: none; padding-top: 70px">
         <div>
           <p class="eyebrow">full stack &amp; mobile developer</p>
-          <h1 class="hero-title">
+          <h1 class="hero-title" data-i18n-html="hero_title_html">
             Construyo productos <span class="hl">de punta a punta</span>: del backend a producción.
           </h1>
-          <p class="hero-sub">
+          <p class="hero-sub" data-i18n-html="hero_sub_html">
             <strong>Franklin Gomez Pacoricona</strong> — especialista en TypeScript, React, React Native, NestJS y
             despliegue en AWS. Más de 2 años llevando aplicaciones desde la arquitectura hasta usuarios reales,
             aplicando SOLID y buenas prácticas de infraestructura.
           </p>
           <div class="cta-row">
-            <a class="btn btn-primary" href="https://wa.me/51918221790" target="_blank" rel="noopener"
+            <a class="btn btn-primary wa-link" href="#" target="_blank" rel="noopener" data-i18n="cta_whatsapp"
               >→ Escribir por WhatsApp</a
             >
-            <a class="btn btn-outline" href="mailto:fgp555@gmail.com">Enviar correo</a>
+            <a class="btn btn-outline email-link" href="#" data-i18n="hero_email">Enviar correo</a>
+            <a class="btn btn-outline" href="/portfolio/" data-i18n="cta_portfolio">Ver portafolio</a>
+            <a class="btn btn-outline cv-pdf-link" href="#" target="_blank" rel="noopener" data-i18n="cta_cv">Descargar CV</a>
           </div>
           <div class="quick-links">
-            <a href="https://linkedin.com/in/franklingp" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="https://github.com/fgp555" target="_blank" rel="noopener">GitHub</a>
-            <a href="https://frankgp.com/portfolio" target="_blank" rel="noopener">Portfolio</a>
-            <span>Remoto · Perú</span>
+            <a class="linkedin-link" href="#" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="github-link" href="#" target="_blank" rel="noopener">GitHub</a>
+            <span data-i18n="hero_location">Remoto · Perú</span>
           </div>
         </div>
 
@@ -779,8 +509,8 @@
       <!-- STATUS PANEL -->
       <section class="status-panel" style="border: none">
         <div class="panel-head">
-          <h2>Servicios en producción</h2>
-          <span class="meta">actualizado · ago 2026</span>
+          <h2 data-i18n="services_title">Servicios en producción</h2>
+          <span class="meta" data-i18n="services_updated">actualizado · ago 2026</span>
         </div>
         <div class="services">
           <div class="service-card">
@@ -788,33 +518,33 @@
               <span class="service-name">react-native-app</span>
               <span class="badge badge-live">LIVE</span>
             </div>
-            <p class="service-desc">Mix&amp;Match — app de armario virtual multiplataforma (Android/iOS + web).</p>
-            <span class="service-metric">▲ +10,000 usuarios activos</span>
+            <p class="service-desc" data-i18n="svc1_desc">Mix&amp;Match — app de armario virtual multiplataforma (Android/iOS + web).</p>
+            <span class="service-metric" data-i18n="svc1_metric">▲ +10,000 usuarios activos</span>
           </div>
           <div class="service-card">
             <div class="service-top">
               <span class="service-name">backend-apis</span>
               <span class="badge badge-live">LIVE</span>
             </div>
-            <p class="service-desc">APIs REST modulares con NestJS y Express, autenticación JWT + OAuth.</p>
-            <span class="service-metric">▲ 6 proyectos en producción</span>
+            <p class="service-desc" data-i18n="svc2_desc">APIs REST modulares con NestJS y Express, autenticación JWT + OAuth.</p>
+            <span class="service-metric" data-i18n="svc2_metric">▲ 6 proyectos en producción</span>
           </div>
           <div class="service-card">
             <div class="service-top">
               <span class="service-name">cloud-infra</span>
               <span class="badge badge-live">LIVE</span>
             </div>
-            <p class="service-desc">Infraestructura como código con Terraform sobre AWS, Docker + Cloudflare Tunnel.</p>
-            <span class="service-metric">▲ 0 puertos entrantes expuestos</span>
+            <p class="service-desc" data-i18n="svc3_desc">Infraestructura como código con Terraform sobre AWS, Docker + Cloudflare Tunnel.</p>
+            <span class="service-metric" data-i18n="svc3_metric">▲ 0 puertos entrantes expuestos</span>
           </div>
         </div>
       </section>
 
       <!-- STACK -->
       <section id="stack">
-        <p class="eyebrow">stack técnico</p>
-        <h2 class="sec-title">Lo que uso para construir</h2>
-        <p class="sec-sub">
+        <p class="eyebrow" data-i18n="stack_eyebrow">stack técnico</p>
+        <h2 class="sec-title" data-i18n="stack_title">Lo que uso para construir</h2>
+        <p class="sec-sub" data-i18n="stack_sub">
           TypeScript de punta a punta: mismo lenguaje en frontend, mobile y backend, sobre infraestructura propia.
         </p>
 
@@ -823,75 +553,15 @@
             <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
             <span class="term-title">skills.json</span>
           </div>
-          <div class="stack-body">
-            <span class="stack-punc">{</span>
-
-            <div class="stack-group">
-              <span class="stack-key">"lenguajes"</span><span class="stack-punc">:</span>
-              <div class="stack-tags">
-                <span class="tag">TypeScript</span><span class="tag">JavaScript</span><span class="tag">HTML5</span
-                ><span class="tag">CSS3</span>
-              </div>
-            </div>
-
-            <div class="stack-group">
-              <span class="stack-key">"frontend"</span><span class="stack-punc">:</span>
-              <div class="stack-tags">
-                <span class="tag">ReactJS</span><span class="tag">NextJS</span><span class="tag">TanStack Query</span
-                ><span class="tag">SPA</span>
-              </div>
-            </div>
-
-            <div class="stack-group">
-              <span class="stack-key">"mobile"</span><span class="stack-punc">:</span>
-              <div class="stack-tags">
-                <span class="tag">React Native</span><span class="tag">Google Play</span
-                ><span class="tag">Push Notifications</span>
-              </div>
-            </div>
-
-            <div class="stack-group">
-              <span class="stack-key">"backend"</span><span class="stack-punc">:</span>
-              <div class="stack-tags">
-                <span class="tag">Node.js</span><span class="tag">NestJS</span><span class="tag">Express.js</span
-                ><span class="tag">WebSockets</span><span class="tag">Arquitectura modular</span>
-              </div>
-            </div>
-
-            <div class="stack-group">
-              <span class="stack-key">"bases_de_datos"</span><span class="stack-punc">:</span>
-              <div class="stack-tags">
-                <span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">MongoDB</span
-                ><span class="tag">TypeORM</span><span class="tag">Mongoose</span>
-              </div>
-            </div>
-
-            <div class="stack-group">
-              <span class="stack-key">"cloud_devops"</span><span class="stack-punc">:</span>
-              <div class="stack-tags">
-                <span class="tag">Terraform</span><span class="tag">AWS EC2/RDS/S3/IAM</span
-                ><span class="tag">Docker</span><span class="tag">Nginx</span><span class="tag">Cloudflare Tunnel</span
-                ><span class="tag">GitHub Actions</span>
-              </div>
-            </div>
-
-            <div class="stack-group" style="margin-bottom: 0">
-              <span class="stack-key">"auth_seguridad"</span><span class="stack-punc">:</span>
-              <div class="stack-tags">
-                <span class="tag">JWT</span><span class="tag">OAuth Google</span><span class="tag">OAuth Apple</span>
-              </div>
-            </div>
-
-            <span class="stack-punc">}</span>
-          </div>
+          <div class="stack-body" id="stackBody"></div>
         </div>
       </section>
 
       <!-- PROYECTOS -->
       <section id="proyectos">
-        <p class="eyebrow">proyectos destacados</p>
-        <h2 class="sec-title">Trabajo entregado, no solo planeado</h2>
-        <p class="sec-sub">
+        <p class="eyebrow" data-i18n="projects_eyebrow">proyectos destacados</p>
+        <h2 class="sec-title" data-i18n="projects_title">Trabajo entregado, no solo planeado</h2>
+        <p class="sec-sub" data-i18n="projects_sub">
           Proyectos freelance llevados de cero a producción, incluyendo infraestructura y publicación en tiendas.
         </p>
 
@@ -900,16 +570,16 @@
             <div class="project-top">
               <div>
                 <div class="project-name">Mix&amp;Match</div>
-                <div class="project-period">Jul 2025 — Actualidad</div>
+                <div class="project-period" data-i18n="proj1_period">Jul 2025 — Actualidad</div>
               </div>
               <span class="badge badge-live">LIVE</span>
             </div>
-            <p class="project-desc">
+            <p class="project-desc" data-i18n="proj1_desc">
               Outfit Planner / armario virtual. App móvil (Android/iOS) y web construidas con React Native y React +
               TypeScript, backend en Express/MySQL, OAuth con Google y Apple, microservicio en Python para remoción de
               fondo de imágenes.
             </p>
-            <span class="project-metric">+10,000 usuarios en 2 meses</span>
+            <span class="project-metric" data-i18n="proj1_metric">+10,000 usuarios en 2 meses</span>
             <div class="project-tags">
               <span class="tag">React Native</span><span class="tag">Express</span><span class="tag">MySQL</span
               ><span class="tag">AWS S3</span>
@@ -924,11 +594,11 @@
               </div>
               <span class="badge badge-live">LIVE</span>
             </div>
-            <p class="project-desc">
+            <p class="project-desc" data-i18n="proj2_desc">
               Infraestructura como código con Terraform sobre AWS (EC2, RDS, S3, IAM). Contenedores Docker detrás de
               Nginx, exposición segura vía Cloudflare Tunnel sin puertos abiertos, y deploys automatizados con Bash.
             </p>
-            <span class="project-metric">Módulos reutilizables dev/prod</span>
+            <span class="project-metric" data-i18n="proj2_metric">Módulos reutilizables dev/prod</span>
             <div class="project-tags">
               <span class="tag">Terraform</span><span class="tag">Docker</span><span class="tag">Cloudflare</span
               ><span class="tag">AWS</span>
@@ -938,16 +608,16 @@
           <div class="project-card">
             <div class="project-top">
               <div>
-                <div class="project-name">Gestión de Vouchers</div>
-                <div class="project-period">Ene — Mar 2025</div>
+                <div class="project-name" data-i18n="proj3_name">Gestión de Vouchers</div>
+                <div class="project-period" data-i18n="proj3_period">Ene — Mar 2025</div>
               </div>
-              <span class="badge badge-live">PUBLICADO</span>
+              <span class="badge badge-live" data-i18n="proj3_badge">PUBLICADO</span>
             </div>
-            <p class="project-desc">
+            <p class="project-desc" data-i18n="proj3_desc">
               Sistema web y móvil con ReactJS, React Native, NestJS y MySQL. Actualizaciones en tiempo real vía
               WebSockets y notificaciones transaccionales automatizadas por WhatsApp API.
             </p>
-            <span class="project-metric">Publicado en Google Play Store</span>
+            <span class="project-metric" data-i18n="proj3_metric">Publicado en Google Play Store</span>
             <div class="project-tags">
               <span class="tag">NestJS</span><span class="tag">WebSockets</span><span class="tag">WhatsApp API</span>
             </div>
@@ -957,103 +627,30 @@
 
       <!-- EXPERIENCIA -->
       <section id="experiencia">
-        <p class="eyebrow">experiencia laboral</p>
-        <h2 class="sec-title">Trayectoria freelance</h2>
-        <p class="sec-sub">Desde desarrollo WordPress hasta arquitectura full stack e infraestructura cloud.</p>
+        <p class="eyebrow" data-i18n="experience_eyebrow">experiencia laboral</p>
+        <h2 class="sec-title" data-i18n="experience_title">Trayectoria freelance</h2>
+        <p class="sec-sub" data-i18n="experience_sub">Desde desarrollo WordPress hasta arquitectura full stack e infraestructura cloud.</p>
 
-        <div class="timeline">
-          <div class="tl-item">
-            <div class="tl-date">JUL 2025 — ACTUALIDAD</div>
-            <div class="tl-role">Full Stack &amp; Mobile Developer</div>
-            <div class="tl-org">Mix&amp;Match Outfit Planner · Freelancer</div>
-            <p class="tl-desc">
-              Liderazgo end-to-end de app móvil y web, autenticación OAuth, dashboard admin, push notifications y
-              despliegue continuo en VPS.
-            </p>
-          </div>
-          <div class="tl-item">
-            <div class="tl-date">2025</div>
-            <div class="tl-role">DevOps &amp; Cloud Infrastructure Developer</div>
-            <div class="tl-org">Transpaservic · Freelancer</div>
-            <p class="tl-desc">
-              Diseño de infraestructura como código con Terraform, contenedores Docker y exposición segura vía
-              Cloudflare Tunnel.
-            </p>
-          </div>
-          <div class="tl-item">
-            <div class="tl-date">ENE — MAR 2025</div>
-            <div class="tl-role">Mobile &amp; Full Stack Developer</div>
-            <div class="tl-org">Sistema de Gestión de Vouchers · Freelancer</div>
-            <p class="tl-desc">
-              Sistema web y móvil con NestJS y MySQL, WebSockets en tiempo real e integración con WhatsApp API.
-            </p>
-          </div>
-          <div class="tl-item">
-            <div class="tl-date">OCT — NOV 2024</div>
-            <div class="tl-role">Desarrollador Full Stack</div>
-            <div class="tl-org">Aplicación de Gestión de Turnos · Freelancer</div>
-            <p class="tl-desc">
-              Backend con NestJS, PostgreSQL y TypeORM. Despliegue en AWS EC2 y frontend en AWS Amplify.
-            </p>
-          </div>
-          <div class="tl-item">
-            <div class="tl-date">AGO — SEP 2024</div>
-            <div class="tl-role">Desarrollador Full Stack</div>
-            <div class="tl-org">BPVentures (Henry Projects) · Freelancer</div>
-            <p class="tl-desc">
-              Desarrollo full stack con NestJS y ReactJS, WebSockets, trabajo en equipo de 6 personas bajo Scrum.
-            </p>
-          </div>
-          <div class="tl-item">
-            <div class="tl-date">MAY — JUN 2024</div>
-            <div class="tl-role">Desarrollador Full Stack</div>
-            <div class="tl-org">Ecommerce · Freelancer</div>
-            <p class="tl-desc">Backend con Node.js y MongoDB, carrito de compras y seguimiento de pedidos.</p>
-          </div>
-          <div class="tl-item">
-            <div class="tl-date">2021 — 2023</div>
-            <div class="tl-role">Desarrollador WordPress</div>
-            <div class="tl-org">Freelancer / Remoto</div>
-            <p class="tl-desc">
-              Sitios para clientes internacionales, gestión de hosting/SSL en cPanel y optimización SEO técnica.
-            </p>
-          </div>
-        </div>
+        <div class="timeline" id="expTimeline"></div>
       </section>
 
       <!-- EDUCACIÓN -->
       <section id="educacion">
-        <p class="eyebrow">formación</p>
-        <h2 class="sec-title">Educación</h2>
-        <div class="edu-grid">
-          <div class="edu-card">
-            <div class="edu-year">2025</div>
-            <div class="edu-name">React Native</div>
-            <div class="edu-org">DevTalles Academy</div>
-          </div>
-          <div class="edu-card">
-            <div class="edu-year">2024</div>
-            <div class="edu-name">Full Stack Web Developer</div>
-            <div class="edu-org">Henry Bootcamp</div>
-          </div>
-          <div class="edu-card">
-            <div class="edu-year">2020 — 2023</div>
-            <div class="edu-name">Desarrollo Web con WordPress</div>
-            <div class="edu-org">Formación independiente</div>
-          </div>
-        </div>
+        <p class="eyebrow" data-i18n="education_eyebrow">formación</p>
+        <h2 class="sec-title" data-i18n="education_title">Educación</h2>
+        <div class="edu-grid" id="eduGrid"></div>
       </section>
 
       <!-- POR QUÉ CONTRATARME -->
       <section>
-        <p class="eyebrow">para reclutadores y clientes</p>
-        <h2 class="sec-title">Por qué trabajar conmigo</h2>
+        <p class="eyebrow" data-i18n="why_eyebrow">para reclutadores y clientes</p>
+        <h2 class="sec-title" data-i18n="why_title">Por qué trabajar conmigo</h2>
         <div class="why-grid">
           <div class="why-card">
             <span class="why-icon">01</span>
             <div>
-              <div class="why-title">Ownership de punta a punta</div>
-              <div class="why-desc">
+              <div class="why-title" data-i18n="why1_title">Ownership de punta a punta</div>
+              <div class="why-desc" data-i18n="why1_desc">
                 Desde el diseño de arquitectura hasta el despliegue en producción, sin depender de terceros para
                 infraestructura.
               </div>
@@ -1062,8 +659,8 @@
           <div class="why-card">
             <span class="why-icon">02</span>
             <div>
-              <div class="why-title">Producción real, no demos</div>
-              <div class="why-desc">
+              <div class="why-title" data-i18n="why2_title">Producción real, no demos</div>
+              <div class="why-desc" data-i18n="why2_desc">
                 Aplicaciones con miles de usuarios activos publicadas en App Store, Play Store y VPS propios.
               </div>
             </div>
@@ -1071,8 +668,8 @@
           <div class="why-card">
             <span class="why-icon">03</span>
             <div>
-              <div class="why-title">Un mismo lenguaje, todo el stack</div>
-              <div class="why-desc">
+              <div class="why-title" data-i18n="why3_title">Un mismo lenguaje, todo el stack</div>
+              <div class="why-desc" data-i18n="why3_desc">
                 TypeScript en frontend, mobile y backend: menos fricción, integraciones más rápidas y consistentes.
               </div>
             </div>
@@ -1080,8 +677,8 @@
           <div class="why-card">
             <span class="why-icon">04</span>
             <div>
-              <div class="why-title">Buenas prácticas por defecto</div>
-              <div class="why-desc">
+              <div class="why-title" data-i18n="why4_title">Buenas prácticas por defecto</div>
+              <div class="why-desc" data-i18n="why4_desc">
                 Principios SOLID, arquitectura modular y separación por capas desde el primer commit.
               </div>
             </div>
@@ -1091,30 +688,282 @@
 
       <!-- CONTACT CTA -->
       <section class="contact-cta" style="border-top: none">
-        <p class="eyebrow" style="justify-content: center">disponibilidad</p>
-        <h2>¿Buscas un desarrollador full stack confiable?</h2>
-        <p>
+        <p class="eyebrow" style="justify-content: center" data-i18n="contact_eyebrow">disponibilidad</p>
+        <h2 data-i18n="contact_title">¿Buscas un desarrollador full stack confiable?</h2>
+        <p data-i18n="contact_sub">
           Disponible para proyectos freelance remotos y posiciones full-time. Respondo por WhatsApp en menos de 24h.
         </p>
         <div class="contact-buttons">
-          <a class="btn btn-primary btn-lg" href="https://wa.me/51918221790" target="_blank" rel="noopener"
+          <a class="btn btn-primary btn-lg wa-link" href="#" target="_blank" rel="noopener" data-i18n="cta_whatsapp"
             >→ Escribir por WhatsApp</a
           >
-          <a class="btn btn-outline btn-lg" href="mailto:fgp555@gmail.com">fgp555@gmail.com</a>
+          <a class="btn btn-outline btn-lg email-link" href="#"
+            ><span class="email-text">correo no disponible sin JS</span></a
+          >
         </div>
       </section>
     </main>
 
     <footer>
       <div class="wrap foot-row">
-        <span>© 2026 Franklin Gomez Pacoricona · Remoto, Perú</span>
+        <span data-i18n="footer_copyright">© 2026 Franklin Gomez Pacoricona · Remoto, Perú</span>
         <div class="foot-links">
-          <a href="https://github.com/fgp555" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://linkedin.com/in/franklingp" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://frankgp.com/portfolio" target="_blank" rel="noopener">Portfolio</a>
+          <a class="github-link" href="#" target="_blank" rel="noopener">GitHub</a>
+          <a class="linkedin-link" href="#" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="/portfolio/">Portfolio</a>
         </div>
       </div>
     </footer>
+
+    <script>
+      // Idioma: es/en según preferencia guardada, si no según el navegador
+      const I18N = {
+        es: {
+          meta_description:
+            "Full Stack & Mobile Developer especializado en TypeScript, React, React Native, NestJS y despliegue en AWS. Disponible para proyectos freelance y remoto.",
+          theme_toggle_label: "Cambiar tema claro/oscuro",
+          lang_toggle_label: "Cambiar a inglés",
+          nav_projects: "Proyectos",
+          nav_experience: "Experiencia",
+          nav_education: "Educación",
+          nav_available: "disponible",
+          nav_contact: "Contactar",
+          hero_title_html:
+            'Construyo productos <span class="hl">de punta a punta</span>: del backend a producción.',
+          cta_whatsapp: "→ Escribir por WhatsApp",
+          hero_email: "Enviar correo",
+          cta_portfolio: "Ver portafolio",
+          cta_cv: "Descargar CV",
+          services_title: "Servicios en producción",
+          services_updated: "actualizado · ago 2026",
+          svc1_desc: "Mix&Match — app de armario virtual multiplataforma (Android/iOS + web).",
+          svc1_metric: "▲ +10,000 usuarios activos",
+          svc2_desc: "APIs REST modulares con NestJS y Express, autenticación JWT + OAuth.",
+          svc2_metric: "▲ 6 proyectos en producción",
+          svc3_desc: "Infraestructura como código con Terraform sobre AWS, Docker + Cloudflare Tunnel.",
+          svc3_metric: "▲ 0 puertos entrantes expuestos",
+          stack_eyebrow: "stack técnico",
+          stack_title: "Lo que uso para construir",
+          stack_sub:
+            "TypeScript de punta a punta: mismo lenguaje en frontend, mobile y backend, sobre infraestructura propia.",
+          projects_eyebrow: "proyectos destacados",
+          projects_title: "Trabajo entregado, no solo planeado",
+          projects_sub:
+            "Proyectos freelance llevados de cero a producción, incluyendo infraestructura y publicación en tiendas.",
+          proj1_period: "Jul 2025 — Actualidad",
+          proj1_desc:
+            "Outfit Planner / armario virtual. App móvil (Android/iOS) y web construidas con React Native y React + TypeScript, backend en Express/MySQL, OAuth con Google y Apple, microservicio en Python para remoción de fondo de imágenes.",
+          proj1_metric: "+10,000 usuarios en 2 meses",
+          proj2_desc:
+            "Infraestructura como código con Terraform sobre AWS (EC2, RDS, S3, IAM). Contenedores Docker detrás de Nginx, exposición segura vía Cloudflare Tunnel sin puertos abiertos, y deploys automatizados con Bash.",
+          proj2_metric: "Módulos reutilizables dev/prod",
+          proj3_name: "Gestión de Vouchers",
+          proj3_period: "Ene — Mar 2025",
+          proj3_badge: "PUBLICADO",
+          proj3_desc:
+            "Sistema web y móvil con ReactJS, React Native, NestJS y MySQL. Actualizaciones en tiempo real vía WebSockets y notificaciones transaccionales automatizadas por WhatsApp API.",
+          proj3_metric: "Publicado en Google Play Store",
+          experience_eyebrow: "experiencia laboral",
+          experience_title: "Trayectoria freelance",
+          experience_sub: "Desde desarrollo WordPress hasta arquitectura full stack e infraestructura cloud.",
+          education_eyebrow: "formación",
+          education_title: "Educación",
+          why_eyebrow: "para reclutadores y clientes",
+          why_title: "Por qué trabajar conmigo",
+          why1_title: "Ownership de punta a punta",
+          why1_desc:
+            "Desde el diseño de arquitectura hasta el despliegue en producción, sin depender de terceros para infraestructura.",
+          why2_title: "Producción real, no demos",
+          why2_desc: "Aplicaciones con miles de usuarios activos publicadas en App Store, Play Store y VPS propios.",
+          why3_title: "Un mismo lenguaje, todo el stack",
+          why3_desc: "TypeScript en frontend, mobile y backend: menos fricción, integraciones más rápidas y consistentes.",
+          why4_title: "Buenas prácticas por defecto",
+          why4_desc: "Principios SOLID, arquitectura modular y separación por capas desde el primer commit.",
+          contact_eyebrow: "disponibilidad",
+          contact_title: "¿Buscas un desarrollador full stack confiable?",
+          contact_sub:
+            "Disponible para proyectos freelance remotos y posiciones full-time. Respondo por WhatsApp en menos de 24h.",
+          footer_copyright: "© 2026 Franklin Gomez Pacoricona · Remoto, Perú",
+          terminal_available: "● available — remoto · freelance & full-time",
+        },
+        en: {
+          meta_description:
+            "Full Stack & Mobile Developer specializing in TypeScript, React, React Native, NestJS, and AWS deployment. Available for freelance and remote projects.",
+          theme_toggle_label: "Toggle light/dark theme",
+          lang_toggle_label: "Switch to Spanish",
+          nav_projects: "Projects",
+          nav_experience: "Experience",
+          nav_education: "Education",
+          nav_available: "available",
+          nav_contact: "Contact",
+          hero_title_html: 'I build products <span class="hl">end to end</span>: from backend to production.',
+          cta_whatsapp: "→ Message on WhatsApp",
+          hero_email: "Send email",
+          cta_portfolio: "View portfolio",
+          cta_cv: "Download CV",
+          services_title: "Services in production",
+          services_updated: "updated · aug 2026",
+          svc1_desc: "Mix&Match — cross-platform virtual closet app (Android/iOS + web).",
+          svc1_metric: "▲ +10,000 active users",
+          svc2_desc: "Modular REST APIs with NestJS and Express, JWT + OAuth authentication.",
+          svc2_metric: "▲ 6 projects in production",
+          svc3_desc: "Infrastructure as code with Terraform on AWS, Docker + Cloudflare Tunnel.",
+          svc3_metric: "▲ 0 inbound ports exposed",
+          stack_eyebrow: "tech stack",
+          stack_title: "What I use to build",
+          stack_sub: "TypeScript end to end: same language across frontend, mobile, and backend, on self-managed infrastructure.",
+          projects_eyebrow: "featured projects",
+          projects_title: "Work delivered, not just planned",
+          projects_sub: "Freelance projects taken from zero to production, including infrastructure and store publishing.",
+          proj1_period: "Jul 2025 — Present",
+          proj1_desc:
+            "Outfit Planner / virtual closet. Mobile app (Android/iOS) and web built with React Native and React + TypeScript, Express/MySQL backend, OAuth with Google and Apple, Python microservice for image background removal.",
+          proj1_metric: "+10,000 users in 2 months",
+          proj2_desc:
+            "Infrastructure as code with Terraform on AWS (EC2, RDS, S3, IAM). Docker containers behind Nginx, secure exposure via Cloudflare Tunnel with no open ports, and automated deploys with Bash.",
+          proj2_metric: "Reusable dev/prod modules",
+          proj3_name: "Voucher Management System",
+          proj3_period: "Jan — Mar 2025",
+          proj3_badge: "PUBLISHED",
+          proj3_desc:
+            "Web and mobile system with ReactJS, React Native, NestJS, and MySQL. Real-time updates via WebSockets and automated transactional notifications via WhatsApp API.",
+          proj3_metric: "Published on Google Play Store",
+          experience_eyebrow: "work experience",
+          experience_title: "Freelance track record",
+          experience_sub: "From WordPress development to full stack architecture and cloud infrastructure.",
+          education_eyebrow: "education",
+          education_title: "Education",
+          why_eyebrow: "for recruiters and clients",
+          why_title: "Why work with me",
+          why1_title: "End-to-end ownership",
+          why1_desc: "From architecture design to production deployment, without relying on third parties for infrastructure.",
+          why2_title: "Real production, not demos",
+          why2_desc: "Applications with thousands of active users published on the App Store, Play Store, and self-managed VPS.",
+          why3_title: "One language, the whole stack",
+          why3_desc: "TypeScript across frontend, mobile, and backend: less friction, faster and more consistent integrations.",
+          why4_title: "Best practices by default",
+          why4_desc: "SOLID principles, modular architecture, and layered separation from the first commit.",
+          contact_eyebrow: "availability",
+          contact_title: "Looking for a reliable full stack developer?",
+          contact_sub: "Available for remote freelance projects and full-time positions. I respond on WhatsApp within 24h.",
+          footer_copyright: "© 2026 Franklin Gomez Pacoricona · Remote, Peru",
+          terminal_available: "● available — remote · freelance & full-time",
+        },
+      };
+
+      function getLang() {
+        const saved = localStorage.getItem("lang");
+        if (saved === "es" || saved === "en") return saved;
+        return (navigator.language || "es").toLowerCase().startsWith("es") ? "es" : "en";
+      }
+
+      // Renderiza identidad, contacto, stack, experiencia y educación desde
+      // SITE_DATA (assets/js/data.js) — única fuente de verdad compartida
+      // con cv/index.html y portfolio/index.html.
+      function renderFromData(lang) {
+        const email = SITE_DATA.email.user + "@" + SITE_DATA.email.domain;
+        document.querySelectorAll(".email-link").forEach(function (el) {
+          el.href = "mailto:" + email;
+          const span = el.querySelector(".email-text");
+          if (span) span.textContent = email;
+        });
+        document.querySelectorAll(".wa-link").forEach(function (el) {
+          el.href = "https://wa.me/" + SITE_DATA.whatsappNumber;
+        });
+        document.querySelectorAll(".linkedin-link").forEach(function (el) {
+          el.href = SITE_DATA.links.linkedin;
+        });
+        document.querySelectorAll(".github-link").forEach(function (el) {
+          el.href = SITE_DATA.links.github;
+        });
+        document.querySelectorAll(".cv-pdf-link").forEach(function (el) {
+          el.href = SITE_DATA.links.cvPdf;
+        });
+
+        const heroSub = document.querySelector('[data-i18n-html="hero_sub_html"]');
+        if (heroSub) heroSub.innerHTML = `<strong>${SITE_DATA.name}</strong> — ${pick(SITE_DATA.summary, lang)}`;
+        const heroLocation = document.querySelector('[data-i18n="hero_location"]');
+        if (heroLocation) heroLocation.textContent = pick(SITE_DATA.location, lang);
+
+        const stackBody = document.getElementById("stackBody");
+        if (stackBody) {
+          const groups = SITE_DATA.skills
+            .map(function (group, i) {
+              const tags = group.items.map((item) => `<span class="tag">${pick(item, lang)}</span>`).join("");
+              const last = i === SITE_DATA.skills.length - 1 ? ' style="margin-bottom: 0"' : "";
+              return `<div class="stack-group"${last}>
+                <span class="stack-key">"${pick(group.jsonKey, lang)}"</span><span class="stack-punc">:</span>
+                <div class="stack-tags">${tags}</div>
+              </div>`;
+            })
+            .join("");
+          stackBody.innerHTML = `<span class="stack-punc">{</span>${groups}<span class="stack-punc">}</span>`;
+        }
+
+        const expTimeline = document.getElementById("expTimeline");
+        if (expTimeline) {
+          expTimeline.innerHTML = SITE_DATA.experience
+            .map(
+              (job) => `
+                <div class="tl-item">
+                  <div class="tl-date">${pick(job.date, lang)}</div>
+                  <div class="tl-role">${pick(job.role, lang)}</div>
+                  <div class="tl-org">${pick(job.org, lang)}</div>
+                  <p class="tl-desc">${pick(job.desc, lang)}</p>
+                </div>`,
+            )
+            .join("");
+        }
+
+        const eduGrid = document.getElementById("eduGrid");
+        if (eduGrid) {
+          eduGrid.innerHTML = SITE_DATA.education
+            .map(
+              (edu) => `
+                <div class="edu-card">
+                  <div class="edu-year">${edu.year}</div>
+                  <div class="edu-name">${pick(edu.name, lang)}</div>
+                  <div class="edu-org">${pick(edu.org, lang)}</div>
+                </div>`,
+            )
+            .join("");
+        }
+      }
+
+      function applyLang(lang) {
+        document.documentElement.setAttribute("lang", lang);
+        const dict = I18N[lang];
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          const key = el.getAttribute("data-i18n");
+          if (dict[key] !== undefined) el.textContent = dict[key];
+        });
+        document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+          const key = el.getAttribute("data-i18n-html");
+          if (dict[key] !== undefined) el.innerHTML = dict[key];
+        });
+        renderFromData(lang);
+        const metaDesc = document.getElementById("metaDescription");
+        if (metaDesc) metaDesc.setAttribute("content", dict.meta_description);
+        const themeBtn = document.querySelector(".theme-toggle");
+        if (themeBtn) themeBtn.setAttribute("aria-label", dict.theme_toggle_label);
+        const langBtn = document.querySelector(".lang-toggle");
+        if (langBtn) {
+          langBtn.textContent = lang === "es" ? "EN" : "ES";
+          langBtn.setAttribute("aria-pressed", String(lang === "en"));
+          langBtn.setAttribute("aria-label", dict.lang_toggle_label);
+        }
+      }
+
+      const activeLang = getLang();
+      applyLang(activeLang);
+
+      document.querySelector(".lang-toggle").addEventListener("click", function () {
+        const current = document.documentElement.getAttribute("lang") === "en" ? "en" : "es";
+        const next = current === "es" ? "en" : "es";
+        localStorage.setItem("lang", next);
+        applyLang(next);
+      });
+    </script>
 
     <script>
       // Secuencia de terminal en el hero
@@ -1126,7 +975,7 @@
         { text: "Full Stack & Mobile Developer — TS Specialist", type: "out" },
         { text: "", type: "blank" },
         { prompt: "$ ", text: "status --check", type: "cmd" },
-        { text: "● available — remoto · freelance & full-time", type: "green" },
+        { text: I18N[document.documentElement.getAttribute("lang") === "en" ? "en" : "es"].terminal_available, type: "green" },
       ];
 
       const el = document.getElementById("termBody");
@@ -1169,7 +1018,7 @@
             const style = l.type === "green" ? ' style="color:var(--green)"' : "";
             el.insertAdjacentHTML(
               "beforeend",
-              `<div class="${wrapClass}"${style} id="line-${i}">${l.type === "cmd" ? '<span class="term-prompt">' + l.prompt + '</span><span class="term-cyan" id="txt-${i}"></span>' : '<span id="txt-' + i + '"></span>'}</div>`,
+              `<div class="${wrapClass}"${style} id="line-${i}">${l.type === "cmd" ? '<span class="term-prompt">' + l.prompt + '</span><span class="term-cyan" id="txt-' + i + '"></span>' : '<span id="txt-' + i + '"></span>'}</div>`,
             );
           }
           const target = document.getElementById("txt-" + i);
@@ -1185,6 +1034,33 @@
         }
         typeNext();
       }
+    </script>
+
+    <script>
+      // Toggle de tema claro/oscuro
+      (function () {
+        const btn = document.querySelector(".theme-toggle");
+        const mql = window.matchMedia("(prefers-color-scheme: light)");
+
+        function isLightActive() {
+          const current = document.documentElement.getAttribute("data-theme");
+          return current === "light" || (!current && mql.matches);
+        }
+        function syncAria() {
+          btn.setAttribute("aria-pressed", String(isLightActive()));
+        }
+
+        syncAria();
+        btn.addEventListener("click", function () {
+          const next = isLightActive() ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+          syncAria();
+        });
+        mql.addEventListener("change", function () {
+          if (!localStorage.getItem("theme")) syncAria();
+        });
+      })();
     </script>
   </body>
 </html>

@@ -1,3 +1,7 @@
+```sh
+http-server -c-1
+```
+
 # fgp555.github.io
 
 > - https://web.frankgp.com

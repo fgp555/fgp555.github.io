@@ -5,53 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Guía de Diseño — FGP</title>
+    <script>
+      // Aplica el tema guardado antes del primer render para evitar parpadeo.
+      (function () {
+        var saved = localStorage.getItem("theme");
+        if (saved === "light" || saved === "dark") {
+          document.documentElement.setAttribute("data-theme", saved);
+        }
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
     <style>
-      /* Los tokens (:root) viven en /theme.css — fuente única de verdad.
-         Cambia un color ahí y se actualiza en todo el sitio. */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        background: var(--bg);
-        color: var(--text);
-        font-family: var(--sans);
-        line-height: 1.6;
-        font-size: 16px;
-        -webkit-font-smoothing: antialiased;
-      }
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-      img {
-        max-width: 100%;
-        display: block;
-      }
-
-      .wrap {
-        max-width: 1120px;
-        margin: 0 auto;
-        padding: 0 28px;
-      }
+      /* Tokens en /theme.css, componentes reutilizables (.btn, .badge, .tag,
+         .card, .terminal, .timeline...) en /components.css.
+         Aquí solo queda el chrome propio de esta página de documentación. */
 
       /* ---------- doc-only chrome ---------- */
       .doc-header {
         position: sticky;
         top: 0;
         z-index: 50;
-        background: rgba(10, 14, 20, 0.9);
+        background: var(--header-bg-strong);
         backdrop-filter: blur(10px);
         border-bottom: 1px solid var(--border-soft);
       }
@@ -259,203 +240,6 @@
         flex-shrink: 0;
       }
 
-      /* ---------- reused component CSS (from index.html) ---------- */
-      .btn {
-        font-family: var(--mono);
-        font-size: 14px;
-        font-weight: 600;
-        padding: 13px 20px;
-        border-radius: 8px;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
-        border: 1px solid transparent;
-        cursor: pointer;
-      }
-      .btn:hover {
-        transform: translateY(-2px);
-      }
-      .btn-primary {
-        background: var(--green);
-        color: #03150e;
-      }
-      .btn-primary:hover {
-        background: #57e6ac;
-      }
-      .btn-outline {
-        background: transparent;
-        border-color: var(--border);
-        color: var(--text);
-      }
-      .btn-outline:hover {
-        border-color: var(--cyan);
-        color: var(--cyan);
-      }
-      .btn-lg {
-        padding: 15px 26px;
-        font-size: 15px;
-      }
-
-      .badge {
-        font-family: var(--mono);
-        font-size: 10.5px;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        padding: 3px 8px;
-        border-radius: 5px;
-      }
-      .badge-live {
-        background: var(--green-dim);
-        color: var(--green);
-      }
-      .badge-cyan {
-        background: var(--cyan-dim);
-        color: var(--cyan);
-      }
-      .badge-amber {
-        background: var(--amber-dim);
-        color: var(--amber);
-      }
-
-      .status-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        font-family: var(--mono);
-        font-size: 12.5px;
-        color: var(--green);
-        background: var(--green-dim);
-        border: 1px solid rgba(61, 220, 151, 0.25);
-        padding: 6px 12px;
-        border-radius: 999px;
-      }
-      .dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: var(--green);
-      }
-
-      .tag {
-        background: var(--bg-elev-2);
-        border: 1px solid var(--border);
-        color: var(--text-dim);
-        font-size: 12px;
-        padding: 5px 10px;
-        border-radius: 6px;
-        font-family: var(--mono);
-        display: inline-block;
-      }
-
-      .card {
-        background: var(--bg-elev);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 20px;
-      }
-      .card-title {
-        font-family: var(--mono);
-        font-weight: 700;
-        font-size: 14.5px;
-        margin-bottom: 6px;
-      }
-      .card-desc {
-        font-size: 13.5px;
-        color: var(--text-dim);
-      }
-
-      .terminal {
-        background: var(--bg-elev);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        overflow: hidden;
-      }
-      .term-bar {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 11px 14px;
-        background: var(--bg-elev-2);
-        border-bottom: 1px solid var(--border);
-      }
-      .term-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-      }
-      .term-bar span:nth-child(1) {
-        background: #ff5f56;
-      }
-      .term-bar span:nth-child(2) {
-        background: #ffbd2e;
-      }
-      .term-bar span:nth-child(3) {
-        background: #27c93f;
-      }
-      .term-title {
-        margin-left: 8px;
-        font-family: var(--mono);
-        font-size: 12px;
-        color: var(--text-faint);
-      }
-      .term-body {
-        padding: 18px 20px 22px;
-        font-family: var(--mono);
-        font-size: 13.5px;
-        line-height: 1.9;
-      }
-      .term-prompt {
-        color: var(--green);
-      }
-      .term-cyan {
-        color: var(--cyan);
-      }
-      .term-out {
-        color: var(--text);
-      }
-
-      .timeline {
-        display: flex;
-        flex-direction: column;
-        border-left: 2px solid var(--border);
-        margin-left: 6px;
-      }
-      .tl-item {
-        position: relative;
-        padding: 0 0 26px 30px;
-      }
-      .tl-item:last-child {
-        padding-bottom: 0;
-      }
-      .tl-item::before {
-        content: "";
-        position: absolute;
-        left: -7px;
-        top: 4px;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: var(--bg-elev);
-        border: 2px solid var(--cyan);
-      }
-      .tl-date {
-        font-family: var(--mono);
-        font-size: 12px;
-        color: var(--cyan);
-        margin-bottom: 5px;
-      }
-      .tl-role {
-        font-family: var(--mono);
-        font-size: 15px;
-        font-weight: 700;
-        margin-bottom: 3px;
-      }
-      .tl-desc {
-        font-size: 13.5px;
-        color: var(--text-dim);
-      }
-
       .grid-3 {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -498,7 +282,7 @@
         color: var(--green);
       }
       .donts h4 {
-        color: #ff8a8a;
+        color: var(--danger);
       }
 
       footer.doc-foot {
@@ -533,8 +317,13 @@
           <a href="#cards">Cards</a>
           <a href="#terminal">Terminal</a>
           <a href="#timeline">Timeline</a>
+          <a href="#tema">Tema</a>
           <a href="#reglas">Reglas</a>
         </nav>
+        <button class="theme-toggle" type="button" aria-label="Cambiar tema claro/oscuro" aria-pressed="false">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
       </div>
     </header>
 
@@ -561,46 +350,50 @@
           Todos definidos como variables CSS en <code>:root</code>. Nunca hardcodear hex en componentes — siempre
           referenciar la variable.
         </p>
+        <p class="desc" style="margin-bottom: 14px">
+          El color de cada cajita sigue el tema activo de esta página ahora mismo. Los valores hex de abajo muestran
+          ambas variantes porque el token cambia entre modo oscuro y claro (ver <a href="#tema" style="color: var(--cyan)">Modo claro / oscuro</a>).
+        </p>
         <div class="swatch-grid">
           <div class="swatch">
             <div class="swatch-color" style="background: var(--bg)"></div>
-            <div class="swatch-meta"><div class="swatch-name">--bg</div><div class="swatch-hex">#0a0e14</div></div>
+            <div class="swatch-meta"><div class="swatch-name">--bg</div><div class="swatch-hex">oscuro #0a0e14</div><div class="swatch-hex">claro #f6f8fa</div></div>
           </div>
           <div class="swatch">
             <div class="swatch-color" style="background: var(--bg-elev)"></div>
-            <div class="swatch-meta"><div class="swatch-name">--bg-elev</div><div class="swatch-hex">#10151d</div></div>
+            <div class="swatch-meta"><div class="swatch-name">--bg-elev</div><div class="swatch-hex">oscuro #10151d</div><div class="swatch-hex">claro #ffffff</div></div>
           </div>
           <div class="swatch">
             <div class="swatch-color" style="background: var(--bg-elev-2)"></div>
-            <div class="swatch-meta"><div class="swatch-name">--bg-elev-2</div><div class="swatch-hex">#161d27</div></div>
+            <div class="swatch-meta"><div class="swatch-name">--bg-elev-2</div><div class="swatch-hex">oscuro #161d27</div><div class="swatch-hex">claro #eef1f5</div></div>
           </div>
           <div class="swatch">
             <div class="swatch-color" style="background: var(--border)"></div>
-            <div class="swatch-meta"><div class="swatch-name">--border</div><div class="swatch-hex">#212a35</div></div>
+            <div class="swatch-meta"><div class="swatch-name">--border</div><div class="swatch-hex">oscuro #212a35</div><div class="swatch-hex">claro #d9dfe6</div></div>
           </div>
           <div class="swatch">
             <div class="swatch-color" style="background: var(--text)"></div>
-            <div class="swatch-meta"><div class="swatch-name">--text</div><div class="swatch-hex">#e8edf2</div></div>
+            <div class="swatch-meta"><div class="swatch-name">--text</div><div class="swatch-hex">oscuro #e8edf2</div><div class="swatch-hex">claro #10151d</div></div>
           </div>
           <div class="swatch">
             <div class="swatch-color" style="background: var(--text-dim)"></div>
-            <div class="swatch-meta"><div class="swatch-name">--text-dim</div><div class="swatch-hex">#95a3b3</div></div>
+            <div class="swatch-meta"><div class="swatch-name">--text-dim</div><div class="swatch-hex">oscuro #95a3b3</div><div class="swatch-hex">claro #495363</div></div>
           </div>
           <div class="swatch">
             <div class="swatch-color" style="background: var(--text-faint)"></div>
-            <div class="swatch-meta"><div class="swatch-name">--text-faint</div><div class="swatch-hex">#576474</div></div>
+            <div class="swatch-meta"><div class="swatch-name">--text-faint</div><div class="swatch-hex">oscuro #576474</div><div class="swatch-hex">claro #8a94a3</div></div>
           </div>
           <div class="swatch">
             <div class="swatch-color" style="background: var(--cyan)"></div>
-            <div class="swatch-meta"><div class="swatch-name">--cyan</div><div class="swatch-hex">#22d3ee</div></div>
+            <div class="swatch-meta"><div class="swatch-name">--cyan</div><div class="swatch-hex">oscuro #22d3ee</div><div class="swatch-hex">claro #0e7490</div></div>
           </div>
           <div class="swatch">
             <div class="swatch-color" style="background: var(--green)"></div>
-            <div class="swatch-meta"><div class="swatch-name">--green</div><div class="swatch-hex">#3ddc97</div></div>
+            <div class="swatch-meta"><div class="swatch-name">--green</div><div class="swatch-hex">oscuro #3ddc97</div><div class="swatch-hex">claro #047857</div></div>
           </div>
           <div class="swatch">
             <div class="swatch-color" style="background: var(--amber)"></div>
-            <div class="swatch-meta"><div class="swatch-name">--amber</div><div class="swatch-hex">#f5a623</div></div>
+            <div class="swatch-meta"><div class="swatch-name">--amber</div><div class="swatch-hex">oscuro #f5a623</div><div class="swatch-hex">claro #b45309</div></div>
           </div>
         </div>
         <div class="doc-block" style="margin-top: 30px">
@@ -780,18 +573,108 @@
         </div>
       </section>
 
+      <!-- MODO CLARO/OSCURO -->
+      <section class="doc-section" id="tema">
+        <p class="doc-eyebrow">tokens</p>
+        <h2>Modo claro / oscuro</h2>
+        <p class="desc">
+          Por defecto el sitio sigue el <code>prefers-color-scheme</code> del sistema. El botón <code>.theme-toggle</code>
+          (arriba a la derecha de esta página) permite forzar un modo, guardado en <code>localStorage</code>. Toda la
+          lógica vive en <code>theme.css</code> (los tokens claros/oscuros) y en un pequeño script por página.
+        </p>
+        <div class="doc-block">
+          <h3>Botón</h3>
+          <div class="demo row">
+            <button class="theme-toggle" type="button" aria-label="Cambiar tema claro/oscuro">
+              <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+              <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+            <span style="color: var(--text-dim); font-size: 13.5px">Muestra luna en modo claro, sol en modo oscuro (icono del modo al que cambiarás).</span>
+          </div>
+          <pre class="code"><span class="tag-name">&lt;button</span> <span class="attr">class</span>="theme-toggle" <span class="attr">aria-label</span>="Cambiar tema claro/oscuro" <span class="attr">aria-pressed</span>="false"&gt;
+  &lt;svg <span class="attr">class</span>="icon-sun"&gt;…&lt;/svg&gt;
+  &lt;svg <span class="attr">class</span>="icon-moon"&gt;…&lt;/svg&gt;
+&lt;/button&gt;</pre>
+          <p class="desc" style="margin-bottom: 0; margin-top: 8px">
+            <code>aria-pressed</code> refleja si el modo claro está activo (lo mantiene el script de abajo) — sin esto,
+            un lector de pantalla no anuncia el estado actual del botón.
+          </p>
+        </div>
+        <div class="doc-block">
+          <h3>Script requerido en cada página nueva</h3>
+          <p class="desc" style="margin-bottom: 12px">
+            1) Bloqueante en <code>&lt;head&gt;</code>, antes de cualquier estilo, para evitar parpadeo. 2) El handler de
+            click, en cualquier parte después del botón.
+          </p>
+          <pre class="code">&lt;script&gt;
+  (function () {
+    var saved = localStorage.getItem("theme");
+    if (saved === "light" || saved === "dark") {
+      document.documentElement.setAttribute("data-theme", saved);
+    }
+  })();
+&lt;/script&gt;
+
+&lt;script&gt;
+  (function () {
+    var btn = document.querySelector(".theme-toggle");
+    var mql = matchMedia("(prefers-color-scheme: light)");
+
+    function isLightActive() {
+      var current = document.documentElement.getAttribute("data-theme");
+      return current === "light" || (!current && mql.matches);
+    }
+    function syncAria() {
+      btn.setAttribute("aria-pressed", String(isLightActive()));
+    }
+
+    syncAria();
+    btn.addEventListener("click", function () {
+      var next = isLightActive() ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("theme", next);
+      syncAria();
+    });
+    mql.addEventListener("change", function () {
+      if (!localStorage.getItem("theme")) syncAria();
+    });
+  })();
+&lt;/script&gt;</pre>
+        </div>
+        <div class="doc-block">
+          <h3>Tokens especiales de tema</h3>
+          <ul style="list-style: none; font-family: var(--mono); font-size: 13px; color: var(--text-dim); line-height: 2">
+            <li><span style="color: var(--cyan)">--brand-cyan</span> / <span style="color: var(--cyan)">--brand-green</span> — valores fijos (no cambian con el tema). Úsalos solo para fondos sólidos de botones que llevan texto oscuro fijo encima (ej. <code>.nav-cta</code>, <code>.btn-primary</code>).</li>
+            <li><span style="color: var(--cyan)">--cyan</span> / <span style="color: var(--cyan)">--green</span> / <span style="color: var(--cyan)">--amber</span> — se oscurecen en modo claro para mantener contraste como texto/borde sobre el fondo de página.</li>
+            <li><span style="color: var(--cyan)">--header-bg</span> / <span style="color: var(--cyan)">--header-bg-strong</span> — fondo translúcido de headers sticky, adaptado por tema.</li>
+            <li><span style="color: var(--cyan)">--glow-1</span> / <span style="color: var(--cyan)">--glow-2</span> — color de los degradados decorativos de fondo (<code>body::before</code>).</li>
+          </ul>
+        </div>
+        <div class="dos-donts">
+          <div class="dos">
+            <h4>✓ hacer</h4>
+            Usar <code>--cyan</code>/<code>--green</code>/<code>--amber</code> para texto, íconos y bordes. Usar <code>--brand-*</code> solo para fondos sólidos de botón.
+          </div>
+          <div class="donts">
+            <h4>✗ evitar</h4>
+            No usar <code>--cyan</code>/<code>--green</code> como fondo sólido con texto oscuro fijo — en modo claro son colores oscuros y el texto se vuelve ilegible.
+          </div>
+        </div>
+      </section>
+
       <!-- REGLAS -->
       <section class="doc-section" id="reglas" style="border-bottom: none">
         <p class="doc-eyebrow">checklist</p>
         <h2>Reglas al crear una página nueva</h2>
         <div class="doc-block">
           <ol style="padding-left: 20px; color: var(--text-dim); font-size: 14.5px; line-height: 2">
-            <li>Copiar el bloque <code>:root</code> de tokens tal cual — no redefinir colores por página.</li>
+            <li>Enlazar <code>theme.css</code> y <code>components.css</code> en el <code>&lt;head&gt;</code> — no redefinir colores ni componentes por página.</li>
             <li>Cargar las mismas fuentes (JetBrains Mono + Inter) con el mismo <code>&lt;link&gt;</code>.</li>
             <li>Títulos en <code>--mono</code>, texto de lectura en <code>--sans</code>.</li>
             <li>Contenedor <code>.wrap</code> a 1120px máx, secciones con padding vertical 74px.</li>
-            <li>Reusar componentes de esta guía (botones, badges, cards, terminal) antes de inventar uno nuevo.</li>
-            <li>Respetar <code>prefers-reduced-motion</code> igual que en <code>index.html</code>.</li>
+            <li>Reusar clases de <code>components.css</code> (<code>.btn</code>, <code>.badge</code>, <code>.tag</code>, <code>.card</code>, <code>.terminal</code>, <code>.timeline</code>) antes de inventar una nueva.</li>
+            <li>Si necesitas un componente nuevo, agrégalo a <code>components.css</code> y documéntalo aquí mismo — no lo dejes solo en la página que lo usa.</li>
+            <li>Respetar <code>prefers-reduced-motion</code> (ya viene resuelto en <code>components.css</code>).</li>
             <li>Antes de publicar, comparar visualmente contra <a href="/index.html" style="color: var(--cyan)">index.html</a> para confirmar consistencia.</li>
           </ol>
         </div>
@@ -799,5 +682,32 @@
     </main>
 
     <footer class="doc-foot">Guía de diseño interna · no indexada · frankgp.com</footer>
+
+    <script>
+      // Toggle de tema claro/oscuro
+      (function () {
+        const btn = document.querySelector(".theme-toggle");
+        const mql = window.matchMedia("(prefers-color-scheme: light)");
+
+        function isLightActive() {
+          const current = document.documentElement.getAttribute("data-theme");
+          return current === "light" || (!current && mql.matches);
+        }
+        function syncAria() {
+          btn.setAttribute("aria-pressed", String(isLightActive()));
+        }
+
+        syncAria();
+        btn.addEventListener("click", function () {
+          const next = isLightActive() ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+          syncAria();
+        });
+        mql.addEventListener("change", function () {
+          if (!localStorage.getItem("theme")) syncAria();
+        });
+      })();
+    </script>
   </body>
 </html>

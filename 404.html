@@ -3,107 +3,131 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>404 - Página no encontrada</title>
+    <title>404 — Página no encontrada · FGP</title>
+    <script>
+      // Aplica el tema guardado antes del primer render para evitar parpadeo.
+      (function () {
+        var saved = localStorage.getItem("theme");
+        if (saved === "light" || saved === "dark") {
+          document.documentElement.setAttribute("data-theme", saved);
+        }
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
     <style>
-      :root {
-        --bg: #0f1115;
-        --bg-alt: #161923;
-        --accent: #7c5cff;
-        --accent-soft: rgba(124, 92, 255, 0.15);
-        --text: #f4f4f7;
-        --text-muted: #9ca0ae;
-        --border: rgba(255, 255, 255, 0.08);
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
       html,
       body {
         height: 100%;
       }
-
       body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        background: radial-gradient(circle at 20% 20%, var(--bg-alt), var(--bg) 60%);
-        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 900px 500px at 15% -5%, var(--glow-1), transparent 60%),
+          radial-gradient(ellipse 700px 500px at 100% 10%, var(--glow-2), transparent 60%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* ---------- HEADER ---------- */
+      header {
+        position: relative;
+        z-index: 1;
+        padding: 20px 28px;
+      }
+      .logo {
+        font-family: var(--mono);
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: 0.02em;
+      }
+      .logo span {
+        color: var(--cyan);
+      }
+      .top-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 640px;
+        margin: 0 auto;
+      }
+
+      /* ---------- MAIN ---------- */
+      main {
+        position: relative;
+        z-index: 1;
+        flex: 1;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 24px;
-        overflow: hidden;
-        position: relative;
+        padding: 20px 24px 60px;
       }
-
-      .glow {
-        position: absolute;
-        width: 500px;
-        height: 500px;
-        background: var(--accent);
-        filter: blur(160px);
-        opacity: 0.18;
-        border-radius: 50%;
-        top: -100px;
-        right: -100px;
-        pointer-events: none;
-      }
-
-      .glow.bottom {
-        top: auto;
-        right: auto;
-        bottom: -150px;
-        left: -150px;
-        opacity: 0.12;
-      }
-
       .container {
-        position: relative;
-        z-index: 1;
-        max-width: 560px;
+        max-width: 480px;
         width: 100%;
         text-align: center;
       }
 
-      .code {
-        font-size: clamp(80px, 18vw, 140px);
-        font-weight: 800;
-        line-height: 1;
-        letter-spacing: -4px;
-        background: linear-gradient(135deg, var(--text) 20%, var(--accent) 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        margin-bottom: 8px;
+      .err-terminal {
+        margin-bottom: 26px;
+        text-align: left;
+      }
+      .err-terminal .term-body {
+        font-size: 13px;
+        line-height: 1.85;
+      }
+      .err-prompt {
+        color: var(--green);
+      }
+      .err-cmd {
+        color: var(--cyan);
+      }
+      .err-out {
+        color: var(--text-dim);
+      }
+      .err-fail {
+        color: var(--amber);
       }
 
-      .badge {
-        display: inline-block;
-        padding: 6px 14px;
-        background: var(--accent-soft);
-        color: var(--accent);
-        border: 1px solid rgba(124, 92, 255, 0.3);
+      .badge-404 {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 5px 12px;
+        background: var(--amber-dim);
+        color: var(--amber);
+        border: 1px solid var(--amber-border);
         border-radius: 999px;
-        font-size: 13px;
-        font-weight: 600;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-        margin-bottom: 20px;
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        margin-bottom: 18px;
       }
 
       h1 {
         font-size: clamp(20px, 4vw, 26px);
-        font-weight: 700;
         margin-bottom: 12px;
       }
 
-      p {
-        color: var(--text-muted);
-        font-size: 16px;
+      main p {
+        color: var(--text-dim);
+        font-size: 15.5px;
         line-height: 1.6;
-        margin-bottom: 32px;
+        margin-bottom: 30px;
       }
 
       .actions {
@@ -111,67 +135,22 @@
         gap: 12px;
         justify-content: center;
         flex-wrap: wrap;
-        margin-bottom: 40px;
-      }
-
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 12px 22px;
-        border-radius: 10px;
-        font-size: 15px;
-        font-weight: 600;
-        text-decoration: none;
-        transition:
-          transform 0.15s ease,
-          background 0.15s ease,
-          border-color 0.15s ease;
-        cursor: pointer;
-        border: 1px solid transparent;
-      }
-
-      .btn:active {
-        transform: scale(0.97);
-      }
-
-      .btn-primary {
-        background: var(--accent);
-        color: white;
-      }
-
-      .btn-primary:hover {
-        background: #6b4bff;
-        transform: translateY(-2px);
-      }
-
-      .btn-secondary {
-        background: transparent;
-        color: var(--text);
-        border-color: var(--border);
-      }
-
-      .btn-secondary:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-        transform: translateY(-2px);
+        margin-bottom: 36px;
       }
 
       .search {
         display: flex;
         max-width: 380px;
         margin: 0 auto;
-        background: var(--bg-alt);
+        background: var(--bg-elev);
         border: 1px solid var(--border);
         border-radius: 10px;
         overflow: hidden;
         transition: border-color 0.15s ease;
       }
-
       .search:focus-within {
-        border-color: var(--accent);
+        border-color: var(--cyan);
       }
-
       .search input {
         flex: 1;
         background: transparent;
@@ -180,40 +159,34 @@
         padding: 12px 16px;
         color: var(--text);
         font-size: 14px;
-        font-family: inherit;
+        font-family: var(--sans);
       }
-
       .search input::placeholder {
-        color: var(--text-muted);
+        color: var(--text-faint);
       }
-
       .search button {
         background: transparent;
         border: none;
-        color: var(--text-muted);
+        color: var(--text-faint);
         padding: 0 16px;
         cursor: pointer;
         display: flex;
         align-items: center;
         transition: color 0.15s ease;
       }
-
       .search button:hover {
-        color: var(--accent);
+        color: var(--cyan);
       }
 
-      footer {
-        margin-top: 28px;
+      main footer {
+        margin-top: 26px;
         font-size: 13px;
-        color: var(--text-muted);
+        color: var(--text-faint);
       }
-
-      footer a {
-        color: var(--accent);
-        text-decoration: none;
+      main footer a {
+        color: var(--cyan);
       }
-
-      footer a:hover {
+      main footer a:hover {
         text-decoration: underline;
       }
 
@@ -224,23 +197,24 @@
       .checking {
         position: relative;
         z-index: 1;
+        flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         gap: 16px;
-        color: var(--text-muted);
-        font-size: 14px;
+        color: var(--text-faint);
+        font-family: var(--mono);
+        font-size: 13.5px;
       }
-
       .spinner {
-        width: 34px;
-        height: 34px;
-        border: 3px solid rgba(255, 255, 255, 0.12);
-        border-top: 3px solid var(--accent);
+        width: 30px;
+        height: 30px;
+        border: 3px solid var(--border);
+        border-top: 3px solid var(--cyan);
         border-radius: 50%;
         animation: spin 0.8s linear infinite;
       }
-
       @keyframes spin {
         to {
           transform: rotate(360deg);
@@ -251,7 +225,7 @@
         .actions {
           flex-direction: column;
         }
-        .btn {
+        .actions .btn {
           justify-content: center;
           width: 100%;
         }
@@ -259,48 +233,63 @@
     </style>
   </head>
   <body>
-    <div class="glow"></div>
-    <div class="glow bottom"></div>
+    <header>
+      <div class="top-row">
+        <a href="/" class="logo">FGP<span>_</span></a>
+        <button class="theme-toggle" type="button" aria-label="Cambiar tema claro/oscuro" aria-pressed="false">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+      </div>
+    </header>
 
     <div class="checking" id="checking">
       <div class="spinner"></div>
       <span>Verificando enlace...</span>
     </div>
 
-    <main class="container hidden" id="notFoundContent">
-      <div class="code">404</div>
-      <span class="badge">Error de página</span>
-      <h1>No pudimos encontrar esta página</h1>
-      <p>
-        Puede que el enlace esté roto, que la página se haya movido, o que nunca haya existido. Revisa la URL o vuelve
-        al inicio.
-      </p>
+    <main class="hidden" id="notFoundContent">
+      <div class="container">
+        <div class="terminal err-terminal">
+          <div class="term-bar">
+            <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+            <span class="term-title">franklin@remote — zsh</span>
+          </div>
+          <div class="term-body">
+            <div><span class="err-prompt">$ </span><span class="err-cmd">cd ~/paginas/lo-que-buscabas</span></div>
+            <div class="err-out">bash: cd: lo-que-buscabas: No such file or directory</div>
+            <div><span class="err-prompt">$ </span><span class="err-cmd">status --check</span></div>
+            <div class="err-fail">✕ 404 — página no encontrada</div>
+          </div>
+        </div>
 
-      <div class="actions">
-        <a href="/" class="btn btn-primary"> ← Volver al inicio </a>
-        <a href="javascript:history.back()" class="btn btn-secondary"> Página anterior </a>
+        <span class="badge-404">// error 404</span>
+        <h1>No pudimos encontrar esta página</h1>
+        <p>
+          Puede que el enlace esté roto, que la página se haya movido, o que nunca haya existido. Revisa la URL o
+          vuelve al inicio.
+        </p>
+
+        <div class="actions">
+          <a href="/" class="btn btn-primary">← Volver al inicio</a>
+          <a href="javascript:history.back()" class="btn btn-outline">Página anterior</a>
+        </div>
+
+        <form class="search" id="ytSearch" target="_blank" onsubmit="return submitYtSearch(event);">
+          <input type="text" id="ytQuery" placeholder="Buscar en YouTube..." aria-label="Buscar" />
+          <button type="submit" aria-label="Buscar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+        </form>
+
+        <footer>
+          ¿Sigues teniendo problemas?
+          <a class="email-link" data-user="info" data-domain="frankgp.com" href="#">Contáctanos</a>
+        </footer>
       </div>
-
-      <form class="search" id="ytSearch" target="_blank" onsubmit="return submitYtSearch(event);">
-        <input type="text" id="ytQuery" placeholder="Buscar en YouTube..." aria-label="Buscar" />
-        <button type="submit" aria-label="Buscar">
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        </button>
-      </form>
-
-      <footer>¿Sigues teniendo problemas? <a href="mailto:info@frankgp.com">Contáctanos</a></footer>
     </main>
 
     <script>
@@ -366,6 +355,42 @@
         window.open(url, "_blank");
         return false;
       }
+    </script>
+
+    <script>
+      // Toggle de tema claro/oscuro
+      (function () {
+        const btn = document.querySelector(".theme-toggle");
+        const mql = window.matchMedia("(prefers-color-scheme: light)");
+
+        function isLightActive() {
+          const current = document.documentElement.getAttribute("data-theme");
+          return current === "light" || (!current && mql.matches);
+        }
+        function syncAria() {
+          btn.setAttribute("aria-pressed", String(isLightActive()));
+        }
+
+        syncAria();
+        btn.addEventListener("click", function () {
+          const next = isLightActive() ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+          syncAria();
+        });
+        mql.addEventListener("change", function () {
+          if (!localStorage.getItem("theme")) syncAria();
+        });
+      })();
+    </script>
+
+    <script>
+      // Arma el email en tiempo de ejecución para que no quede como texto plano
+      // en el HTML (evita cosecha por bots simples que solo leen el código fuente).
+      document.querySelectorAll(".email-link").forEach(function (el) {
+        const email = el.dataset.user + "@" + el.dataset.domain;
+        el.href = "mailto:" + email;
+      });
     </script>
   </body>
 </html>
