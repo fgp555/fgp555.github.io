@@ -1,0 +1,82 @@
+body {
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+  padding: 20px;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.total-box {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #020617;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #334155;
+}
+
+.amount {
+  font-size: 2rem;
+  color: #22c55e;
+  transition: 0.2s;
+}
+
+button {
+  padding: 10px 20px;
+  background: #22c55e;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-reset {
+  background: #ef4444;
+  margin-left: 10px;
+}
+
+.card {
+  display: block;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 8px 0;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.card:hover {
+  border-color: #22c55e;
+}
+
+.card input {
+  display: none;
+}
+
+.card input:checked + .card-content {
+  border-left: 4px solid #22c55e;
+  padding-left: 8px;
+}
+
+.card-content strong {
+  display: block;
+}
+
+.card-content small {
+  display: block;
+  color: #94a3b8;
+  font-size: 0.8rem;
+}
+
+.price {
+  color: #22c55e;
+  font-weight: bold;
+}

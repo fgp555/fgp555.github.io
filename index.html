@@ -13,7 +13,7 @@
         }
       })();
     </script>
-    <script src="https://frank-gp.github.io/component/stat.js" type="module"></script>
+    <script src="https://app.frankgp.com/api/stat/tracker.js" type="module"></script>
     <script src="https://stats.frankgp.com/tracker.js" data-site="xpkveqec" async></script>
 
     <meta
@@ -27,9 +27,10 @@
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/theme.css" />
-    <link rel="stylesheet" href="assets/css/components.css" />
-    <script src="assets/js/data.js"></script>
+    <link rel="stylesheet" href="assets/css/theme.css?v=20260825T193057" />
+    <link rel="stylesheet" href="assets/css/components.css?v=20260825T193057" />
+    <script src="assets/js/data.js?v=20260825T193057"></script>
+    <script src="assets/js/page-nav.js?v=20260825T193057"></script>
     <style>
       body::before {
         content: "";
@@ -464,6 +465,12 @@
             <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
             <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
           </button>
+          <a class="icon-link github-link" href="#" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+          </a>
+          <a class="icon-link linkedin-link" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
           <a class="nav-cta wa-link" href="#" target="_blank" rel="noopener" data-i18n="nav_contact">Contactar</a>
         </div>
       </div>
@@ -486,9 +493,9 @@
             <a class="btn btn-primary wa-link" href="#" target="_blank" rel="noopener" data-i18n="cta_whatsapp"
               >→ Escribir por WhatsApp</a
             >
-            <a class="btn btn-outline email-link" href="#" data-i18n="hero_email">Enviar correo</a>
-            <a class="btn btn-outline" href="/portfolio/" data-i18n="cta_portfolio">Ver portafolio</a>
             <a class="btn btn-outline cv-pdf-link" href="#" target="_blank" rel="noopener" data-i18n="cta_cv">Descargar CV</a>
+            <a class="btn btn-outline" href="/portfolio/" data-i18n="cta_portfolio">Ver portafolio</a>
+            <a class="btn btn-outline" href="/services/" data-i18n="cta_services">Ver servicios</a>
           </div>
           <div class="quick-links">
             <a class="linkedin-link" href="#" target="_blank" rel="noopener">LinkedIn</a>
@@ -565,64 +572,7 @@
           Proyectos freelance llevados de cero a producción, incluyendo infraestructura y publicación en tiendas.
         </p>
 
-        <div class="projects-grid">
-          <div class="project-card">
-            <div class="project-top">
-              <div>
-                <div class="project-name">Mix&amp;Match</div>
-                <div class="project-period" data-i18n="proj1_period">Jul 2025 — Actualidad</div>
-              </div>
-              <span class="badge badge-live">LIVE</span>
-            </div>
-            <p class="project-desc" data-i18n="proj1_desc">
-              Outfit Planner / armario virtual. App móvil (Android/iOS) y web construidas con React Native y React +
-              TypeScript, backend en Express/MySQL, OAuth con Google y Apple, microservicio en Python para remoción de
-              fondo de imágenes.
-            </p>
-            <span class="project-metric" data-i18n="proj1_metric">+10,000 usuarios en 2 meses</span>
-            <div class="project-tags">
-              <span class="tag">React Native</span><span class="tag">Express</span><span class="tag">MySQL</span
-              ><span class="tag">AWS S3</span>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-top">
-              <div>
-                <div class="project-name">Transpaservic</div>
-                <div class="project-period">2025</div>
-              </div>
-              <span class="badge badge-live">LIVE</span>
-            </div>
-            <p class="project-desc" data-i18n="proj2_desc">
-              Infraestructura como código con Terraform sobre AWS (EC2, RDS, S3, IAM). Contenedores Docker detrás de
-              Nginx, exposición segura vía Cloudflare Tunnel sin puertos abiertos, y deploys automatizados con Bash.
-            </p>
-            <span class="project-metric" data-i18n="proj2_metric">Módulos reutilizables dev/prod</span>
-            <div class="project-tags">
-              <span class="tag">Terraform</span><span class="tag">Docker</span><span class="tag">Cloudflare</span
-              ><span class="tag">AWS</span>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-top">
-              <div>
-                <div class="project-name" data-i18n="proj3_name">Gestión de Vouchers</div>
-                <div class="project-period" data-i18n="proj3_period">Ene — Mar 2025</div>
-              </div>
-              <span class="badge badge-live" data-i18n="proj3_badge">PUBLICADO</span>
-            </div>
-            <p class="project-desc" data-i18n="proj3_desc">
-              Sistema web y móvil con ReactJS, React Native, NestJS y MySQL. Actualizaciones en tiempo real vía
-              WebSockets y notificaciones transaccionales automatizadas por WhatsApp API.
-            </p>
-            <span class="project-metric" data-i18n="proj3_metric">Publicado en Google Play Store</span>
-            <div class="project-tags">
-              <span class="tag">NestJS</span><span class="tag">WebSockets</span><span class="tag">WhatsApp API</span>
-            </div>
-          </div>
-        </div>
+        <div class="projects-grid" id="featuredProjects"></div>
       </section>
 
       <!-- EXPERIENCIA -->
@@ -707,11 +657,7 @@
     <footer>
       <div class="wrap foot-row">
         <span data-i18n="footer_copyright">© 2026 Franklin Gomez Pacoricona · Remoto, Perú</span>
-        <div class="foot-links">
-          <a class="github-link" href="#" target="_blank" rel="noopener">GitHub</a>
-          <a class="linkedin-link" href="#" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="/portfolio/">Portfolio</a>
-        </div>
+        <select class="page-nav-select" id="pageNav" aria-label="Navegar a otra página"></select>
       </div>
     </footer>
 
@@ -731,9 +677,9 @@
           hero_title_html:
             'Construyo productos <span class="hl">de punta a punta</span>: del backend a producción.',
           cta_whatsapp: "→ Escribir por WhatsApp",
-          hero_email: "Enviar correo",
           cta_portfolio: "Ver portafolio",
           cta_cv: "Descargar CV",
+          cta_services: "Ver servicios",
           services_title: "Servicios en producción",
           services_updated: "actualizado · ago 2026",
           svc1_desc: "Mix&Match — app de armario virtual multiplataforma (Android/iOS + web).",
@@ -750,19 +696,6 @@
           projects_title: "Trabajo entregado, no solo planeado",
           projects_sub:
             "Proyectos freelance llevados de cero a producción, incluyendo infraestructura y publicación en tiendas.",
-          proj1_period: "Jul 2025 — Actualidad",
-          proj1_desc:
-            "Outfit Planner / armario virtual. App móvil (Android/iOS) y web construidas con React Native y React + TypeScript, backend en Express/MySQL, OAuth con Google y Apple, microservicio en Python para remoción de fondo de imágenes.",
-          proj1_metric: "+10,000 usuarios en 2 meses",
-          proj2_desc:
-            "Infraestructura como código con Terraform sobre AWS (EC2, RDS, S3, IAM). Contenedores Docker detrás de Nginx, exposición segura vía Cloudflare Tunnel sin puertos abiertos, y deploys automatizados con Bash.",
-          proj2_metric: "Módulos reutilizables dev/prod",
-          proj3_name: "Gestión de Vouchers",
-          proj3_period: "Ene — Mar 2025",
-          proj3_badge: "PUBLICADO",
-          proj3_desc:
-            "Sistema web y móvil con ReactJS, React Native, NestJS y MySQL. Actualizaciones en tiempo real vía WebSockets y notificaciones transaccionales automatizadas por WhatsApp API.",
-          proj3_metric: "Publicado en Google Play Store",
           experience_eyebrow: "experiencia laboral",
           experience_title: "Trayectoria freelance",
           experience_sub: "Desde desarrollo WordPress hasta arquitectura full stack e infraestructura cloud.",
@@ -798,9 +731,9 @@
           nav_contact: "Contact",
           hero_title_html: 'I build products <span class="hl">end to end</span>: from backend to production.',
           cta_whatsapp: "→ Message on WhatsApp",
-          hero_email: "Send email",
           cta_portfolio: "View portfolio",
           cta_cv: "Download CV",
+          cta_services: "View services",
           services_title: "Services in production",
           services_updated: "updated · aug 2026",
           svc1_desc: "Mix&Match — cross-platform virtual closet app (Android/iOS + web).",
@@ -815,19 +748,6 @@
           projects_eyebrow: "featured projects",
           projects_title: "Work delivered, not just planned",
           projects_sub: "Freelance projects taken from zero to production, including infrastructure and store publishing.",
-          proj1_period: "Jul 2025 — Present",
-          proj1_desc:
-            "Outfit Planner / virtual closet. Mobile app (Android/iOS) and web built with React Native and React + TypeScript, Express/MySQL backend, OAuth with Google and Apple, Python microservice for image background removal.",
-          proj1_metric: "+10,000 users in 2 months",
-          proj2_desc:
-            "Infrastructure as code with Terraform on AWS (EC2, RDS, S3, IAM). Docker containers behind Nginx, secure exposure via Cloudflare Tunnel with no open ports, and automated deploys with Bash.",
-          proj2_metric: "Reusable dev/prod modules",
-          proj3_name: "Voucher Management System",
-          proj3_period: "Jan — Mar 2025",
-          proj3_badge: "PUBLISHED",
-          proj3_desc:
-            "Web and mobile system with ReactJS, React Native, NestJS, and MySQL. Real-time updates via WebSockets and automated transactional notifications via WhatsApp API.",
-          proj3_metric: "Published on Google Play Store",
           experience_eyebrow: "work experience",
           experience_title: "Freelance track record",
           experience_sub: "From WordPress development to full stack architecture and cloud infrastructure.",
@@ -928,6 +848,29 @@
             )
             .join("");
         }
+
+        const featuredProjects = document.getElementById("featuredProjects");
+        if (featuredProjects) {
+          featuredProjects.innerHTML = SITE_DATA.featuredProjects
+            .map(
+              (p) => `
+                <div class="project-card">
+                  <div class="project-top">
+                    <div>
+                      <div class="project-name">${pick(p.name, lang)}</div>
+                      <div class="project-period">${pick(p.period, lang)}</div>
+                    </div>
+                    <span class="badge badge-live">${pick(p.badge, lang)}</span>
+                  </div>
+                  <p class="project-desc">${pick(p.desc, lang)}</p>
+                  <span class="project-metric">${pick(p.metric, lang)}</span>
+                  <div class="project-tags">${p.tags.map((t) => `<span class="tag">${t}</span>`).join("")}</div>
+                </div>`,
+            )
+            .join("");
+        }
+
+        if (typeof renderPageNav === "function") renderPageNav(lang);
       }
 
       function applyLang(lang) {

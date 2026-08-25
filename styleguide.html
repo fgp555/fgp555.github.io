@@ -14,14 +14,17 @@
         }
       })();
     </script>
+    <script src="https://app.frankgp.com/api/stat/tracker.js" type="module"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/theme.css" />
-    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/theme.css?v=20260825T193057" />
+    <link rel="stylesheet" href="assets/css/components.css?v=20260825T193057" />
+    <script src="assets/js/data.js?v=20260825T193057"></script>
+    <script src="assets/js/page-nav.js?v=20260825T193057"></script>
     <style>
       /* Tokens en /theme.css, componentes reutilizables (.btn, .badge, .tag,
          .card, .terminal, .timeline...) en /components.css.
@@ -79,21 +82,6 @@
         color: var(--text-dim);
         max-width: 640px;
         font-size: 15.5px;
-      }
-      .doc-hero .warn {
-        margin-top: 20px;
-        display: inline-flex;
-        gap: 10px;
-        align-items: flex-start;
-        background: var(--amber-dim);
-        border: 1px solid rgba(245, 166, 35, 0.3);
-        color: var(--amber);
-        font-size: 13px;
-        padding: 10px 14px;
-        border-radius: 8px;
-        max-width: 640px;
-        font-family: var(--sans);
-        line-height: 1.5;
       }
 
       .doc-section {
@@ -291,6 +279,10 @@
         font-family: var(--mono);
         font-size: 12px;
         color: var(--text-faint);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
       }
 
       @media (max-width: 800px) {
@@ -336,10 +328,6 @@
           tipografía monoespaciada para títulos y datos, Inter para texto de lectura. Úsalo como referencia al crear
           cualquier página nueva del dominio para mantener consistencia.
         </p>
-        <div class="warn">
-          ⚠ <span><code>404.html</code> actualmente usa un sistema distinto (acento morado, fondo #0f1115, fuente
-          system-ui). Pendiente migrarlo a estos tokens para que todo el sitio comparta un mismo lenguaje visual.</span>
-        </div>
       </section>
 
       <!-- COLORES -->
@@ -681,7 +669,10 @@
       </section>
     </main>
 
-    <footer class="doc-foot">Guía de diseño interna · no indexada · frankgp.com</footer>
+    <footer class="doc-foot">
+      Guía de diseño interna · no indexada · frankgp.com
+      <select class="page-nav-select" id="pageNav" aria-label="Navegar a otra página"></select>
+    </footer>
 
     <script>
       // Toggle de tema claro/oscuro

@@ -1,0 +1,10 @@
+{
+  "name": "frankgp-com",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sitio estático sin dependencias — este package.json existe solo para scripts de mantenimiento (no hay build ni runtime dependencies).",
+  "scripts": {
+    "bump-version": "node scripts/bump-version.js",
+    "build": "node scripts/bump-version.js"
+  }
+}
