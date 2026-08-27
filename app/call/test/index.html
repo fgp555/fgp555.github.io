@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica — Procesos Call Center</title>
+<style>
+  :root{
+    --bg:#f4f5f7; --card:#fff; --text:#1c2024; --muted:#5b6470; --border:#e2e5ea;
+    --primary:#d3222a; --primary-ink:#fff; --accent:#0b6bcb;
+    --ok-bg:#e7f6ec; --ok-bd:#7bc894; --ok-tx:#1c6b3c;
+    --bad-bg:#fdeaea; --bad-bd:#e79a9a; --bad-tx:#a52222;
+    --shadow:0 1px 3px rgba(0,0,0,.08),0 8px 24px rgba(0,0,0,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#15171a; --card:#1e2126; --text:#e7e9ec; --muted:#9aa3ad; --border:#31353c;
+      --primary:#e5484d; --accent:#5eb0ef;
+      --ok-bg:#12321f; --ok-bd:#2f7b4f; --ok-tx:#7ee2a8;
+      --bad-bg:#3a1a1a; --bad-bd:#8a3b3b; --bad-tx:#f5a3a3;
+      --shadow:0 1px 3px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);line-height:1.5;padding:24px 16px;
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:780px;margin:0 auto}
+  h1{font-size:1.4rem;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:.9rem;margin-bottom:20px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;
+    padding:22px;box-shadow:var(--shadow);margin-bottom:16px}
+  label{font-weight:600;font-size:.9rem;display:block;margin-bottom:6px}
+  select,input[type=number]{width:100%;padding:9px 10px;border:1px solid var(--border);
+    border-radius:9px;background:var(--bg);color:var(--text);font-size:.95rem}
+  .row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+  .row>div{flex:1;min-width:150px}
+  .chk{display:flex;align-items:center;gap:8px;font-weight:500;font-size:.9rem}
+  .chk input{width:16px;height:16px}
+  button{font:inherit;cursor:pointer;border:1px solid var(--border);border-radius:10px;
+    padding:11px 16px;background:var(--card);color:var(--text);transition:.12s}
+  button:hover{border-color:var(--muted)}
+  .btn-primary{background:var(--primary);color:var(--primary-ink);border-color:var(--primary);font-weight:600}
+  .btn-primary:hover{filter:brightness(1.06)}
+  .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .themes{display:flex;flex-direction:column;gap:8px;margin-bottom:8px}
+  .theme{display:flex;align-items:center;gap:10px;border:1px solid var(--border);
+    border-radius:10px;padding:10px 12px;cursor:pointer}
+  .theme:hover{border-color:var(--muted)}
+  .theme input{width:16px;height:16px}
+  .theme .t-name{font-weight:600;font-size:.95rem}
+  .theme .t-count{margin-left:auto;font-size:.8rem;color:var(--muted)}
+  .progress{height:8px;background:var(--border);border-radius:99px;overflow:hidden;margin-bottom:14px}
+  .progress>span{display:block;height:100%;background:var(--primary);width:0;transition:width .3s}
+  .meta{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);margin-bottom:10px}
+  .badge{display:inline-block;font-size:.72rem;font-weight:700;text-transform:uppercase;
+    letter-spacing:.04em;color:var(--accent);border:1px solid var(--accent);
+    border-radius:99px;padding:2px 10px;margin-bottom:12px}
+  .q{font-size:1.08rem;font-weight:600;margin-bottom:16px}
+  .opts{display:flex;flex-direction:column;gap:10px}
+  .opt{text-align:left;width:100%;display:flex;gap:10px;align-items:flex-start}
+  .opt .mk{flex:0 0 22px;height:22px;border:1px solid var(--muted);border-radius:6px;
+    display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;margin-top:1px}
+  .opt.correct{background:var(--ok-bg);border-color:var(--ok-bd);color:var(--ok-tx)}
+  .opt.correct .mk{border-color:var(--ok-bd)}
+  .opt.wrong{background:var(--bad-bg);border-color:var(--bad-bd);color:var(--bad-tx)}
+  .opt.wrong .mk{border-color:var(--bad-bd)}
+  .opt:disabled{cursor:default;opacity:1}
+  .expl{margin-top:16px;border-left:4px solid var(--accent);background:var(--bg);
+    border-radius:0 10px 10px 0;padding:12px 14px;font-size:.92rem;display:none}
+  .expl.show{display:block}
+  .expl .src{display:block;margin-top:8px;font-size:.8rem;color:var(--muted)}
+  .hidden{display:none}
+  .score{font-size:2.4rem;font-weight:800;margin:4px 0}
+  .review h3{font-size:1rem;margin:18px 0 10px}
+  .rev-item{border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px;font-size:.9rem}
+  .rev-item .rq{font-weight:600;margin-bottom:6px}
+  .tag-ok{color:var(--ok-tx);font-weight:700}
+  .tag-bad{color:var(--bad-tx);font-weight:700}
+  .foot{text-align:center;color:var(--muted);font-size:.78rem;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Práctica — Procesos de Atención (Call Center)</h1>
+  <div class="sub">Banco de preguntas basado en los diagramas y guías de Claro / OSIPTEL. Uso interno de repaso.</div>
+
+  <section id="setup" class="card">
+    <label>Temas (elige uno o varios)</label>
+    <div class="themes" id="themes"></div>
+    <div class="btn-row" style="margin-bottom:12px">
+      <button id="selAll" type="button">Seleccionar todos</button>
+      <button id="selNone" type="button">Ninguno</button>
+    </div>
+    <div class="row">
+      <div>
+        <label for="num">N.º de preguntas</label>
+        <input type="number" id="num" min="1" value="20">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;justify-content:flex-end">
+        <div class="chk"><input type="checkbox" id="shuffleQ" checked><label for="shuffleQ" style="margin:0">Barajar preguntas</label></div>
+        <div class="chk"><input type="checkbox" id="shuffleO" checked><label for="shuffleO" style="margin:0">Barajar opciones</label></div>
+        <div class="chk"><input type="checkbox" id="instant" checked><label for="instant" style="margin:0">Respuesta al instante</label></div>
+      </div>
+    </div>
+    <div class="btn-row"><button class="btn-primary" id="start">Empezar práctica</button></div>
+    <div id="loadErr" class="sub" style="color:var(--bad-tx);margin-top:10px"></div>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="progress"><span id="bar"></span></div>
+    <div class="meta"><span id="counter">Pregunta 1 de 1</span><span id="running">Aciertos: 0</span></div>
+    <span class="badge" id="badge">Tema</span>
+    <div class="q" id="qtext">—</div>
+    <div class="opts" id="opts"></div>
+    <div class="expl" id="expl"></div>
+    <div class="btn-row">
+      <button class="btn-primary hidden" id="next">Siguiente</button>
+      <button id="quit">Terminar</button>
+    </div>
+  </section>
+
+  <section id="result" class="card hidden">
+    <div style="text-align:center">
+      <div class="sub" style="margin:0">Resultado</div>
+      <div class="score" id="finalScore">0%</div>
+      <div id="finalDetail" class="sub"></div>
+    </div>
+    <div class="btn-row" style="justify-content:center">
+      <button class="btn-primary" id="again">Volver al inicio</button>
+      <button id="onlyWrong" class="hidden">Repasar solo las falladas</button>
+    </div>
+    <div class="review" id="review"></div>
+  </section>
+
+  <div class="foot">Bancos editables en <code>data-*.js</code></div>
+</div>
+
+<!-- ====== BANCOS DE PREGUNTAS ====== -->
+<script src="data-reclamos.js"></script>
+<script src="data-renteseg.js"></script>
+<script src="data-bloqueo.js"></script>
+<script src="data-derivacion.js"></script>
+<script src="data-contencion.js"></script>
+<script src="data-migracion.js"></script>
+
+<script>
+(function(){
+  "use strict";
+  const TEMAS = window.TEMAS || {};
+  const $ = s => document.querySelector(s);
+  const el = {
+    setup:$("#setup"), quiz:$("#quiz"), result:$("#result"), themes:$("#themes"),
+    num:$("#num"), shuffleQ:$("#shuffleQ"), shuffleO:$("#shuffleO"), instant:$("#instant"),
+    start:$("#start"), selAll:$("#selAll"), selNone:$("#selNone"), loadErr:$("#loadErr"),
+    bar:$("#bar"), counter:$("#counter"), running:$("#running"), badge:$("#badge"),
+    qtext:$("#qtext"), opts:$("#opts"), expl:$("#expl"), next:$("#next"), quit:$("#quit"),
+    finalScore:$("#finalScore"), finalDetail:$("#finalDetail"), review:$("#review"),
+    again:$("#again"), onlyWrong:$("#onlyWrong")
+  };
+
+  function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;}
+  function esc(t){const d=document.createElement("div");d.textContent=t;return d.innerHTML;}
+
+  const keys = Object.keys(TEMAS);
+  if(!keys.length){
+    el.loadErr.textContent = "No se cargó ningún banco. Abre index.html desde su carpeta (no como archivo suelto en otra ruta).";
+    el.start.disabled = true;
+  }
+
+  let totalAll = 0;
+  keys.forEach(k=>{
+    const t = TEMAS[k];
+    const n = (t.preguntas||[]).length;
+    totalAll += n;
+    const wrap = document.createElement("label");
+    wrap.className = "theme";
+    wrap.innerHTML = `<input type="checkbox" class="th" value="${k}" checked>
+      <span class="t-name">${esc(t.titulo||k)}</span><span class="t-count">${n} preguntas</span>`;
+    el.themes.appendChild(wrap);
+  });
+  el.num.value = Math.min(20, totalAll) || 20;
+  el.num.max = totalAll || 1;
+
+  function checkedThemes(){ return [...document.querySelectorAll(".th:checked")].map(c=>c.value); }
+  el.selAll.onclick = ()=> document.querySelectorAll(".th").forEach(c=>c.checked=true);
+  el.selNone.onclick = ()=> document.querySelectorAll(".th").forEach(c=>c.checked=false);
+
+  let quiz=[], idx=0, correctCount=0, answers=[];
+
+  function poolFrom(themeKeys){
+    let pool=[];
+    themeKeys.forEach(k=>{
+      const t = TEMAS[k]; if(!t) return;
+      (t.preguntas||[]).forEach(p=> pool.push({...p, _tema:t.titulo||k}));
+    });
+    return pool;
+  }
+
+  function buildSession(pool){
+    let qs = el.shuffleQ.checked ? shuffle(pool) : pool.slice();
+    const n = Math.min(parseInt(el.num.value,10)||qs.length, qs.length);
+    qs = qs.slice(0,n);
+    return qs.map(q=>({...q, _opts: el.shuffleO.checked ? shuffle(q.opciones) : q.opciones.slice()}));
+  }
+
+  function startWith(pool){
+    quiz = buildSession(pool);
+    if(!quiz.length){ alert("No hay preguntas para esa selección."); return; }
+    idx=0; correctCount=0; answers=[];
+    el.setup.classList.add("hidden"); el.result.classList.add("hidden");
+    el.quiz.classList.remove("hidden");
+    renderQ();
+  }
+
+  function renderQ(){
+    const q = quiz[idx];
+    el.badge.textContent = q._tema;
+    el.qtext.innerHTML = esc(q.q);
+    el.counter.textContent = `Pregunta ${idx+1} de ${quiz.length}`;
+    el.running.textContent = `Aciertos: ${correctCount}`;
+    el.bar.style.width = (idx/quiz.length*100).toFixed(1)+"%";
+    el.expl.className = "expl"; el.expl.innerHTML = "";
+    el.next.classList.add("hidden");
+    el.opts.innerHTML = "";
+    const L = "ABC";
+    q._opts.forEach((text,i)=>{
+      const b = document.createElement("button");
+      b.className = "opt";
+      b.innerHTML = `<span class="mk">${L[i]}</span><span>${esc(text)}</span>`;
+      b.addEventListener("click", ()=>choose(b, text));
+      el.opts.appendChild(b);
+    });
+  }
+
+  function choose(btn, chosen){
+    const q = quiz[idx];
+    if(answers[idx]) return;
+    const ok = chosen === q.correcta;
+    answers[idx] = {q, chosen, ok};
+    if(ok) correctCount++;
+    [...el.opts.children].forEach(b=>{
+      const label = b.querySelector("span:last-child").textContent;
+      b.disabled = true;
+      if(label === q.correcta) b.classList.add("correct");
+      else if(b===btn) b.classList.add("wrong");
+    });
+    el.running.textContent = `Aciertos: ${correctCount}`;
+    if(el.instant.checked){
+      el.expl.innerHTML = `<strong>${ok?"✓ Correcto.":"✗ Incorrecto."}</strong> ${esc(q.exp)}`+
+        (q.fuente ? `<span class="src">Fuente: ${esc(q.fuente)}</span>` : "");
+      el.expl.classList.add("show");
+    }
+    el.next.classList.remove("hidden");
+    el.next.textContent = (idx===quiz.length-1) ? "Ver resultado" : "Siguiente";
+    el.next.focus();
+  }
+
+  el.next.addEventListener("click", ()=>{ if(idx<quiz.length-1){idx++;renderQ();} else finish(); });
+  el.quit.addEventListener("click", finish);
+
+  function finish(){
+    el.quiz.classList.add("hidden");
+    el.result.classList.remove("hidden");
+    const answered = answers.filter(Boolean);
+    const total = quiz.length;
+    const pct = total ? Math.round(correctCount/total*100) : 0;
+    el.finalScore.textContent = pct + "%";
+    el.finalDetail.textContent = `${correctCount} de ${total} correctas · ${answered.length} respondidas`;
+    const wrong = answered.filter(a=>!a.ok);
+    el.onlyWrong.classList.toggle("hidden", wrong.length===0);
+    el.onlyWrong.onclick = ()=> startWith(wrong.map(a=>a.q));
+    el.review.innerHTML = answered.length ? "<h3>Revisión</h3>" : "";
+    answered.forEach((a,i)=>{
+      const d = document.createElement("div");
+      d.className = "rev-item";
+      d.innerHTML =
+        `<div class="rq">${i+1}. ${esc(a.q.q)}</div>`+
+        `<div>Tu respuesta: <span class="${a.ok?'tag-ok':'tag-bad'}">${esc(a.chosen)}</span></div>`+
+        (a.ok ? "" : `<div>Correcta: <span class="tag-ok">${esc(a.q.correcta)}</span></div>`)+
+        `<div style="margin-top:6px;color:var(--muted)">${esc(a.q.exp)}</div>`+
+        (a.q.fuente ? `<div style="margin-top:4px;font-size:.8rem;color:var(--muted)">Fuente: ${esc(a.q.fuente)}</div>` : "");
+      el.review.appendChild(d);
+    });
+    el.bar.style.width = "100%";
+  }
+
+  el.start.addEventListener("click", ()=>{
+    const ths = checkedThemes();
+    if(!ths.length){ alert("Selecciona al menos un tema."); return; }
+    startWith(poolFrom(ths));
+  });
+  el.again.addEventListener("click", ()=>{
+    el.result.classList.add("hidden");
+    el.setup.classList.remove("hidden");
+  });
+})();
+</script>
+</body>
+</html>

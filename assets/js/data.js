@@ -21,7 +21,7 @@ const SITE_DATA = {
     portfolio: "/portfolio/",
     services: "/services/",
     cv: "/cv/",
-    cvPdf: "https://docs.google.com/document/d/1S1EE1_uq8RdS7KrGghOChN9hu1sbb9hD/export?format=pdf",
+    cvPdf: "https://docs.google.com/document/d/1QXvw63hNlLx4HayL5e9AbrjCb5g3ffaQV5JKyAbAHCA/export?format=pdf",
   },
 
   location: { es: "Remoto · Perú", en: "Remote · Peru" },
@@ -138,6 +138,15 @@ const SITE_DATA = {
 
   // Más reciente primero.
   experience: [
+    {
+      date: { es: "AGO 2026 — ACTUALIDAD", en: "AUG 2026 — PRESENT" },
+      role: { es: "Cloud & DevOps Engineer", en: "Cloud & DevOps Engineer" },
+      org: "Briela Sin Fronteras · Freelancer",
+      desc: {
+        es: "Diseño e implementación de infraestructura AWS con Terraform (EC2, RDS, S3, IAM/SSM) para un sitio Django + Wagtail de terceros, publicado vía Cloudflare Tunnel sin exponer puertos. Entornos dev/prod separados, despliegue automatizado y backups a S3.",
+        en: "Designed and implemented AWS infrastructure with Terraform (EC2, RDS, S3, IAM/SSM) for a third-party Django + Wagtail site, published via Cloudflare Tunnel with no exposed ports. Separate dev/prod environments, automated deployment, and S3 backups.",
+      },
+    },
     {
       date: { es: "JUL 2025 — ACTUALIDAD", en: "JUL 2025 — PRESENT" },
       role: { es: "Full Stack & Mobile Developer", en: "Full Stack & Mobile Developer" },

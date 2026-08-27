@@ -9,6 +9,7 @@ node_modules
 *.zip
 *.bat
 *.sh
+!cv/publish.sh
 .vite
 /img
 /lib
@@ -21,3 +22,10 @@ dev.html
 
 *.private*
 *.temp.*
+
+# Google OAuth
+.venv/
+token.json
+cv-sync-credentials.json
+.google-doc-id
+# *.docx
