@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>CV (fuente del PDF) — Franklin Gomez Pacoricona</title>
+    <script src="../assets/js/data.js"></script>
+    <style>
+      /* Documento dedicado SOLO a generar el PDF (scripts/generate-cv-pdf.js
+         le apunta a este archivo, no a cv/index.html, que es la versión
+         condensada para la web). Siempre en modo claro — no hay toggle de
+         tema, no hay header/footer del sitio. Para cambiar el diseño del
+         CV: edita este CSS y corre `npm run cv:pdf`.
+
+         A propósito NO se usa Google Fonts (Inter) acá como en el resto del
+         sitio: Chromium headless embebe las variable fonts vía @font-face
+         como fuentes Type3 (glifos dibujados a mano) en vez de TrueType
+         normal, lo cual algunos parsers de ATS más estrictos leen peor.
+         Usar una fuente del sistema (Arial/Helvetica) hace que Chromium
+         embeba una fuente TrueType estándar — más seguro para ATS. */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --ink: #1a1d29;
+        --muted: #5b6472;
+        --faint: #8891a0;
+        --accent: #2451a3;
+        --accent-soft: #eef3fb;
+        --rule: #dde3ec;
+      }
+      body {
+        font-family: Arial, Helvetica, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: #eceef2;
+        font-size: 13px;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      .sheet {
+        max-width: 800px;
+        margin: 24px auto;
+        background: #ffffff;
+        padding: 44px 50px 54px;
+        box-shadow: 0 4px 24px rgba(20, 30, 60, 0.12);
+      }
+
+      /* ---------- HEADER ---------- */
+      .cv-header {
+        text-align: center;
+        padding-bottom: 18px;
+        border-bottom: 2px solid var(--accent);
+      }
+      .cv-name {
+        font-size: 29px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+      }
+      .cv-title {
+        margin-top: 4px;
+        font-size: 12.5px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--accent);
+      }
+      .cv-contact {
+        margin-top: 14px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+      }
+      .cv-contact-row {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        row-gap: 6px;
+        column-gap: 18px;
+      }
+      .cv-contact-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        color: var(--muted);
+        white-space: nowrap;
+        text-decoration: none;
+      }
+      .cv-contact-item svg {
+        width: 13px;
+        height: 13px;
+        flex: none;
+        stroke: var(--accent);
+      }
+
+      /* ---------- SECTIONS ---------- */
+      section {
+        margin-top: 22px;
+      }
+      h2 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        margin-bottom: 12px;
+      }
+      h2::before {
+        content: "";
+        width: 14px;
+        height: 3px;
+        background: var(--accent);
+        border-radius: 2px;
+      }
+      h2::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--rule);
+      }
+      p.cv-summary {
+        font-size: 12.5px;
+        color: #333a47;
+      }
+
+      ul.cv-bullets {
+        list-style: none;
+        margin-top: 2px;
+      }
+      ul.cv-bullets li {
+        position: relative;
+        padding-left: 15px;
+        font-size: 12.3px;
+        color: #3a4150;
+        margin-bottom: 4px;
+      }
+      ul.cv-bullets li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 7px;
+        width: 5px;
+        height: 5px;
+        border-radius: 1px;
+        background: var(--accent);
+        opacity: 0.6;
+      }
+
+      /* ---------- EXPERIENCE / EDUCATION ENTRIES ---------- */
+      .entry {
+        margin-top: 15px;
+      }
+      .entry:first-child {
+        margin-top: 0;
+      }
+      .entry-role {
+        font-size: 12.8px;
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .entry-org {
+        font-weight: 500;
+        color: var(--muted);
+      }
+      .entry-date {
+        margin-top: 1px;
+        font-size: 10.5px;
+        font-weight: 600;
+        color: var(--faint);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      /* ---------- SKILLS ---------- */
+      .skills-group {
+        margin-bottom: 10px;
+      }
+      .skills-group:last-child {
+        margin-bottom: 0;
+      }
+      .skills-label {
+        font-size: 10.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        margin-bottom: 5px;
+      }
+      .skills-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      .skill-tag {
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--accent);
+        background: var(--accent-soft);
+        border-radius: 4px;
+        padding: 3px 8px;
+      }
+
+      @media print {
+        body {
+          background: #ffffff;
+        }
+        .sheet {
+          box-shadow: none;
+          margin: 0;
+          max-width: 100%;
+        }
+        .entry {
+          break-inside: avoid;
+        }
+        .skills-group {
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sheet">
+      <!-- IDENTIDAD -->
+      <div class="cv-header">
+        <div class="cv-name" id="cvName"></div>
+        <div class="cv-title" id="cvTitle"></div>
+        <div class="cv-contact" id="cvContact"></div>
+      </div>
+
+      <!-- PERFIL PROFESIONAL -->
+      <section>
+        <h2 id="labelProfile"></h2>
+        <p class="cv-summary" id="cvSummary"></p>
+      </section>
+
+      <!-- ARQUITECTURA Y RESPONSABILIDAD TÉCNICA -->
+      <section>
+        <h2 id="labelPractices"></h2>
+        <ul class="cv-bullets" id="cvPractices"></ul>
+      </section>
+
+      <!-- EXPERIENCIA LABORAL -->
+      <section>
+        <h2 id="labelExperience"></h2>
+        <div id="cvExperience"></div>
+      </section>
+
+      <!-- EDUCACIÓN -->
+      <section>
+        <h2 id="labelEducation"></h2>
+        <div id="cvEducation"></div>
+      </section>
+
+      <!-- HABILIDADES TÉCNICAS -->
+      <section>
+        <h2 id="labelSkills"></h2>
+        <div id="cvSkills"></div>
+      </section>
+    </div>
+
+    <script>
+      // Renderiza el CV completo (versión detallada) desde SITE_DATA —
+      // assets/js/data.js es la única fuente de verdad. Idioma por query
+      // string: cv/pdf-source.html?lang=en (default "es"). Usado por
+      // scripts/generate-cv-pdf.js para generar un PDF por idioma.
+      const lang = new URLSearchParams(location.search).get("lang") === "en" ? "en" : "es";
+      document.documentElement.lang = lang;
+
+      // Encabezados de sección — en inglés se usan a propósito los términos
+      // literales que buscan los parsers de ATS ("Education", "Work
+      // Experience"), no una traducción libre.
+      const SECTION_LABELS = {
+        profile: { es: "Perfil profesional", en: "Professional Summary" },
+        practices: { es: "Arquitectura y responsabilidad técnica", en: "Technical Architecture & Ownership" },
+        experience: { es: "Experiencia laboral", en: "Work Experience" },
+        education: { es: "Educación", en: "Education" },
+        skills: { es: "Habilidades técnicas", en: "Technical Skills" },
+      };
+      document.getElementById("labelProfile").textContent = SECTION_LABELS.profile[lang];
+      document.getElementById("labelPractices").textContent = SECTION_LABELS.practices[lang];
+      document.getElementById("labelExperience").textContent = SECTION_LABELS.experience[lang];
+      document.getElementById("labelEducation").textContent = SECTION_LABELS.education[lang];
+      document.getElementById("labelSkills").textContent = SECTION_LABELS.skills[lang];
+
+      // Íconos inline estilo Lucide (stroke="currentColor", stroke-width="2",
+      // round caps/joins) — misma convención del resto del sitio, sin CDN.
+      const ICONS = {
+        pin: `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>`,
+        mail: `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
+        phone: `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
+        linkedin: `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>`,
+        github: `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 1.5 5 1.5 5 1.5c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 8.5c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>`,
+        globe: `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>`,
+      };
+
+      document.getElementById("cvName").textContent = SITE_DATA.name;
+      document.getElementById("cvTitle").textContent = SITE_DATA.title;
+      document.getElementById("cvSummary").textContent = pick(SITE_DATA.summaryLong, lang);
+
+      const email = SITE_DATA.email.user + "@" + SITE_DATA.email.domain;
+      const whatsapp = "+" + SITE_DATA.whatsappNumber.replace(/^(\d{2})/, "$1 ");
+      const portfolioUrl = "https://frankgp.com" + SITE_DATA.links.portfolio;
+      const contactRows = [
+        [
+          [ICONS.pin, pick(SITE_DATA.location, lang), null],
+          [ICONS.mail, email, "mailto:" + email],
+          [ICONS.phone, whatsapp, "https://wa.me/" + SITE_DATA.whatsappNumber],
+        ],
+        [
+          [ICONS.linkedin, SITE_DATA.links.linkedin.replace(/^https?:\/\//, ""), SITE_DATA.links.linkedin],
+          [ICONS.github, SITE_DATA.links.github.replace(/^https?:\/\//, ""), SITE_DATA.links.github],
+          [ICONS.globe, "frankgp.com" + SITE_DATA.links.portfolio, portfolioUrl],
+        ],
+      ];
+      document.getElementById("cvContact").innerHTML = contactRows
+        .map(
+          (row) =>
+            `<div class="cv-contact-row">${row
+              .map(([icon, text, href]) =>
+                href
+                  ? `<a class="cv-contact-item" href="${href}" target="_blank" rel="noopener">${icon}${text}</a>`
+                  : `<span class="cv-contact-item">${icon}${text}</span>`,
+              )
+              .join("")}</div>`,
+        )
+        .join("");
+
+      document.getElementById("cvPractices").innerHTML = pick(SITE_DATA.technicalPractices, lang)
+        .map((t) => `<li>${t}</li>`)
+        .join("");
+
+      function entryBullets(entry) {
+        const items = entry.bullets ? pick(entry.bullets, lang) : [pick(entry.desc, lang)];
+        return `<ul class="cv-bullets">${items.map((b) => `<li>${b}</li>`).join("")}</ul>`;
+      }
+
+      document.getElementById("cvExperience").innerHTML = SITE_DATA.experience
+        .map(
+          (job) => `
+            <div class="entry">
+              <div class="entry-head">
+                <div class="entry-role">${pick(job.role, lang)} <span class="entry-org">— ${pick(job.org, lang)}</span></div>
+                <div class="entry-date">${pick(job.date, lang)}</div>
+              </div>
+              ${entryBullets(job)}
+            </div>`,
+        )
+        .join("");
+
+      document.getElementById("cvEducation").innerHTML = SITE_DATA.education
+        .map(
+          (edu) => `
+            <div class="entry">
+              <div class="entry-head">
+                <div class="entry-role">${pick(edu.name, lang)} <span class="entry-org">— ${pick(edu.org, lang)}</span></div>
+                <div class="entry-date">${edu.year}</div>
+              </div>
+              ${edu.bullets ? `<ul class="cv-bullets">${pick(edu.bullets, lang).map((b) => `<li>${b}</li>`).join("")}</ul>` : ""}
+            </div>`,
+        )
+        .join("");
+
+      document.getElementById("cvSkills").innerHTML = SITE_DATA.skills
+        .map(
+          (group) => `
+            <div class="skills-group">
+              <div class="skills-label">${pick(group.label, lang)}</div>
+              <div class="skills-tags">
+                ${group.items.map((i) => `<span class="skill-tag">${pick(i, lang)}</span>`).join("")}
+              </div>
+            </div>`,
+        )
+        .join("");
+    </script>
+  </body>
+</html>

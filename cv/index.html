@@ -86,6 +86,23 @@
         width: 15px;
         height: 15px;
       }
+      .print-btn-secondary {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-dim);
+        background: transparent;
+        border: 1px solid var(--border);
+        padding: 8px 12px;
+        border-radius: 7px;
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+      }
+      .print-btn-secondary:hover {
+        color: var(--text);
+        border-color: var(--text-dim);
+      }
 
       main {
         position: relative;
@@ -277,7 +294,7 @@
     <header>
       <div class="nav">
         <a href="/" class="logo">FGP<span>_</span></a>
-        <div style="display: flex; align-items: center; gap: 14px">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
           <button class="theme-toggle" type="button" aria-label="Cambiar tema claro/oscuro" aria-pressed="false">
             <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
             <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
@@ -289,6 +306,9 @@
               <line x1="12" x2="12" y1="15" y2="3"></line>
             </svg>
             Descargar PDF
+          </a>
+          <a class="print-btn-secondary" id="cvPdfLinkEn" href="#" target="_blank" rel="noopener" title="Download English version">
+            EN
           </a>
         </div>
       </div>
@@ -370,6 +390,9 @@
       const cvPdfLink = document.getElementById("cvPdfLink");
       cvPdfLink.href = SITE_DATA.links.cvPdf;
       cvPdfLink.setAttribute("download", "");
+      const cvPdfLinkEn = document.getElementById("cvPdfLinkEn");
+      cvPdfLinkEn.href = SITE_DATA.links.cvPdfEn;
+      cvPdfLinkEn.setAttribute("download", "");
 
       const email = SITE_DATA.email.user + "@" + SITE_DATA.email.domain;
       document.getElementById("cvContact").innerHTML = `

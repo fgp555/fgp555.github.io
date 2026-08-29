@@ -797,7 +797,7 @@
           el.href = SITE_DATA.links.github;
         });
         document.querySelectorAll(".cv-pdf-link").forEach(function (el) {
-          el.href = SITE_DATA.links.cvPdf;
+          el.href = lang === "en" ? SITE_DATA.links.cvPdfEn : SITE_DATA.links.cvPdf;
           el.setAttribute("download", "");
         });
 

@@ -6,7 +6,8 @@
   "scripts": {
     "bump-version": "node scripts/bump-version.js",
     "build": "node scripts/bump-version.js",
-    "cv:pdf": "node scripts/generate-cv-pdf.js"
+    "cv:pdf": "node scripts/generate-cv-pdf.js",
+    "postinstall": "playwright install chromium"
   },
   "devDependencies": {
     "playwright": "^1.62.1"

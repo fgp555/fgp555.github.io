@@ -1,10 +1,15 @@
-# CV — setup y flujo de trabajo (histórico / alternativo)
+# CV — setup y flujo de trabajo (histórico, archivos eliminados)
 
-> **Este ya no es el flujo actual.** Hoy el PDF se genera directo desde
-> `cv/index.html` + `assets/js/data.js` con `npm run cv:pdf` (Playwright,
-> headless Chromium) — sin Markdown, sin Pandoc, sin Google Docs. Ver la
-> sección "Single sources of truth" en `CLAUDE.md`. Este documento se deja
-> como referencia por si algún día quieres volver a tener una copia
+> **Este ya no es el flujo actual.** Hoy el PDF se genera desde
+> `cv/pdf-source.html` + `assets/js/data.js` con `npm run cv:pdf` (Playwright, headless Chromium)
+> — sin Markdown, sin Pandoc, sin Google Docs. Ver la sección "Single
+> sources of truth" en `CLAUDE.md`.
+>
+> Los archivos que este documento describe (`cv.md`, `publish.sh`,
+> `cv_sync.py`, `reference-style.docx`, `cv_franklin_gomez_fullstack.docx`)
+> **ya no existen en el repo** — se borraron por estar deprecados. Este
+> documento se deja solo como referencia de cómo funcionaba ese flujo, por
+> si algún día quieres reconstruirlo para volver a tener una copia
 > comentable en Google Docs.
 
 Este directorio mantenía tu CV en **`cv.md`** (Markdown, se editaba en VSCode) como
