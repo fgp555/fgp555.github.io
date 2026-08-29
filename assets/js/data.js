@@ -21,7 +21,7 @@ const SITE_DATA = {
     portfolio: "/portfolio/",
     services: "/services/",
     cv: "/cv/",
-    cvPdf: "https://docs.google.com/document/d/1QXvw63hNlLx4HayL5e9AbrjCb5g3ffaQV5JKyAbAHCA/export?format=pdf",
+    cvPdf: "/cv/cv_franklin_gomez_fullstack.pdf",
   },
 
   location: { es: "Remoto · Perú", en: "Remote · Peru" },

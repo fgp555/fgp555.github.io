@@ -1,7 +1,14 @@
-# CV — setup y flujo de trabajo
+# CV — setup y flujo de trabajo (histórico / alternativo)
 
-Este directorio mantiene tu CV en **`cv.md`** (Markdown, se edita en VSCode) como
-única fuente de verdad. Un script compila eso a `.docx` con tu estilo y lo sube
+> **Este ya no es el flujo actual.** Hoy el PDF se genera directo desde
+> `cv/index.html` + `assets/js/data.js` con `npm run cv:pdf` (Playwright,
+> headless Chromium) — sin Markdown, sin Pandoc, sin Google Docs. Ver la
+> sección "Single sources of truth" en `CLAUDE.md`. Este documento se deja
+> como referencia por si algún día quieres volver a tener una copia
+> comentable en Google Docs.
+
+Este directorio mantenía tu CV en **`cv.md`** (Markdown, se editaba en VSCode) como
+única fuente de verdad. Un script compilaba eso a `.docx` con tu estilo y lo subía
 a tu Google Doc — siempre el mismo documento/URL.
 
 ```
@@ -103,13 +110,23 @@ qué documento apuntar.
 | `cv-sync-credentials.json`               | No (`.gitignore`) | credencial — respaldar aparte, ver paso 4              |
 | `token.json`, `.google-doc-id`, `.venv/` | No (`.gitignore`) | se regeneran solos en cada máquina                     |
 
-## Nota sobre el formato
+## Nota sobre el formato (el "CSS" de Word)
 
-Pandoc usa los **estilos con nombre** (`Heading 1`, `Heading 2`, `List
-Paragraph`, etc.) definidos en `reference-style.docx` para dar formato a los
-títulos (`#`, `##`) y viñetas (`-`) de `cv.md`. Si algún día el resultado se
-ve distinto a lo esperado (colores, tamaños), es porque esos estilos con
-nombre en `reference-style.docx` no coinciden exactamente con el formato
-"manual" que tenía el CV original — se puede afinar abriendo
-`reference-style.docx` en Word/LibreOffice y ajustando esos estilos una sola
-vez.
+Word/Google Docs no tienen CSS — el equivalente son los **estilos con nombre**
+(`Heading 1`, `Heading 2`, `Normal`, `Strong`, `Emphasis`, `List Paragraph`).
+Pandoc mapea el Markdown de `cv.md` a esos estilos:
+
+| Markdown        | Estilo de Word usado |
+| ---------------- | --------------------- |
+| `# Título`       | `Heading 1` — nombre (centrado, negrita, azul marino, 17pt) |
+| `## Título`       | `Heading 2` — encabezados de sección (negrita, azul marino, borde inferior, 11pt) |
+| `**negrita**`     | `Strong` (carácter) — línea de rol/empresa (negrita, casi negro) |
+| `*cursiva*`       | `Emphasis` (carácter) — línea de fecha (cursiva, gris, más chica) |
+| `- viñeta`        | `List Paragraph` — Calibri gris, con sangría |
+| texto normal      | `Normal` — Calibri, gris, base de todo el documento |
+
+Esos 6 estilos están definidos en `reference-style.docx` (`word/styles.xml`)
+para reproducir el look del CV original. Si en el futuro el resultado se ve
+distinto a lo esperado, el ajuste se hace **ahí** (abriendo
+`reference-style.docx` en Word/LibreOffice → modificar el estilo con nombre
+correspondiente de la tabla de arriba), nunca en `cv.md`.

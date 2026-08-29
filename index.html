@@ -27,10 +27,10 @@
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/theme.css?v=20260829T075657" />
-    <link rel="stylesheet" href="assets/css/components.css?v=20260829T075657" />
-    <script src="assets/js/data.js?v=20260829T075657"></script>
-    <script src="assets/js/page-nav.js?v=20260829T075657"></script>
+    <link rel="stylesheet" href="assets/css/theme.css?v=20260829T084715" />
+    <link rel="stylesheet" href="assets/css/components.css?v=20260829T084715" />
+    <script src="assets/js/data.js?v=20260829T084715"></script>
+    <script src="assets/js/page-nav.js?v=20260829T084715"></script>
     <style>
       body::before {
         content: "";
@@ -798,6 +798,7 @@
         });
         document.querySelectorAll(".cv-pdf-link").forEach(function (el) {
           el.href = SITE_DATA.links.cvPdf;
+          el.setAttribute("download", "");
         });
 
         const heroSub = document.querySelector('[data-i18n-html="hero_sub_html"]');

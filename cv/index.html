@@ -24,10 +24,10 @@
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/css/theme.css?v=20260829T075657" />
-    <link rel="stylesheet" href="../assets/css/components.css?v=20260829T075657" />
-    <script src="../assets/js/data.js?v=20260829T075657"></script>
-    <script src="../assets/js/page-nav.js?v=20260829T075657"></script>
+    <link rel="stylesheet" href="../assets/css/theme.css?v=20260829T084715" />
+    <link rel="stylesheet" href="../assets/css/components.css?v=20260829T084715" />
+    <script src="../assets/js/data.js?v=20260829T084715"></script>
+    <script src="../assets/js/page-nav.js?v=20260829T084715"></script>
     <style>
       body::before {
         content: "";
@@ -367,7 +367,9 @@
       document.getElementById("cvName").textContent = SITE_DATA.name;
       document.getElementById("cvTitle").textContent = SITE_DATA.title;
       document.getElementById("cvSummary").textContent = pick(SITE_DATA.summary, lang);
-      document.getElementById("cvPdfLink").href = SITE_DATA.links.cvPdf;
+      const cvPdfLink = document.getElementById("cvPdfLink");
+      cvPdfLink.href = SITE_DATA.links.cvPdf;
+      cvPdfLink.setAttribute("download", "");
 
       const email = SITE_DATA.email.user + "@" + SITE_DATA.email.domain;
       document.getElementById("cvContact").innerHTML = `
