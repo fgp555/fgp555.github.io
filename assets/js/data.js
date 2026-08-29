@@ -34,9 +34,9 @@ const SITE_DATA = {
 
   location: { es: "Remoto · Perú", en: "Remote · Peru" },
 
-  // Páginas del sitio, usadas por el <select> de navegación del footer
-  // (ver assets/js/page-nav.js). Agregar una página nueva = agregar una
-  // línea aquí, nada más.
+  // Páginas del sitio, usadas por el <select> "Ir a…" flotante (ver
+  // assets/js/page-nav.js y .page-nav-select en components.css). Agregar
+  // una página nueva = agregar una línea aquí, nada más.
   pages: [
     { label: { es: "Inicio", en: "Home" }, url: "/" },
     { label: { es: "Portafolio", en: "Portfolio" }, url: "/portfolio/" },
@@ -52,7 +52,7 @@ const SITE_DATA = {
   },
 
   // Resumen largo para el CV (perfil profesional completo, bilingüe —
-  // usado por cv/pdf-source.html vía ?lang=es|en). "summary" de arriba es
+  // usado por cv/index.html vía ?lang=es|en). "summary" de arriba es
   // la versión corta para el hero del sitio.
   summaryLong: {
     es: `Full Stack & Mobile Developer con experiencia profesional en desarrollo web desde 2020 y ${stackYears}+ años construyendo aplicaciones modernas con TypeScript, React, React Native y Node.js en entornos productivos. Experiencia liderando proyectos end-to-end, desde el diseño de arquitectura backend hasta el despliegue en producción, aplicando buenas prácticas y principios SOLID.`,
@@ -60,7 +60,7 @@ const SITE_DATA = {
   },
 
   // "Arquitectura y responsabilidad técnica" del CV — bilingüe, usado por
-  // cv/pdf-source.html.
+  // cv/index.html.
   technicalPractices: {
     es: [
       "Definí arquitectura backend basada en NestJS aplicando principios SOLID y separación por capas (controllers, services, repositories).",
@@ -83,7 +83,7 @@ const SITE_DATA = {
   featuredProjects: [
     {
       name: "Mix&Match",
-      period: { es: "Jul 2025 — Actualidad", en: "Jul 2025 — Present" },
+      period: { es: "Jul — Dic 2025", en: "Jul — Dec 2025" },
       badge: "LIVE",
       desc: {
         es: "Outfit Planner / armario virtual. App móvil (Android/iOS) y web construidas con React Native y React + TypeScript, backend en Express/MySQL, OAuth con Google y Apple, microservicio en Python para remoción de fondo de imágenes.",
@@ -146,6 +146,7 @@ const SITE_DATA = {
         "NestJS",
         "Express.js",
         "WebSockets",
+        "OpenAPI/Swagger",
         { es: "Arquitectura modular", en: "Modular architecture" },
       ],
     },
@@ -153,13 +154,24 @@ const SITE_DATA = {
       key: "databases",
       label: { es: "Bases de datos", en: "Databases" },
       jsonKey: { es: "bases_de_datos", en: "databases" },
-      items: ["PostgreSQL", "MySQL", "MongoDB", "TypeORM", "Mongoose"],
+      items: ["PostgreSQL", "MySQL", "MongoDB", "DynamoDB", "TypeORM", "Mongoose"],
     },
     {
       key: "cloud_devops",
       label: { es: "Cloud & DevOps", en: "Cloud & DevOps" },
       jsonKey: { es: "cloud_devops", en: "cloud_devops" },
-      items: ["Terraform", "AWS EC2/RDS/S3/IAM", "Docker", "Nginx", "Cloudflare Tunnel", "GitHub Actions"],
+      items: [
+        "Terraform",
+        "AWS EC2/RDS/S3/IAM",
+        "AWS Lambda",
+        "API Gateway",
+        "EventBridge",
+        "CloudWatch",
+        "Docker",
+        "Nginx",
+        "Cloudflare Tunnel",
+        "GitHub Actions",
+      ],
     },
     {
       key: "auth_security",
@@ -167,13 +179,19 @@ const SITE_DATA = {
       jsonKey: { es: "auth_seguridad", en: "auth_security" },
       items: ["JWT", "OAuth Google", "OAuth Apple"],
     },
+    {
+      key: "testing",
+      label: { es: "Testing", en: "Testing" },
+      jsonKey: { es: "testing", en: "testing" },
+      items: ["Jest", "Supertest"],
+    },
   ],
 
   // Más reciente primero.
   experience: [
     {
-      date: { es: "AGO 2026 — ACTUALIDAD", en: "AUG 2026 — PRESENT" },
-      role: { es: "Cloud & DevOps Engineer", en: "Cloud & DevOps Engineer" },
+      date: { es: "AGO 2026", en: "AUG 2026" },
+      role: { es: "Proyecto DevOps Freelance", en: "DevOps Freelance Project" },
       org: { es: "Briela Sin Fronteras (Perú) · Freelancer", en: "Briela Sin Fronteras (Peru) · Freelancer" },
       desc: {
         es: "Diseño e implementación de infraestructura AWS con Terraform (EC2, RDS, S3, IAM/SSM) para un sitio Django + Wagtail de terceros, publicado vía Cloudflare Tunnel sin exponer puertos. Entornos dev/prod separados, despliegue automatizado y backups a S3.",
@@ -187,6 +205,7 @@ const SITE_DATA = {
           "Implementé exposición segura de servicios mediante Cloudflare Tunnel, eliminando la necesidad de puertos entrantes abiertos (HTTP/HTTPS).",
           "Desarrollé script de automatización de deploy (Bash) con git pull, build, migraciones, colecta de estáticos y healthcheck en cada actualización.",
           "Configuré backups automatizados de base de datos a S3 por entorno.",
+          "El proyecto sigue en producción, con soporte y mantenimiento ligero continuo.",
         ],
         en: [
           "Designed infrastructure as code (IaC) with Terraform for a third-party Django + Wagtail site, with a reusable module shared across two environments (dev and prod) with independent state.",
@@ -195,11 +214,12 @@ const SITE_DATA = {
           "Implemented secure service exposure via Cloudflare Tunnel, eliminating the need for open inbound ports (HTTP/HTTPS).",
           "Developed a Bash deployment automation script covering git pull, build, migrations, static file collection, and healthcheck on every update.",
           "Configured automated database backups to S3 per environment.",
+          "The project remains in production, with light ongoing support and maintenance.",
         ],
       },
     },
     {
-      date: { es: "JUL 2025 — ACTUALIDAD", en: "JUL 2025 — PRESENT" },
+      date: { es: "JUL — DIC 2025", en: "JUL — DEC 2025" },
       role: { es: "Full Stack & Mobile Developer", en: "Full Stack & Mobile Developer" },
       org: "Mix&Match Outfit Planner (Argentina) · Freelancer",
       desc: {
@@ -211,6 +231,7 @@ const SITE_DATA = {
           "Lideré el desarrollo end-to-end de aplicación móvil multiplataforma (Android & iOS) y plataforma web con React Native y ReactJS + TypeScript.",
           "Diseñé y desarrollé APIs REST escalables con Express.js y MySQL, estructuradas bajo principios modulares y separación por capas.",
           "Implementé autenticación segura mediante OAuth (Google y Apple Sign-In) y gestión de sesiones con JWT, cumpliendo requisitos para publicación en App Store y Play Store.",
+          "Implementé pruebas unitarias y de integración (Jest + Supertest) para los flujos de autenticación y middlewares críticos.",
           "Desarrollé microservicio en Python para procesamiento y eliminación automática de fondo en imágenes, deployado en el mismo VPS, optimizando el flujo de subida de contenido.",
           "Integré almacenamiento en AWS S3 con compresión y optimización de imágenes para reducir tiempos de carga.",
           "Configuré entorno productivo en VPS Linux con dominio, SSL y despliegue continuo.",
@@ -224,6 +245,7 @@ const SITE_DATA = {
           "Led end-to-end development of a cross-platform mobile app (Android & iOS) and web platform with React Native and ReactJS + TypeScript.",
           "Designed and built scalable REST APIs with Express.js and MySQL, structured under modular principles and layered separation.",
           "Implemented secure authentication via OAuth (Google and Apple Sign-In) and JWT session management, meeting App Store and Play Store publication requirements.",
+          "Implemented unit and integration tests (Jest + Supertest) for authentication flows and critical middlewares.",
           "Developed a Python microservice for automatic image background processing and removal, deployed on the same VPS, streamlining the content upload flow.",
           "Integrated AWS S3 storage with image compression and optimization to reduce load times.",
           "Configured a production environment on a Linux VPS with domain, SSL, and continuous deployment.",
@@ -236,7 +258,7 @@ const SITE_DATA = {
       },
     },
     {
-      date: { es: "ENE 2025 — ACTUALIDAD", en: "JAN 2025 — PRESENT" },
+      date: { es: "ENE — ABR 2025", en: "JAN — APR 2025" },
       role: { es: "Full Stack, Mobile & DevOps Developer", en: "Full Stack, Mobile & DevOps Developer" },
       org: "Transpaservic (Colombia) · Freelancer",
       desc: {
@@ -256,6 +278,7 @@ const SITE_DATA = {
           "Implementé exposición segura de servicios mediante Cloudflare Tunnel, eliminando la necesidad de puertos entrantes abiertos (HTTP/HTTPS).",
           "Gestioné variables sensibles y credenciales (tfvars, secrets) siguiendo buenas prácticas de seguridad, evitando exposición en control de versiones.",
           "Automaticé el proceso de deploy con scripts Bash (git pull, generación de .env, rebuild de contenedores) para actualizar la app sin recrear la infraestructura base.",
+          "El sistema sigue en producción, en mantenimiento y mejoras continuas desde entonces.",
         ],
         en: [
           "Designed and implemented a web and mobile transport order-management system with ReactJS, React Native, NestJS, and MySQL, where the central office issues orders and transport companies approve them from the app.",
@@ -269,6 +292,7 @@ const SITE_DATA = {
           "Implemented secure service exposure via Cloudflare Tunnel, eliminating the need for open inbound ports (HTTP/HTTPS).",
           "Managed sensitive variables and credentials (tfvars, secrets) following security best practices, avoiding exposure in version control.",
           "Automated the deployment process with Bash scripts (git pull, .env generation, container rebuild) to update the app without recreating the base infrastructure.",
+          "The system remains in production, in continuous maintenance and improvement since then.",
         ],
       },
     },
@@ -276,21 +300,21 @@ const SITE_DATA = {
       date: { es: "OCT — NOV 2024", en: "OCT — NOV 2024" },
       role: { es: "Desarrollador Full Stack", en: "Full Stack Developer" },
       org: {
-        es: "Aplicación de Gestión de Turnos (Argentina) · Freelancer",
-        en: "Shift Management Application (Argentina) · Freelancer",
+        es: "Sistema de Citas Médicas (Argentina) · Freelancer",
+        en: "Medical Appointment System (Argentina) · Freelancer",
       },
       desc: {
-        es: "Backend con NestJS, PostgreSQL y TypeORM. Despliegue en AWS EC2 y frontend en AWS Amplify.",
-        en: "Backend with NestJS, PostgreSQL, and TypeORM. Deployed on AWS EC2 with frontend on AWS Amplify.",
+        es: "Sistema de citas para clínicas. Backend con NestJS, PostgreSQL y TypeORM. Despliegue en AWS EC2 y frontend en AWS Amplify.",
+        en: "Appointment scheduling system for clinics. Backend with NestJS, PostgreSQL, and TypeORM. Deployed on AWS EC2 with frontend on AWS Amplify.",
       },
       bullets: {
         es: [
-          "Desarrollo backend con NestJS, PostgreSQL y TypeORM.",
+          "Desarrollé sistema de citas para clínicas, con backend en NestJS, PostgreSQL y TypeORM.",
           "Diseño de APIs REST y autenticación segura con JWT.",
           "Despliegue en AWS EC2 y publicación de frontend en AWS Amplify.",
         ],
         en: [
-          "Backend development with NestJS, PostgreSQL, and TypeORM.",
+          "Developed an appointment scheduling system for clinics, with a NestJS, PostgreSQL, and TypeORM backend.",
           "Designed REST APIs and secure JWT authentication.",
           "Deployed on AWS EC2 and published the frontend on AWS Amplify.",
         ],
@@ -301,18 +325,20 @@ const SITE_DATA = {
       role: { es: "Desarrollador Full Stack", en: "Full Stack Developer" },
       org: "BPVentures (Henry Projects, Argentina) · Freelancer",
       desc: {
-        es: "Desarrollo full stack con NestJS y ReactJS, WebSockets, trabajo en equipo de 6 personas bajo Scrum.",
-        en: "Full stack development with NestJS and ReactJS, WebSockets, working in a 6-person team under Scrum.",
+        es: "Desarrollo full stack con NestJS y ReactJS, WebSockets, documentación de API con OpenAPI/Swagger y CI con GitHub Actions, trabajo en equipo de 6 personas bajo Scrum.",
+        en: "Full stack development with NestJS and ReactJS, WebSockets, API documentation with OpenAPI/Swagger and CI with GitHub Actions, working in a 6-person team under Scrum.",
       },
       bullets: {
         es: [
           "Desarrollo full stack con NestJS y ReactJS.",
           "Implementación de WebSockets para notificaciones en tiempo real.",
+          "Documenté la API con OpenAPI/Swagger (NestJS Swagger module) y configuré un pipeline de CI (GitHub Actions) que sincroniza automáticamente la especificación con SwaggerHub en cada push.",
           "Trabajo colaborativo en equipo de 6 personas bajo metodología Scrum.",
         ],
         en: [
           "Full stack development with NestJS and ReactJS.",
           "Implemented WebSockets for real-time notifications.",
+          "Documented the API with OpenAPI/Swagger (NestJS Swagger module) and set up a CI pipeline (GitHub Actions) that automatically syncs the spec to SwaggerHub on every push.",
           "Collaborated in a 6-person team under Scrum methodology.",
         ],
       },
@@ -320,10 +346,10 @@ const SITE_DATA = {
     {
       date: { es: "MAY — JUN 2024", en: "MAY — JUN 2024" },
       role: { es: "Desarrollador Full Stack", en: "Full Stack Developer" },
-      org: "Ecommerce (Argentina) · Freelancer",
+      org: "Mariaknoll Store (Argentina) · Freelancer",
       desc: {
-        es: "Backend con Node.js y MongoDB, carrito de compras y seguimiento de pedidos.",
-        en: "Backend with Node.js and MongoDB, shopping cart, and order tracking.",
+        es: "Catálogo full stack para vestidos de fiesta, con backend en Node.js y MongoDB, carrito de compras y seguimiento de pedidos.",
+        en: "Full stack catalog for party dresses, with a Node.js and MongoDB backend, shopping cart, and order tracking.",
       },
       bullets: {
         es: [
@@ -361,8 +387,8 @@ const SITE_DATA = {
     },
   ],
 
-  // Más reciente primero. "bullets" (bilingüe) es el detalle usado por
-  // cv/pdf-source.html — cv/index.html e index.html solo usan year/name/org.
+  // Más reciente primero. "bullets" (bilingüe) es el detalle mostrado por
+  // cv/index.html — index.html (home) solo usa year/name/org.
   education: [
     {
       year: "2025",
@@ -418,7 +444,7 @@ const SITE_DATA = {
       },
     },
     {
-      year: "2008 — 2011",
+      year: "2008 — 2010",
       name: { es: "Estudios de Computación e Informática", en: "Computer Science & IT Studies" },
       org: { es: "Instituto Tecnológico Unitek de IDAT (Perú)", en: "Instituto Tecnológico Unitek de IDAT (Peru)" },
       bullets: {
@@ -432,35 +458,49 @@ const SITE_DATA = {
   // tiene toggle de idioma). Más reciente primero: debe mantenerse
   // consistente con "experience" de arriba (ej. el proyecto más nuevo aquí
   // debería corresponder al primer puesto de "experience").
-  projects: [
+  projectsPortfolio: [
+    {
+      title: "Briela Sin Fronteras",
+      description:
+        "Infraestructura como código con Terraform sobre AWS (EC2, RDS, S3, IAM) para un sitio Django + Wagtail de terceros, publicado vía Cloudflare Tunnel sin exponer puertos.",
+      category: "devops",
+      image: "https://cdn.frankgp.com/portfolio/brielasinfronteras-web.webp",
+      duration: "Mantenimiento",
+      year: "2026",
+      roles: ["devops"],
+      tech: ["Terraform", "AWS EC2/RDS/S3/IAM", "Docker", "Nginx", "Cloudflare Tunnel"],
+      links: [{ label: "Ver sitio", url: "http://brielasinfronteras.org" }],
+    },
+    {
+      title: "Monitor de Disponibilidad Web",
+      description:
+        "Microservicio serverless en AWS que revisa la disponibilidad de sitios web de forma programada y envía alertas por email ante caídas o recuperaciones, con el estado persistido en DynamoDB.",
+      category: "devops",
+      image: null,
+      duration: "Proyecto personal",
+      year: "2026",
+      roles: ["backend", "devops"],
+      tech: ["Node.js", "Terraform", "AWS Lambda", "API Gateway", "EventBridge", "DynamoDB", "CloudWatch"],
+      links: [{ label: "GitHub", url: "https://github.com/fgp555/fgp-microservices" }],
+    },
     {
       title: "Mix&Match",
       description:
         "Outfit Planner / armario virtual. App móvil (Android/iOS) y web, OAuth con Google y Apple, microservicio en Python para remoción de fondo de imágenes.",
       category: "fullstack",
-      image: null,
+      image: "https://cdn.frankgp.com/portfolio/ivanageraldine-web.webp",
       duration: "En curso",
       year: "2025",
       roles: ["backend", "mobile", "frontend", "devops"],
       tech: ["React Native", "React", "TypeScript", "Express", "MySQL", "AWS S3"],
-      links: [],
-    },
-    {
-      title: "FGP Academy",
-      description: "Plataforma de cursos online.",
-      category: "fullstack",
-      image: "https://i.postimg.cc/k5fHRr14/fgp-academy.webp",
-      duration: "3 meses",
-      year: "2025",
-      roles: ["backend", "devops"],
-      tech: ["ReactJS", "NodeJS", "AWS", "MySQL", "WhatsApp API"],
-      links: [{ label: "Ver sitio", url: "https://frankgp.com/academy" }],
+      links: [{ label: "Ver sitio", url: "http://ivanageraldine.com" }],
     },
     {
       title: "Gestión de Órdenes — Web",
-      description: "Sistema de gestión de órdenes de transporte para Transpaservic: la central emite órdenes y las empresas transportistas las aprueban desde la app.",
+      description:
+        "Sistema de gestión de órdenes de transporte para Transpaservic: la central emite órdenes y las empresas transportistas las aprueban desde la app.",
       category: "fullstack",
-      image: "https://i.postimg.cc/qqWL8KSK/transpaservic-web.webp",
+      image: "https://cdn.frankgp.com/portfolio/transpaservic-web.webp",
       duration: "3 meses",
       year: "2025",
       roles: ["backend", "devops"],
@@ -471,7 +511,7 @@ const SITE_DATA = {
       title: "Gestión de Órdenes — Mobile",
       description: "Versión móvil del sistema de gestión de órdenes de transporte para Transpaservic.",
       category: "mobile",
-      image: "https://i.postimg.cc/mgMxgxkB/transpaservic-mockup.webp",
+      image: "https://cdn.frankgp.com/portfolio/transpaservic-mobile.webp",
       duration: "1 mes",
       year: "2025",
       roles: ["backend", "mobile", "devops"],
@@ -479,65 +519,43 @@ const SITE_DATA = {
       links: [{ label: "Play Store", url: "https://play.google.com/store/apps/details?id=com.fgp555.transpaservic" }],
     },
     {
-      title: "Transport Website",
-      description: "Sitio web para servicio de transporte de carga pesada.",
-      category: "fullstack",
-      image: "https://i.postimg.cc/1XBWtQV7/mockup-desktop.webp",
-      duration: "1 mes",
-      year: "2025",
-      roles: ["backend", "frontend", "devops"],
-      tech: ["Figma", "Angular", "Bootstrap", "NodeJS", "CPanel", "MySQL"],
-      links: [{ label: "Ver sitio", url: "https://e-transportech.org" }],
-    },
-    {
-      title: "Sistema de Citas",
+      title: "Sistema de Citas Médicas",
       description: "Sistema de citas para clínicas.",
       category: "fullstack",
-      image: "https://i.postimg.cc/pXH5G93K/crefi.webp",
+      image: null,
       duration: "1 mes",
       year: "2024",
       roles: ["backend", "devops"],
       tech: ["ReactJS", "NestJS", "CPanel", "PostgreSQL"],
-      links: [{ label: "GitHub", url: "https://github.com/fgp555/gio-m3-appointments" }],
-    },
-    {
-      title: "Acortador de URL",
-      description: "Acortador de URL con copias de seguridad y estadísticas.",
-      category: "fullstack",
-      image: "https://i.postimg.cc/26Kjp5kd/shortener.webp",
-      duration: "1 semana",
-      year: "2024",
-      roles: ["backend", "frontend", "devops"],
-      tech: ["HTML", "CSS", "JS", "NodeJS", "CPanel", "MongoDB"],
-      links: [{ label: "YouTube", url: "https://youtu.be/_okCMMfx1O4" }],
+      links: [{ label: "GitHub", url: "https://github.com/fgp555/gio-appointments-project" }],
     },
     {
       title: "Sistema de Envíos",
       description: "Sistema de envíos y entregas con generación de reportes en PDF.",
       category: "fullstack",
-      image: "https://i.postimg.cc/pXdQYG7g/shipping.webp",
+      image: null,
       duration: "1 mes",
       year: "2024",
       roles: ["backend", "frontend", "devops"],
       tech: ["HTML", "CSS", "JS", "NestJS", "CPanel", "MySQL"],
-      links: [{ label: "YouTube", url: "https://youtu.be/DY9lwTE08aw" }],
+      links: [{ label: "GitHub", url: "https://github.com/fgp555/nere-shipping-project" }],
     },
     {
       title: "BP Ventures",
-      description: "Sistema de entregables para la empresa BP Ventures.",
+      description: "Sistema de entregables para la empresa BP Ventures, con API documentada en OpenAPI/Swagger y CI (GitHub Actions) que la sincroniza con SwaggerHub.",
       category: "fullstack",
-      image: "https://i.postimg.cc/3JKBdJYC/bpventures.webp",
+      image: null,
       duration: "1 mes",
       year: "2024",
       roles: ["backend", "frontend", "devops"],
-      tech: ["NextJS", "NestJS", "CPanel", "PostgreSQL"],
+      tech: ["NextJS", "NestJS", "Swagger", "CPanel", "PostgreSQL"],
       links: [{ label: "YouTube", url: "https://youtu.be/vSBttwQO62k" }],
     },
     {
       title: "Mariaknoll Store",
       description: "Catálogo full stack para vestidos de fiesta.",
       category: "fullstack",
-      image: "https://i.postimg.cc/Nfpkq761/mariaknoll-rest-png.webp",
+      image: null,
       duration: "1 mes",
       year: "2024",
       roles: ["backend", "devops"],
@@ -545,32 +563,10 @@ const SITE_DATA = {
       links: [{ label: "GitHub", url: "https://github.com/buchervanesa/mariaknoll.website" }],
     },
     {
-      title: "Mini-Postman App",
-      description: "Herramienta para probar peticiones GET, POST y PUT.",
-      category: "tools",
-      image: "https://i.postimg.cc/mkSNr70W/mini-postman.webp",
-      duration: "1 semana",
-      year: "2024",
-      roles: ["frontend"],
-      tech: ["HTML", "CSS", "JS"],
-      links: [{ label: "Ver sitio", url: "https://frank-gp.github.io/app/mini-postman" }],
-    },
-    {
-      title: "Fou De Toi Restaurant",
-      description: "Sitio para restaurante vegetariano.",
-      category: "frontend",
-      image: "https://i.postimg.cc/vHQtNSVY/foudetoi-rest.webp",
-      duration: "1 semana",
-      year: "2023",
-      roles: ["frontend"],
-      tech: ["HTML", "CSS", "JS"],
-      links: [],
-    },
-    {
-      title: "Venta de Laptops",
+      title: "Catálogo de Laptops",
       description: "Catálogo para la venta de laptops.",
       category: "frontend",
-      image: "https://i.postimg.cc/qBcGQdgD/petulap.webp",
+      image: "https://cdn.frankgp.com/portfolio/petulap-web.webp",
       duration: "1 semana",
       year: "2022",
       roles: ["frontend"],

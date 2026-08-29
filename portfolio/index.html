@@ -18,6 +18,23 @@
       name="description"
       content="Portafolio de proyectos entregados: apps móviles, sistemas web y herramientas construidas de principio a fin, con capturas y stack técnico."
     />
+    <link rel="canonical" href="https://frankgp.com/portfolio/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://frankgp.com/portfolio/" />
+    <meta property="og:image" content="https://frankgp.com/favicon-512.webp" />
+    <meta property="og:locale" content="es_PE" />
+    <meta property="og:title" content="Portafolio — Franklin Gomez Pacoricona" />
+    <meta
+      property="og:description"
+      content="Portafolio de proyectos entregados: apps móviles, sistemas web y herramientas construidas de principio a fin, con capturas y stack técnico."
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Portafolio — Franklin Gomez Pacoricona" />
+    <meta
+      name="twitter:description"
+      content="Portafolio de proyectos entregados: apps móviles, sistemas web y herramientas construidas de principio a fin, con capturas y stack técnico."
+    />
+    <meta name="twitter:image" content="https://frankgp.com/favicon-512.webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -152,6 +169,7 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
+        cursor: pointer;
         transition:
           border-color 0.2s ease,
           transform 0.2s ease;
@@ -164,7 +182,8 @@
         display: none;
       }
       .port-img {
-        aspect-ratio: 16 / 10;
+        /* 1920x1200 — ver convención de imágenes de portfolio en CLAUDE.md */
+        aspect-ratio: 1920 / 1200;
         background: var(--bg-elev-2);
         overflow: hidden;
       }
@@ -289,6 +308,175 @@
           grid-template-columns: 1fr;
         }
       }
+
+      /* ---------- MODAL (detalle de proyecto, pantalla grande) ---------- */
+      body.modal-open {
+        overflow: hidden;
+      }
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 500;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+      }
+      .modal-backdrop.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .modal-box {
+        /* Siempre oscuro, sin importar el tema claro/oscuro del sitio —
+           estilo "visor de galería", igual en ambos modos. */
+        --bg-elev: #10151d;
+        --bg-elev-2: #161d27;
+        --border: #212a35;
+        --text: #e8edf2;
+        --text-dim: #95a3b3;
+        --text-faint: #576474;
+        --cyan: #22d3ee;
+        --cyan-dim: rgba(34, 211, 238, 0.12);
+        --cyan-border: rgba(34, 211, 238, 0.25);
+
+        position: relative;
+        width: 100%;
+        max-width: 820px;
+        max-height: 88vh;
+        overflow-y: auto;
+        background: var(--bg-elev);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        color: var(--text);
+        transform: scale(0.96) translateY(8px);
+        transition: transform 0.2s ease;
+      }
+      .modal-backdrop.open .modal-box {
+        transform: scale(1) translateY(0);
+      }
+      .modal-close {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        z-index: 2;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-elev-2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text-dim);
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .modal-close:hover {
+        color: var(--cyan);
+        border-color: var(--cyan);
+      }
+      .modal-nav {
+        position: fixed;
+        top: 50%;
+        z-index: 501;
+        transform: translateY(-50%);
+        width: 46px;
+        height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 50%;
+        color: #fff;
+        cursor: pointer;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.2s ease,
+          background 0.15s ease;
+      }
+      .modal-backdrop.open .modal-nav {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .modal-nav:hover {
+        background: rgba(255, 255, 255, 0.18);
+      }
+      .modal-nav svg {
+        width: 22px;
+        height: 22px;
+      }
+      .modal-prev {
+        left: 16px;
+      }
+      .modal-next {
+        right: 16px;
+      }
+      @media (max-width: 700px) {
+        .modal-nav {
+          width: 38px;
+          height: 38px;
+        }
+        .modal-nav svg {
+          width: 18px;
+          height: 18px;
+        }
+        .modal-prev {
+          left: 6px;
+        }
+        .modal-next {
+          right: 6px;
+        }
+      }
+      .modal-img {
+        /* 1920x1200 — ver convención de imágenes de portfolio en CLAUDE.md */
+        aspect-ratio: 1920 / 1200;
+        background: var(--bg-elev-2);
+        overflow: hidden;
+      }
+      .modal-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .modal-body {
+        padding: 26px 28px 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .modal-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .modal-top h2 {
+        font-family: var(--mono);
+        font-size: 21px;
+      }
+      .modal-body p {
+        color: var(--text-dim);
+        font-size: 14.5px;
+        line-height: 1.6;
+      }
+      @media (max-width: 600px) {
+        .modal-backdrop {
+          padding: 0;
+        }
+        .modal-box {
+          max-height: 100vh;
+          height: 100%;
+          border-radius: 0;
+        }
+      }
     </style>
   </head>
   <body>
@@ -327,9 +515,49 @@
     <footer>
       <div class="wrap foot-row">
         <span>© 2026 Franklin Gomez Pacoricona</span>
-        <select class="page-nav-select" id="pageNav" aria-label="Navegar a otra página"></select>
+        <div style="display: flex; gap: 8px; margin-right: 130px">
+          <a class="icon-link email-link" href="#" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+          </a>
+          <a class="icon-link wa-link" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21z"></path><path d="M9 10a.5.5 0 0 0 1 0v-1a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"></path></svg>
+          </a>
+          <a class="icon-link linkedin-link" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+          <a class="icon-link github-link" href="#" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+          </a>
+        </div>
       </div>
     </footer>
+
+    <!-- Selector "Ir a…" flotante (ver .page-nav-select en components.css) -->
+    <select class="page-nav-select" id="pageNav" aria-label="Navegar a otra página"></select>
+
+    <!-- Modal de detalle de proyecto — se llena en JS al hacer click en una card -->
+    <div class="modal-backdrop" id="portModal" aria-hidden="true">
+      <button class="modal-nav modal-prev" id="modalPrev" type="button" aria-label="Proyecto anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+      </button>
+      <button class="modal-nav modal-next" id="modalNext" type="button" aria-label="Proyecto siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+      </button>
+      <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" id="modalClose" type="button" aria-label="Cerrar">&times;</button>
+        <div class="modal-img" id="modalImg"></div>
+        <div class="modal-body">
+          <div class="modal-top">
+            <h2 id="modalTitle"></h2>
+            <span class="badge badge-cyan" id="modalBadge"></span>
+          </div>
+          <p id="modalDesc"></p>
+          <div class="port-meta" id="modalMeta"></div>
+          <div class="port-tags" id="modalTags"></div>
+          <div class="port-links" id="modalLinks"></div>
+        </div>
+      </div>
+    </div>
 
     <script>
       const CATEGORY_LABELS = {
@@ -337,6 +565,7 @@
         mobile: "Mobile",
         frontend: "Frontend",
         tools: "Tools",
+        devops: "DevOps",
       };
       const ROLE_LABELS = {
         backend: "Backend",
@@ -346,7 +575,7 @@
         design: "Diseño",
       };
 
-      const PROJECTS = SITE_DATA.projects;
+      const PROJECTS = SITE_DATA.projectsPortfolio;
 
       const linkIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path></svg>`;
 
@@ -354,7 +583,7 @@
       const filtersEl = document.getElementById("filters");
       const emptyState = document.getElementById("emptyState");
 
-      function cardHTML(p) {
+      function cardHTML(p, i) {
         const roles = p.roles.map((r) => ROLE_LABELS[r] || r).join(" · ");
         const tags = p.tech.map((t) => `<span class="tag">${t}</span>`).join("");
         const links = p.links
@@ -364,7 +593,7 @@
           ? `<img src="${p.image}" alt="${p.title}" loading="lazy" />`
           : `<div class="port-img-placeholder">${p.title}</div>`;
         return `
-          <div class="port-card" data-category="${p.category}">
+          <div class="port-card" data-category="${p.category}" data-index="${i}">
             <div class="port-img">${img}</div>
             <div class="port-body">
               <div class="port-top">
@@ -404,6 +633,66 @@
           if (match) visibleCount++;
         });
         emptyState.style.display = visibleCount === 0 ? "block" : "none";
+      });
+
+      // ---------- Modal de detalle (click en una card) ----------
+      const modal = document.getElementById("portModal");
+      const modalImg = document.getElementById("modalImg");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalBadge = document.getElementById("modalBadge");
+      const modalDesc = document.getElementById("modalDesc");
+      const modalMeta = document.getElementById("modalMeta");
+      const modalTags = document.getElementById("modalTags");
+      const modalLinks = document.getElementById("modalLinks");
+      let currentIndex = 0;
+
+      function showModalAt(i) {
+        currentIndex = (i + PROJECTS.length) % PROJECTS.length; // wraparound circular
+        openModal(PROJECTS[currentIndex]);
+      }
+
+      function openModal(p) {
+        const roles = p.roles.map((r) => ROLE_LABELS[r] || r).join(" · ");
+        modalImg.innerHTML = p.image
+          ? `<img src="${p.image}" alt="${p.title}" />`
+          : `<div class="port-img-placeholder">${p.title}</div>`;
+        modalTitle.textContent = p.title;
+        modalBadge.textContent = CATEGORY_LABELS[p.category];
+        modalDesc.textContent = p.description;
+        modalMeta.textContent = `${roles} · ${p.duration} · ${p.year}`;
+        modalTags.innerHTML = p.tech.map((t) => `<span class="tag">${t}</span>`).join("");
+        modalLinks.innerHTML = p.links
+          .map((l) => `<a href="${l.url}" target="_blank" rel="noopener">${linkIcon}${l.label}</a>`)
+          .join("");
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+      }
+
+      function closeModal() {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+      }
+
+      grid.addEventListener("click", function (e) {
+        if (e.target.closest("a")) return; // no abrir el modal si el click fue en un link de la card
+        const card = e.target.closest(".port-card");
+        if (!card) return;
+        showModalAt(Number(card.dataset.index));
+      });
+
+      document.getElementById("modalClose").addEventListener("click", closeModal);
+      document.getElementById("modalPrev").addEventListener("click", () => showModalAt(currentIndex - 1));
+      document.getElementById("modalNext").addEventListener("click", () => showModalAt(currentIndex + 1));
+      modal.addEventListener("click", function (e) {
+        if (e.target === modal) closeModal(); // click en el fondo, fuera de la caja
+      });
+      document.addEventListener("keydown", function (e) {
+        if (!modal.classList.contains("open")) return;
+        if (e.key === "Escape") closeModal();
+        if (e.key === "ArrowLeft") showModalAt(currentIndex - 1);
+        if (e.key === "ArrowRight") showModalAt(currentIndex + 1);
       });
     </script>
 

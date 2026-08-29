@@ -418,17 +418,22 @@ section {
   height: 16px;
 }
 
-/* ---------- page nav select (footer) ---------- */
+/* ---------- page nav select (flotante, esquina inferior derecha) ---------- */
 .page-nav-select {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 200;
   font-family: var(--mono);
   font-size: 12.5px;
   color: var(--text-dim);
   background: var(--bg-elev-2);
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 6px 10px;
+  padding: 8px 10px;
   cursor: pointer;
   appearance: none;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none' stroke='%2395a3b3' stroke-width='1.5'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;

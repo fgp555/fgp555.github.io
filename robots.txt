@@ -1,5 +1,4 @@
 User-agent: *
-Disallow: /wp-admin/
 Allow: /
 
-Sitemap: https://fgp555.com/sitemap.xml
+Sitemap: https://frankgp.com/sitemap.xml

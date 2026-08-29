@@ -18,17 +18,53 @@
       name="description"
       content="Currículum de Franklin Gomez Pacoricona — Full Stack & Mobile Developer. Experiencia, formación y stack técnico."
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
+    <link rel="canonical" href="https://frankgp.com/cv/" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://frankgp.com/cv/" />
+    <meta property="og:image" content="https://frankgp.com/favicon-512.webp" />
+    <meta property="og:locale" content="es_PE" />
+    <meta property="og:title" content="CV — Franklin Gomez Pacoricona" />
+    <meta
+      property="og:description"
+      content="Currículum de Franklin Gomez Pacoricona — Full Stack & Mobile Developer. Experiencia, formación y stack técnico."
     />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="CV — Franklin Gomez Pacoricona" />
+    <meta
+      name="twitter:description"
+      content="Currículum de Franklin Gomez Pacoricona — Full Stack & Mobile Developer. Experiencia, formación y stack técnico."
+    />
+    <meta name="twitter:image" content="https://frankgp.com/favicon-512.webp" />
     <link rel="stylesheet" href="../assets/css/theme.css?v=20260829T084715" />
     <link rel="stylesheet" href="../assets/css/components.css?v=20260829T084715" />
     <script src="../assets/js/data.js?v=20260829T084715"></script>
     <script src="../assets/js/page-nav.js?v=20260829T084715"></script>
     <style>
+      /* Única fuente para la versión web Y el PDF descargable (ver
+         scripts/generate-cv-pdf.js) — antes existían dos archivos casi
+         duplicados (cv/index.html condensado + cv/cv-preview-pdf.html
+         detallado); ahora es uno solo. A propósito usa Arial en vez de las
+         fuentes del sitio (JetBrains Mono/Inter): además de ser más
+         ATS-safe para el PDF (Chromium embebe variable fonts de Google
+         Fonts como Type3 en vez de TrueType), mantiene el mismo look en
+         pantalla y en el PDF generado, sin reglas @media print que
+         cambien la tipografía. Se redefinen --mono/--sans para que los
+         componentes compartidos (logo, tags, select) hereden Arial
+         también. Los colores sí usan las variables del sitio (--bg-elev,
+         --text, --cyan, etc.) para que el toggle de tema funcione — el
+         PDF los fuerza siempre a modo claro en @media print, más abajo. */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --mono: Arial, Helvetica, "Segoe UI", sans-serif;
+        --sans: Arial, Helvetica, "Segoe UI", sans-serif;
+      }
+      body {
+        font-family: var(--sans);
+      }
       body::before {
         content: "";
         position: fixed;
@@ -58,15 +94,27 @@
         margin: 0 auto;
       }
       .logo {
-        font-family: var(--mono);
         font-weight: 700;
         font-size: 16px;
       }
       .logo span {
         color: var(--cyan);
       }
+      .lang-toggle {
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--text-dim);
+        background: var(--bg-elev-2);
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        padding: 8px 11px;
+        cursor: pointer;
+      }
+      .lang-toggle:hover {
+        color: var(--cyan);
+        border-color: var(--cyan);
+      }
       .print-btn {
-        font-family: var(--mono);
         font-size: 13px;
         font-weight: 600;
         background: var(--brand-green);
@@ -86,23 +134,6 @@
         width: 15px;
         height: 15px;
       }
-      .print-btn-secondary {
-        font-family: var(--mono);
-        font-size: 12px;
-        font-weight: 600;
-        color: var(--text-dim);
-        background: transparent;
-        border: 1px solid var(--border);
-        padding: 8px 12px;
-        border-radius: 7px;
-        display: inline-flex;
-        align-items: center;
-        white-space: nowrap;
-      }
-      .print-btn-secondary:hover {
-        color: var(--text);
-        border-color: var(--text-dim);
-      }
 
       main {
         position: relative;
@@ -120,109 +151,174 @@
         background: var(--bg-elev);
         border: 1px solid var(--border);
         border-radius: 14px;
-        padding: 44px 44px 50px;
+        padding: 44px 50px 54px;
       }
 
-      /* ---------- IDENTITY ---------- */
+      /* ---------- IDENTIDAD ---------- */
+      .cv-header {
+        text-align: center;
+        padding-bottom: 18px;
+        border-bottom: 2px solid var(--cyan);
+      }
       .cv-name {
-        font-size: clamp(24px, 3.4vw, 32px);
-        margin-bottom: 4px;
+        font-size: 29px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
       }
       .cv-title {
-        font-family: var(--mono);
+        margin-top: 4px;
+        font-size: 12.5px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
         color: var(--cyan);
-        font-size: 15px;
-        margin-bottom: 16px;
       }
       .cv-contact {
+        margin-top: 14px;
         display: flex;
-        flex-wrap: wrap;
-        gap: 6px 16px;
-        font-family: var(--mono);
-        font-size: 12.5px;
-        color: var(--text-dim);
-        margin-bottom: 28px;
-        padding-bottom: 24px;
-        border-bottom: 1px solid var(--border-soft);
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
       }
-      .cv-contact a:hover {
+      .cv-contact-row {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        row-gap: 6px;
+        column-gap: 18px;
+      }
+      .cv-contact-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        color: var(--text-dim);
+        white-space: nowrap;
+        text-decoration: none;
+      }
+      .cv-contact-item:hover {
         color: var(--cyan);
       }
-
-      .cv-summary {
-        color: var(--text-dim);
-        font-size: 15px;
-        line-height: 1.7;
-        margin-bottom: 34px;
+      .cv-contact-item svg {
+        width: 13px;
+        height: 13px;
+        flex: none;
+        stroke: var(--cyan);
       }
 
-      /* ---------- SECTIONS ---------- */
-      .cv-section {
-        margin-bottom: 32px;
+      /* ---------- SECCIONES ---------- */
+      /* Pisa la regla genérica "section { padding: 74px 0; border-top: ... }"
+         de components.css (pensada para las secciones grandes del home) —
+         acá las secciones del CV son bloques compactos dentro del "sheet". */
+      section {
+        margin-top: 22px;
+        padding: 0;
+        border-top: none;
       }
-      .cv-section:last-child {
-        margin-bottom: 0;
-      }
-      .cv-section h2 {
-        font-family: var(--mono);
-        font-size: 12.5px;
+      h2 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
         font-weight: 700;
-        letter-spacing: 0.08em;
+        color: var(--cyan);
         text-transform: uppercase;
+        letter-spacing: 0.12em;
+        margin-bottom: 12px;
+      }
+      h2::before {
+        content: "";
+        width: 14px;
+        height: 3px;
+        background: var(--cyan);
+        border-radius: 2px;
+      }
+      h2::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border-soft);
+      }
+      p.cv-summary {
+        font-size: 12.5px;
+        color: var(--text-dim);
+        line-height: 1.6;
+      }
+
+      ul.cv-bullets {
+        list-style: none;
+        margin-top: 2px;
+      }
+      ul.cv-bullets li {
+        position: relative;
+        padding-left: 15px;
+        font-size: 12.3px;
+        color: var(--text-dim);
+        margin-bottom: 4px;
+      }
+      ul.cv-bullets li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 7px;
+        width: 5px;
+        height: 5px;
+        border-radius: 1px;
+        background: var(--cyan);
+        opacity: 0.6;
+      }
+
+      /* ---------- EXPERIENCIA / EDUCACIÓN ---------- */
+      .entry {
+        margin-top: 15px;
+      }
+      .entry:first-child {
+        margin-top: 0;
+      }
+      .entry-role {
+        font-size: 12.8px;
+        font-weight: 700;
+      }
+      .entry-org {
+        font-weight: 500;
+        color: var(--text-dim);
+      }
+      .entry-date {
+        margin-top: 1px;
+        font-size: 10.5px;
+        font-weight: 600;
         color: var(--text-faint);
-        margin-bottom: 16px;
-        padding-bottom: 8px;
-        border-bottom: 1px solid var(--border-soft);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
       }
 
       /* ---------- SKILLS ---------- */
-      .cv-skills-grid {
-        display: grid;
-        grid-template-columns: 130px 1fr;
-        gap: 10px 16px;
+      .skills-group {
+        margin-bottom: 10px;
       }
-      .cv-skills-grid dt {
-        font-family: var(--mono);
-        font-size: 12.5px;
-        color: var(--text-faint);
-        padding-top: 2px;
+      .skills-group:last-child {
+        margin-bottom: 0;
       }
-      .cv-skills-grid dd {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-      }
-
-      /* ---------- EXPERIENCE / EDUCATION (reusa .timeline de components.css) ---------- */
-      .cv-section .timeline {
-        margin-left: 4px;
-      }
-      .cv-edu-list {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-      }
-      .cv-edu-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-      .cv-edu-name {
-        font-family: var(--mono);
+      .skills-label {
+        font-size: 10.5px;
         font-weight: 700;
-        font-size: 14.5px;
-      }
-      .cv-edu-org {
-        font-size: 13.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
         color: var(--text-dim);
+        margin-bottom: 5px;
       }
-      .cv-edu-year {
-        font-family: var(--mono);
-        font-size: 12px;
-        color: var(--text-faint);
-        white-space: nowrap;
+      .skills-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      .skill-tag {
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--cyan);
+        background: var(--cyan-dim);
+        border-radius: 4px;
+        padding: 3px 8px;
       }
 
       footer {
@@ -237,7 +333,6 @@
         align-items: center;
         flex-wrap: wrap;
         gap: 14px;
-        font-family: var(--mono);
         font-size: 12.5px;
         color: var(--text-faint);
       }
@@ -245,28 +340,35 @@
         color: var(--cyan);
       }
 
-      /* ---------- PRINT ---------- */
+      /* ---------- IMPRESIÓN (PDF) — siempre modo claro, sin importar el
+         tema activo en pantalla; oculta todo lo que no es el currículum. ---------- */
       @media print {
+        /* !important en cada variable: sin esto, ":root:not([data-theme='dark'])"
+           y ":root[data-theme='light']" de theme.css (más específicos que un
+           simple ":root") le ganaban a este override — el body quedaba con
+           el gris clarito del tema (#f6f8fa) en vez de blanco puro, y esa
+           diferencia contra el blanco de la página del PDF dibujaba una
+           línea visible en el borde derecho/inferior. */
         :root {
-          --bg: #ffffff;
-          --bg-elev: #ffffff;
-          --bg-elev-2: #f4f4f4;
-          --border: #dcdcdc;
-          --border-soft: #e6e6e6;
-          --text: #111111;
-          --text-dim: #333333;
-          --text-faint: #666666;
-          --cyan: #0e7490;
-          --cyan-dim: #eef6f8;
-          --green: #047857;
-          --green-dim: #eefaf4;
-          --amber: #b45309;
-          --amber-dim: #fdf3e7;
+          --bg: #ffffff !important;
+          --bg-elev: #ffffff !important;
+          --bg-elev-2: #f4f4f4 !important;
+          --border: #dcdcdc !important;
+          --border-soft: #e6e6e6 !important;
+          --text: #111111 !important;
+          --text-dim: #333333 !important;
+          --text-faint: #666666 !important;
+          --cyan: #0e7490 !important;
+          --cyan-dim: #eef6f8 !important;
+        }
+        body {
+          background: #ffffff !important;
         }
         body::before,
         header,
         footer,
-        .theme-toggle {
+        .theme-toggle,
+        .page-nav-select {
           display: none !important;
         }
         main {
@@ -281,7 +383,13 @@
           max-width: 100%;
           padding: 0;
         }
-        .cv-section {
+        section {
+          break-inside: avoid;
+        }
+        .entry {
+          break-inside: avoid;
+        }
+        .skills-group {
           break-inside: avoid;
         }
         a {
@@ -299,16 +407,14 @@
             <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
             <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
           </button>
-          <a class="print-btn" id="cvPdfLink" href="#" target="_blank" rel="noopener">
+          <button class="lang-toggle" id="langToggle" type="button" aria-label="Cambiar idioma">EN</button>
+          <a class="print-btn" id="cvPdfLink" href="#" download>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" x2="12" y1="15" y2="3"></line>
             </svg>
-            Descargar PDF
-          </a>
-          <a class="print-btn-secondary" id="cvPdfLinkEn" href="#" target="_blank" rel="noopener" title="Download English version">
-            EN
+            <span id="cvPdfLinkText">Descargar PDF</span>
           </a>
         </div>
       </div>
@@ -317,30 +423,42 @@
     <main>
       <div class="cv-wrap">
         <div class="sheet">
-          <!-- IDENTIDAD (renderizado desde assets/js/data.js) -->
-          <h1 class="cv-name" id="cvName"></h1>
-          <p class="cv-title" id="cvTitle"></p>
-          <div class="cv-contact" id="cvContact"></div>
-
-          <p class="cv-summary" id="cvSummary"></p>
-
-          <!-- STACK -->
-          <div class="cv-section">
-            <h2>Stack técnico</h2>
-            <dl class="cv-skills-grid" id="cvSkills"></dl>
+          <!-- IDENTIDAD -->
+          <div class="cv-header">
+            <div class="cv-name" id="cvName"></div>
+            <div class="cv-title" id="cvTitle"></div>
+            <div class="cv-contact" id="cvContact"></div>
           </div>
 
-          <!-- EXPERIENCIA -->
-          <div class="cv-section">
-            <h2>Experiencia</h2>
-            <div class="timeline" id="cvExperience"></div>
-          </div>
+          <!-- PERFIL PROFESIONAL -->
+          <section>
+            <h2 id="labelProfile"></h2>
+            <p class="cv-summary" id="cvSummary"></p>
+          </section>
+
+          <!-- ARQUITECTURA Y RESPONSABILIDAD TÉCNICA -->
+          <section>
+            <h2 id="labelPractices"></h2>
+            <ul class="cv-bullets" id="cvPractices"></ul>
+          </section>
+
+          <!-- EXPERIENCIA LABORAL -->
+          <section>
+            <h2 id="labelExperience"></h2>
+            <div id="cvExperience"></div>
+          </section>
 
           <!-- EDUCACIÓN -->
-          <div class="cv-section">
-            <h2>Educación</h2>
-            <div class="cv-edu-list" id="cvEducation"></div>
-          </div>
+          <section>
+            <h2 id="labelEducation"></h2>
+            <div id="cvEducation"></div>
+          </section>
+
+          <!-- HABILIDADES TÉCNICAS -->
+          <section>
+            <h2 id="labelSkills"></h2>
+            <div id="cvSkills"></div>
+          </section>
         </div>
       </div>
     </main>
@@ -348,9 +466,25 @@
     <footer>
       <div class="cv-wrap foot-row">
         <span>© 2026 Franklin Gomez Pacoricona</span>
-        <select class="page-nav-select" id="pageNav" aria-label="Navegar a otra página"></select>
+        <div style="display: flex; gap: 8px; margin-right: 130px">
+          <a class="icon-link email-link" href="#" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+          </a>
+          <a class="icon-link wa-link" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21z"></path><path d="M9 10a.5.5 0 0 0 1 0v-1a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"></path></svg>
+          </a>
+          <a class="icon-link linkedin-link" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+          <a class="icon-link github-link" href="#" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+          </a>
+        </div>
       </div>
     </footer>
+
+    <!-- Selector "Ir a…" flotante (ver .page-nav-select en components.css) -->
+    <select class="page-nav-select" id="pageNav" aria-label="Navegar a otra página"></select>
 
     <script>
       // Toggle de tema claro/oscuro
@@ -380,64 +514,139 @@
     </script>
 
     <script>
-      // Renderiza el CV completo desde SITE_DATA (assets/js/data.js) — única
-      // fuente de verdad compartida con index.html y portfolio/index.html.
-      const lang = "es";
+      // Renderiza el CV completo (versión detallada, la misma que se usa
+      // para generar el PDF — ver scripts/generate-cv-pdf.js) desde
+      // SITE_DATA (assets/js/data.js), única fuente de verdad. Idioma por
+      // query string: /cv/?lang=en (default "es"), con un botón para
+      // togglearlo sin editar la URL a mano.
+      const I18N = true; // sentinel: evita el auto-init en español de page-nav.js, lo llamamos manualmente abajo con el lang correcto
+      const lang = new URLSearchParams(location.search).get("lang") === "en" ? "en" : "es";
+      document.documentElement.lang = lang;
+
+      const langBtn = document.getElementById("langToggle");
+      langBtn.textContent = lang === "es" ? "EN" : "ES";
+      langBtn.setAttribute("aria-label", lang === "es" ? "Switch to English" : "Cambiar a español");
+      langBtn.addEventListener("click", function () {
+        const url = new URL(location.href);
+        if (lang === "es") url.searchParams.set("lang", "en");
+        else url.searchParams.delete("lang");
+        location.href = url.toString();
+      });
+
+      renderPageNav(lang);
+
+      // Encabezados de sección — en inglés se usan a propósito los términos
+      // literales que buscan los parsers de ATS ("Education", "Work
+      // Experience"), no una traducción libre.
+      const SECTION_LABELS = {
+        profile: { es: "Perfil profesional", en: "Professional Summary" },
+        practices: { es: "Arquitectura y responsabilidad técnica", en: "Technical Architecture & Ownership" },
+        experience: { es: "Experiencia laboral", en: "Work Experience" },
+        education: { es: "Educación", en: "Education" },
+        skills: { es: "Habilidades técnicas", en: "Technical Skills" },
+      };
+      document.getElementById("labelProfile").textContent = SECTION_LABELS.profile[lang];
+      document.getElementById("labelPractices").textContent = SECTION_LABELS.practices[lang];
+      document.getElementById("labelExperience").textContent = SECTION_LABELS.experience[lang];
+      document.getElementById("labelEducation").textContent = SECTION_LABELS.education[lang];
+      document.getElementById("labelSkills").textContent = SECTION_LABELS.skills[lang];
+
+      // Íconos inline estilo Lucide (stroke="currentColor", stroke-width="2",
+      // round caps/joins) — misma convención del resto del sitio, sin CDN.
+      const ICONS = {
+        pin: `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>`,
+        mail: `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
+        phone: `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21z"/><path d="M9 10a.5.5 0 0 0 1 0v-1a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>`,
+        linkedin: `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>`,
+        github: `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 1.5 5 1.5 5 1.5c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 8.5c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>`,
+        globe: `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>`,
+      };
 
       document.getElementById("cvName").textContent = SITE_DATA.name;
       document.getElementById("cvTitle").textContent = SITE_DATA.title;
-      document.getElementById("cvSummary").textContent = pick(SITE_DATA.summary, lang);
-      const cvPdfLink = document.getElementById("cvPdfLink");
-      cvPdfLink.href = SITE_DATA.links.cvPdf;
-      cvPdfLink.setAttribute("download", "");
-      const cvPdfLinkEn = document.getElementById("cvPdfLinkEn");
-      cvPdfLinkEn.href = SITE_DATA.links.cvPdfEn;
-      cvPdfLinkEn.setAttribute("download", "");
+      document.getElementById("cvSummary").textContent = pick(SITE_DATA.summaryLong, lang);
 
       const email = SITE_DATA.email.user + "@" + SITE_DATA.email.domain;
-      document.getElementById("cvContact").innerHTML = `
-        <a href="mailto:${email}">${email}</a>
-        <a href="https://wa.me/${SITE_DATA.whatsappNumber}" target="_blank" rel="noopener">+${SITE_DATA.whatsappNumber.replace(/^51/, "51 ")}</a>
-        <a href="${SITE_DATA.links.linkedin}" target="_blank" rel="noopener">linkedin.com/in/franklingp</a>
-        <a href="${SITE_DATA.links.github}" target="_blank" rel="noopener">github.com/fgp555</a>
-        <span>${pick(SITE_DATA.location, lang)}</span>
-      `;
-
-      document.getElementById("cvSkills").innerHTML = SITE_DATA.skills
+      const whatsapp = "+" + SITE_DATA.whatsappNumber.replace(/^(\d{2})/, "$1 ");
+      const portfolioUrl = "https://frankgp.com" + SITE_DATA.links.portfolio;
+      const contactRows = [
+        [
+          [ICONS.pin, pick(SITE_DATA.location, lang), null],
+          [ICONS.mail, email, "mailto:" + email],
+          [ICONS.phone, whatsapp, "https://wa.me/" + SITE_DATA.whatsappNumber],
+        ],
+        [
+          [ICONS.linkedin, SITE_DATA.links.linkedin.replace(/^https?:\/\//, ""), SITE_DATA.links.linkedin],
+          [ICONS.github, SITE_DATA.links.github.replace(/^https?:\/\//, ""), SITE_DATA.links.github],
+          [ICONS.globe, "frankgp.com" + SITE_DATA.links.portfolio, portfolioUrl],
+        ],
+      ];
+      document.getElementById("cvContact").innerHTML = contactRows
         .map(
-          (group) => `
-            <dt>${pick(group.label, lang)}</dt>
-            <dd>${group.items.map((item) => `<span class="tag">${pick(item, lang)}</span>`).join("")}</dd>
-          `,
+          (row) =>
+            `<div class="cv-contact-row">${row
+              .map(([icon, text, href]) =>
+                href
+                  ? `<a class="cv-contact-item" href="${href}" target="_blank" rel="noopener">${icon}${text}</a>`
+                  : `<span class="cv-contact-item">${icon}${text}</span>`,
+              )
+              .join("")}</div>`,
         )
         .join("");
+
+      document.getElementById("cvPractices").innerHTML = pick(SITE_DATA.technicalPractices, lang)
+        .map((t) => `<li>${t}</li>`)
+        .join("");
+
+      function entryBullets(entry) {
+        const items = entry.bullets ? pick(entry.bullets, lang) : [pick(entry.desc, lang)];
+        return `<ul class="cv-bullets">${items.map((b) => `<li>${b}</li>`).join("")}</ul>`;
+      }
 
       document.getElementById("cvExperience").innerHTML = SITE_DATA.experience
         .map(
           (job) => `
-            <div class="tl-item">
-              <div class="tl-date">${pick(job.date, lang)}</div>
-              <div class="tl-role">${pick(job.role, lang)}</div>
-              <div class="tl-org">${pick(job.org, lang)}</div>
-              <p class="tl-desc">${pick(job.desc, lang)}</p>
-            </div>
-          `,
+            <div class="entry">
+              <div class="entry-head">
+                <div class="entry-role">${pick(job.role, lang)} <span class="entry-org">— ${pick(job.org, lang)}</span></div>
+                <div class="entry-date">${pick(job.date, lang)}</div>
+              </div>
+              ${entryBullets(job)}
+            </div>`,
         )
         .join("");
 
       document.getElementById("cvEducation").innerHTML = SITE_DATA.education
         .map(
           (edu) => `
-            <div class="cv-edu-item">
-              <div>
-                <div class="cv-edu-name">${pick(edu.name, lang)}</div>
-                <div class="cv-edu-org">${pick(edu.org, lang)}</div>
+            <div class="entry">
+              <div class="entry-head">
+                <div class="entry-role">${pick(edu.name, lang)} <span class="entry-org">— ${pick(edu.org, lang)}</span></div>
+                <div class="entry-date">${edu.year}</div>
               </div>
-              <div class="cv-edu-year">${edu.year}</div>
-            </div>
-          `,
+              ${edu.bullets ? `<ul class="cv-bullets">${pick(edu.bullets, lang).map((b) => `<li>${b}</li>`).join("")}</ul>` : ""}
+            </div>`,
         )
         .join("");
+
+      document.getElementById("cvSkills").innerHTML = SITE_DATA.skills
+        .map(
+          (group) => `
+            <div class="skills-group">
+              <div class="skills-label">${pick(group.label, lang)}</div>
+              <div class="skills-tags">
+                ${group.items.map((i) => `<span class="skill-tag">${pick(i, lang)}</span>`).join("")}
+              </div>
+            </div>`,
+        )
+        .join("");
+
+      // Botón de descarga de PDF — apunta al PDF del idioma que se está
+      // mostrando ahora mismo (ES o EN), no dos botones separados.
+      const cvPdfLink = document.getElementById("cvPdfLink");
+      cvPdfLink.href = lang === "en" ? SITE_DATA.links.cvPdfEn : SITE_DATA.links.cvPdf;
+      cvPdfLink.setAttribute("download", "");
+      document.getElementById("cvPdfLinkText").textContent = lang === "en" ? "Download PDF" : "Descargar PDF";
     </script>
   </body>
 </html>
