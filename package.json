@@ -6,6 +6,9 @@
   "scripts": {
     "build:html": "node scripts/bump-version.js",
     "build:cv": "node scripts/generate-cv-pdf.js",
+    "linkedin:profile": "node scripts/linkedin/generate-profile.js",
+    "linkedin:auth": "node scripts/linkedin/get-token.js",
+    "linkedin:post": "node scripts/linkedin/post.js",
     "postinstall": "playwright install chromium"
   },
   "devDependencies": {

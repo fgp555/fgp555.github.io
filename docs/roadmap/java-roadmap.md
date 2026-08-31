@@ -105,3 +105,38 @@ Detalles de la Vacante:
 📅 Duración: 4 meses (con posibilidad de continuidad).
 Si dominas el backend, los microservicios y Kubernetes, ¡queremos conocerte!
 Revisa todos los detalles y postúlate aquí: https://lnkd.in/ggWDMSyN
+
+
+<!-- Java -->
+<!-- Punto de partida: 0 experiencia real en Java hoy (todo el stack actual es
+     TypeScript/Node/NestJS) — todo lo de acá abajo es ⏳ pendiente. Se anota el
+     equivalente ya dominado en Node entre paréntesis porque el concepto ya se
+     entiende, solo cambia la sintaxis/herramienta. -->
+
+### Fundamentos del lenguaje
+⏳ OOP en Java (clases, interfaces, herencia, polimorfismo)
+⏳ Colecciones (List, Map, Set) y Streams API
+⏳ Generics
+⏳ Manejo de excepciones (checked vs unchecked)
+⏳ Maven o Gradle (equivalente a npm/package.json)
+
+### Spring
+⏳ Spring Boot (equivalente a NestJS: DI, módulos, controllers, services)
+⏳ Spring Data JPA (equivalente a TypeORM)
+⏳ Spring Security (equivalente a los guards/JWT que ya hago en NestJS)
+⏳ Spring Boot Actuator (health checks, métricas — conecta con lo de observabilidad del roadmap DevOps)
+
+### Testing
+⏳ JUnit 5 (equivalente a Jest)
+⏳ Mockito (equivalente a mocks de Jest/Supertest)
+
+### Persistencia (conceptos ya dominados, cambia la herramienta)
+⏳ Hibernate/JPA — mapeo objeto-relacional, ya conozco el concepto por TypeORM
+⏳ PostgreSQL/MySQL desde Java — el SQL y el modelado ya los sé, falta el driver/ORM de Java
+
+Para búsqueda laboral, yo priorizaría:
+Java core → Maven/Gradle → Spring Boot → Spring Data JPA → JUnit + Mockito → Spring Security → (Docker y CI/CD ya los sé, solo aplicarlos a un proyecto Java).
+
+### Camino estructurado
+⏳ Un curso o certificación de Spring Boot que cubra la lista de arriba en orden
+⏳ Proyecto propio pequeño en Java + Spring Boot + PostgreSQL, con Docker y CI/CD ya conocidos, para tener algo real que mostrar en el CV (igual que "Monitor de Disponibilidad Web" para AWS)
