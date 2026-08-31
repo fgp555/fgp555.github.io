@@ -35,10 +35,10 @@
       content="Currículum de Franklin Gomez Pacoricona — Full Stack & Mobile Developer. Experiencia, formación y stack técnico."
     />
     <meta name="twitter:image" content="https://frankgp.com/favicon-512.webp" />
-    <link rel="stylesheet" href="../assets/css/theme.css?v=20260829T084715" />
-    <link rel="stylesheet" href="../assets/css/components.css?v=20260829T084715" />
-    <script src="../assets/js/data.js?v=20260829T084715"></script>
-    <script src="../assets/js/page-nav.js?v=20260829T084715"></script>
+    <link rel="stylesheet" href="../assets/css/theme.css?v=20260831T075310" />
+    <link rel="stylesheet" href="../assets/css/components.css?v=20260831T075310" />
+    <script src="../assets/js/data.js?v=20260831T075310"></script>
+    <script src="../assets/js/page-nav.js?v=20260831T075310"></script>
     <style>
       /* Única fuente para la versión web Y el PDF descargable (ver
          scripts/generate-cv-pdf.js) — antes existían dos archivos casi
@@ -383,14 +383,22 @@
           max-width: 100%;
           padding: 0;
         }
-        section {
-          break-inside: avoid;
-        }
+        /* OJO: "section" (Experiencia laboral, Educación, etc.) NO lleva
+           break-inside: avoid — son secciones largas con muchos items, y
+           evitar que se corten obliga a empujar la sección COMPLETA a la
+           página siguiente si no entra entera, dejando huecos enormes en
+           blanco (mal para un CV: parece que solo hay 1 página y listo).
+           Solo se evita cortar los items chicos de adentro (.entry,
+           .skills-group), para que al menos no corten un bullet a la
+           mitad — la sección en sí puede fluir entre páginas. */
         .entry {
           break-inside: avoid;
         }
         .skills-group {
           break-inside: avoid;
+        }
+        h2 {
+          break-after: avoid;
         }
         a {
           color: inherit !important;

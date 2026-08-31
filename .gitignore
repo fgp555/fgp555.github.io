@@ -22,4 +22,8 @@ dev.html
 *.private*
 *.temp.*
 
+# Credenciales de LinkedIn (scripts/linkedin) — nunca subir
+.env
+scripts/linkedin/.env
+
 # *.docx

@@ -219,6 +219,33 @@ const SITE_DATA = {
       },
     },
     {
+      date: { es: "AGO 2026", en: "AUG 2026" },
+      role: { es: "Proyecto DevOps Personal", en: "Personal DevOps Project" },
+      org: { es: "Monitor de Disponibilidad Web", en: "Web Uptime Monitor" },
+      desc: {
+        es: "Microservicio serverless en AWS que monitorea la disponibilidad de sitios web de forma programada y envía alertas por email ante caídas o recuperaciones, con el estado persistido en DynamoDB.",
+        en: "Serverless AWS microservice that monitors website uptime on a schedule and sends email alerts on outages or recoveries, with status persisted in DynamoDB.",
+      },
+      bullets: {
+        es: [
+          "Desarrollé un microservicio serverless en AWS (Lambda) que revisa la disponibilidad de varios sitios web en paralelo, con manejo de timeouts y detección de bloqueos de Cloudflare para evitar falsos positivos.",
+          "Programé la ejecución automática mediante EventBridge (regla programada) y expuse una API Gateway para invocación manual.",
+          "Persistí el estado de cada sitio (activo/caído, desde cuándo) en DynamoDB, para detectar cambios de estado entre revisiones.",
+          "Envié alertas automáticas por email ante caídas y recuperaciones, incluyendo el tiempo de inactividad calculado.",
+          "Definí toda la infraestructura como código con Terraform (Lambda, API Gateway, EventBridge, DynamoDB, IAM).",
+          "Monitoreo y debugging de la ejecución vía CloudWatch Logs.",
+        ],
+        en: [
+          "Developed a serverless AWS microservice (Lambda) that checks multiple websites' availability in parallel, with timeout handling and Cloudflare-block detection to avoid false positives.",
+          "Scheduled automatic execution via EventBridge (scheduled rule) and exposed an API Gateway endpoint for manual invocation.",
+          "Persisted each site's state (up/down, since when) in DynamoDB, to detect status changes between checks.",
+          "Sent automated email alerts on outages and recoveries, including calculated downtime.",
+          "Defined the entire infrastructure as code with Terraform (Lambda, API Gateway, EventBridge, DynamoDB, IAM).",
+          "Monitored and debugged execution via CloudWatch Logs.",
+        ],
+      },
+    },
+    {
       date: { es: "JUL — DIC 2025", en: "JUL — DEC 2025" },
       role: { es: "Full Stack & Mobile Developer", en: "Full Stack & Mobile Developer" },
       org: "Mix&Match Outfit Planner (Argentina) · Freelancer",
