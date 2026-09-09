@@ -17,7 +17,7 @@ const stackYears = new Date().getFullYear() - STACK_SINCE_YEAR;
 
 const SITE_DATA = {
   name: "Franklin Gomez Pacoricona",
-  title: "Full Stack & Mobile Developer",
+  title: "Full Stack Engineer — Backend & Cloud Focused",
 
   email: { user: "fgp555", domain: "gmail.com" },
   whatsappNumber: "51918221790",

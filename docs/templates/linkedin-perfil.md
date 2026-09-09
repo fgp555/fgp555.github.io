@@ -9,10 +9,10 @@
 
 ## Titular (headline)
 
-_127 / 220 caracteres (límite de LinkedIn)_
+_143 / 220 caracteres (límite de LinkedIn)_
 
 ```
-Full Stack & Mobile Developer | TypeScript, React, React Native, NestJS, AWS | Construyo desde la arquitectura hasta producción
+Full Stack Engineer — Backend & Cloud Focused | TypeScript, React, React Native, NestJS, AWS | Construyo desde la arquitectura hasta producción
 ```
 
 ## Acerca de
