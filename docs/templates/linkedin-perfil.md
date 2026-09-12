@@ -57,6 +57,7 @@ Portafolio: frankgp.com/portfolio/ · CV: frankgp.com/cv/
 • Envié alertas automáticas por email ante caídas y recuperaciones, incluyendo el tiempo de inactividad calculado.
 • Definí toda la infraestructura como código con Terraform (Lambda, API Gateway, EventBridge, DynamoDB, IAM).
 • Monitoreo y debugging de la ejecución vía CloudWatch Logs.
+• Desarrollé el proyecto usando Claude Code como herramienta de IA agéntica en el flujo de trabajo diario (implementación, debugging e infraestructura como código).
 ```
 
 ### Full Stack & Mobile Developer — Mix&Match Outfit Planner (Argentina) · Freelancer
@@ -72,6 +73,9 @@ Portafolio: frankgp.com/portfolio/ · CV: frankgp.com/cv/
 • Configuré entorno productivo en VPS Linux con dominio, SSL y despliegue continuo.
 • Implementé push notifications en la app móvil para mejorar el engagement y la retención de usuarios.
 • Desarrollé panel de administración (dashboard) en el frontend para gestión de usuarios y contenido, usando TanStack Query para el manejo eficiente de datos asíncronos y caché.
+• Gestioné el estado global de la aplicación combinando Redux Toolkit, Zustand y Context API según el caso de uso.
+• Guardé tokens de sesión con expo-secure-store (Keychain en iOS, Keystore en Android) en vez de almacenamiento plano.
+• Compilé y publiqué la app con EAS Build y EAS Update (Expo), incluyendo builds de iOS alquilando una instancia macOS en Scaleway al no contar con hardware Mac propio.
 • Agregué feature de etiquetas (tags) para prendas, mejorando la organización y búsqueda dentro del armario virtual.
 • Implementé rutina de limpieza para eliminar automáticamente usuarios inactivos con más de 90 días sin actividad, optimizando la base de datos.
 • Producto lanzado en producción alcanzando +10,000 usuarios en los primeros 2 meses, y en mantenimiento y evolución continua desde entonces.
@@ -85,6 +89,7 @@ Portafolio: frankgp.com/portfolio/ · CV: frankgp.com/cv/
 • Implementé WebSockets para actualizaciones en tiempo real.
 • Integré push notifications en la aplicación móvil.
 • Automaticé notificaciones transaccionales mediante integración con WhatsApp API.
+• Gestioné el estado de la aplicación móvil con Redux Toolkit, Zustand y Context API según el caso, y usé EAS Build/EAS Update (Expo) para la compilación y distribución de builds.
 • Publicación en Google Play Store y despliegue web en producción.
 • Diseñé infraestructura como código (IaC) con Terraform, estructurando módulos reutilizables consumidos por múltiples entornos (dev/prod).
 • Aprovisioné y administré recursos en AWS (EC2, RDS, S3, IAM, Security Groups, Systems Manager) mediante Terraform.
@@ -186,6 +191,12 @@ Portafolio: frankgp.com/portfolio/ · CV: frankgp.com/cv/
 **Mobile**
 - [ ] React Native
 - [ ] Expo
+- [ ] EAS Build
+- [ ] EAS Update
+- [ ] React Navigation
+- [ ] Redux Toolkit
+- [ ] Zustand
+- [ ] Context API
 - [ ] Google Play Store
 - [ ] Apple App Store
 - [ ] Push Notifications
@@ -226,3 +237,6 @@ Portafolio: frankgp.com/portfolio/ · CV: frankgp.com/cv/
 **Testing**
 - [ ] Jest
 - [ ] Supertest
+
+**IA & Desarrollo Asistido**
+- [ ] Claude Code
