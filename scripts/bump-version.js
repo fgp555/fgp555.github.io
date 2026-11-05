@@ -19,7 +19,7 @@ const files = [
   "services/index.html",
 ];
 
-const root = path.join(__dirname, "..");
+const root = path.join(__dirname, "..", "web");
 
 files.forEach((file) => {
   const filePath = path.join(root, file);

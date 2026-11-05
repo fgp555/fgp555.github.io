@@ -29,3 +29,6 @@ scripts/linkedin/.env
 # *.docx
 
 .claude/
+# Favicon público incluido en el sitio
+!/web/favicon-512.webp
+/_site/

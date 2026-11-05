@@ -1,6 +1,6 @@
 // Genera docs/templates/linkedin-perfil.md — el texto de "Acerca de" y
 // "Experiencia" listo para copiar/pegar directo a tu perfil de LinkedIn,
-// generado desde assets/js/data.js (misma fuente que el CV). Corré esto
+// generado desde web/assets/js/data.js (misma fuente que el CV). Corré esto
 // de nuevo cada vez que actualices data.js para tener el bloque al día.
 //
 // Uso: npm run linkedin:profile
@@ -8,7 +8,7 @@ const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 
-const DATA_JS_PATH = path.join(__dirname, "..", "..", "assets", "js", "data.js");
+const DATA_JS_PATH = path.join(__dirname, "..", "..", "web", "assets", "js", "data.js");
 const OUT_PATH = path.join(__dirname, "..", "..", "docs", "templates", "linkedin-perfil.md");
 
 // data.js declara `const SITE_DATA = {...}` y `function pick(...)` como
@@ -80,7 +80,7 @@ function main() {
 
   const md = `# Perfil de LinkedIn — listo para copiar/pegar
 
-> Generado automáticamente desde \`assets/js/data.js\` — no editar a mano,
+> Generado automáticamente desde \`web/assets/js/data.js\` — no editar a mano,
 > volver a correr \`npm run linkedin:profile\` después de actualizar el CV.
 > Los bloques de texto (Titular, Acerca de, cada Experiencia/Educación)
 > están pensados para copiar tal cual al campo correspondiente en
@@ -105,7 +105,7 @@ ${about}
 
 ## Experiencia
 
-${data.experience.map(buildExperienceEntry).join("\n\n")}
+${data.experienceCV.map(buildExperienceEntry).join("\n\n")}
 
 ## Educación
 

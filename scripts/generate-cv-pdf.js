@@ -1,4 +1,4 @@
-// Genera los PDFs del CV a partir de cv/index.html (única fuente para la
+// Genera los PDFs del CV a partir de web/cv/index.html (única fuente para la
 // versión web Y el PDF — antes eran dos archivos casi duplicados) usando
 // Chromium headless (Playwright) — mismo motor de "imprimir" del navegador,
 // así que el PDF resultante tiene texto real (seleccionable, buscable,
@@ -10,11 +10,11 @@
 //   - cv_franklin_gomez_fullstack.pdf     (español, el que enlaza el sitio)
 //   - cv_franklin_gomez_fullstack_en.pdf  (inglés, para postulaciones en ese idioma)
 //
-// Correr desde la raíz del repo: npm run cv:pdf
+// Correr desde la raíz del repo: npm run build:pdf
 const path = require("path");
 const { chromium } = require("playwright");
 
-const OUT_DIR = path.join(__dirname, "..", "cv");
+const OUT_DIR = path.join(__dirname, "..", "web", "cv");
 const SOURCE_URL = "file://" + path.join(OUT_DIR, "index.html").replace(/\\/g, "/");
 
 const TARGETS = [
