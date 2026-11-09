@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detector Fibra Óptica - CTR</title>
+  <meta name="description" content="Extensión de Chrome para identificar ofertas de fibra óptica en CTR durante la llamada.">
+  <link rel="canonical" href="https://frankgp.com/fibra-detector/">
+  <link rel="icon" href="icono.png" type="image/png">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #20242c;
+      --muted: #555d69;
+      --red: #b5241a;
+      --soft: #fff2ef;
+      --line: #e8e1de;
+      font: 16px/1.55 system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: #fbf9f7; color: var(--ink); }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { line-height: 1.15; }
+    h1 { max-width: 14ch; font-size: clamp(2.65rem, 5vw, 4.7rem); letter-spacing: -.06em; }
+    h2 { font-size: clamp(1.55rem, 3vw, 2.25rem); letter-spacing: -.035em; }
+    h3 { font-size: 1.06rem; }
+    a { color: var(--red); text-underline-offset: .2em; }
+    :focus-visible { outline: 3px solid #255fc3; outline-offset: 5px; }
+    .wrap { width: min(100% - 2rem, 68rem); margin-inline: auto; }
+    .top { border-bottom: 1px solid var(--line); }
+    .top .wrap, .footer .wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: .75rem 1.25rem;
+      padding-block: 1rem;
+    }
+    .brand { display: inline-flex; align-items: center; gap: .65rem; font-weight: 700; }
+    .top a { font-weight: 650; }
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: clamp(1.5rem, 5vw, 4.5rem);
+      padding-block: clamp(2.75rem, 7vw, 6rem);
+    }
+    .eyebrow { color: var(--red); font-size: .78rem; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+    .hero h1 { margin-block: .55rem 1rem; }
+    .intro { max-width: 37ch; color: var(--muted); font-size: 1.13rem; }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      margin-top: 1.35rem;
+      padding: .75rem 1.05rem;
+      border-radius: .7rem;
+      background: var(--red);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .cta:hover { background: #931b13; }
+    .preview { margin: 0; }
+    .window {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 1.15rem;
+      background: #f5ece8;
+      box-shadow: 0 1rem 2.5rem #41241b14;
+    }
+    .window-bar { padding: .75rem 1rem; background: white; font-size: .85rem; font-weight: 650; }
+    .example { display: grid; gap: 1rem; padding: clamp(.85rem, 3vw, 1.65rem); }
+    .offer { color: #534640; font-size: .88rem; }
+    .offer strong { display: block; color: var(--red); }
+    .alert {
+      border-top: .3rem solid var(--red);
+      border-radius: .75rem;
+      padding: 1.25rem 1rem;
+      background: white;
+      text-align: center;
+    }
+    .alert h2 { margin-block: .35rem; font-size: 1.27rem; letter-spacing: -.02em; }
+    .alert p { color: var(--muted); font-size: .92rem; }
+    .alert-action {
+      display: inline-block;
+      margin-top: .9rem;
+      border-radius: .5rem;
+      padding: .4rem .8rem;
+      background: var(--red);
+      color: white;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+    figcaption { margin-top: .65rem; color: var(--muted); font-size: .84rem; }
+    .demo-video { padding-bottom: clamp(2rem, 5vw, 3.5rem); }
+    .demo-video video { display: block; width: 100%; max-width: 56rem; aspect-ratio: 16 / 9; margin-inline: auto; border-radius: 1rem; background: #20242c; }
+    .install { border-top: 1px solid var(--line); padding-block: clamp(2rem, 5vw, 3.5rem); }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.25rem 0 0; padding: 0; }
+    .steps li { list-style: none; border: 1px solid var(--line); border-radius: .85rem; padding: 1rem; background: white; }
+    .step-number { display: inline-grid; place-items: center; width: 2rem; height: 2rem; margin-bottom: .7rem; border-radius: 50%; background: var(--soft); color: var(--red); font-weight: 750; }
+    .steps p, .details p { margin-top: .55rem; color: var(--muted); }
+    .details { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2.5rem; padding: 1.5rem; margin-bottom: 3rem; border-radius: 1rem; background: var(--soft); }
+    .details h2 { font-size: 1.3rem; }
+    .tools { margin-bottom: 3rem; }
+    .tool-card {
+      display: block;
+      max-width: 34rem;
+      margin-top: 1rem;
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--line);
+      border-radius: .85rem;
+      background: white;
+      text-decoration: none;
+    }
+    .tool-card:hover { border-color: var(--red); }
+    .tool-card h3 { text-decoration: underline; text-underline-offset: .2em; }
+    .tool-card p { margin-top: .4rem; color: var(--muted); }
+    .footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+    @media (max-width: 740px) {
+      .hero, .details { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 420px) {
+      .steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <span class="brand"><img src="icono.png" width="32" height="32" alt=""> Detector Fibra Óptica</span>
+      <a href="#instalacion">Cómo instalar</a>
+    </div>
+  </header>
+  <main>
+    <section class="hero wrap" aria-labelledby="titulo">
+      <div>
+        <p class="eyebrow">Extensión para Chrome</p>
+        <h1 id="titulo">Detector Fibra Óptica - CTR</h1>
+        <p class="intro">Recibe una alerta cuando la consulta de ofertas de CTR incluya «Fibra Óptica» y ofrece la actualización durante la llamada.</p>
+        <a class="cta" href="https://chromewebstore.google.com/detail/nnlnfpcociingfjgjfkieldhhhmgpckl">Añadir a Chrome <span aria-hidden="true">↗</span></a>
+      </div>
+      <figure class="preview">
+        <div class="window">
+          <div class="window-bar">CTR · Consulta de ofertas</div>
+          <div class="example">
+            <p class="offer">Recomendación de ejemplo<strong>Actualización de Internet a Fibra Óptica</strong></p>
+            <div class="alert">
+              <span aria-hidden="true">📡</span>
+              <h2>¡Oportunidad única!</h2>
+              <p>Ofrece la actualización a fibra óptica.</p>
+              <span class="alert-action" aria-hidden="true">Entendido</span>
+            </div>
+          </div>
+        </div>
+        <figcaption>Vista ilustrativa de la alerta con una oferta ficticia.</figcaption>
+      </figure>
+    </section>
+    <section class="demo-video wrap" aria-label="Demostración de Detector Fibra Óptica">
+      <video autoplay muted loop playsinline aria-label="Video de demostración">
+        <source src="https://cdn.frankgp.com/call/demo-fibra-detector.mp4" type="video/mp4">
+      </video>
+    </section>
+    <section class="install wrap" id="instalacion" aria-labelledby="pasos">
+      <h2 id="pasos">Instalación en cuatro pasos</h2>
+      <ol class="steps" role="list">
+        <li><span class="step-number" aria-hidden="true">1</span><h3>Abre la ficha</h3><p>Entra en Chrome Web Store desde el botón de arriba.</p></li>
+        <li><span class="step-number" aria-hidden="true">2</span><h3>Añade la extensión</h3><p>Pulsa <strong>Añadir a Chrome</strong>.</p></li>
+        <li><span class="step-number" aria-hidden="true">3</span><h3>Confirma</h3><p>Selecciona <strong>Agregar extensión</strong> en el aviso de Chrome.</p></li>
+        <li><span class="step-number" aria-hidden="true">4</span><h3>Actualiza CTR</h3><p>Recarga la pestaña de consulta de ofertas y realiza una consulta.</p></li>
+      </ol>
+    </section>
+    <div class="details wrap">
+      <section aria-labelledby="configuracion">
+        <h2 id="configuracion">Cambia el texto a detectar</h2>
+        <p>Abre el menú de la extensión, escribe una palabra o frase y pulsa <strong>Guardar</strong>. <strong>Restablecer</strong> recupera «Fibra Óptica».</p>
+      </section>
+      <section aria-labelledby="privacidad">
+        <h2 id="privacidad">Privacidad</h2>
+        <p>La extensión analiza el texto visible de las consultas en tu navegador. Solo guarda localmente la frase configurada y no envía el contenido de CTR a servidores externos.</p>
+      </section>
+    </div>
+    <section class="tools wrap" aria-labelledby="herramientas">
+      <h2 id="herramientas">Más herramientas del autor</h2>
+      <a class="tool-card" href="https://frankgp.com/app/password-manager/">
+        <h3>Password Manager <span aria-hidden="true">↗</span></h3>
+        <p>Gestor de contraseñas de Frank GP.</p>
+      </a>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="wrap">
+      <p>Créditos · <strong>Frank GP &amp; Mirella</strong></p>
+      <p>Herramienta de apoyo interno para asesores de call center.</p>
+    </div>
+  </footer>
+</body>
+</html>
