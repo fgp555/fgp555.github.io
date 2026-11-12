@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Herramientas | Frank GP</title>
+  <meta name="description" content="Explora las aplicaciones y extensiones creadas por Frank GP. Herramientas prácticas para organizar información y facilitar tareas cotidianas.">
+  <link rel="canonical" href="https://frankgp.com/app/">
+  <link rel="icon" href="../favicon-512.webp" type="image/webp">
+  <script src="catalog.js"></script>
+  <link rel="stylesheet" href="catalog.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Ir al contenido</a>
+  <header class="site-header"><div class="container header-inner"><a class="brand" href="../"><span class="brand-symbol" aria-hidden="true">F.</span><span>Frank GP<small>Herramientas</small></span></a><div class="header-actions"><a href="../">Ver portafolio <span aria-hidden="true">↗</span></a><button id="theme-toggle" type="button" aria-label="Cambiar tema" title="Cambiar tema" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.1A8.5 8.5 0 0 1 10.9 3.5 8.5 8.5 0 1 0 20.5 13.1Z" /></svg></button></div></div></header>
+  <main id="contenido" class="container">
+    <section class="intro" aria-labelledby="page-title"><p class="eyebrow">APLICACIONES &amp; EXTENSIONES</p><h1 id="page-title">Pequeñas herramientas.<br><span>Menos pasos en tu día.</span></h1><p class="intro-copy">Un lugar para encontrar las aplicaciones que voy creando. Explora lo que hacen y abre la que necesitas.</p></section>
+    <section aria-labelledby="catalog-title" class="catalog-section">
+      <div class="catalog-heading"><h2 id="catalog-title">Explora las herramientas</h2><span class="tool-count" id="tool-count" role="status" aria-live="polite">2 herramientas</span></div>
+      <div class="search-toolbar" id="search-toolbar" hidden><label for="tool-search" class="search-field"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 4.5 4.5" /></svg><span class="visually-hidden">Buscar herramientas</span><input id="tool-search" type="search" placeholder="Buscar por nombre o función…" autocomplete="off" aria-controls="tool-grid"></label></div>
+      <div class="tool-grid" id="tool-grid">
+        <!-- Para agregar una herramienta, añade otro article.tool-card con su nombre, descripción y enlace. La búsqueda y el contador se actualizan solos. -->
+        <article class="tool-card" data-keywords="password manager contraseñas credenciales bóveda organización seguridad web">
+          <div class="card-top"><span class="tool-icon password-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2" /></svg></span><span class="tool-type">Aplicación web</span></div>
+          <h3><a href="password-manager/">Password Manager</a></h3><p class="card-description">Organiza tus credenciales en una bóveda local y consulta tus registros desde el navegador.</p>
+          <div class="card-bottom"><span>Organización personal</span><a class="card-action" href="password-manager/" aria-label="Abrir Password Manager">Abrir herramienta <span aria-hidden="true">↗</span></a></div>
+        </article>
+        <article class="tool-card" data-keywords="detector fibra óptica optica ctr call project asesor ofertas chrome edge extensión">
+          <div class="card-top"><span class="tool-icon fiber-icon"><img src="../fibra-detector/icono.png" width="40" height="40" alt=""></span><span class="tool-type">Extensión de navegador</span></div>
+          <h3><a href="../fibra-detector/">Detector Fibra Óptica</a></h3><p class="card-description">Identifica ofertas de fibra en CTR con una alerta visual y registra el resultado para su seguimiento.</p>
+          <div class="card-bottom"><span>Chrome · Microsoft Edge</span><a class="card-action" href="../fibra-detector/" aria-label="Conocer Detector Fibra Óptica">Conocer extensión <span aria-hidden="true">↗</span></a></div>
+        </article>
+      </div>
+      <div class="empty-state" id="empty-state" hidden><h3>No encontramos esa herramienta</h3><p>Prueba con otro nombre o una palabra más general.</p><button id="clear-search" type="button">Mostrar todas</button></div>
+    </section>
+    <aside class="collection-note"><span class="note-symbol" aria-hidden="true">+</span><div><h2>Una colección que sigue creciendo.</h2><p>Las nuevas herramientas se incorporarán aquí cuando estén disponibles.</p></div></aside>
+  </main>
+  <footer class="site-footer"><div class="container"><p>Diseñado y desarrollado por <a href="../">Frank GP</a>.</p><p>Herramientas para resolver tareas reales.</p></div></footer>
+</body>
+</html>

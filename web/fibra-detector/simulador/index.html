@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Demostración | Detector Fibra Óptica - CTR</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="simulator.js" defer></script>
+</head>
+<body>
+  <header class="site-header"><a href="../">Detector Fibra Óptica - CTR</a><span>Demostración pública</span></header>
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <span class="eyebrow">Acceso de revisión · Sin VPN ni contraseña</span>
+      <h1 id="page-title">Prueba la extensión con datos ficticios</h1>
+      <p>Esta página reproduce la consulta de ofertas. No pertenece al sistema CTR real y no contiene datos de clientes ni credenciales.</p>
+      <ol><li>Instala la versión 1.0.5 enviada a revisión y recarga esta página.</li><li>Elige un caso y pulsa <strong>Buscar</strong> o Enter.</li><li>Con fibra, la extensión resalta la fila y muestra «¡Oportunidad única!».</li><li>Abre el icono de la extensión para declarar Venta realizada o Sin venta. Pulsa de nuevo para regresar a Pendiente.</li></ol>
+      <p class="notice">La página no genera alertas ni envía peticiones a Call Project por sí misma. La extensión instalada puede enviar presencia, detecciones y resultados con el ID ficticio E9800001. No ingreses datos reales.</p>
+    </section>
+    <app-cabecera-menu><div class="session-info"><div><strong>Consulta de ofertas</strong><p>Entorno de demostración</p></div><div class="inner-div">👤 E9800001 - ALEX DEMOSTRACION</div></div></app-cabecera-menu>
+    <app-consulta-ofertas>
+      <section class="workspace" aria-labelledby="search-title">
+        <h2 id="search-title">Consulta de prueba</h2>
+        <div class="cases" role="group" aria-label="Casos de prueba">
+          <button type="button" class="case" data-case="fiber" aria-pressed="true">Con fibra</button>
+          <button type="button" class="case" data-case="without-fiber" aria-pressed="false">Sin fibra</button>
+          <button type="button" class="case" data-case="second-fiber" aria-pressed="false">Otro cliente con fibra</button>
+        </div>
+        <form id="search-form">
+          <label>Tipo<select name="documentType"><option>DNI</option></select></label>
+          <label>Documento ficticio<input id="documentNumber" name="documentNumber" value="00000001" readonly></label>
+          <label>Línea ficticia<input id="line" name="line" value="" readonly></label>
+          <button class="primary" type="submit">Buscar</button>
+          <button type="button" id="clear">Limpiar</button>
+        </form>
+        <p id="search-status" role="status">Caso preparado. Pulsa Buscar.</p>
+        <section class="client-data" aria-label="Datos ficticios del cliente" hidden><h3>Datos del cliente</h3><p id="client-name"></p><p id="client-reference"></p></section>
+        <div class="table-wrapper"><table aria-label="Recomendaciones de la consulta"><thead><tr><th>Línea</th><th>Cuenta</th><th>Contrato</th><th>Recomendación</th></tr></thead><tbody id="recommendations"></tbody></table></div>
+      </section>
+    </app-consulta-ofertas>
+    <footer>La detección visual funciona aunque Call Project no esté disponible. El envío y el seguimiento requieren conexión. <a href="../privacy-policy.html">Política de privacidad</a></footer>
+  </main>
+</body>
+</html>
