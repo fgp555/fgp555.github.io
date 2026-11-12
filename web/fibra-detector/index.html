@@ -4,196 +4,72 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Detector Fibra Óptica - CTR</title>
-  <meta name="description" content="Extensión de Chrome para identificar ofertas de fibra óptica en CTR durante la llamada.">
+  <meta name="description" content="Identifica ofertas de fibra óptica en CTR, recibe una alerta y registra el resultado en Call Project. Para Chrome y Microsoft Edge.">
   <link rel="canonical" href="https://frankgp.com/fibra-detector/">
   <link rel="icon" href="icono.png" type="image/png">
-  <style>
-    :root {
-      color-scheme: light;
-      --ink: #20242c;
-      --muted: #555d69;
-      --red: #b5241a;
-      --soft: #fff2ef;
-      --line: #e8e1de;
-      font: 16px/1.55 system-ui, sans-serif;
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    body { margin: 0; background: #fbf9f7; color: var(--ink); }
-    h1, h2, h3, p { margin: 0; }
-    h1, h2, h3 { line-height: 1.15; }
-    h1 { max-width: 14ch; font-size: clamp(2.65rem, 5vw, 4.7rem); letter-spacing: -.06em; }
-    h2 { font-size: clamp(1.55rem, 3vw, 2.25rem); letter-spacing: -.035em; }
-    h3 { font-size: 1.06rem; }
-    a { color: var(--red); text-underline-offset: .2em; }
-    :focus-visible { outline: 3px solid #255fc3; outline-offset: 5px; }
-    .wrap { width: min(100% - 2rem, 68rem); margin-inline: auto; }
-    .top { border-bottom: 1px solid var(--line); }
-    .top .wrap, .footer .wrap {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: .75rem 1.25rem;
-      padding-block: 1rem;
-    }
-    .brand { display: inline-flex; align-items: center; gap: .65rem; font-weight: 700; }
-    .top a { font-weight: 650; }
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: clamp(1.5rem, 5vw, 4.5rem);
-      padding-block: clamp(2.75rem, 7vw, 6rem);
-    }
-    .eyebrow { color: var(--red); font-size: .78rem; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
-    .hero h1 { margin-block: .55rem 1rem; }
-    .intro { max-width: 37ch; color: var(--muted); font-size: 1.13rem; }
-    .cta {
-      display: inline-flex;
-      align-items: center;
-      gap: .6rem;
-      margin-top: 1.35rem;
-      padding: .75rem 1.05rem;
-      border-radius: .7rem;
-      background: var(--red);
-      color: white;
-      text-decoration: none;
-      font-weight: 700;
-    }
-    .cta:hover { background: #931b13; }
-    .preview { margin: 0; }
-    .window {
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 1.15rem;
-      background: #f5ece8;
-      box-shadow: 0 1rem 2.5rem #41241b14;
-    }
-    .window-bar { padding: .75rem 1rem; background: white; font-size: .85rem; font-weight: 650; }
-    .example { display: grid; gap: 1rem; padding: clamp(.85rem, 3vw, 1.65rem); }
-    .offer { color: #534640; font-size: .88rem; }
-    .offer strong { display: block; color: var(--red); }
-    .alert {
-      border-top: .3rem solid var(--red);
-      border-radius: .75rem;
-      padding: 1.25rem 1rem;
-      background: white;
-      text-align: center;
-    }
-    .alert h2 { margin-block: .35rem; font-size: 1.27rem; letter-spacing: -.02em; }
-    .alert p { color: var(--muted); font-size: .92rem; }
-    .alert-action {
-      display: inline-block;
-      margin-top: .9rem;
-      border-radius: .5rem;
-      padding: .4rem .8rem;
-      background: var(--red);
-      color: white;
-      font-size: .85rem;
-      font-weight: 700;
-    }
-    figcaption { margin-top: .65rem; color: var(--muted); font-size: .84rem; }
-    .demo-video { padding-bottom: clamp(2rem, 5vw, 3.5rem); }
-    .demo-video video { display: block; width: 100%; max-width: 56rem; aspect-ratio: 16 / 9; margin-inline: auto; border-radius: 1rem; background: #20242c; }
-    .install { border-top: 1px solid var(--line); padding-block: clamp(2rem, 5vw, 3.5rem); }
-    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.25rem 0 0; padding: 0; }
-    .steps li { list-style: none; border: 1px solid var(--line); border-radius: .85rem; padding: 1rem; background: white; }
-    .step-number { display: inline-grid; place-items: center; width: 2rem; height: 2rem; margin-bottom: .7rem; border-radius: 50%; background: var(--soft); color: var(--red); font-weight: 750; }
-    .steps p, .details p { margin-top: .55rem; color: var(--muted); }
-    .details { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2.5rem; padding: 1.5rem; margin-bottom: 3rem; border-radius: 1rem; background: var(--soft); }
-    .details h2 { font-size: 1.3rem; }
-    .tools { margin-bottom: 3rem; }
-    .tool-card {
-      display: block;
-      max-width: 34rem;
-      margin-top: 1rem;
-      padding: 1rem 1.2rem;
-      border: 1px solid var(--line);
-      border-radius: .85rem;
-      background: white;
-      text-decoration: none;
-    }
-    .tool-card:hover { border-color: var(--red); }
-    .tool-card h3 { text-decoration: underline; text-underline-offset: .2em; }
-    .tool-card p { margin-top: .4rem; color: var(--muted); }
-    .footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
-    @media (max-width: 740px) {
-      .hero, .details { grid-template-columns: 1fr; }
-      .steps { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 420px) {
-      .steps { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link rel="stylesheet" href="landing.css">
 </head>
 <body>
-  <header class="top">
-    <div class="wrap">
-      <span class="brand"><img src="icono.png" width="32" height="32" alt=""> Detector Fibra Óptica</span>
-      <a href="#instalacion">Cómo instalar</a>
-    </div>
-  </header>
-  <main>
-    <section class="hero wrap" aria-labelledby="titulo">
-      <div>
-        <p class="eyebrow">Extensión para Chrome</p>
-        <h1 id="titulo">Detector Fibra Óptica - CTR</h1>
-        <p class="intro">Recibe una alerta cuando la consulta de ofertas de CTR incluya «Fibra Óptica» y ofrece la actualización durante la llamada.</p>
-        <a class="cta" href="https://chromewebstore.google.com/detail/nnlnfpcociingfjgjfkieldhhhmgpckl">Añadir a Chrome <span aria-hidden="true">↗</span></a>
+  <a class="skip-link" href="#contenido">Ir al contenido</a>
+  <header class="site-header"><div class="container header-inner">
+    <a class="brand" href="./"><img src="icono.png" width="40" height="40" alt=""><span>Detector Fibra Óptica<small>Una oportunidad mejor atendida.</small></span></a>
+    <nav aria-label="Navegación principal"><a href="#como-funciona">Cómo funciona</a><a href="#instalacion">Instalación</a><a class="nav-demo" href="simulador/">Probar demo ↗</a></nav>
+  </div></header>
+  <main id="contenido">
+    <section class="hero container" aria-labelledby="titulo">
+      <div class="hero-copy">
+        <p class="eyebrow"><span aria-hidden="true"></span> Extensión para asesores · CTR</p>
+        <h1 id="titulo">La oportunidad aparece.<br><em>Tú no la dejas pasar.</em></h1>
+        <p class="hero-description">Si una oferta de CTR incluye fibra óptica, recibe una alerta visual para ofrecerla durante la llamada. Después, registra el resultado y continúa atendiendo.</p>
+        <div class="hero-actions"><a class="button primary" href="https://chromewebstore.google.com/detail/nnlnfpcociingfjgjfkieldhhhmgpckl">Instalar extensión <span aria-hidden="true">↗</span></a><a class="button secondary" href="simulador/">Explorar la demo <span aria-hidden="true">→</span></a></div>
+        <div class="compatibility"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></svg><p>Google Chrome y Microsoft Edge<small>En escritorio · Requiere acceso autorizado a CTR</small></p></div>
       </div>
-      <figure class="preview">
-        <div class="window">
-          <div class="window-bar">CTR · Consulta de ofertas</div>
-          <div class="example">
-            <p class="offer">Recomendación de ejemplo<strong>Actualización de Internet a Fibra Óptica</strong></p>
-            <div class="alert">
-              <span aria-hidden="true">📡</span>
-              <h2>¡Oportunidad única!</h2>
-              <p>Ofrece la actualización a fibra óptica.</p>
-              <span class="alert-action" aria-hidden="true">Entendido</span>
-            </div>
+      <figure class="product-preview">
+        <div class="preview-caption"><span>ASÍ SE VE EN TU CONSULTA</span><span class="preview-dot" aria-hidden="true"></span></div>
+        <div class="browser-window">
+          <div class="browser-top"><span class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="browser-address">CTR / Consulta de ofertas</span></div>
+          <div class="mock-workspace">
+            <div class="mock-title"><span>Recomendaciones</span><small>Consulta de ejemplo</small></div>
+            <div class="mock-row"><span class="offer-dot muted" aria-hidden="true"></span>Renovación de plan</div>
+            <div class="mock-row highlighted"><span class="offer-dot" aria-hidden="true"></span><span>Actualizar a <strong>Fibra Óptica</strong></span><span aria-hidden="true">✓</span></div>
+            <div class="mock-row"><span class="offer-dot muted" aria-hidden="true"></span>Mejora de velocidad</div>
+            <div class="sample-alert"><img src="icono.png" width="36" height="36" alt=""><h2>¡Oportunidad única!</h2><p>Ofrece la actualización a fibra óptica.</p><span class="sample-button">Entendido</span></div>
+            <div class="preview-result"><span class="result-check" aria-hidden="true">✓</span><div><strong>De la oferta al seguimiento</strong><small>Declara el resultado desde la extensión.</small></div></div>
           </div>
         </div>
-        <figcaption>Vista ilustrativa de la alerta con una oferta ficticia.</figcaption>
+        <figcaption>Vista ilustrativa con datos ficticios. <a href="simulador/">Prueba el flujo real →</a></figcaption>
       </figure>
     </section>
-    <section class="demo-video wrap" aria-label="Demostración de Detector Fibra Óptica">
-      <video autoplay muted loop playsinline aria-label="Video de demostración">
-        <source src="https://cdn.frankgp.com/call/demo-fibra-detector.mp4" type="video/mp4">
-      </video>
-    </section>
-    <section class="install wrap" id="instalacion" aria-labelledby="pasos">
-      <h2 id="pasos">Instalación en cuatro pasos</h2>
-      <ol class="steps" role="list">
-        <li><span class="step-number" aria-hidden="true">1</span><h3>Abre la ficha</h3><p>Entra en Chrome Web Store desde el botón de arriba.</p></li>
-        <li><span class="step-number" aria-hidden="true">2</span><h3>Añade la extensión</h3><p>Pulsa <strong>Añadir a Chrome</strong>.</p></li>
-        <li><span class="step-number" aria-hidden="true">3</span><h3>Confirma</h3><p>Selecciona <strong>Agregar extensión</strong> en el aviso de Chrome.</p></li>
-        <li><span class="step-number" aria-hidden="true">4</span><h3>Actualiza CTR</h3><p>Recarga la pestaña de consulta de ofertas y realiza una consulta.</p></li>
+    <section class="workflow container" id="como-funciona" aria-labelledby="workflow-title">
+      <div class="section-heading"><p class="eyebrow">Sin cambiar tu forma de atender</p><h2 id="workflow-title">Consulta. Detecta. Da seguimiento.</h2><p>La extensión acompaña la consulta que ya haces en CTR.</p></div>
+      <ol class="workflow-grid">
+        <li><span class="step-index">01</span><h3>Consulta la oferta</h3><p>Busca al cliente en CTR como siempre. La detección se vuelve a evaluar en cada consulta.</p></li>
+        <li><span class="step-index">02</span><h3>Identifica la oportunidad</h3><p>La fila con fibra óptica se resalta y una alerta te recuerda ofrecer la actualización.</p></li>
+        <li><span class="step-index">03</span><h3>Registra el resultado</h3><p>Marca Venta realizada o Sin venta en el popup. Tu supervisor puede seguir la gestión en Call Project.</p></li>
       </ol>
     </section>
-    <div class="details wrap">
-      <section aria-labelledby="configuracion">
-        <h2 id="configuracion">Cambia el texto a detectar</h2>
-        <p>Abre el menú de la extensión, escribe una palabra o frase y pulsa <strong>Guardar</strong>. <strong>Restablecer</strong> recupera «Fibra Óptica».</p>
-      </section>
-      <section aria-labelledby="privacidad">
-        <h2 id="privacidad">Privacidad</h2>
-        <p>La extensión analiza el texto visible de las consultas en tu navegador. Solo guarda localmente la frase configurada y no envía el contenido de CTR a servidores externos.</p>
-      </section>
-    </div>
-    <section class="tools wrap" aria-labelledby="herramientas">
-      <h2 id="herramientas">Más herramientas del autor</h2>
-      <a class="tool-card" href="https://frankgp.com/app/password-manager/">
-        <h3>Password Manager <span aria-hidden="true">↗</span></h3>
-        <p>Gestor de contraseñas de Frank GP.</p>
-      </a>
+    <section class="video-section container" aria-labelledby="video-title">
+      <div class="video-copy"><p class="eyebrow">Mírala en acción</p><h2 id="video-title">Una alerta pequeña.<br>Una ayuda en el momento justo.</h2><p>Así se presenta una oportunidad de fibra durante la consulta. La alerta principal es breve para que puedas volver a la atención.</p><a class="text-link" href="simulador/">Prefiero probar el simulador →</a></div>
+      <div class="video-frame"><video controls muted loop playsinline preload="none" aria-label="Demostración visual de la extensión; los pasos están descritos en Cómo funciona"><source src="https://cdn.frankgp.com/call/demo-fibra-detector.mp4" type="video/mp4">Tu navegador no puede reproducir el video. <a href="simulador/">Abre la demo interactiva</a>.</video><p>Demostración de uso · Puedes pausar o repetir el video.</p></div>
     </section>
+    <section class="capabilities container" aria-labelledby="capabilities-title">
+      <div class="section-heading"><p class="eyebrow">El seguimiento, conectado</p><h2 id="capabilities-title">Tú atiendes. Tu equipo tiene contexto.</h2></div>
+      <div class="feature-grid">
+        <article><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 16 0M8 12a4 4 0 0 1 8 0M12 12v8m-3 0h6"/></svg><h3>La alerta sigue funcionando</h3><p>Detecta la frase fija «FIBRA OPTICA» sin distinguir mayúsculas ni tildes. La alerta es local: si Call Project no está disponible, sigue funcionando y los envíos quedan pendientes.</p></article>
+        <article><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6M5 21h14"/></svg><h3>El resultado, en un clic</h3><p>Pendiente es el estado inicial. Elige Venta realizada o Sin venta; pulsa otra vez la opción seleccionada para corregirla y volver a Pendiente.</p></article>
+        <article><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3m2-17a3 3 0 0 1 0 6m1 4a5 5 0 0 1 3 4v3"/></svg><h3>Supervisión en Call Project</h3><p>Supervisores y administradores autorizados consultan detecciones, presencia y resultados según sus permisos. La vinculación de cuenta es opcional.</p></article>
+      </div>
+    </section>
+    <section class="installation container" id="instalacion" aria-labelledby="install-title">
+      <div class="install-heading"><p class="eyebrow">Empieza aquí</p><h2 id="install-title">Instala y vuelve a tu consulta.</h2><p>Disponible desde Chrome Web Store para Chrome y Edge de escritorio.</p><a class="button primary" href="https://chromewebstore.google.com/detail/nnlnfpcociingfjgjfkieldhhhmgpckl">Abrir Chrome Web Store ↗</a></div>
+      <div><ol class="install-steps">
+        <li><span>1</span><div><h3>Abre la ficha de la extensión</h3><p>Usa el botón de Chrome Web Store.</p></div></li>
+        <li><span>2</span><div><h3>Confirma la instalación</h3><p>Pulsa Añadir a Chrome y después Agregar extensión.</p></div></li>
+        <li><span>3</span><div><h3>Recarga la pestaña de CTR</h3><p>Realiza una nueva búsqueda para comenzar a detectar ofertas.</p></div></li>
+      </ol><details><summary>¿Usas Microsoft Edge?</summary><p>Abre la misma ficha desde Edge. Si lo solicita, permite extensiones de otras tiendas y confirma la instalación. Después, recarga CTR. Las políticas de tu organización pueden restringirla.</p><a href="https://support.microsoft.com/en-us/edge/add-turn-off-or-remove-extensions-in-microsoft-edge">Instrucciones de Microsoft ↗</a></details></div>
+    </section>
+    <section class="privacy-section container" aria-labelledby="privacy-title"><div><p class="eyebrow">Información y privacidad</p><h2 id="privacy-title">Qué se comparte con tu equipo.</h2><p>El seguimiento envía por HTTPS el ID y nombre observados del asesor, la referencia consultada, fechas, señales de presencia y el resultado declarado a Call Project. La extensión guarda información localmente para reintentar envíos pendientes.</p><p>En el backend, la referencia se protege mediante un hash y se conservan su tipo y últimos cuatro caracteres. La herramienta no verifica automáticamente una venta ni reemplaza el registro comercial oficial.</p><a class="text-link" href="privacy-policy.html">Leer la política de privacidad →</a></div><aside><img src="icono.png" width="40" height="40" alt=""><h3>¿Quieres conocerla primero?</h3><p>Prueba con y sin fibra en una página con datos ficticios, sin VPN ni acceso a CTR.</p><a class="button secondary" href="simulador/">Abrir simulador →</a></aside></section>
   </main>
-  <footer class="footer">
-    <div class="wrap">
-      <p>Créditos · <strong>Frank GP &amp; Mirella</strong></p>
-      <p>Herramienta de apoyo interno para asesores de call center.</p>
-    </div>
-  </footer>
+  <footer class="site-footer"><div class="container"><div class="footer-top"><span class="brand"><img src="icono.png" width="28" height="28" alt=""> Detector Fibra Óptica</span><nav aria-label="Enlaces del pie"><a href="privacy-policy.html">Privacidad</a><a href="https://call.frankgp.com">Call Project ↗</a><a href="https://frankgp.com/app/password-manager/">Más herramientas ↗</a></nav></div><div class="footer-bottom"><p>Creado por <strong>Frank GP &amp; Mirella</strong>.</p><p>Herramienta independiente. No está afiliada ni patrocinada por Claro.</p></div></div></footer>
 </body>
 </html>

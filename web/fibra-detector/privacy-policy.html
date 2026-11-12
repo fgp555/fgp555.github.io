@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Política de Privacidad — Detector Fibra Óptica - CTR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        max-width: 720px;
+        margin: 40px auto;
+        padding: 0 20px;
+        color: #222;
+        line-height: 1.6;
+      }
+      h1 {
+        color: #da291c;
+      }
+      h2 {
+        color: #333;
+        margin-top: 30px;
+      }
+      footer {
+        margin-top: 50px;
+        font-size: 13px;
+        color: #777;
+        border-top: 1px solid #ddd;
+        padding-top: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Política de Privacidad</h1>
+    <p>
+      <strong>Extensión:</strong> Detector Fibra Óptica - CTR<br />
+      <strong>Última actualización:</strong> 11 de noviembre de 2026
+    </p>
+
+    <h2>1. Propósito de la extensión</h2>
+    <p>
+      Detector Fibra Óptica - CTR es una extensión de navegador de uso interno que detecta automáticamente la frase
+      "Fibra Óptica" en la página de consulta de ofertas del sistema CTR y muestra una alerta visual al usuario cuando
+      dicha frase aparece en los resultados. También permite registrar y supervisar esas oportunidades en Call Project,
+      incluyendo la presencia del asesor y el resultado declarado de la oferta.
+    </p>
+
+    <h2>2. Datos que procesa la extensión</h2>
+    <p>
+      Para cumplir su propósito, la extensión lee el texto visible (contenido de la página) de la pestaña activa,
+      únicamente cuando el usuario se encuentra en el dominio del sistema de consulta de ofertas. Este procesamiento
+      de detección ocurre en el navegador. Para el seguimiento se envían por HTTPS el ID y nombre del asesor visibles en
+      CTR, la referencia consultada (documento o teléfono), un identificador de evento, fechas, señales de presencia y el
+      resultado declarado (pendiente, venta realizada o sin venta). No se envía el nombre del cliente ni la página completa.
+      El servidor recibe además los metadatos técnicos de la conexión, como la dirección IP. Las señales de presencia
+      indican actividad de CTR, no acreditan que una persona esté trabajando de manera continua.
+    </p>
+
+    <h2>3. Qué NO hace la extensión</h2>
+    <ul>
+      <li>
+        No lee contraseñas de CTR ni recopila información de salud, tarjetas bancarias, ubicación GPS o comunicaciones personales.
+      </li>
+      <li>Transmite los datos descritos al servicio Call Project para el seguimiento de oportunidades. El servicio utiliza proveedores de alojamiento y transporte, incluido Cloudflare, que procesan las solicitudes necesarias para prestar el servicio.</li>
+      <li>No utiliza cookies de seguimiento ni herramientas de analítica de terceros.</li>
+      <li>No vende datos ni los utiliza con fines publicitarios, crediticios o de préstamo.</li>
+      <li>No utiliza los datos para fines ajenos a detectar, registrar y supervisar las oportunidades de fibra.</li>
+    </ul>
+
+    <h2>4. Almacenamiento</h2>
+    <p>
+      Chrome o Edge almacenan localmente las ofertas, referencias consultadas, resultados, cola de envíos y, si existe
+      vinculación, la credencial de la instalación. La cola elimina un envío tras la confirmación del servidor; el registro
+      local de la oferta puede permanecer para conservar su resultado. Estos datos no tienen borrado automático por plazo
+      en la versión actual y se pueden eliminar borrando los datos de la extensión o desinstalándola.
+      El backend guarda la referencia protegida mediante HMAC y sus últimos cuatro caracteres, además del historial de
+      actividad. Los datos del servidor permanecen hasta su eliminación administrativa;
+      desinstalar la extensión no elimina los registros del servidor.
+    </p>
+
+    <h2>5. Permisos</h2>
+    <p>
+      El acceso al dominio claroterecomienda.com.pe y sus subdominios permite leer la identidad del asesor y los resultados
+      de consultas. El permiso de acceso al servicio Call Project permite enviar los eventos y tramitar la vinculación mediante HTTPS.
+      storage conserva la cola, ofertas y credenciales; alarms programa reintentos mientras el navegador está
+      abierto. La extensión no necesita acceso general al historial de navegación.
+    </p>
+
+    <h2>6. Acceso, autenticación y cambios a esta política</h2>
+    <p>El asesor se identifica automáticamente por el ID visible en CTR; opcionalmente puede autorizar una instalación
+      desde Call Project. La extensión guarda una credencial de instalación, no la contraseña de Google ni de CTR.
+      El dashboard requiere una cuenta autorizada: los administradores tienen acceso global y los supervisores acceden
+      según sus equipos. Los IDs aún no registrados se conservan pendientes de asignación.</p>
+    <p>
+      Cualquier cambio futuro en el funcionamiento de la extensión que afecte el tratamiento de datos será reflejado en
+      esta página.
+    </p>
+
+    <h2>7. Contacto</h2>
+    <p>
+      Responsable: Frank GP. Para consultas de privacidad, acceso o solicitudes de eliminación, escribe a
+      <a href="mailto:fgp555@gmail.com">fgp555@gmail.com</a> o contacta con el administrador de tu equipo.
+    </p>
+
+    <footer>
+      Este documento corresponde exclusivamente a la extensión "Detector Fibra Óptica - CTR", de uso interno y
+      restringido.
+    </footer>
+  </body>
+</html>
