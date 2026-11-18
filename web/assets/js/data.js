@@ -330,6 +330,40 @@ const SITE_DATA = {
   // Más reciente primero.
   experienceCV: [
     {
+      "date": {
+        "es": "NOV 2026",
+        "en": "NOV 2026"
+      },
+      "role": {
+        "es": "Full Stack Developer · Proyecto independiente",
+        "en": "Full Stack Developer · Independent Project"
+      },
+      "org": "Call Project",
+      "url": "https://frankgp.com/fibra-detector",
+      "desc": {
+        "es": "Plataforma en producción para detectar oportunidades de fibra óptica y centralizar su seguimiento comercial, con más de 400 asesores registrados y 20 supervisores con sus respectivos equipos durante la primera semana.",
+        "en": "Production platform for detecting fiber-optic sales opportunities and centralizing sales follow-up, with over 400 registered advisors and 20 supervisors with their respective teams within the first week."
+      },
+      "bullets": {
+        "es": [
+          "Desarrollé de extremo a extremo una plataforma de monitoreo comercial con dashboard React y TypeScript, API Node.js y Express, y persistencia en MariaDB con TypeORM.",
+          "Implementé una extensión para Chrome y Edge que identifica ofertas de fibra óptica en CTR, genera alertas y registra detecciones y última actividad para facilitar el seguimiento de oportunidades y apoyar las ventas.",
+          "Construí una app Android nativa con Kotlin y Jetpack Compose, notificaciones push mediante Firebase Cloud Messaging y monitoreo en tiempo real mediante Server-Sent Events (SSE).",
+          "Implementé autenticación con Google OAuth y correo/contraseña, permisos por rol y cobertura de equipos, importación masiva y trazabilidad del historial de detecciones.",
+          "Puse la solución en producción; durante la primera semana se registraron más de 400 asesores y 20 supervisores, cada uno con su equipo.",
+          "Proyecto: <a href=\"https://frankgp.com/fibra-detector\">https://frankgp.com/fibra-detector</a>."
+        ],
+        "en": [
+          "Developed an end-to-end sales monitoring platform with a React and TypeScript dashboard, a Node.js and Express API, and MariaDB persistence using TypeORM.",
+          "Built a Chrome and Edge extension that identifies fiber-optic offers in CTR, generates alerts, and records detections and last activity to support opportunity follow-up and sales.",
+          "Built a native Android app with Kotlin and Jetpack Compose, push notifications through Firebase Cloud Messaging, and real-time monitoring using Server-Sent Events (SSE).",
+          "Implemented Google OAuth and email/password authentication, role-based permissions and team coverage, bulk imports, and detection history tracking.",
+          "Launched the platform in production; over 400 advisors and 20 supervisors, each with their own team, were registered within the first week.",
+          "Project: <a href=\"https://frankgp.com/fibra-detector\">https://frankgp.com/fibra-detector</a>."
+        ]
+      }
+    },
+    {
       date: { es: "NOV 2026", en: "NOV 2026" },
       role: { es: "Proyecto Personal Mobile & DevOps", en: "Personal Mobile & DevOps Project" },
       org: "App Publisher",
@@ -456,6 +490,33 @@ const SITE_DATA = {
           "Launched into production, reaching +10,000 users within the first 2 months, and in continuous maintenance and evolution since then.",
         ],
       },
+    },
+    {
+      "date": {
+        "es": "MAR — ABR 2025",
+        "en": "MAR — APR 2025"
+      },
+      "role": {
+        "es": "Desarrollador Full Stack",
+        "en": "Full Stack Developer"
+      },
+      "org": "E-Transportech · Freelancer",
+      "desc": {
+        "es": "Diseño y desarrollo de un sitio web responsive para una empresa de transporte con Angular 19 y Node.js/Express, páginas de servicios y formulario de contacto con envío de correos y almacenamiento de consultas.",
+        "en": "Designed and developed a responsive website for a transportation company using Angular 19 and Node.js/Express, with service pages and a contact form that sends emails and stores inquiries."
+      },
+      "bullets": {
+        "es": [
+          "Diseñé y desarrollé un sitio web responsive con Angular 19 para presentar la empresa de transporte y sus servicios en dispositivos móviles y de escritorio.",
+          "Implementé el backend con Node.js y Express.js para procesar el formulario de contacto, enviar correos y almacenar las consultas recibidas.",
+          "Realicé el despliegue del sitio y del backend en un servidor, integrando la presentación de servicios con la recepción de consultas comerciales."
+        ],
+        "en": [
+          "Designed and developed a responsive Angular 19 website to present the transportation company and its services on mobile and desktop devices.",
+          "Implemented a Node.js and Express.js backend to process the contact form, send emails, and store incoming inquiries.",
+          "Deployed the website and backend to a server, connecting the service presentation with the collection of business inquiries."
+        ]
+      }
     },
     {
       date: { es: "ENE — ABR 2025", en: "JAN — APR 2025" },

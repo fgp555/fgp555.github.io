@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "http-server web -c-1",
     "pdf": "node scripts/generate-cv-pdf.js",
-    "version": "node scripts/bump-version.js",
+    "build": "node scripts/bump-version.js",
     "linkedin:profile": "node scripts/linkedin/generate-profile.js",
     "linkedin:auth": "node scripts/linkedin/get-token.js",
     "linkedin:post": "node scripts/linkedin/post.js",

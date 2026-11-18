@@ -15,8 +15,14 @@
       <span class="eyebrow">Acceso de revisión · Sin VPN ni contraseña</span>
       <h1 id="page-title">Prueba la extensión con datos ficticios</h1>
       <p>Esta página reproduce la consulta de ofertas. No pertenece al sistema CTR real y no contiene datos de clientes ni credenciales.</p>
-      <ol><li>Instala la versión 1.0.5 enviada a revisión y recarga esta página.</li><li>Elige un caso y pulsa <strong>Buscar</strong> o Enter.</li><li>Con fibra, la extensión resalta la fila y muestra «¡Oportunidad única!».</li><li>Abre el icono de la extensión para declarar Venta realizada o Sin venta. Pulsa de nuevo para regresar a Pendiente.</li></ol>
-      <p class="notice">La página no genera alertas ni envía peticiones a Call Project por sí misma. La extensión instalada puede enviar presencia, detecciones y resultados con el ID ficticio E9800001. No ingreses datos reales.</p>
+      <ol>
+        <li>Instala la extensión que vas a probar en Chrome, Edge o Firefox de escritorio y recarga esta página.</li>
+        <li>Selecciona <strong>Con fibra</strong> y pulsa <strong>Buscar</strong> o Enter. La extensión debe resaltar la recomendación y mostrar «¡Oportunidad única!».</li>
+        <li>Cierra la alerta con <strong>Entendido</strong>. Selecciona <strong>Sin fibra</strong> y pulsa <strong>Buscar</strong>: no debe aparecer una alerta de fibra.</li>
+        <li>Selecciona <strong>Otro cliente con fibra</strong> y pulsa <strong>Buscar</strong> para comprobar un segundo caso positivo.</li>
+        <li>Abre el icono de la extensión para consultar la última oferta y el estado de conexión. La detección automática no requiere vincular una cuenta; la vinculación y las pruebas desde la extensión requieren una cuenta autorizada.</li>
+      </ol>
+      <p class="notice">La página no genera alertas ni envía peticiones a Call Project por sí misma. La extensión instalada puede enviar señales de actividad y detecciones a su servidor configurado con el ID ficticio E9800001. Repetir la misma consulta puede mostrar la alerta local sin crear una nueva detección en el servidor. No ingreses datos reales.</p>
     </section>
     <app-cabecera-menu><div class="session-info"><div><strong>Consulta de ofertas</strong><p>Entorno de demostración</p></div><div class="inner-div">👤 E9800001 - ALEX DEMOSTRACION</div></div></app-cabecera-menu>
     <app-consulta-ofertas>
