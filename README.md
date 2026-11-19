@@ -27,7 +27,7 @@ http-server web -c-1
 - `scripts/`: mantenimiento local; ejecutar desde la raíz del repositorio.
 - `docs/`: documentación interna, fuera del contenido publicado.
 - `npm run bump-version`: actualiza las versiones de caché en `web/`.
-- `npm run build:pdf`: genera los dos PDF en `web/cv/`.
+- `npm run build:pdf`: genera el único PDF en español (máximo 3 páginas) en `web/cv/`.
 - `npm run linkedin:profile`: lee `web/assets/js/data.js`.
 
 ## Publicación
@@ -36,3 +36,6 @@ El workflow `.github/workflows/pages.yml` publica únicamente `web/` en GitHub P
 En GitHub, configurar **Settings → Pages → Build and deployment → Source → GitHub Actions** antes del despliegue.
 Mantener el dominio personalizado `frankgp.com` en Pages; `web/CNAME` conserva el archivo del dominio.
 Las URLs públicas siguen siendo `/`, `/cv/`, `/portfolio/`, etc.; no llevan `/web/`.
+## Datos de proyectos
+
+Editar únicamente `web/assets/js/data.js`: `projects` alimenta todo el portafolio. Agregar `cv: { order, summary, achievements }` para incluir un proyecto en el CV y `featured: { order, badge, metric }` para destacarlo en portada. Los textos son solo en español; no se mantienen listas paralelas. Los logros completos se conservan en `details`.

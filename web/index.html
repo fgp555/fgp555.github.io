@@ -23,10 +23,6 @@
     />
     <link rel="canonical" href="https://frankgp.com/" />
 
-    <!-- Open Graph / Twitter Card — title es el mismo texto que <title> (ya
-         es neutro entre idiomas: nombre + "Mobile Developer — React Native & TypeScript",
-         igual que SITE_DATA.title). Solo description se actualiza en
-         applyLang() (mismo dict.meta_description que la <meta description>). -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://frankgp.com/" />
     <meta property="og:image" content="https://frankgp.com/favicon-512.webp" />
@@ -504,18 +500,17 @@
     </style>
   </head>
   <body>
-    <header>
+    <header class="site-header">
       <div class="nav">
         <div class="logo">FGP<span>_</span></div>
-        <nav class="nav-links">
-          <a href="#stack">Stack</a>
-          <a href="#proyectos" data-i18n="nav_projects">Proyectos</a>
-          <a href="#experiencia" data-i18n="nav_experience">Experiencia</a>
-          <a href="#educacion" data-i18n="nav_education">Educación</a>
+        <nav class="nav-links site-nav" aria-label="Navegación principal">
+          <a href="/" aria-current="page">Inicio</a>
+          <a href="/portfolio/">Portafolio</a>
+          <a href="/services/">Servicios</a>
+          <a href="/cv/">CV</a>
         </nav>
         <div style="display: flex; align-items: center; gap: 14px">
-          <span class="status-pill"><span class="dot"></span><span data-i18n="nav_available">disponible</span></span>
-          <button class="lang-toggle" type="button" aria-label="Switch to English" aria-pressed="false">EN</button>
+          <span class="status-pill"><span class="dot"></span><span data-copy="nav_available">disponible</span></span>
           <button class="theme-toggle" type="button" aria-label="Cambiar tema claro/oscuro" aria-pressed="false">
             <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
             <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
@@ -526,7 +521,7 @@
           <a class="icon-link linkedin-link" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
           </a>
-          <a class="nav-cta wa-link" href="#" target="_blank" rel="noopener" data-i18n="nav_contact">Contactar</a>
+          <a class="nav-cta wa-link" href="#" target="_blank" rel="noopener" data-copy="nav_contact">Contactar</a>
         </div>
       </div>
     </header>
@@ -536,22 +531,22 @@
       <section class="hero" style="border: none; padding-top: 70px">
         <div>
           <p class="eyebrow">mobile developer · react native &amp; typescript</p>
-          <h1 class="hero-title" data-i18n-html="hero_title_html">
+          <h1 class="hero-title" data-copy-html="hero_title_html">
             Desarrollo apps para <span class="hl">Android e iOS</span>, listas para publicar.
           </h1>
-          <p class="hero-sub" data-i18n-html="hero_sub_html">
+          <p class="hero-sub" data-copy-html="hero_sub_html">
             Desarrollo y publicación de apps Android e iOS con React Native y TypeScript, con soporte DevOps y backend.
           </p>
           <div class="cta-row">
-            <a class="btn btn-primary" href="/portfolio/" data-i18n="cta_portfolio">Ver aplicaciones</a>
-            <a class="btn btn-outline cv-pdf-link" href="#" target="_blank" rel="noopener" data-i18n="cta_cv">Descargar CV</a>
-            <a class="btn btn-outline wa-link" href="#" target="_blank" rel="noopener" data-i18n="cta_whatsapp">→ Escribir por WhatsApp</a>
-            <a class="btn btn-outline" href="/services/" data-i18n="cta_services">Ver servicios</a>
+            <a class="btn btn-primary" href="/portfolio/" data-copy="cta_portfolio">Ver aplicaciones</a>
+            <a class="btn btn-outline cv-pdf-link" href="#" target="_blank" rel="noopener" data-copy="cta_cv">Descargar CV</a>
+            <a class="btn btn-outline wa-link" href="#" target="_blank" rel="noopener" data-copy="cta_whatsapp">→ Escribir por WhatsApp</a>
+            <a class="btn btn-outline" href="/services/" data-copy="cta_services">Ver servicios</a>
           </div>
           <div class="quick-links">
             <a class="linkedin-link" href="#" target="_blank" rel="noopener">LinkedIn</a>
             <a class="github-link" href="#" target="_blank" rel="noopener">GitHub</a>
-            <span data-i18n="hero_location">Remoto · Perú</span>
+            <span data-copy="hero_location">Remoto · Perú</span>
           </div>
         </div>
 
@@ -567,8 +562,8 @@
       <!-- STATUS PANEL -->
       <section class="status-panel" style="border: none">
         <div class="panel-head">
-          <h2 data-i18n="services_title">Servicios en producción</h2>
-          <span class="meta" data-i18n="services_updated">actualizado · nov 2026</span>
+          <h2 data-copy="services_title">Servicios en producción</h2>
+          <span class="meta" data-copy="services_updated">actualizado · nov 2026</span>
         </div>
         <div class="services">
           <div class="service-card">
@@ -576,33 +571,33 @@
               <span class="service-name">react-native-app</span>
               <span class="badge badge-live">LIVE</span>
             </div>
-            <p class="service-desc" data-i18n="svc1_desc">Mix&amp;Match — app de armario virtual multiplataforma (Android/iOS + web).</p>
-            <span class="service-metric" data-i18n="svc1_metric">▲ +10,000 usuarios en los primeros 2 meses</span>
+            <p class="service-desc" data-copy="svc1_desc">Mix&amp;Match — app de armario virtual multiplataforma (Android/iOS + web).</p>
+            <span class="service-metric" data-copy="svc1_metric">▲ +10,000 usuarios en los primeros 2 meses</span>
           </div>
           <div class="service-card">
             <div class="service-top">
               <span class="service-name">cloud-infra</span>
               <span class="badge badge-live">LIVE</span>
             </div>
-            <p class="service-desc" data-i18n="svc3_desc">Infraestructura como código con Terraform sobre AWS, Docker + Cloudflare Tunnel.</p>
-            <span class="service-metric" data-i18n="svc3_metric">▲ 0 puertos entrantes expuestos</span>
+            <p class="service-desc" data-copy="svc3_desc">Infraestructura como código con Terraform sobre AWS, Docker + Cloudflare Tunnel.</p>
+            <span class="service-metric" data-copy="svc3_metric">▲ 0 puertos entrantes expuestos</span>
           </div>
           <div class="service-card">
             <div class="service-top">
               <span class="service-name">backend-apis</span>
               <span class="badge badge-live">LIVE</span>
             </div>
-            <p class="service-desc" data-i18n="svc2_desc">APIs REST modulares con NestJS y Express, autenticación JWT + OAuth.</p>
-            <span class="service-metric" data-i18n="svc2_metric">▲ 6 proyectos en producción</span>
+            <p class="service-desc" data-copy="svc2_desc">APIs REST modulares con NestJS y Express, autenticación JWT + OAuth.</p>
+            <span class="service-metric" data-copy="svc2_metric">▲ 6 proyectos en producción</span>
           </div>
         </div>
       </section>
 
       <!-- STACK -->
       <section id="stack">
-        <p class="eyebrow" data-i18n="stack_eyebrow">stack técnico</p>
-        <h2 class="sec-title" data-i18n="stack_title">Lo que uso para construir</h2>
-        <p class="sec-sub" data-i18n="stack_sub">
+        <p class="eyebrow" data-copy="stack_eyebrow">stack técnico</p>
+        <h2 class="sec-title" data-copy="stack_title">Lo que uso para construir</h2>
+        <p class="sec-sub" data-copy="stack_sub">
           Mobile como especialidad, DevOps como segunda fortaleza y backend para integrar el producto completo.
         </p>
 
@@ -617,9 +612,9 @@
 
       <!-- PROYECTOS -->
       <section id="proyectos">
-        <p class="eyebrow" data-i18n="projects_eyebrow">proyectos destacados</p>
-        <h2 class="sec-title" data-i18n="projects_title">Trabajo entregado, no solo planeado</h2>
-        <p class="sec-sub" data-i18n="projects_sub">
+        <p class="eyebrow" data-copy="projects_eyebrow">proyectos destacados</p>
+        <h2 class="sec-title" data-copy="projects_title">Trabajo entregado, no solo planeado</h2>
+        <p class="sec-sub" data-copy="projects_sub">
           Apps publicadas en tiendas y herramientas para automatizar sus releases.
         </p>
 
@@ -628,30 +623,30 @@
 
       <!-- EXPERIENCIA -->
       <section id="experiencia">
-        <p class="eyebrow" data-i18n="experience_eyebrow">experiencia laboral</p>
-        <h2 class="sec-title" data-i18n="experience_title">Trayectoria freelance</h2>
-        <p class="sec-sub" data-i18n="experience_sub">Desarrollo mobile, automatización e infraestructura cloud, con una base en desarrollo web y backend.</p>
+        <p class="eyebrow" data-copy="experience_eyebrow">experiencia laboral</p>
+        <h2 class="sec-title" data-copy="experience_title">Trayectoria freelance</h2>
+        <p class="sec-sub" data-copy="experience_sub">Desarrollo mobile, automatización e infraestructura cloud, con una base en desarrollo web y backend.</p>
 
         <div class="timeline" id="expTimeline"></div>
       </section>
 
       <!-- EDUCACIÓN -->
       <section id="educacion">
-        <p class="eyebrow" data-i18n="education_eyebrow">formación</p>
-        <h2 class="sec-title" data-i18n="education_title">Educación</h2>
+        <p class="eyebrow" data-copy="education_eyebrow">formación</p>
+        <h2 class="sec-title" data-copy="education_title">Educación</h2>
         <div class="edu-grid" id="eduGrid"></div>
       </section>
 
       <!-- POR QUÉ CONTRATARME -->
       <section>
-        <p class="eyebrow" data-i18n="why_eyebrow">para reclutadores y clientes</p>
-        <h2 class="sec-title" data-i18n="why_title">Por qué trabajar conmigo</h2>
+        <p class="eyebrow" data-copy="why_eyebrow">para reclutadores y clientes</p>
+        <h2 class="sec-title" data-copy="why_title">Por qué trabajar conmigo</h2>
         <div class="why-grid">
           <div class="why-card">
             <span class="why-icon">01</span>
             <div>
-              <div class="why-title" data-i18n="why1_title">Ownership de punta a punta</div>
-              <div class="why-desc" data-i18n="why1_desc">
+              <div class="why-title" data-copy="why1_title">Ownership de punta a punta</div>
+              <div class="why-desc" data-copy="why1_desc">
                 Desde el diseño de arquitectura hasta el despliegue en producción, sin depender de terceros para
                 infraestructura.
               </div>
@@ -660,8 +655,8 @@
           <div class="why-card">
             <span class="why-icon">02</span>
             <div>
-              <div class="why-title" data-i18n="why2_title">Producción real, no demos</div>
-              <div class="why-desc" data-i18n="why2_desc">
+              <div class="why-title" data-copy="why2_title">Producción real, no demos</div>
+              <div class="why-desc" data-copy="why2_desc">
                 Apps publicadas en App Store y Google Play; Mix&Match superó los 10.000 usuarios en sus primeros dos meses.
               </div>
             </div>
@@ -669,8 +664,8 @@
           <div class="why-card">
             <span class="why-icon">03</span>
             <div>
-              <div class="why-title" data-i18n="why3_title">Mobile con soporte DevOps y backend</div>
-              <div class="why-desc" data-i18n="why3_desc">
+              <div class="why-title" data-copy="why3_title">Mobile con soporte DevOps y backend</div>
+              <div class="why-desc" data-copy="why3_desc">
                 Automatización de releases, infraestructura AWS y APIs para acompañar el ciclo de vida de la app.
               </div>
             </div>
@@ -678,8 +673,8 @@
           <div class="why-card">
             <span class="why-icon">04</span>
             <div>
-              <div class="why-title" data-i18n="why4_title">Buenas prácticas por defecto</div>
-              <div class="why-desc" data-i18n="why4_desc">
+              <div class="why-title" data-copy="why4_title">Buenas prácticas por defecto</div>
+              <div class="why-desc" data-copy="why4_desc">
                 Principios SOLID, arquitectura modular y separación por capas desde el primer commit.
               </div>
             </div>
@@ -689,13 +684,13 @@
 
       <!-- CONTACT CTA -->
       <section class="contact-cta" style="border-top: none">
-        <p class="eyebrow" style="justify-content: center" data-i18n="contact_eyebrow">disponibilidad</p>
-        <h2 data-i18n="contact_title">¿Buscas un desarrollador mobile para tu equipo o proyecto?</h2>
-        <p data-i18n="contact_sub">
+        <p class="eyebrow" style="justify-content: center" data-copy="contact_eyebrow">disponibilidad</p>
+        <h2 data-copy="contact_title">¿Buscas un desarrollador mobile para tu equipo o proyecto?</h2>
+        <p data-copy="contact_sub">
           Disponible para proyectos freelance remotos y posiciones full-time. Respondo por WhatsApp en menos de 24h.
         </p>
         <div class="contact-buttons">
-          <a class="btn btn-primary btn-lg wa-link" href="#" target="_blank" rel="noopener" data-i18n="cta_whatsapp"
+          <a class="btn btn-primary btn-lg wa-link" href="#" target="_blank" rel="noopener" data-copy="cta_whatsapp"
             >→ Escribir por WhatsApp</a
           >
           <a class="btn btn-outline btn-lg email-link" href="#"
@@ -707,7 +702,7 @@
 
     <footer>
       <div class="wrap foot-row">
-        <span data-i18n="footer_copyright">© 2026 Franklin Gomez Pacoricona · Remoto, Perú</span>
+        <span data-copy="footer_copyright">© 2026 Franklin Gomez Pacoricona · Remoto, Perú</span>
         <div style="display: flex; gap: 8px; margin-right: 130px">
           <a class="icon-link email-link" href="#" aria-label="Email">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
@@ -730,124 +725,53 @@
 
     <script>
       // Idioma: es/en según preferencia guardada, si no según el navegador
-      const I18N = {
-        es: {
-          meta_description:
-            "Mobile Developer — React Native & TypeScript especializado en apps Android e iOS. DevOps, automatización de releases y APIs backend. Disponible para proyectos freelance y remoto.",
-          theme_toggle_label: "Cambiar tema claro/oscuro",
-          lang_toggle_label: "Cambiar a inglés",
-          nav_projects: "Proyectos",
-          nav_experience: "Experiencia",
-          nav_education: "Educación",
-          nav_available: "disponible",
-          nav_contact: "Contactar",
-          hero_title_html:
-            'Desarrollo apps para <span class="hl">Android e iOS</span>, listas para publicar.',
-          cta_whatsapp: "→ Escribir por WhatsApp",
-          cta_portfolio: "Ver aplicaciones",
-          cta_cv: "Descargar CV",
-          cta_services: "Ver servicios",
-          services_title: "Servicios en producción",
-          services_updated: "actualizado · nov 2026",
-          svc1_desc: "Mix&Match — app de armario virtual multiplataforma (Android/iOS + web).",
-          svc1_metric: "▲ +10,000 usuarios en los primeros 2 meses",
-          svc2_desc: "APIs REST modulares con NestJS y Express, autenticación JWT + OAuth.",
-          svc2_metric: "▲ 6 proyectos en producción",
-          svc3_desc: "Infraestructura como código con Terraform sobre AWS, Docker + Cloudflare Tunnel.",
-          svc3_metric: "▲ 0 puertos entrantes expuestos",
-          stack_eyebrow: "stack técnico",
-          stack_title: "Lo que uso para construir",
-          stack_sub:
-            "Mobile como especialidad, DevOps como segunda fortaleza y backend para integrar el producto completo.",
-          projects_eyebrow: "proyectos destacados",
-          projects_title: "Trabajo entregado, no solo planeado",
-          projects_sub:
-            "Apps publicadas en tiendas y herramientas para automatizar sus releases.",
-          experience_eyebrow: "experiencia laboral",
-          experience_title: "Trayectoria freelance",
-          experience_sub: "Desarrollo mobile, automatización e infraestructura cloud, con una base en desarrollo web y backend.",
-          education_eyebrow: "formación",
-          education_title: "Educación",
-          why_eyebrow: "para reclutadores y clientes",
-          why_title: "Por qué trabajar conmigo",
-          why1_title: "Ownership de punta a punta",
-          why1_desc:
-            "Desde el diseño de arquitectura hasta el despliegue en producción, sin depender de terceros para infraestructura.",
-          why2_title: "Producción real, no demos",
-          why2_desc: "Apps publicadas en App Store y Google Play; Mix&Match superó los 10.000 usuarios en sus primeros dos meses.",
-          why3_title: "Mobile con soporte DevOps y backend",
-          why3_desc: "Automatización de releases, infraestructura AWS y APIs para acompañar el ciclo de vida de la app.",
-          why4_title: "Buenas prácticas por defecto",
-          why4_desc: "Principios SOLID, arquitectura modular y separación por capas desde el primer commit.",
-          contact_eyebrow: "disponibilidad",
-          contact_title: "¿Buscas un desarrollador mobile para tu equipo o proyecto?",
-          contact_sub:
-            "Disponible para proyectos freelance remotos y posiciones full-time. Respondo por WhatsApp en menos de 24h.",
-          footer_copyright: "© 2026 Franklin Gomez Pacoricona · Remoto, Perú",
-          terminal_available: "● available — remoto · freelance & full-time",
-        },
-        en: {
-          meta_description:
-            "Mobile Developer — React Native & TypeScript specializing in Android and iOS apps. DevOps, release automation, and backend APIs. Available for freelance and remote projects.",
-          theme_toggle_label: "Toggle light/dark theme",
-          lang_toggle_label: "Switch to Spanish",
-          nav_projects: "Projects",
-          nav_experience: "Experience",
-          nav_education: "Education",
-          nav_available: "available",
-          nav_contact: "Contact",
-          hero_title_html: 'I build apps for <span class="hl">Android and iOS</span>, ready to publish.',
-          cta_whatsapp: "→ Message on WhatsApp",
-          cta_portfolio: "View apps",
-          cta_cv: "Download CV",
-          cta_services: "View services",
-          services_title: "Services in production",
-          services_updated: "updated · nov 2026",
-          svc1_desc: "Mix&Match — cross-platform virtual closet app (Android/iOS + web).",
-          svc1_metric: "▲ +10,000 users in the first 2 months",
-          svc2_desc: "Modular REST APIs with NestJS and Express, JWT + OAuth authentication.",
-          svc2_metric: "▲ 6 projects in production",
-          svc3_desc: "Infrastructure as code with Terraform on AWS, Docker + Cloudflare Tunnel.",
-          svc3_metric: "▲ 0 inbound ports exposed",
-          stack_eyebrow: "tech stack",
-          stack_title: "What I use to build",
-          stack_sub: "Mobile as my specialty, DevOps as my second strength, and backend to connect the complete product.",
-          projects_eyebrow: "featured projects",
-          projects_title: "Work delivered, not just planned",
-          projects_sub: "Apps published on stores and tools to automate their releases.",
-          experience_eyebrow: "work experience",
-          experience_title: "Freelance track record",
-          experience_sub: "Mobile development, automation, and cloud infrastructure, built on web and backend experience.",
-          education_eyebrow: "education",
-          education_title: "Education",
-          why_eyebrow: "for recruiters and clients",
-          why_title: "Why work with me",
-          why1_title: "End-to-end ownership",
-          why1_desc: "From architecture design to production deployment, without relying on third parties for infrastructure.",
-          why2_title: "Real production, not demos",
-          why2_desc: "Apps published on the App Store and Google Play; Mix&Match reached over 10,000 users in its first two months.",
-          why3_title: "Mobile supported by DevOps and backend",
-          why3_desc: "Release automation, AWS infrastructure, and APIs to support the app lifecycle.",
-          why4_title: "Best practices by default",
-          why4_desc: "SOLID principles, modular architecture, and layered separation from the first commit.",
-          contact_eyebrow: "availability",
-          contact_title: "Looking for a mobile developer for your team or project?",
-          contact_sub: "Available for remote freelance projects and full-time positions. I respond on WhatsApp within 24h.",
-          footer_copyright: "© 2026 Franklin Gomez Pacoricona · Remote, Peru",
-          terminal_available: "● available — remote · freelance & full-time",
-        },
-      };
+      const PAGE_TEXT = {
+  "meta_description": "Mobile Developer — React Native & TypeScript especializado en apps Android e iOS. DevOps, automatización de releases y APIs backend. Disponible para proyectos freelance y remoto.",
+  "theme_toggle_label": "Cambiar tema claro/oscuro",
+  "nav_available": "disponible",
+  "nav_contact": "Contactar",
+  "hero_title_html": "Desarrollo apps para <span class=\"hl\">Android e iOS</span>, listas para publicar.",
+  "cta_whatsapp": "→ Escribir por WhatsApp",
+  "cta_portfolio": "Ver aplicaciones",
+  "cta_cv": "Descargar CV",
+  "cta_services": "Ver servicios",
+  "services_title": "Servicios en producción",
+  "services_updated": "actualizado · nov 2026",
+  "svc1_desc": "Mix&Match — app de armario virtual multiplataforma (Android/iOS + web).",
+  "svc1_metric": "▲ +10,000 usuarios en los primeros 2 meses",
+  "svc2_desc": "APIs REST modulares con NestJS y Express, autenticación JWT + OAuth.",
+  "svc2_metric": "▲ 6 proyectos en producción",
+  "svc3_desc": "Infraestructura como código con Terraform sobre AWS, Docker + Cloudflare Tunnel.",
+  "svc3_metric": "▲ 0 puertos entrantes expuestos",
+  "stack_eyebrow": "stack técnico",
+  "stack_title": "Lo que uso para construir",
+  "stack_sub": "Mobile como especialidad, DevOps como segunda fortaleza y backend para integrar el producto completo.",
+  "projects_eyebrow": "proyectos destacados",
+  "projects_title": "Trabajo entregado, no solo planeado",
+  "projects_sub": "Apps publicadas en tiendas y herramientas para automatizar sus releases.",
+  "experience_eyebrow": "experiencia laboral",
+  "experience_title": "Trayectoria freelance",
+  "experience_sub": "Desarrollo mobile, automatización e infraestructura cloud, con una base en desarrollo web y backend.",
+  "education_eyebrow": "formación",
+  "education_title": "Educación",
+  "why_eyebrow": "para reclutadores y clientes",
+  "why_title": "Por qué trabajar conmigo",
+  "why1_title": "Ownership de punta a punta",
+  "why1_desc": "Desde el diseño de arquitectura hasta el despliegue en producción, sin depender de terceros para infraestructura.",
+  "why2_title": "Producción real, no demos",
+  "why2_desc": "Apps publicadas en App Store y Google Play; Mix&Match superó los 10.000 usuarios en sus primeros dos meses.",
+  "why3_title": "Mobile con soporte DevOps y backend",
+  "why3_desc": "Automatización de releases, infraestructura AWS y APIs para acompañar el ciclo de vida de la app.",
+  "why4_title": "Buenas prácticas por defecto",
+  "why4_desc": "Principios SOLID, arquitectura modular y separación por capas desde el primer commit.",
+  "contact_eyebrow": "disponibilidad",
+  "contact_title": "¿Buscas un desarrollador mobile para tu equipo o proyecto?",
+  "contact_sub": "Disponible para proyectos freelance remotos y posiciones full-time. Respondo por WhatsApp en menos de 24h.",
+  "footer_copyright": "© 2026 Franklin Gomez Pacoricona · Remoto, Perú",
+  "terminal_available": "● available — remoto · freelance & full-time"
+};
 
-      function getLang() {
-        const saved = localStorage.getItem("lang");
-        if (saved === "es" || saved === "en") return saved;
-        return (navigator.language || "es").toLowerCase().startsWith("es") ? "es" : "en";
-      }
-
-      // Renderiza identidad, contacto, stack, experiencia y educación desde
-      // SITE_DATA (assets/js/data.js) — única fuente de verdad compartida
-      // con cv/index.html y portfolio/index.html.
-      function renderFromData(lang) {
+      function renderFromData() {
         const email = SITE_DATA.email.user + "@" + SITE_DATA.email.domain;
         document.querySelectorAll(".email-link").forEach(function (el) {
           el.href = "mailto:" + email;
@@ -864,23 +788,23 @@
           el.href = SITE_DATA.links.github;
         });
         document.querySelectorAll(".cv-pdf-link").forEach(function (el) {
-          el.href = lang === "en" ? SITE_DATA.links.cvPdfEn : SITE_DATA.links.cvPdf;
+          el.href = SITE_DATA.links.cvPdf;
           el.setAttribute("download", "");
         });
 
-        const heroSub = document.querySelector('[data-i18n-html="hero_sub_html"]');
-        if (heroSub) heroSub.innerHTML = `<strong>${SITE_DATA.name}</strong> — ${pick(SITE_DATA.summary, lang)}`;
-        const heroLocation = document.querySelector('[data-i18n="hero_location"]');
-        if (heroLocation) heroLocation.textContent = pick(SITE_DATA.location, lang);
+        const heroSub = document.querySelector('[data-copy-html="hero_sub_html"]');
+        if (heroSub) heroSub.innerHTML = `<strong>${SITE_DATA.name}</strong> — ${SITE_DATA.summary}`;
+        const heroLocation = document.querySelector('[data-copy="hero_location"]');
+        if (heroLocation) heroLocation.textContent = SITE_DATA.location;
 
         const stackBody = document.getElementById("stackBody");
         if (stackBody) {
           const groups = SITE_DATA.skills
             .map(function (group, i) {
-              const tags = group.items.map((item) => `<span class="tag">${pick(item, lang)}</span>`).join("");
+              const tags = group.items.map((item) => `<span class="tag">${item}</span>`).join("");
               const last = i === SITE_DATA.skills.length - 1 ? ' style="margin-bottom: 0"' : "";
               return `<div class="stack-group"${last}>
-                <span class="stack-key">"${pick(group.jsonKey, lang)}"</span><span class="stack-punc">:</span>
+                <span class="stack-key">"${group.jsonKey}"</span><span class="stack-punc">:</span>
                 <div class="stack-tags">${tags}</div>
               </div>`;
             })
@@ -890,14 +814,14 @@
 
         const expTimeline = document.getElementById("expTimeline");
         if (expTimeline) {
-          expTimeline.innerHTML = SITE_DATA.experienceCV
+          expTimeline.innerHTML = getCVProjects()
             .map(
               (job) => `
                 <div class="tl-item">
-                  <div class="tl-date">${pick(job.date, lang)}</div>
-                  <div class="tl-role">${pick(job.role, lang)}</div>
-                  <div class="tl-org">${pick(job.org, lang)}</div>
-                  <p class="tl-desc">${pick(job.desc, lang)}</p>
+                  <div class="tl-date">${job.date}</div>
+                  <div class="tl-role">${job.role}</div>
+                  <div class="tl-org">${job.name}</div>
+                  <p class="tl-desc">${job.cv.summary}</p>
                 </div>`,
             )
             .join("");
@@ -910,8 +834,8 @@
               (edu) => `
                 <div class="edu-card">
                   <div class="edu-year">${edu.year}</div>
-                  <div class="edu-name">${pick(edu.name, lang)}</div>
-                  <div class="edu-org">${pick(edu.org, lang)}</div>
+                  <div class="edu-name">${edu.name}</div>
+                  <div class="edu-org">${edu.org}</div>
                 </div>`,
             )
             .join("");
@@ -919,67 +843,42 @@
 
         const featuredProjects = document.getElementById("featuredProjects");
         if (featuredProjects) {
-          featuredProjects.innerHTML = SITE_DATA.featuredProjects
+          featuredProjects.innerHTML = getFeaturedProjects()
             .map(
               (p) => `
                 <div class="project-card">
                   <div class="project-top">
                     <div>
-                      <div class="project-name">${pick(p.name, lang)}</div>
-                      <div class="project-period">${pick(p.period, lang)}</div>
+                      <div class="project-name">${p.name}</div>
+                      <div class="project-period">${p.date}</div>
                     </div>
-                    <span class="badge badge-live">${pick(p.badge, lang)}</span>
+                    <span class="badge badge-live">${p.featured.badge}</span>
                   </div>
-                  <p class="project-desc">${pick(p.desc, lang)}</p>
-                  <span class="project-metric">${pick(p.metric, lang)}</span>
-                  <div class="project-tags">${p.tags.map((t) => `<span class="tag">${t}</span>`).join("")}</div>
+                  <p class="project-desc">${p.description}</p>
+                  <span class="project-metric">${p.featured.metric}</span>
+                  <div class="project-tags">${p.technologies.map((t) => `<span class="tag">${t}</span>`).join("")}</div>
                 </div>`,
             )
             .join("");
         }
 
-        if (typeof renderPageNav === "function") renderPageNav(lang);
+        if (typeof renderPageNav === "function") renderPageNav();
       }
 
-      function applyLang(lang) {
-        document.documentElement.setAttribute("lang", lang);
-        const dict = I18N[lang];
-        document.querySelectorAll("[data-i18n]").forEach(function (el) {
-          const key = el.getAttribute("data-i18n");
-          if (dict[key] !== undefined) el.textContent = dict[key];
-        });
-        document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
-          const key = el.getAttribute("data-i18n-html");
-          if (dict[key] !== undefined) el.innerHTML = dict[key];
-        });
-        renderFromData(lang);
-        const metaDesc = document.getElementById("metaDescription");
-        if (metaDesc) metaDesc.setAttribute("content", dict.meta_description);
-        const ogDesc = document.getElementById("ogDescription");
-        if (ogDesc) ogDesc.setAttribute("content", dict.meta_description);
-        const twitterDesc = document.getElementById("twitterDescription");
-        if (twitterDesc) twitterDesc.setAttribute("content", dict.meta_description);
-        const ogLocale = document.getElementById("ogLocale");
-        if (ogLocale) ogLocale.setAttribute("content", lang === "en" ? "en_US" : "es_PE");
-        const themeBtn = document.querySelector(".theme-toggle");
-        if (themeBtn) themeBtn.setAttribute("aria-label", dict.theme_toggle_label);
-        const langBtn = document.querySelector(".lang-toggle");
-        if (langBtn) {
-          langBtn.textContent = lang === "es" ? "EN" : "ES";
-          langBtn.setAttribute("aria-pressed", String(lang === "en"));
-          langBtn.setAttribute("aria-label", dict.lang_toggle_label);
-        }
-      }
-
-      const activeLang = getLang();
-      applyLang(activeLang);
-
-      document.querySelector(".lang-toggle").addEventListener("click", function () {
-        const current = document.documentElement.getAttribute("lang") === "en" ? "en" : "es";
-        const next = current === "es" ? "en" : "es";
-        localStorage.setItem("lang", next);
-        applyLang(next);
+      document.documentElement.lang = "es";
+      document.querySelectorAll("[data-copy]").forEach(el => {
+        const text = PAGE_TEXT[el.dataset.copy];
+        if (text !== undefined) el.textContent = text;
       });
+      document.querySelectorAll("[data-copy-html]").forEach(el => {
+        const text = PAGE_TEXT[el.dataset.copyHtml];
+        if (text !== undefined) el.innerHTML = text;
+      });
+      renderFromData();
+      ["metaDescription", "ogDescription", "twitterDescription"].forEach(id => {
+        document.getElementById(id)?.setAttribute("content", PAGE_TEXT.meta_description);
+      });
+
     </script>
 
     <script>
@@ -992,7 +891,7 @@
         { text: "Mobile Developer — React Native & TypeScript", type: "out" },
         { text: "", type: "blank" },
         { prompt: "$ ", text: "status --check", type: "cmd" },
-        { text: I18N[document.documentElement.getAttribute("lang") === "en" ? "en" : "es"].terminal_available, type: "green" },
+        { text: PAGE_TEXT.terminal_available, type: "green" },
       ];
 
       const el = document.getElementById("termBody");

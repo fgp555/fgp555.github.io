@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1200" viewBox="0 0 1920 1200" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">Monitor de Disponibilidad Web — AWS Lambda</title>
+  <desc id="description">Arquitectura ilustrativa de un servicio sin frontend: EventBridge ejecuta una Lambda que consulta sitios web, conserva su estado en DynamoDB y envía alertas por email ante cambios de disponibilidad.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1920" y2="1200" gradientUnits="userSpaceOnUse"><stop stop-color="#171E30"/><stop offset="1" stop-color="#080D16"/></linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(1230 640) rotate(130) scale(1040 780)" gradientUnits="userSpaceOnUse"><stop stop-color="#FFAC49" stop-opacity=".09"/><stop offset="1" stop-color="#FFAC49" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse"><path d="M64 0H0V64" stroke="#A4E3EE" stroke-opacity=".035"/></pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1 1L8 5L1 9" stroke="#6B879D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+  </defs>
+  <rect width="1920" height="1200" fill="url(#bg)"/>
+  <rect width="1920" height="1200" fill="url(#grid)"/>
+  <rect width="1920" height="1200" fill="url(#glow)"/>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <rect x="132" y="102" width="94" height="94" rx="24" fill="#34291E" stroke="#755132"/>
+    <text x="179" y="170" fill="#FFB35F" font-size="68" font-weight="700" text-anchor="middle">λ</text>
+    <text x="254" y="141" fill="#FFB35F" font-size="24" font-weight="700" letter-spacing="5">AUTOMATIZACIÓN CLOUD</text>
+    <text x="254" y="181" fill="#8DA4B7" font-size="26">Serverless · AWS · Terraform</text>
+    <rect x="1495" y="121" width="293" height="57" rx="28.5" fill="#252D28" stroke="#40594C"/>
+    <circle cx="1528" cy="149.5" r="6" fill="#58D9B3"/>
+    <text x="1550" y="159" fill="#C5E7D9" font-size="24" font-weight="600">Servicio sin frontend</text>
+    <text x="126" y="313" fill="#F1F7FB" font-size="88" font-weight="750" letter-spacing="-3">Monitor de Disponibilidad Web</text>
+    <text x="132" y="385" fill="#AFC0CF" font-size="36">Una Lambda revisa tus sitios. Un email avisa si cambia su estado.</text>
+    <text x="132" y="466" fill="#738CA1" font-size="21" font-weight="600" letter-spacing="3">ARQUITECTURA DEL SERVICIO</text>
+  </g>
+  <!-- Flujo: disparador programado → función → destinos. -->
+  <g stroke="#6B879D" stroke-width="3" marker-end="url(#arrow)">
+    <path d="M500 740H690"/>
+    <path d="M1160 740H1252V577H1380"/>
+    <path d="M1160 740H1380"/>
+    <path d="M1160 740H1252V903H1380"/>
+  </g>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <rect x="132" y="635" width="368" height="210" rx="24" fill="#101B2A" stroke="#354C61" stroke-width="2"/>
+    <circle cx="194" cy="696" r="24" stroke="#B6A4F7" stroke-width="3"/>
+    <path d="M194 681V696L206 704" stroke="#B6A4F7" stroke-width="3" stroke-linecap="round"/>
+    <text x="240" y="706" fill="#ECF2F9" font-size="31" font-weight="650">EventBridge</text>
+    <text x="171" y="767" fill="#A0B4C6" font-size="25">Ejecución programada</text>
+    <text x="171" y="807" fill="#718CA3" font-size="22">Revisiones automáticas</text>
+    <rect x="690" y="586" width="470" height="308" rx="28" fill="#211E1D" stroke="#C18447" stroke-width="2"/>
+    <rect x="731" y="625" width="77" height="77" rx="20" fill="#423022"/>
+    <text x="769" y="683" fill="#FFB35F" font-size="61" font-weight="700" text-anchor="middle">λ</text>
+    <text x="837" y="675" fill="#FFBF78" font-size="40" font-weight="700">AWS Lambda</text>
+    <text x="731" y="755" fill="#ECF2F9" font-size="29">Consultar y comparar estados</text>
+    <text x="731" y="803" fill="#B9B0A6" font-size="25">Node.js · peticiones en paralelo</text>
+    <text x="731" y="850" fill="#8C8176" font-size="23">Timeouts y cambios de disponibilidad</text>
+    <rect x="1380" y="512" width="408" height="130" rx="22" fill="#102329" stroke="#28545D" stroke-width="2"/>
+    <path d="M1410 573H1425L1434 554L1447 594L1458 573H1474" stroke="#58D9B3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1495" y="566" fill="#D3EEE7" font-size="30" font-weight="650">Sitios web</text>
+    <text x="1495" y="608" fill="#85ABA6" font-size="23">Consulta de disponibilidad</text>
+    <rect x="1380" y="675" width="408" height="130" rx="22" fill="#101D30" stroke="#344D77" stroke-width="2"/>
+    <ellipse cx="1442" cy="717" rx="25" ry="10" stroke="#82B1F5" stroke-width="3"/>
+    <path d="M1417 717V753C1417 767 1467 767 1467 753V717M1417 735C1417 749 1467 749 1467 735" stroke="#82B1F5" stroke-width="3"/>
+    <text x="1495" y="729" fill="#D6E6FA" font-size="30" font-weight="650">DynamoDB</text>
+    <text x="1495" y="771" fill="#89A2C6" font-size="23">Estado e inicio de la caída</text>
+    <rect x="1380" y="838" width="408" height="130" rx="22" fill="#241E2D" stroke="#624C77" stroke-width="2"/>
+    <rect x="1416" y="878" width="53" height="39" rx="5" stroke="#C3A2EC" stroke-width="3"/>
+    <path d="M1418 882L1442 901L1467 882" stroke="#C3A2EC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1495" y="891" fill="#E7D9FA" font-size="30" font-weight="650">Alertas por email</text>
+    <text x="1495" y="933" fill="#AD97C6" font-size="23">Caídas y recuperaciones</text>
+    <path d="M132 1061H1788" stroke="#3A555C" stroke-width="2"/>
+    <text x="132" y="1120" fill="#A3B8C9" font-size="26">Node.js / Terraform / API Gateway / CloudWatch</text>
+    <text x="1788" y="1120" fill="#76A7B7" font-size="26" text-anchor="end">fgp555 / fgp-microservices</text>
+  </g>
+</svg>

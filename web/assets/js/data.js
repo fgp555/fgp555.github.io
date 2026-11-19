@@ -1,170 +1,66 @@
-/* ============================================================
-   SITE_DATA — frankgp.com
-   Fuente única de verdad para identidad, contacto, resumen,
-   stack, experiencia y educación. Cargado por index.html,
-   cv/index.html y portfolio/index.html (y cualquier página
-   futura que necesite estos datos).
-
-   Edita SOLO aquí — nunca hardcodear email, links, fechas de
-   experiencia o educación directamente en un HTML.
-============================================================ */
+/* Fuente única del sitio, solo en español.
+ * projects: catálogo completo del portafolio.
+ * cv: selección, orden, resumen y logros breves del CV (máximo 3 páginas).
+ * featured: selección y orden de portada; no duplicar nombre, fechas ni stack.
+ * details: historial completo del proyecto, fuera del CV resumido.
+ */
 const SITE_DATA = {
-  name: "Franklin Gomez Pacoricona",
-  title: "Mobile Developer — React Native & TypeScript",
-
-  email: { user: "fgp555", domain: "gmail.com" },
-  whatsappNumber: "51918221790",
-
-  links: {
-    linkedin: "https://linkedin.com/in/franklingp",
-    github: "https://github.com/fgp555",
-    portfolio: "/portfolio/",
-    services: "/services/",
-    cv: "/cv/",
-    cvPdf: "/cv/cv_franklin_gomez_fullstack.pdf",
-    cvPdfEn: "/cv/cv_franklin_gomez_fullstack_en.pdf",
+  "name": "Franklin Gomez Pacoricona",
+  "title": "Mobile Developer — React Native & TypeScript",
+  "email": {
+    "user": "fgp555",
+    "domain": "gmail.com"
   },
-
-  location: { es: "Remoto · Perú", en: "Remote · Peru" },
-
-  // Páginas del sitio, usadas por el <select> "Ir a…" flotante (ver
-  // assets/js/page-nav.js y .page-nav-select en components.css). Agregar
-  // una página nueva = agregar una línea aquí, nada más.
-  pages: [
-    { label: { es: "Inicio", en: "Home" }, url: "/" },
-    { label: { es: "Portafolio", en: "Portfolio" }, url: "/portfolio/" },
-    { label: { es: "Servicios", en: "Services" }, url: "/services/" },
-    { label: "CV", url: "/cv/" },
-    { label: "Style Guide", url: "/styleguide.html" },
-    { label: "404 Page", url: "/404.html" },
-  ],
-
-  summary: {
-    "es": "Desarrollo y publico aplicaciones para Android e iOS con React Native y TypeScript. Experiencia con autenticación, notificaciones push y productos en producción como Mix&Match, que superó los 10.000 usuarios en sus primeros dos meses. Complemento el desarrollo mobile con automatización de releases, infraestructura AWS y APIs backend.",
-    "en": "I build and publish Android and iOS applications with React Native and TypeScript. Experience with authentication, push notifications, and production products such as Mix&Match, which reached over 10,000 users in its first two months. I complement mobile development with release automation, AWS infrastructure, and backend APIs."
+  "whatsappNumber": "51918221790",
+  "links": {
+    "linkedin": "https://linkedin.com/in/franklingp",
+    "github": "https://github.com/fgp555",
+    "portfolio": "/portfolio/",
+    "services": "/services/",
+    "cv": "/cv/",
+    "cvPdf": "/cv/cv_franklin_gomez_fullstack.pdf"
   },
-
-
-  // Resumen largo para el CV (perfil profesional completo, bilingüe —
-  // usado por cv/index.html vía ?lang=es|en). "summary" de arriba es
-  // la versión corta para el hero del sitio.
-  summaryLong: {
-    "es": "Mobile Developer especializado en React Native y TypeScript, con experiencia en aplicaciones Android e iOS publicadas en Google Play y App Store. Desarrollé Mix&Match y la app móvil de Transpaservic, integrando autenticación OAuth, notificaciones push y APIs REST. Mix&Match superó los 10.000 usuarios en sus primeros dos meses. Mi segunda fortaleza es DevOps: automatización de releases con App Publisher (Go, Gradle y GitHub Actions) e infraestructura AWS con Terraform y Docker. Complemento este perfil con desarrollo backend en Node.js, NestJS y Express, y experiencia profesional en desarrollo web desde 2020.",
-    "en": "Mobile Developer specializing in React Native and TypeScript, with experience delivering Android and iOS applications published on Google Play and the App Store. Built Mix&Match and the Transpaservic mobile app, integrating OAuth authentication, push notifications, and REST APIs. Mix&Match reached over 10,000 users in its first two months. My second strength is DevOps: release automation with App Publisher (Go, Gradle, and GitHub Actions) and AWS infrastructure with Terraform and Docker. I complement this profile with backend development using Node.js, NestJS, and Express, and professional web development experience since 2020."
-  },
-
-
-  // "Arquitectura y responsabilidad técnica" del CV — bilingüe, usado por
-  // cv/index.html.
-  technicalPractices: {
-    "es": [
-      "Desarrollé aplicaciones móviles con React Native y TypeScript, usando React Navigation, Redux Toolkit, Zustand y Context API según el caso de uso.",
-      "Integré OAuth Google/Apple, notificaciones push y almacenamiento seguro de tokens con expo-secure-store.",
-      "Compilé y publiqué aplicaciones con EAS Build y EAS Update; desarrollé App Publisher para automatizar releases Android con Go, Gradle y GitHub Actions.",
-      "Implementé infraestructura AWS con Terraform, Docker, Nginx y Cloudflare Tunnel, con entornos dev/prod separados.",
-      "Diseñé APIs REST con Node.js/NestJS/Express, autenticación JWT y bases de datos PostgreSQL/MySQL."
-    ],
-    "en": [
-      "Built mobile applications with React Native and TypeScript, using React Navigation, Redux Toolkit, Zustand, and Context API according to the use case.",
-      "Integrated Google/Apple OAuth, push notifications, and secure token storage with expo-secure-store.",
-      "Built and published applications with EAS Build and EAS Update; developed App Publisher to automate Android releases with Go, Gradle, and GitHub Actions.",
-      "Implemented AWS infrastructure with Terraform, Docker, Nginx, and Cloudflare Tunnel, with separate dev/prod environments.",
-      "Designed REST APIs with Node.js/NestJS/Express, JWT authentication, and PostgreSQL/MySQL databases."
-    ]
-  },
-
-
-  // Las 3 cards de "Proyectos destacados" en index.html — texto curado para
-  // ese pitch (bilingüe, con métrica de impacto), distinto de "projects"
-  // (galería completa de /portfolio, solo español, sin métricas de venta).
-  // Orden de presentación: mobile y automatización de releases.
-  featuredProjects: [
+  "location": "Remoto · Perú",
+  "pages": [
     {
-      "name": "Mix&Match",
-      "period": {
-        "es": "Jul — Dic 2025",
-        "en": "Jul — Dec 2025"
-      },
-      "badge": "LIVE",
-      "desc": {
-        "es": "Outfit Planner / armario virtual. App móvil (Android/iOS) y web construidas con React Native y React + TypeScript, backend en Express/MySQL, OAuth con Google y Apple, microservicio en Python para remoción de fondo de imágenes.",
-        "en": "Outfit Planner / virtual closet. Mobile app (Android/iOS) and web built with React Native and React + TypeScript, Express/MySQL backend, OAuth with Google and Apple, Python microservice for image background removal."
-      },
-      "metric": {
-        "es": "+10,000 usuarios en 2 meses",
-        "en": "+10,000 users in 2 months"
-      },
-      "tags": [
-        "React Native",
-        "TypeScript",
-        "Expo",
-        "OAuth",
-        "AWS S3"
-      ]
+      "label": "Inicio",
+      "url": "/"
     },
     {
-      "name": "Transpaservic Mobile",
-      "period": {
-        "es": "Ene — Abr 2025",
-        "en": "Jan — Apr 2025"
-      },
-      "badge": {
-        "es": "PUBLICADO",
-        "en": "PUBLISHED"
-      },
-      "desc": {
-        "es": "Sistema web y móvil de gestión de órdenes de transporte para Transpaservic: la central emite órdenes y las empresas transportistas las aprueban desde la app. Construido con ReactJS, React Native, NestJS y MySQL, con actualizaciones en tiempo real vía WebSockets y notificaciones automatizadas por WhatsApp API.",
-        "en": "Web and mobile transport order-management system for Transpaservic: the central office issues orders and transport companies approve them from the app. Built with ReactJS, React Native, NestJS, and MySQL, with real-time updates via WebSockets and automated notifications via WhatsApp API."
-      },
-      "metric": {
-        "es": "Publicado en Google Play Store",
-        "en": "Published on Google Play Store"
-      },
-      "tags": [
-        "React Native",
-        "Expo",
-        "WebSockets",
-        "NestJS"
-      ]
+      "label": "Portafolio",
+      "url": "/portfolio/"
     },
     {
-      "name": "App Publisher",
-      "period": {
-        "es": "Nov 2026",
-        "en": "Nov 2026"
-      },
-      "badge": "CLI",
-      "desc": {
-        "es": "CLI en Go para compilar, firmar y publicar aplicaciones Android y React Native en Google Play. Genera workflows de GitHub Actions y configuración de firma para Kotlin y Expo.",
-        "en": "Go CLI to build, sign, and publish Android and React Native apps to Google Play. Generates GitHub Actions workflows and signing configuration for Kotlin and Expo."
-      },
-      "metric": {
-        "es": "Automatización de releases Android",
-        "en": "Android release automation"
-      },
-      "tags": [
-        "Go",
-        "Gradle",
-        "GitHub Actions",
-        "Google Play API"
-      ]
+      "label": "Servicios",
+      "url": "/services/"
+    },
+    {
+      "label": "CV",
+      "url": "/cv/"
+    },
+    {
+      "label": "Style Guide",
+      "url": "/styleguide.html"
+    },
+    {
+      "label": "404 Page",
+      "url": "/404.html"
     }
   ],
-
-
-  // "label" es el texto legible (usado en el CV). "jsonKey" es la key en
-  // formato snake_case que se muestra en el bloque skills.json de index.html.
-  skills: [
+  "summary": "Desarrollo y publico aplicaciones para Android e iOS con React Native y TypeScript. Experiencia con autenticación, notificaciones push y productos en producción como Mix&Match, que superó los 10.000 usuarios en sus primeros dos meses. Complemento el desarrollo mobile con automatización de releases, infraestructura AWS y APIs backend.",
+  "summaryLong": "Desarrollador Mobile especializado en React Native y TypeScript, con aplicaciones publicadas en Google Play y App Store. Mix&Match superó los 10.000 usuarios en sus primeros dos meses. Complemento el desarrollo móvil con automatización de releases, infraestructura AWS/Terraform y APIs Node.js/NestJS. Experiencia profesional en desarrollo web desde 2020.",
+  "technicalPractices": [
+    "Desarrollé aplicaciones móviles con React Native y TypeScript, usando React Navigation, Redux Toolkit, Zustand y Context API según el caso de uso.",
+    "Integré OAuth Google/Apple, notificaciones push y almacenamiento seguro de tokens con expo-secure-store.",
+    "Compilé y publiqué aplicaciones con EAS Build y EAS Update; desarrollé App Publisher para automatizar releases Android con Go, Gradle y GitHub Actions.",
+    "Implementé infraestructura AWS con Terraform, Docker, Nginx y Cloudflare Tunnel, con entornos dev/prod separados.",
+    "Diseñé APIs REST con Node.js/NestJS/Express, autenticación JWT y bases de datos PostgreSQL/MySQL."
+  ],
+  "skills": [
     {
       "key": "mobile",
-      "label": {
-        "es": "Mobile",
-        "en": "Mobile"
-      },
-      "jsonKey": {
-        "es": "mobile",
-        "en": "mobile"
-      },
+      "label": "Mobile",
+      "jsonKey": "mobile",
       "items": [
         "React Native",
         "Expo",
@@ -182,14 +78,8 @@ const SITE_DATA = {
     },
     {
       "key": "cloud_devops",
-      "label": {
-        "es": "Cloud & DevOps",
-        "en": "Cloud & DevOps"
-      },
-      "jsonKey": {
-        "es": "cloud_devops",
-        "en": "cloud_devops"
-      },
+      "label": "Cloud & DevOps",
+      "jsonKey": "cloud_devops",
       "items": [
         "Terraform",
         "AWS EC2/RDS/S3/IAM",
@@ -205,36 +95,21 @@ const SITE_DATA = {
     },
     {
       "key": "backend",
-      "label": {
-        "es": "Backend",
-        "en": "Backend"
-      },
-      "jsonKey": {
-        "es": "backend",
-        "en": "backend"
-      },
+      "label": "Backend",
+      "jsonKey": "backend",
       "items": [
         "Node.js",
         "NestJS",
         "Express.js",
         "WebSockets",
         "OpenAPI/Swagger",
-        {
-          "es": "Arquitectura modular",
-          "en": "Modular architecture"
-        }
+        "Arquitectura modular"
       ]
     },
     {
       "key": "frontend",
-      "label": {
-        "es": "Frontend",
-        "en": "Frontend"
-      },
-      "jsonKey": {
-        "es": "frontend",
-        "en": "frontend"
-      },
+      "label": "Frontend",
+      "jsonKey": "frontend",
       "items": [
         "ReactJS",
         "NextJS",
@@ -244,14 +119,8 @@ const SITE_DATA = {
     },
     {
       "key": "languages",
-      "label": {
-        "es": "Lenguajes",
-        "en": "Languages"
-      },
-      "jsonKey": {
-        "es": "lenguajes",
-        "en": "languages"
-      },
+      "label": "Lenguajes",
+      "jsonKey": "lenguajes",
       "items": [
         "Go",
         "TypeScript",
@@ -262,14 +131,8 @@ const SITE_DATA = {
     },
     {
       "key": "databases",
-      "label": {
-        "es": "Bases de datos",
-        "en": "Databases"
-      },
-      "jsonKey": {
-        "es": "bases_de_datos",
-        "en": "databases"
-      },
+      "label": "Bases de datos",
+      "jsonKey": "bases_de_datos",
       "items": [
         "PostgreSQL",
         "MySQL",
@@ -281,14 +144,8 @@ const SITE_DATA = {
     },
     {
       "key": "auth_security",
-      "label": {
-        "es": "Auth & Seguridad",
-        "en": "Auth & Security"
-      },
-      "jsonKey": {
-        "es": "auth_seguridad",
-        "en": "auth_security"
-      },
+      "label": "Auth & Seguridad",
+      "jsonKey": "auth_seguridad",
       "items": [
         "JWT",
         "OAuth Google",
@@ -297,14 +154,8 @@ const SITE_DATA = {
     },
     {
       "key": "testing",
-      "label": {
-        "es": "Testing",
-        "en": "Testing"
-      },
-      "jsonKey": {
-        "es": "testing",
-        "en": "testing"
-      },
+      "label": "Testing",
+      "jsonKey": "testing",
       "items": [
         "Jest",
         "Supertest"
@@ -312,416 +163,58 @@ const SITE_DATA = {
     },
     {
       "key": "ai_dev",
-      "label": {
-        "es": "IA & Desarrollo Asistido",
-        "en": "AI & AI-Assisted Development"
-      },
-      "jsonKey": {
-        "es": "ia_desarrollo_asistido",
-        "en": "ai_assisted_development"
-      },
+      "label": "IA & Desarrollo Asistido",
+      "jsonKey": "ia_desarrollo_asistido",
       "items": [
         "Claude Code"
       ]
     }
   ],
-
-
-  // Más reciente primero.
-  experienceCV: [
+  "education": [
     {
-      "date": {
-        "es": "NOV 2026",
-        "en": "NOV 2026"
-      },
-      "role": {
-        "es": "Full Stack Developer · Proyecto independiente",
-        "en": "Full Stack Developer · Independent Project"
-      },
-      "org": "Call Project",
-      "url": "https://frankgp.com/fibra-detector",
-      "desc": {
-        "es": "Plataforma en producción para detectar oportunidades de fibra óptica y centralizar su seguimiento comercial, con más de 400 asesores registrados y 20 supervisores con sus respectivos equipos durante la primera semana.",
-        "en": "Production platform for detecting fiber-optic sales opportunities and centralizing sales follow-up, with over 400 registered advisors and 20 supervisors with their respective teams within the first week."
-      },
-      "bullets": {
-        "es": [
-          "Desarrollé de extremo a extremo una plataforma de monitoreo comercial con dashboard React y TypeScript, API Node.js y Express, y persistencia en MariaDB con TypeORM.",
-          "Implementé una extensión para Chrome y Edge que identifica ofertas de fibra óptica en CTR, genera alertas y registra detecciones y última actividad para facilitar el seguimiento de oportunidades y apoyar las ventas.",
-          "Construí una app Android nativa con Kotlin y Jetpack Compose, notificaciones push mediante Firebase Cloud Messaging y monitoreo en tiempo real mediante Server-Sent Events (SSE).",
-          "Implementé autenticación con Google OAuth y correo/contraseña, permisos por rol y cobertura de equipos, importación masiva y trazabilidad del historial de detecciones.",
-          "Puse la solución en producción; durante la primera semana se registraron más de 400 asesores y 20 supervisores, cada uno con su equipo.",
-          "Proyecto: <a href=\"https://frankgp.com/fibra-detector\">https://frankgp.com/fibra-detector</a>."
-        ],
-        "en": [
-          "Developed an end-to-end sales monitoring platform with a React and TypeScript dashboard, a Node.js and Express API, and MariaDB persistence using TypeORM.",
-          "Built a Chrome and Edge extension that identifies fiber-optic offers in CTR, generates alerts, and records detections and last activity to support opportunity follow-up and sales.",
-          "Built a native Android app with Kotlin and Jetpack Compose, push notifications through Firebase Cloud Messaging, and real-time monitoring using Server-Sent Events (SSE).",
-          "Implemented Google OAuth and email/password authentication, role-based permissions and team coverage, bulk imports, and detection history tracking.",
-          "Launched the platform in production; over 400 advisors and 20 supervisors, each with their own team, were registered within the first week.",
-          "Project: <a href=\"https://frankgp.com/fibra-detector\">https://frankgp.com/fibra-detector</a>."
-        ]
-      }
+      "year": "2025",
+      "name": "React Native",
+      "org": "DevTalles Academy",
+      "bullets": [
+        "Desarrollo de aplicaciones móviles multiplataforma con React Native.",
+        "Integración de APIs REST, manejo de estado y navegación.",
+        "Optimización de rendimiento y buenas prácticas para producción móvil."
+      ]
     },
     {
-      date: { es: "NOV 2026", en: "NOV 2026" },
-      role: { es: "Proyecto Personal Mobile & DevOps", en: "Personal Mobile & DevOps Project" },
-      org: "App Publisher",
-      desc: {
-        es: "Desarrollo de una CLI interactiva en Go para automatizar la compilación, firma y publicación de aplicaciones Android nativas y React Native en Google Play, con integración de CI/CD mediante GitHub Actions.",
-        en: "Developed an interactive Go CLI to automate building, signing, and publishing native Android and React Native applications to Google Play, with CI/CD integration through GitHub Actions.",
-      },
-      bullets: {
-        es: [
-          "Desarrollé una CLI en Go con menú interactivo y detección de proyectos Android y React Native para ejecutar tareas de compilación y publicación mediante Gradle.",
-          "Integré Google Play Developer API para consultar versiones y cargar Android App Bundles (AAB) en el track configurado, con autenticación mediante cuenta de servicio.",
-          "Automaticé el incremento de versionCode antes de compilar y publicar, con soporte para archivos Gradle en Groovy y Kotlin DSL.",
-          "Generé workflows de GitHub Actions para proyectos Kotlin y Expo/React Native, con compilación, firma de releases y publicación automática desde la rama deploy.",
-          "Implementé un config plugin de Expo para configurar la firma de Android durante Prebuild, utilizando variables de entorno y configuración local para las credenciales.",
-        ],
-        en: [
-          "Built a Go CLI with an interactive menu and Android and React Native project detection to run build and publishing tasks through Gradle.",
-          "Integrated the Google Play Developer API to inspect versions and upload Android App Bundles (AAB) to the configured track, using service account authentication.",
-          "Automated versionCode increments before building and publishing, supporting both Groovy and Kotlin DSL Gradle files.",
-          "Generated GitHub Actions workflows for Kotlin and Expo/React Native projects, including builds, release signing, and automatic publishing from the deploy branch.",
-          "Implemented an Expo config plugin to configure Android signing during Prebuild, using environment variables and local configuration for credentials.",
-        ],
-      },
+      "year": "2024",
+      "name": "Full Stack Web Developer",
+      "org": "Henry Bootcamp (Argentina · Remoto)",
+      "bullets": [
+        "Desarrollo de aplicaciones web con ReactJS, NextJS, Node.js y NestJS.",
+        "Diseño de APIs RESTful y arquitecturas backend escalables.",
+        "Trabajo con bases de datos SQL (PostgreSQL, MySQL) y NoSQL (MongoDB).",
+        "Metodologías ágiles (Scrum), Git y Pair Programming."
+      ]
     },
     {
-      date: { es: "AGO 2026", en: "AUG 2026" },
-      role: { es: "Proyecto DevOps Freelance", en: "DevOps Freelance Project" },
-      org: { es: "Briela Sin Fronteras (Perú) · Freelancer", en: "Briela Sin Fronteras (Peru) · Freelancer" },
-      desc: {
-        es: "Diseño e implementación de infraestructura AWS con Terraform (EC2, RDS, S3, IAM/SSM) para un sitio Django + Wagtail de terceros, publicado vía Cloudflare Tunnel sin exponer puertos. Entornos dev/prod separados, despliegue automatizado y backups a S3.",
-        en: "Designed and implemented AWS infrastructure with Terraform (EC2, RDS, S3, IAM/SSM) for a third-party Django + Wagtail site, published via Cloudflare Tunnel with no exposed ports. Separate dev/prod environments, automated deployment, and S3 backups.",
-      },
-      bullets: {
-        es: [
-          "Diseñé infraestructura como código (IaC) con Terraform para un sitio Django + Wagtail de terceros, con módulo reutilizable entre dos entornos (dev y prod) con state independiente.",
-          "Aprovisioné y administré recursos en AWS (EC2, RDS, S3, IAM, Systems Manager) mediante Terraform.",
-          "Configuré despliegue de aplicación containerizada con Docker y Nginx como reverse proxy sobre instancias EC2.",
-          "Implementé exposición segura de servicios mediante Cloudflare Tunnel, eliminando la necesidad de puertos entrantes abiertos (HTTP/HTTPS).",
-          "Desarrollé script de automatización de deploy (Bash) con git pull, build, migraciones, colecta de estáticos y healthcheck en cada actualización.",
-          "Configuré backups automatizados de base de datos a S3 por entorno.",
-          "El proyecto sigue en producción, con soporte y mantenimiento ligero continuo.",
-        ],
-        en: [
-          "Designed infrastructure as code (IaC) with Terraform for a third-party Django + Wagtail site, with a reusable module shared across two environments (dev and prod) with independent state.",
-          "Provisioned and managed AWS resources (EC2, RDS, S3, IAM, Systems Manager) via Terraform.",
-          "Configured deployment of a containerized application with Docker and Nginx as a reverse proxy on EC2 instances.",
-          "Implemented secure service exposure via Cloudflare Tunnel, eliminating the need for open inbound ports (HTTP/HTTPS).",
-          "Developed a Bash deployment automation script covering git pull, build, migrations, static file collection, and healthcheck on every update.",
-          "Configured automated database backups to S3 per environment.",
-          "The project remains in production, with light ongoing support and maintenance.",
-        ],
-      },
+      "year": "2020 — 2023",
+      "name": "Desarrollo Web con WordPress",
+      "org": "Formación independiente",
+      "bullets": [
+        "Desarrollo y personalización de temas con HTML, CSS y PHP.",
+        "Optimización de rendimiento y SEO técnico.",
+        "Implementación de prácticas de seguridad y mantenimiento en entornos productivos."
+      ]
     },
     {
-      date: { es: "AGO 2026", en: "AUG 2026" },
-      role: { es: "Proyecto DevOps Personal", en: "Personal DevOps Project" },
-      org: { es: "Monitor de Disponibilidad Web", en: "Web Uptime Monitor" },
-      desc: {
-        es: "Microservicio serverless en AWS que monitorea la disponibilidad de sitios web de forma programada y envía alertas por email ante caídas o recuperaciones, con el estado persistido en DynamoDB.",
-        en: "Serverless AWS microservice that monitors website uptime on a schedule and sends email alerts on outages or recoveries, with status persisted in DynamoDB.",
-      },
-      bullets: {
-        es: [
-          "Desarrollé un microservicio serverless en AWS (Lambda) que revisa la disponibilidad de varios sitios web en paralelo, con manejo de timeouts y detección de bloqueos de Cloudflare para evitar falsos positivos.",
-          "Programé la ejecución automática mediante EventBridge (regla programada) y expuse una API Gateway para invocación manual.",
-          "Persistí el estado de cada sitio (activo/caído, desde cuándo) en DynamoDB, para detectar cambios de estado entre revisiones.",
-          "Envié alertas automáticas por email ante caídas y recuperaciones, incluyendo el tiempo de inactividad calculado.",
-          "Definí toda la infraestructura como código con Terraform (Lambda, API Gateway, EventBridge, DynamoDB, IAM).",
-          "Monitoreo y debugging de la ejecución vía CloudWatch Logs.",
-          "Desarrollé el proyecto usando Claude Code como herramienta de IA agéntica en el flujo de trabajo diario (implementación, debugging e infraestructura como código).",
-        ],
-        en: [
-          "Developed a serverless AWS microservice (Lambda) that checks multiple websites' availability in parallel, with timeout handling and Cloudflare-block detection to avoid false positives.",
-          "Scheduled automatic execution via EventBridge (scheduled rule) and exposed an API Gateway endpoint for manual invocation.",
-          "Persisted each site's state (up/down, since when) in DynamoDB, to detect status changes between checks.",
-          "Sent automated email alerts on outages and recoveries, including calculated downtime.",
-          "Defined the entire infrastructure as code with Terraform (Lambda, API Gateway, EventBridge, DynamoDB, IAM).",
-          "Monitored and debugged execution via CloudWatch Logs.",
-          "Built the project using Claude Code as an agentic AI tool in the daily workflow (implementation, debugging, and infrastructure as code).",
-        ],
-      },
-    },
-    {
-      date: { es: "JUL — DIC 2025", en: "JUL — DEC 2025" },
-      role: { es: "Full Stack & Mobile Developer", en: "Full Stack & Mobile Developer" },
-      org: "Mix&Match Outfit Planner (Argentina) · Freelancer",
-      desc: {
-        es: "Liderazgo end-to-end de app móvil y web, autenticación OAuth, dashboard admin, push notifications y despliegue continuo en VPS.",
-        en: "End-to-end leadership of mobile and web app, OAuth authentication, admin dashboard, push notifications, and continuous deployment on VPS.",
-      },
-      bullets: {
-        es: [
-          "Lideré el desarrollo end-to-end de aplicación móvil multiplataforma (Android & iOS) y plataforma web con React Native y ReactJS + TypeScript.",
-          "Diseñé y desarrollé APIs REST escalables con Express.js y MySQL, estructuradas bajo principios modulares y separación por capas.",
-          "Implementé autenticación segura mediante OAuth (Google y Apple Sign-In) y gestión de sesiones con JWT, cumpliendo requisitos para publicación en App Store y Play Store.",
-          "Implementé pruebas unitarias y de integración (Jest + Supertest) para los flujos de autenticación y middlewares críticos.",
-          "Desarrollé microservicio en Python para procesamiento y eliminación automática de fondo en imágenes, deployado en el mismo VPS, optimizando el flujo de subida de contenido.",
-          "Integré almacenamiento en AWS S3 con compresión y optimización de imágenes para reducir tiempos de carga.",
-          "Configuré entorno productivo en VPS Linux con dominio, SSL y despliegue continuo.",
-          "Implementé push notifications en la app móvil para mejorar el engagement y la retención de usuarios.",
-          "Desarrollé panel de administración (dashboard) en el frontend para gestión de usuarios y contenido, usando TanStack Query para el manejo eficiente de datos asíncronos y caché.",
-          "Gestioné el estado global de la aplicación combinando Redux Toolkit, Zustand y Context API según el caso de uso.",
-          "Guardé tokens de sesión con expo-secure-store (Keychain en iOS, Keystore en Android) en vez de almacenamiento plano.",
-          "Compilé y publiqué la app con EAS Build y EAS Update (Expo), incluyendo builds de iOS alquilando una instancia macOS en Scaleway al no contar con hardware Mac propio.",
-          "Agregué feature de etiquetas (tags) para prendas, mejorando la organización y búsqueda dentro del armario virtual.",
-          "Implementé rutina de limpieza para eliminar automáticamente usuarios inactivos con más de 90 días sin actividad, optimizando la base de datos.",
-          "Producto lanzado en producción alcanzando +10,000 usuarios en los primeros 2 meses, y en mantenimiento y evolución continua desde entonces.",
-        ],
-        en: [
-          "Led end-to-end development of a cross-platform mobile app (Android & iOS) and web platform with React Native and ReactJS + TypeScript.",
-          "Designed and built scalable REST APIs with Express.js and MySQL, structured under modular principles and layered separation.",
-          "Implemented secure authentication via OAuth (Google and Apple Sign-In) and JWT session management, meeting App Store and Play Store publication requirements.",
-          "Implemented unit and integration tests (Jest + Supertest) for authentication flows and critical middlewares.",
-          "Developed a Python microservice for automatic image background processing and removal, deployed on the same VPS, streamlining the content upload flow.",
-          "Integrated AWS S3 storage with image compression and optimization to reduce load times.",
-          "Configured a production environment on a Linux VPS with domain, SSL, and continuous deployment.",
-          "Implemented push notifications in the mobile app to improve user engagement and retention.",
-          "Built an admin dashboard on the frontend for user and content management, using TanStack Query for efficient async data handling and caching.",
-          "Managed global application state combining Redux Toolkit, Zustand, and Context API depending on the use case.",
-          "Stored session tokens with expo-secure-store (Keychain on iOS, Keystore on Android) instead of plain storage.",
-          "Built and published the app with EAS Build and EAS Update (Expo), including iOS builds run on a rented Scaleway macOS instance since I didn't have my own Mac hardware.",
-          "Added a tagging feature for garments, improving organization and search within the virtual closet.",
-          "Implemented a cleanup routine to automatically remove users inactive for more than 90 days, optimizing the database.",
-          "Launched into production, reaching +10,000 users within the first 2 months, and in continuous maintenance and evolution since then.",
-        ],
-      },
-    },
-    {
-      "date": {
-        "es": "MAR — ABR 2025",
-        "en": "MAR — APR 2025"
-      },
-      "role": {
-        "es": "Desarrollador Full Stack",
-        "en": "Full Stack Developer"
-      },
-      "org": "E-Transportech · Freelancer",
-      "desc": {
-        "es": "Diseño y desarrollo de un sitio web responsive para una empresa de transporte con Angular 19 y Node.js/Express, páginas de servicios y formulario de contacto con envío de correos y almacenamiento de consultas.",
-        "en": "Designed and developed a responsive website for a transportation company using Angular 19 and Node.js/Express, with service pages and a contact form that sends emails and stores inquiries."
-      },
-      "bullets": {
-        "es": [
-          "Diseñé y desarrollé un sitio web responsive con Angular 19 para presentar la empresa de transporte y sus servicios en dispositivos móviles y de escritorio.",
-          "Implementé el backend con Node.js y Express.js para procesar el formulario de contacto, enviar correos y almacenar las consultas recibidas.",
-          "Realicé el despliegue del sitio y del backend en un servidor, integrando la presentación de servicios con la recepción de consultas comerciales."
-        ],
-        "en": [
-          "Designed and developed a responsive Angular 19 website to present the transportation company and its services on mobile and desktop devices.",
-          "Implemented a Node.js and Express.js backend to process the contact form, send emails, and store incoming inquiries.",
-          "Deployed the website and backend to a server, connecting the service presentation with the collection of business inquiries."
-        ]
-      }
-    },
-    {
-      date: { es: "ENE — ABR 2025", en: "JAN — APR 2025" },
-      role: { es: "Full Stack, Mobile & DevOps Developer", en: "Full Stack, Mobile & DevOps Developer" },
-      org: "Transpaservic (Colombia) · Freelancer",
-      desc: {
-        es: "Sistema de gestión de órdenes de transporte: desarrollo full stack (web y móvil) con ReactJS, React Native, NestJS y MySQL, y despliegue de infraestructura AWS con Terraform.",
-        en: "Transport order-management system: full stack development (web and mobile) with ReactJS, React Native, NestJS, and MySQL, plus AWS infrastructure deployment with Terraform.",
-      },
-      bullets: {
-        es: [
-          "Diseñé e implementé sistema web y móvil de gestión de órdenes de transporte con ReactJS, React Native, NestJS y MySQL, donde la central emite órdenes y las empresas transportistas las aprueban desde la app.",
-          "Implementé WebSockets para actualizaciones en tiempo real.",
-          "Integré push notifications en la aplicación móvil.",
-          "Automaticé notificaciones transaccionales mediante integración con WhatsApp API.",
-          "Gestioné el estado de la aplicación móvil con Redux Toolkit, Zustand y Context API según el caso, y usé EAS Build/EAS Update (Expo) para la compilación y distribución de builds.",
-          "Publicación en Google Play Store y despliegue web en producción.",
-          "Diseñé infraestructura como código (IaC) con Terraform, estructurando módulos reutilizables consumidos por múltiples entornos (dev/prod).",
-          "Aprovisioné y administré recursos en AWS (EC2, RDS, S3, IAM, Security Groups, Systems Manager) mediante Terraform.",
-          "Configuré despliegue de aplicación containerizada con Docker y Nginx como reverse proxy sobre instancias EC2.",
-          "Implementé exposición segura de servicios mediante Cloudflare Tunnel, eliminando la necesidad de puertos entrantes abiertos (HTTP/HTTPS).",
-          "Gestioné variables sensibles y credenciales (tfvars, secrets) siguiendo buenas prácticas de seguridad, evitando exposición en control de versiones.",
-          "Automaticé el proceso de deploy con scripts Bash (git pull, generación de .env, rebuild de contenedores) para actualizar la app sin recrear la infraestructura base.",
-          "El sistema sigue en producción, en mantenimiento y mejoras continuas desde entonces.",
-        ],
-        en: [
-          "Designed and implemented a web and mobile transport order-management system with ReactJS, React Native, NestJS, and MySQL, where the central office issues orders and transport companies approve them from the app.",
-          "Implemented WebSockets for real-time updates.",
-          "Integrated push notifications into the mobile app.",
-          "Automated transactional notifications via WhatsApp API integration.",
-          "Managed mobile app state with Redux Toolkit, Zustand, and Context API depending on the case, and used EAS Build/EAS Update (Expo) for build compilation and distribution.",
-          "Published on the Google Play Store and deployed the web app to production.",
-          "Designed infrastructure as code (IaC) with Terraform, structuring reusable modules consumed by multiple environments (dev/prod).",
-          "Provisioned and managed AWS resources (EC2, RDS, S3, IAM, Security Groups, Systems Manager) via Terraform.",
-          "Configured deployment of a containerized application with Docker and Nginx as a reverse proxy on EC2 instances.",
-          "Implemented secure service exposure via Cloudflare Tunnel, eliminating the need for open inbound ports (HTTP/HTTPS).",
-          "Managed sensitive variables and credentials (tfvars, secrets) following security best practices, avoiding exposure in version control.",
-          "Automated the deployment process with Bash scripts (git pull, .env generation, container rebuild) to update the app without recreating the base infrastructure.",
-          "The system remains in production, in continuous maintenance and improvement since then.",
-        ],
-      },
-    },
-    {
-      date: { es: "OCT — NOV 2024", en: "OCT — NOV 2024" },
-      role: { es: "Desarrollador Full Stack", en: "Full Stack Developer" },
-      org: {
-        es: "Sistema de Citas Médicas (Argentina) · Freelancer",
-        en: "Medical Appointment System (Argentina) · Freelancer",
-      },
-      desc: {
-        es: "Sistema de citas para clínicas. Backend con NestJS, PostgreSQL y TypeORM. Despliegue en AWS EC2 y frontend en AWS Amplify.",
-        en: "Appointment scheduling system for clinics. Backend with NestJS, PostgreSQL, and TypeORM. Deployed on AWS EC2 with frontend on AWS Amplify.",
-      },
-      bullets: {
-        es: [
-          "Desarrollé sistema de citas para clínicas, con backend en NestJS, PostgreSQL y TypeORM.",
-          "Diseño de APIs REST y autenticación segura con JWT.",
-          "Despliegue en AWS EC2 y publicación de frontend en AWS Amplify.",
-        ],
-        en: [
-          "Developed an appointment scheduling system for clinics, with a NestJS, PostgreSQL, and TypeORM backend.",
-          "Designed REST APIs and secure JWT authentication.",
-          "Deployed on AWS EC2 and published the frontend on AWS Amplify.",
-        ],
-      },
-    },
-    {
-      date: { es: "AGO — SEP 2024", en: "AUG — SEP 2024" },
-      role: { es: "Desarrollador Full Stack", en: "Full Stack Developer" },
-      org: "BPVentures (Henry Projects, Argentina) · Freelancer",
-      desc: {
-        es: "Desarrollo full stack con NestJS y ReactJS, WebSockets, documentación de API con OpenAPI/Swagger y CI con GitHub Actions, trabajo en equipo de 6 personas bajo Scrum.",
-        en: "Full stack development with NestJS and ReactJS, WebSockets, API documentation with OpenAPI/Swagger and CI with GitHub Actions, working in a 6-person team under Scrum.",
-      },
-      bullets: {
-        es: [
-          "Desarrollo full stack con NestJS y ReactJS.",
-          "Implementación de WebSockets para notificaciones en tiempo real.",
-          "Documenté la API con OpenAPI/Swagger (NestJS Swagger module) y configuré un pipeline de CI (GitHub Actions) que sincroniza automáticamente la especificación con SwaggerHub en cada push.",
-          "Trabajo colaborativo en equipo de 6 personas bajo metodología Scrum.",
-        ],
-        en: [
-          "Full stack development with NestJS and ReactJS.",
-          "Implemented WebSockets for real-time notifications.",
-          "Documented the API with OpenAPI/Swagger (NestJS Swagger module) and set up a CI pipeline (GitHub Actions) that automatically syncs the spec to SwaggerHub on every push.",
-          "Collaborated in a 6-person team under Scrum methodology.",
-        ],
-      },
-    },
-    {
-      date: { es: "MAY — JUN 2024", en: "MAY — JUN 2024" },
-      role: { es: "Desarrollador Full Stack", en: "Full Stack Developer" },
-      org: "Mariaknoll Store (Argentina) · Freelancer",
-      desc: {
-        es: "Catálogo full stack para vestidos de fiesta, con backend en Node.js y MongoDB, carrito de compras y seguimiento de pedidos.",
-        en: "Full stack catalog for party dresses, with a Node.js and MongoDB backend, shopping cart, and order tracking.",
-      },
-      bullets: {
-        es: [
-          "Desarrollo backend con Node.js y MongoDB.",
-          "Implementación de carrito de compras y seguimiento de pedidos.",
-          "Diseño de frontend con HTML, CSS y JavaScript.",
-        ],
-        en: [
-          "Backend development with Node.js and MongoDB.",
-          "Implemented shopping cart and order tracking.",
-          "Designed frontend with HTML, CSS, and JavaScript.",
-        ],
-      },
-    },
-    {
-      date: { es: "2020 — 2023", en: "2020 — 2023" },
-      role: { es: "Desarrollador WordPress", en: "WordPress Developer" },
-      org: { es: "Freelancer / Remoto (Perú)", en: "Freelancer / Remote (Peru)" },
-      desc: {
-        es: "Sitios para clientes internacionales, gestión de hosting/SSL en cPanel y optimización SEO técnica.",
-        en: "Sites for international clients, hosting/SSL management in cPanel, and technical SEO optimization.",
-      },
-      bullets: {
-        es: [
-          "Desarrollo y personalización de sitios WordPress para clientes internacionales.",
-          "Gestión de hosting, dominios, SSL y configuraciones de seguridad en cPanel.",
-          "Optimización de rendimiento y SEO técnico.",
-        ],
-        en: [
-          "Developed and customized WordPress sites for international clients.",
-          "Managed hosting, domains, SSL, and security configurations in cPanel.",
-          "Performance optimization and technical SEO.",
-        ],
-      },
-    },
+      "year": "2008 — 2010",
+      "name": "Técnico en Computación e Informática",
+      "org": "Instituto Tecnológico Unitek de IDAT (Perú)",
+      "bullets": [
+        "Formación técnica en fundamentos de computación e informática."
+      ]
+    }
   ],
-
-  // Más reciente primero. "bullets" (bilingüe) es el detalle mostrado por
-  // cv/index.html — index.html (home) solo usa year/name/org.
-  education: [
+  "projects": [
     {
-      year: "2025",
-      name: "React Native",
-      org: "DevTalles Academy",
-      bullets: {
-        es: [
-          "Desarrollo de aplicaciones móviles multiplataforma con React Native.",
-          "Integración de APIs REST, manejo de estado y navegación.",
-          "Optimización de rendimiento y buenas prácticas para producción móvil.",
-        ],
-        en: [
-          "Developed cross-platform mobile applications with React Native.",
-          "REST API integration, state management, and navigation.",
-          "Performance optimization and best practices for mobile production.",
-        ],
-      },
-    },
-    {
-      year: "2024",
-      name: "Full Stack Web Developer",
-      org: { es: "Henry Bootcamp (Argentina · Remoto)", en: "Henry Bootcamp (Argentina · Remote)" },
-      bullets: {
-        es: [
-          "Desarrollo de aplicaciones web con ReactJS, NextJS, Node.js y NestJS.",
-          "Diseño de APIs RESTful y arquitecturas backend escalables.",
-          "Trabajo con bases de datos SQL (PostgreSQL, MySQL) y NoSQL (MongoDB).",
-          "Metodologías ágiles (Scrum), Git y Pair Programming.",
-        ],
-        en: [
-          "Developed web applications with ReactJS, NextJS, Node.js, and NestJS.",
-          "Designed RESTful APIs and scalable backend architectures.",
-          "Worked with SQL (PostgreSQL, MySQL) and NoSQL (MongoDB) databases.",
-          "Agile methodologies (Scrum), Git, and Pair Programming.",
-        ],
-      },
-    },
-    {
-      year: "2020 — 2023",
-      name: { es: "Desarrollo Web con WordPress", en: "WordPress Web Development" },
-      org: { es: "Formación independiente", en: "Independent study" },
-      bullets: {
-        es: [
-          "Desarrollo y personalización de temas con HTML, CSS y PHP.",
-          "Optimización de rendimiento y SEO técnico.",
-          "Implementación de prácticas de seguridad y mantenimiento en entornos productivos.",
-        ],
-        en: [
-          "Developed and customized themes with HTML, CSS, and PHP.",
-          "Performance optimization and technical SEO.",
-          "Implemented security and maintenance practices in production environments.",
-        ],
-      },
-    },
-    {
-      year: "2008 — 2010",
-      name: { es: "Técnico en Computación e Informática", en: "Computer Science & IT Technician" },
-      org: { es: "Instituto Tecnológico Unitek de IDAT (Perú)", en: "Instituto Tecnológico Unitek de IDAT (Peru)" },
-      bullets: {
-        es: ["Formación técnica en fundamentos de computación e informática."],
-        en: ["Technical training in computer science and IT fundamentals."],
-      },
-    },
-  ],
-
-  // Proyectos mostrados en /portfolio — español únicamente (esa página no
-  // tiene toggle de idioma). Orden: apps móviles, tooling, DevOps y backend.
-  projectsPortfolio: [
-    {
-      "title": "Mix&Match",
+      "id": "mix-match",
+      "name": "Mix&Match",
       "description": "Outfit Planner / armario virtual. App móvil (Android/iOS) y web, OAuth con Google y Apple, microservicio en Python para remoción de fondo de imágenes.",
       "category": "fullstack",
       "image": "https://cdn.frankgp.com/portfolio/ivanageraldine-web.webp",
@@ -733,7 +226,7 @@ const SITE_DATA = {
         "frontend",
         "devops"
       ],
-      "tech": [
+      "technologies": [
         "React Native",
         "React",
         "TypeScript",
@@ -749,10 +242,44 @@ const SITE_DATA = {
           "label": "Ver sitio",
           "url": "http://ivanageraldine.com"
         }
-      ]
+      ],
+      "date": "JUL — DIC 2025",
+      "role": "Full Stack & Mobile Developer",
+      "client": "Mix&Match Outfit Planner (Argentina) · Freelancer",
+      "details": [
+        "Lideré el desarrollo end-to-end de aplicación móvil multiplataforma (Android & iOS) y plataforma web con React Native y ReactJS + TypeScript.",
+        "Diseñé y desarrollé APIs REST escalables con Express.js y MySQL, estructuradas bajo principios modulares y separación por capas.",
+        "Implementé autenticación segura mediante OAuth (Google y Apple Sign-In) y gestión de sesiones con JWT, cumpliendo requisitos para publicación en App Store y Play Store.",
+        "Implementé pruebas unitarias y de integración (Jest + Supertest) para los flujos de autenticación y middlewares críticos.",
+        "Desarrollé microservicio en Python para procesamiento y eliminación automática de fondo en imágenes, deployado en el mismo VPS, optimizando el flujo de subida de contenido.",
+        "Integré almacenamiento en AWS S3 con compresión y optimización de imágenes para reducir tiempos de carga.",
+        "Configuré entorno productivo en VPS Linux con dominio, SSL y despliegue continuo.",
+        "Implementé push notifications en la app móvil para mejorar el engagement y la retención de usuarios.",
+        "Desarrollé panel de administración (dashboard) en el frontend para gestión de usuarios y contenido, usando TanStack Query para el manejo eficiente de datos asíncronos y caché.",
+        "Gestioné el estado global de la aplicación combinando Redux Toolkit, Zustand y Context API según el caso de uso.",
+        "Guardé tokens de sesión con expo-secure-store (Keychain en iOS, Keystore en Android) en vez de almacenamiento plano.",
+        "Compilé y publiqué la app con EAS Build y EAS Update (Expo), incluyendo builds de iOS alquilando una instancia macOS en Scaleway al no contar con hardware Mac propio.",
+        "Agregué feature de etiquetas (tags) para prendas, mejorando la organización y búsqueda dentro del armario virtual.",
+        "Implementé rutina de limpieza para eliminar automáticamente usuarios inactivos con más de 90 días sin actividad, optimizando la base de datos.",
+        "Producto lanzado en producción alcanzando +10,000 usuarios en los primeros 2 meses, y en mantenimiento y evolución continua desde entonces."
+      ],
+      "cv": {
+        "order": 4,
+        "summary": "App Android/iOS y web desarrollada para un cliente, con React Native y TypeScript.",
+        "achievements": [
+          "Superó los 10.000 usuarios en sus primeros dos meses y se publicó en Google Play y App Store.",
+          "Integré OAuth Google/Apple, notificaciones push y almacenamiento seguro de tokens; backend Express/MySQL y S3."
+        ]
+      },
+      "featured": {
+        "order": 1,
+        "badge": "LIVE",
+        "metric": "+10,000 usuarios en 2 meses"
+      }
     },
     {
-      "title": "Gestión de Órdenes — Mobile",
+      "id": "transpaservic-mobile",
+      "name": "Gestión de Órdenes — Mobile",
       "description": "Versión móvil del sistema de gestión de órdenes de transporte para Transpaservic.",
       "category": "mobile",
       "image": "https://cdn.frankgp.com/portfolio/transpaservic-mobile.webp",
@@ -763,7 +290,7 @@ const SITE_DATA = {
         "mobile",
         "devops"
       ],
-      "tech": [
+      "technologies": [
         "Figma",
         "React Native",
         "Redux Toolkit",
@@ -777,20 +304,52 @@ const SITE_DATA = {
           "label": "Play Store",
           "url": "https://play.google.com/store/apps/details?id=com.fgp555.transpaservic"
         }
-      ]
+      ],
+      "date": "ENE — ABR 2025",
+      "role": "Full Stack, Mobile & DevOps Developer",
+      "client": "Transpaservic (Colombia) · Freelancer",
+      "details": [
+        "Diseñé e implementé sistema web y móvil de gestión de órdenes de transporte con ReactJS, React Native, NestJS y MySQL, donde la central emite órdenes y las empresas transportistas las aprueban desde la app.",
+        "Implementé WebSockets para actualizaciones en tiempo real.",
+        "Integré push notifications en la aplicación móvil.",
+        "Automaticé notificaciones transaccionales mediante integración con WhatsApp API.",
+        "Gestioné el estado de la aplicación móvil con Redux Toolkit, Zustand y Context API según el caso, y usé EAS Build/EAS Update (Expo) para la compilación y distribución de builds.",
+        "Publicación en Google Play Store y despliegue web en producción.",
+        "Diseñé infraestructura como código (IaC) con Terraform, estructurando módulos reutilizables consumidos por múltiples entornos (dev/prod).",
+        "Aprovisioné y administré recursos en AWS (EC2, RDS, S3, IAM, Security Groups, Systems Manager) mediante Terraform.",
+        "Configuré despliegue de aplicación containerizada con Docker y Nginx como reverse proxy sobre instancias EC2.",
+        "Implementé exposición segura de servicios mediante Cloudflare Tunnel, eliminando la necesidad de puertos entrantes abiertos (HTTP/HTTPS).",
+        "Gestioné variables sensibles y credenciales (tfvars, secrets) siguiendo buenas prácticas de seguridad, evitando exposición en control de versiones.",
+        "Automaticé el proceso de deploy con scripts Bash (git pull, generación de .env, rebuild de contenedores) para actualizar la app sin recrear la infraestructura base.",
+        "El sistema sigue en producción, en mantenimiento y mejoras continuas desde entonces."
+      ],
+      "cv": {
+        "order": 5,
+        "summary": "App móvil de gestión de órdenes de transporte, integrada con una plataforma web y backend NestJS.",
+        "achievements": [
+          "Publicada en Google Play, con React Native, Expo, notificaciones push y actualizaciones en tiempo real.",
+          "Desarrollé APIs con NestJS/MySQL y configuré infraestructura AWS con Terraform, Docker y Nginx."
+        ]
+      },
+      "featured": {
+        "order": 2,
+        "badge": "PUBLICADO",
+        "metric": "Publicado en Google Play Store"
+      }
     },
     {
-      "title": "App Publisher",
+      "id": "app-publisher",
+      "name": "App Publisher",
       "description": "CLI interactiva en Go para compilar, firmar y publicar aplicaciones Android nativas y React Native en Google Play. Automatiza el incremento de versionCode, la carga de AAB y la generación de workflows de GitHub Actions para Kotlin y Expo/React Native.",
       "category": "tools",
-      "image": null,
-      "duration": "Proyecto personal",
+      "image": "https://cdn.frankgp.com/portfolio/app-publisher.webp",
+      "duration": "Proyecto para la comunidad",
       "year": "2026",
       "roles": [
         "mobile",
         "devops"
       ],
-      "tech": [
+      "technologies": [
         "Go",
         "Android",
         "Gradle",
@@ -804,10 +363,192 @@ const SITE_DATA = {
           "label": "GitHub",
           "url": "https://github.com/fgp555/app-publisher"
         }
+      ],
+      "date": "NOV 2026",
+      "role": "Mobile & DevOps Developer · Proyecto para la comunidad",
+      "client": "App Publisher",
+      "details": [
+        "Desarrollé una CLI en Go con menú interactivo y detección de proyectos Android y React Native para ejecutar tareas de compilación y publicación mediante Gradle.",
+        "Integré Google Play Developer API para consultar versiones y cargar Android App Bundles (AAB) en el track configurado, con autenticación mediante cuenta de servicio.",
+        "Automaticé el incremento de versionCode antes de compilar y publicar, con soporte para archivos Gradle en Groovy y Kotlin DSL.",
+        "Generé workflows de GitHub Actions para proyectos Kotlin y Expo/React Native, con compilación, firma de releases y publicación automática desde la rama deploy.",
+        "Implementé un config plugin de Expo para configurar la firma de Android durante Prebuild, utilizando variables de entorno y configuración local para las credenciales."
+      ],
+      "cv": {
+        "order": 2,
+        "summary": "Herramienta para la comunidad mobile que automatiza releases Android y React Native.",
+        "achievements": [
+          "Desarrollé una CLI en Go para compilar con Gradle, incrementar versionCode y publicar AAB mediante Google Play Developer API.",
+          "Generé workflows de GitHub Actions y configuración de firma para Kotlin y Expo/React Native."
+        ]
+      },
+      "featured": {
+        "order": 3,
+        "badge": "CLI",
+        "metric": "Automatización de releases Android"
+      }
+    },
+    {
+      "id": "call-project",
+      "name": "Call Project",
+      "description": "Plataforma en producción para detectar oportunidades de fibra óptica y centralizar su seguimiento comercial, con más de 400 asesores registrados y 20 supervisores con sus respectivos equipos durante la primera semana.",
+      "category": "fullstack",
+      "image": "https://cdn.frankgp.com/portfolio/call-project-mobile.webp",
+      "duration": "Freelance",
+      "year": "2026",
+      "roles": [
+        "frontend",
+        "backend"
+      ],
+      "technologies": [
+        "Kotlin",
+        "Jetpack Compose",
+        "TypeScript",
+        "React",
+        "Node.js",
+        "Express",
+        "MariaDB",
+        "TypeORM",
+        "Firebase Cloud Messaging"
+      ],
+      "links": [
+        {
+          "label": "Ver proyecto",
+          "url": "https://frankgp.com/fibra-detector"
+        }
+      ],
+      "date": "NOV 2026",
+      "role": "Mobile & Full Stack Developer · Freelance",
+      "client": "Call Project",
+      "details": [
+        "Desarrollé de extremo a extremo una plataforma de monitoreo comercial con dashboard React y TypeScript, API Node.js y Express, y persistencia en MariaDB con TypeORM.",
+        "Implementé una extensión para Chrome y Edge que identifica ofertas de fibra óptica en CTR, genera alertas y registra detecciones y última actividad para facilitar el seguimiento de oportunidades y apoyar las ventas.",
+        "Construí una app Android nativa con Kotlin y Jetpack Compose, notificaciones push mediante Firebase Cloud Messaging y monitoreo en tiempo real mediante Server-Sent Events (SSE).",
+        "Implementé autenticación con Google OAuth y correo/contraseña, permisos por rol y cobertura de equipos, importación masiva y trazabilidad del historial de detecciones.",
+        "Puse la solución en producción; durante la primera semana se registraron más de 400 asesores y 20 supervisores, cada uno con su equipo."
+      ],
+      "cv": {
+        "order": 1,
+        "summary": "Plataforma freelance para detectar oportunidades de fibra óptica y centralizar el seguimiento comercial.",
+        "achievements": [
+          "Desarrollé dashboard React/TypeScript, API Express/MariaDB, extensión Chrome/Edge y app Android con Kotlin y Jetpack Compose.",
+          "Más de 400 asesores y 20 supervisores registrados durante la primera semana; push con FCM y seguimiento mediante SSE."
+        ]
+      }
+    },
+    {
+      "id": "img-viewer",
+      "name": "IMG Viewer",
+      "description": "Visor y editor ligero de imágenes para Windows, desarrollado con asistencia de inteligencia artificial como proyecto para la comunidad. Incluye navegación por carpetas, zoom, recorte, rotación, anotaciones y captura de pantalla.",
+      "category": "desktop",
+      "image": "https://cdn.frankgp.com/portfolio/imgviewer.webp",
+      "duration": "Proyecto para la comunidad",
+      "year": "2026",
+      "roles": [
+        "ai_development"
+      ],
+      "technologies": [
+        "C#",
+        ".NET 10",
+        "WPF",
+        "XAML",
+        "WebP",
+        "SharpVectors"
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/fgp555/img-viewer"
+        }
+      ],
+      "date": "NOV 2026",
+      "role": "Desarrollo con IA · Proyecto para la comunidad"
+    },
+    {
+      "id": "pdf-reader",
+      "name": "PDF Reader",
+      "description": "Lector de PDF para Windows, desarrollado con asistencia de inteligencia artificial como proyecto para la comunidad. Incluye navegación por páginas y documentos, búsqueda y selección de texto, zoom, rotación, impresión y tema claro/oscuro.",
+      "category": "desktop",
+      "image": "https://cdn.frankgp.com/portfolio/pdfreader.webp",
+      "duration": "Proyecto para la comunidad",
+      "year": "2026",
+      "roles": [
+        "ai_development"
+      ],
+      "technologies": [
+        "C#",
+        ".NET 10",
+        "WPF",
+        "XAML",
+        "PDFtoImage",
+        "PdfPig"
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/fgp555/PDFReader"
+        }
+      ],
+      "date": "NOV 2026",
+      "role": "Desarrollo con IA · Proyecto para la comunidad"
+    },
+    {
+      "id": "e-transportech",
+      "name": "E-Transportech",
+      "description": "Diseño y desarrollo de un sitio web responsive para una empresa de transporte con Angular 19 y Node.js/Express, páginas de servicios y formulario de contacto con envío de correos y almacenamiento de consultas.",
+      "category": "fullstack",
+      "image": null,
+      "duration": "Freelance",
+      "year": "2025",
+      "roles": [
+        "frontend",
+        "backend"
+      ],
+      "technologies": [
+        "Angular 19",
+        "Node.js",
+        "Express"
+      ],
+      "links": [],
+      "date": "MAR — ABR 2025",
+      "role": "Desarrollador Full Stack",
+      "client": "E-Transportech · Freelancer",
+      "details": [
+        "Diseñé y desarrollé un sitio web responsive con Angular 19 para presentar la empresa de transporte y sus servicios en dispositivos móviles y de escritorio.",
+        "Implementé el backend con Node.js y Express.js para procesar el formulario de contacto, enviar correos y almacenar las consultas recibidas.",
+        "Realicé el despliegue del sitio y del backend en un servidor, integrando la presentación de servicios con la recepción de consultas comerciales."
       ]
     },
     {
-      "title": "Briela Sin Fronteras",
+      "id": "wordpress",
+      "name": "Sitios WordPress para clientes",
+      "description": "Sitios para clientes internacionales, gestión de hosting/SSL en cPanel y optimización SEO técnica.",
+      "category": "fullstack",
+      "image": null,
+      "duration": "Freelance",
+      "year": "2020",
+      "roles": [
+        "frontend",
+        "backend"
+      ],
+      "technologies": [
+        "WordPress",
+        "PHP",
+        "cPanel"
+      ],
+      "links": [],
+      "date": "2020 — 2023",
+      "role": "Desarrollador WordPress",
+      "client": "Freelancer / Remoto (Perú)",
+      "details": [
+        "Desarrollo y personalización de sitios WordPress para clientes internacionales.",
+        "Gestión de hosting, dominios, SSL y configuraciones de seguridad en cPanel.",
+        "Optimización de rendimiento y SEO técnico."
+      ]
+    },
+    {
+      "id": "briela",
+      "name": "Briela Sin Fronteras",
       "description": "Infraestructura como código con Terraform sobre AWS (EC2, RDS, S3, IAM) para un sitio Django + Wagtail de terceros, publicado vía Cloudflare Tunnel sin exponer puertos.",
       "category": "devops",
       "image": "https://cdn.frankgp.com/portfolio/brielasinfronteras-web.webp",
@@ -816,7 +557,7 @@ const SITE_DATA = {
       "roles": [
         "devops"
       ],
-      "tech": [
+      "technologies": [
         "Terraform",
         "AWS EC2/RDS/S3/IAM",
         "Docker",
@@ -828,20 +569,41 @@ const SITE_DATA = {
           "label": "Ver sitio",
           "url": "http://brielasinfronteras.org"
         }
-      ]
+      ],
+      "date": "AGO 2026",
+      "role": "Proyecto DevOps Freelance",
+      "client": "Briela Sin Fronteras (Perú) · Freelancer",
+      "details": [
+        "Diseñé infraestructura como código (IaC) con Terraform para un sitio Django + Wagtail de terceros, con módulo reutilizable entre dos entornos (dev y prod) con state independiente.",
+        "Aprovisioné y administré recursos en AWS (EC2, RDS, S3, IAM, Systems Manager) mediante Terraform.",
+        "Configuré despliegue de aplicación containerizada con Docker y Nginx como reverse proxy sobre instancias EC2.",
+        "Implementé exposición segura de servicios mediante Cloudflare Tunnel, eliminando la necesidad de puertos entrantes abiertos (HTTP/HTTPS).",
+        "Desarrollé script de automatización de deploy (Bash) con git pull, build, migraciones, colecta de estáticos y healthcheck en cada actualización.",
+        "Configuré backups automatizados de base de datos a S3 por entorno.",
+        "El proyecto sigue en producción, con soporte y mantenimiento ligero continuo."
+      ],
+      "cv": {
+        "order": 3,
+        "summary": "Infraestructura AWS para un sitio Django/Wagtail de un cliente, con entornos dev/prod separados.",
+        "achievements": [
+          "Implementé módulos Terraform para EC2, RDS, S3 e IAM, contenedores Docker y exposición mediante Cloudflare Tunnel.",
+          "Automaticé despliegues y backups a S3, con healthchecks y mantenimiento en producción."
+        ]
+      }
     },
     {
-      "title": "Monitor de Disponibilidad Web",
+      "id": "uptime-monitor",
+      "name": "Monitor de Disponibilidad Web",
       "description": "Microservicio serverless en AWS que revisa la disponibilidad de sitios web de forma programada y envía alertas por email ante caídas o recuperaciones, con el estado persistido en DynamoDB.",
       "category": "devops",
-      "image": null,
+      "image": "https://cdn.frankgp.com/portfolio/uptime-monitor.webp",
       "duration": "Proyecto personal",
       "year": "2026",
       "roles": [
         "backend",
         "devops"
       ],
-      "tech": [
+      "technologies": [
         "Node.js",
         "Terraform",
         "AWS Lambda",
@@ -855,10 +617,23 @@ const SITE_DATA = {
           "label": "GitHub",
           "url": "https://github.com/fgp555/fgp-microservices"
         }
+      ],
+      "date": "AGO 2026",
+      "role": "Proyecto DevOps Personal",
+      "client": "Monitor de Disponibilidad Web",
+      "details": [
+        "Desarrollé un microservicio serverless en AWS (Lambda) que revisa la disponibilidad de varios sitios web en paralelo, con manejo de timeouts y detección de bloqueos de Cloudflare para evitar falsos positivos.",
+        "Programé la ejecución automática mediante EventBridge (regla programada) y expuse una API Gateway para invocación manual.",
+        "Persistí el estado de cada sitio (activo/caído, desde cuándo) en DynamoDB, para detectar cambios de estado entre revisiones.",
+        "Envié alertas automáticas por email ante caídas y recuperaciones, incluyendo el tiempo de inactividad calculado.",
+        "Definí toda la infraestructura como código con Terraform (Lambda, API Gateway, EventBridge, DynamoDB, IAM).",
+        "Monitoreo y debugging de la ejecución vía CloudWatch Logs.",
+        "Desarrollé el proyecto usando Claude Code como herramienta de IA agéntica en el flujo de trabajo diario (implementación, debugging e infraestructura como código)."
       ]
     },
     {
-      "title": "Gestión de Órdenes — Web",
+      "id": "transpaservic-web",
+      "name": "Gestión de Órdenes — Web",
       "description": "Sistema de gestión de órdenes de transporte para Transpaservic: la central emite órdenes y las empresas transportistas las aprueban desde la app.",
       "category": "fullstack",
       "image": "https://cdn.frankgp.com/portfolio/transpaservic-web.webp",
@@ -868,7 +643,7 @@ const SITE_DATA = {
         "backend",
         "devops"
       ],
-      "tech": [
+      "technologies": [
         "Figma",
         "ReactJS",
         "NestJS",
@@ -880,10 +655,13 @@ const SITE_DATA = {
           "label": "Ver sitio",
           "url": "http://transpaservic.com.co"
         }
-      ]
+      ],
+      "date": "2025",
+      "role": "Desarrollo de software"
     },
     {
-      "title": "Sistema de Citas Médicas",
+      "id": "citas-medicas",
+      "name": "Sistema de Citas Médicas",
       "description": "Sistema de citas para clínicas.",
       "category": "fullstack",
       "image": null,
@@ -893,7 +671,7 @@ const SITE_DATA = {
         "backend",
         "devops"
       ],
-      "tech": [
+      "technologies": [
         "ReactJS",
         "NestJS",
         "CPanel",
@@ -904,10 +682,19 @@ const SITE_DATA = {
           "label": "GitHub",
           "url": "https://github.com/fgp555/gio-appointments-project"
         }
+      ],
+      "date": "OCT — NOV 2024",
+      "role": "Desarrollador Full Stack",
+      "client": "Sistema de Citas Médicas (Argentina) · Freelancer",
+      "details": [
+        "Desarrollé sistema de citas para clínicas, con backend en NestJS, PostgreSQL y TypeORM.",
+        "Diseño de APIs REST y autenticación segura con JWT.",
+        "Despliegue en AWS EC2 y publicación de frontend en AWS Amplify."
       ]
     },
     {
-      "title": "Sistema de Envíos",
+      "id": "envios",
+      "name": "Sistema de Envíos",
       "description": "Sistema de envíos y entregas con generación de reportes en PDF.",
       "category": "fullstack",
       "image": null,
@@ -918,7 +705,7 @@ const SITE_DATA = {
         "frontend",
         "devops"
       ],
-      "tech": [
+      "technologies": [
         "HTML",
         "CSS",
         "JS",
@@ -931,10 +718,13 @@ const SITE_DATA = {
           "label": "GitHub",
           "url": "https://github.com/fgp555/nere-shipping-project"
         }
-      ]
+      ],
+      "date": "2024",
+      "role": "Desarrollo de software"
     },
     {
-      "title": "BP Ventures",
+      "id": "bp-ventures",
+      "name": "BP Ventures",
       "description": "Sistema de entregables para la empresa BP Ventures, con API documentada en OpenAPI/Swagger y CI (GitHub Actions) que la sincroniza con SwaggerHub.",
       "category": "fullstack",
       "image": null,
@@ -945,7 +735,7 @@ const SITE_DATA = {
         "frontend",
         "devops"
       ],
-      "tech": [
+      "technologies": [
         "NextJS",
         "NestJS",
         "Swagger",
@@ -957,10 +747,20 @@ const SITE_DATA = {
           "label": "YouTube",
           "url": "https://youtu.be/vSBttwQO62k"
         }
+      ],
+      "date": "AGO — SEP 2024",
+      "role": "Desarrollador Full Stack",
+      "client": "BPVentures (Henry Projects, Argentina) · Freelancer",
+      "details": [
+        "Desarrollo full stack con NestJS y ReactJS.",
+        "Implementación de WebSockets para notificaciones en tiempo real.",
+        "Documenté la API con OpenAPI/Swagger (NestJS Swagger module) y configuré un pipeline de CI (GitHub Actions) que sincroniza automáticamente la especificación con SwaggerHub en cada push.",
+        "Trabajo colaborativo en equipo de 6 personas bajo metodología Scrum."
       ]
     },
     {
-      "title": "Mariaknoll Store",
+      "id": "mariaknoll",
+      "name": "Mariaknoll Store",
       "description": "Catálogo full stack para vestidos de fiesta.",
       "category": "fullstack",
       "image": null,
@@ -970,7 +770,7 @@ const SITE_DATA = {
         "backend",
         "devops"
       ],
-      "tech": [
+      "technologies": [
         "HTML",
         "CSS",
         "JS",
@@ -983,10 +783,19 @@ const SITE_DATA = {
           "label": "GitHub",
           "url": "https://github.com/buchervanesa/mariaknoll.website"
         }
+      ],
+      "date": "MAY — JUN 2024",
+      "role": "Desarrollador Full Stack",
+      "client": "Mariaknoll Store (Argentina) · Freelancer",
+      "details": [
+        "Desarrollo backend con Node.js y MongoDB.",
+        "Implementación de carrito de compras y seguimiento de pedidos.",
+        "Diseño de frontend con HTML, CSS y JavaScript."
       ]
     },
     {
-      "title": "Catálogo de Laptops",
+      "id": "catalogo-laptops",
+      "name": "Catálogo de Laptops",
       "description": "Catálogo para la venta de laptops.",
       "category": "frontend",
       "image": "https://cdn.frankgp.com/portfolio/petulap-web.webp",
@@ -995,7 +804,7 @@ const SITE_DATA = {
       "roles": [
         "frontend"
       ],
-      "tech": [
+      "technologies": [
         "HTML",
         "CSS",
         "JS"
@@ -1005,14 +814,16 @@ const SITE_DATA = {
           "label": "Ver sitio",
           "url": "https://catalogo-web.github.io/catalogo-petulap"
         }
-      ]
+      ],
+      "date": "2022",
+      "role": "Desarrollo de software"
     }
-  ],
-
+  ]
 };
 
-// Helper: valor bilingüe {es,en} o string plano -> string según idioma activo.
-function pick(value, lang) {
-  if (value == null) return "";
-  return typeof value === "string" ? value : value[lang] || value.es || "";
+function getCVProjects() {
+  return SITE_DATA.projects.filter(p => p.cv).sort((a, b) => a.cv.order - b.cv.order);
+}
+function getFeaturedProjects() {
+  return SITE_DATA.projects.filter(p => p.featured).sort((a, b) => a.featured.order - b.featured.order);
 }

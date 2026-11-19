@@ -26,18 +26,14 @@ function loadSiteData() {
   return vm.runInContext(code + "\nSITE_DATA", sandbox, { filename: "data.js" });
 }
 
-function pick(value, lang) {
-  if (value == null) return "";
-  return typeof value === "string" ? value : value[lang] || value.es || "";
-}
 
 function buildHeadline(data) {
   return `${data.title} | TypeScript, React, React Native, NestJS, AWS | Construyo desde la arquitectura hasta producción`;
 }
 
 function buildAbout(data) {
-  const summary = pick(data.summaryLong, "es");
-  const practices = data.technicalPractices.es.map((p) => `🔹 ${p}`).join("\n");
+  const summary = data.summaryLong;
+  const practices = data.technicalPractices.map((p) => `🔹 ${p}`).join("\n");
   return `Soy ${data.name.split(" ")[0]}, ${summary}
 
 Algunas cosas que hago en el día a día:
@@ -48,18 +44,18 @@ Portafolio: frankgp.com${data.links.portfolio} · CV: frankgp.com${data.links.cv
 }
 
 function buildExperienceEntry(job) {
-  const role = pick(job.role, "es");
-  const org = pick(job.org, "es");
-  const date = pick(job.date, "es");
-  const bullets = job.bullets ? pick(job.bullets, "es") : [pick(job.desc, "es")];
+  const role = job.role;
+  const org = job.name;
+  const date = job.date;
+  const bullets = job.details?.length ? job.details : [job.description];
   const body = bullets.map((b) => `• ${b}`).join("\n");
   return `### ${role} — ${org}\n**Fechas:** ${date}\n\n\`\`\`\n${body}\n\`\`\``;
 }
 
 function buildEducationEntry(edu) {
-  const name = pick(edu.name, "es");
-  const org = pick(edu.org, "es");
-  const bullets = edu.bullets ? pick(edu.bullets, "es") : [];
+  const name = edu.name;
+  const org = edu.org;
+  const bullets = edu.bullets ? edu.bullets : [];
   const body = bullets.length ? "\n\n```\n" + bullets.map((b) => `• ${b}`).join("\n") + "\n```" : "";
   return `### ${name} — ${org}\n**Año:** ${edu.year}${body}`;
 }
@@ -67,8 +63,8 @@ function buildEducationEntry(edu) {
 function buildSkillsChecklist(data) {
   return data.skills
     .map((group) => {
-      const items = group.items.map((i) => `- [ ] ${pick(i, "es")}`).join("\n");
-      return `**${pick(group.label, "es")}**\n${items}`;
+      const items = group.items.map((i) => `- [ ] ${i}`).join("\n");
+      return `**${group.label}**\n${items}`;
     })
     .join("\n\n");
 }
@@ -105,7 +101,7 @@ ${about}
 
 ## Experiencia
 
-${data.experienceCV.map(buildExperienceEntry).join("\n\n")}
+${data.projects.filter(p => p.details?.length).map(buildExperienceEntry).join("\n\n")}
 
 ## Educación
 

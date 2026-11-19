@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1200" viewBox="0 0 1920 1200" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">App Publisher — CLI para publicar apps Android</title>
+  <desc id="description">Miniatura con una terminal ilustrativa del comando app-publisher deploy: actualizar versionCode, compilar con Gradle y publicar en Google Play.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1920" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0C1D2B"/>
+      <stop offset="1" stop-color="#080D16"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(1460 370) rotate(145) scale(1050 760)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#18C9D8" stop-opacity=".13"/>
+      <stop offset="1" stop-color="#18C9D8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="132" y1="0" x2="1788" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38E6CB"/>
+      <stop offset="1" stop-color="#41BFEF"/>
+    </linearGradient>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" stroke="#A4E3EE" stroke-opacity=".035"/>
+    </pattern>
+  </defs>
+  <rect width="1920" height="1200" fill="url(#background)"/>
+  <rect width="1920" height="1200" fill="url(#grid)"/>
+  <rect width="1920" height="1200" fill="url(#glow)"/>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <rect x="132" y="102" width="94" height="94" rx="24" fill="#102D38" stroke="#2D6976"/>
+    <path d="M155 131L173 148L155 165M184 166H204" stroke="#45E5D2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="254" y="141" fill="#65DACA" font-size="24" font-weight="700" letter-spacing="5">HERRAMIENTAS MOBILE</text>
+    <text x="254" y="181" fill="#8DA4B7" font-size="26">CLI · Android · React Native</text>
+    <rect x="1483" y="121" width="305" height="57" rx="28.5" fill="#122A31" stroke="#28545D"/>
+    <circle cx="1515" cy="149.5" r="6" fill="#45E5D2"/>
+    <text x="1537" y="159" fill="#BFE8E2" font-size="24" font-weight="600">Para la comunidad</text>
+    <text x="126" y="334" fill="#F1F7FB" font-size="116" font-weight="750" letter-spacing="-5">App Publisher<tspan fill="#45E5D2">_</tspan></text>
+    <text x="132" y="401" fill="#AFC0CF" font-size="36">De tu terminal a Google Play.</text>
+  </g>
+  <rect x="132" y="466" width="1656" height="522" rx="24" fill="#040A11" stroke="#294252" stroke-width="2"/>
+  <path d="M156 467H1764Q1787 467 1787 491V536H133V491Q133 467 156 467Z" fill="#162430"/>
+  <circle cx="171" cy="502" r="9" fill="#FD6C69"/>
+  <circle cx="203" cy="502" r="9" fill="#F1C85C"/>
+  <circle cx="235" cy="502" r="9" fill="#46D3A2"/>
+  <g font-family="Consolas, 'Courier New', monospace">
+    <text x="283" y="512" fill="#8FA4B6" font-size="25">terminal / android-app</text>
+    <text x="1515" y="511" fill="#8299AA" font-size="22">FLUJO DE EJEMPLO</text>
+    <text x="186" y="614" font-size="37"><tspan fill="#45E5D2">$ </tspan><tspan fill="#EEF5FC">app-publisher deploy</tspan></text>
+    <path d="M187 657H1732" stroke="#1C303F"/>
+    <text x="186" y="721" font-size="31"><tspan fill="#45E5D2">01</tspan><tspan x="260" fill="#D1DEE9">Actualizar versionCode</tspan><tspan x="1440" fill="#728FA3">VERSIONAR</tspan></text>
+    <text x="186" y="804" font-size="31"><tspan fill="#45E5D2">02</tspan><tspan x="260" fill="#D1DEE9">Compilar el AAB con Gradle</tspan><tspan x="1440" fill="#728FA3">COMPILAR</tspan></text>
+    <text x="186" y="887" font-size="31"><tspan fill="#45E5D2">03</tspan><tspan x="260" fill="#D1DEE9">Publicar en Google Play</tspan><tspan x="1440" fill="#728FA3">PUBLICAR</tspan></text>
+    <rect x="187" y="932" width="14" height="27" rx="2" fill="#45E5D2"/>
+  </g>
+  <rect x="132" y="1060" width="1656" height="2" fill="url(#accent)" opacity=".5"/>
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="26">
+    <text x="132" y="1120" fill="#A3B8C9">Go <tspan fill="#456475"> / </tspan> Gradle <tspan fill="#456475"> / </tspan> GitHub Actions <tspan fill="#456475"> / </tspan> Google Play API</text>
+    <text x="1788" y="1120" fill="#76A7B7" text-anchor="end">fgp555 / app-publisher</text>
+  </g>
+</svg>

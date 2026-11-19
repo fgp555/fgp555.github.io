@@ -100,20 +100,8 @@
       .logo span {
         color: var(--cyan);
       }
-      .lang-toggle {
-        font-size: 12.5px;
-        font-weight: 700;
-        color: var(--text-dim);
-        background: var(--bg-elev-2);
-        border: 1px solid var(--border);
-        border-radius: 7px;
-        padding: 8px 11px;
-        cursor: pointer;
-      }
-      .lang-toggle:hover {
-        color: var(--cyan);
-        border-color: var(--cyan);
-      }
+
+
       .print-btn {
         font-size: 13px;
         font-weight: 600;
@@ -409,18 +397,29 @@
           color: inherit !important;
         }
       }
+      .cv-project-summary { font-size: 12.3px; color: var(--text-dim); margin: 5px 0; }
+      @media print {
+        .cv-summary { line-height: 1.5; }
+        ul.cv-bullets li { line-height: 1.45; margin-bottom: 3px; }
+        .entry { margin-top: 12px; }
+      }
     </style>
   </head>
   <body>
-    <header>
+    <header class="site-header">
       <div class="nav">
         <a href="/" class="logo">FGP<span>_</span></a>
+        <nav class="nav-links site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/portfolio/">Portafolio</a>
+          <a href="/services/">Servicios</a>
+          <a href="/cv/" aria-current="page">CV</a>
+        </nav>
         <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
           <button class="theme-toggle" type="button" aria-label="Cambiar tema claro/oscuro" aria-pressed="false">
             <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
             <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
           </button>
-          <button class="lang-toggle" id="langToggle" type="button" aria-label="Cambiar idioma">EN</button>
           <a class="print-btn" id="cvPdfLink" href="#" download>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -447,12 +446,6 @@
           <section>
             <h2 id="labelProfile"></h2>
             <p class="cv-summary" id="cvSummary"></p>
-          </section>
-
-          <!-- ARQUITECTURA Y RESPONSABILIDAD TÉCNICA -->
-          <section>
-            <h2 id="labelPractices"></h2>
-            <ul class="cv-bullets" id="cvPractices"></ul>
           </section>
 
           <!-- EXPERIENCIA LABORAL -->
@@ -527,42 +520,15 @@
     </script>
 
     <script>
-      // Renderiza el CV completo (versión detallada, la misma que se usa
-      // para generar el PDF — ver scripts/generate-cv-pdf.js) desde
-      // SITE_DATA (assets/js/data.js), única fuente de verdad. Idioma por
-      // query string: /cv/?lang=en (default "es"), con un botón para
-      // togglearlo sin editar la URL a mano.
-      const I18N = true; // sentinel: evita el auto-init en español de page-nav.js, lo llamamos manualmente abajo con el lang correcto
-      const lang = new URLSearchParams(location.search).get("lang") === "en" ? "en" : "es";
-      document.documentElement.lang = lang;
-
-      const langBtn = document.getElementById("langToggle");
-      langBtn.textContent = lang === "es" ? "EN" : "ES";
-      langBtn.setAttribute("aria-label", lang === "es" ? "Switch to English" : "Cambiar a español");
-      langBtn.addEventListener("click", function () {
-        const url = new URL(location.href);
-        if (lang === "es") url.searchParams.set("lang", "en");
-        else url.searchParams.delete("lang");
-        location.href = url.toString();
-      });
-
-      renderPageNav(lang);
-
-      // Encabezados de sección — en inglés se usan a propósito los términos
-      // literales que buscan los parsers de ATS ("Education", "Work
-      // Experience"), no una traducción libre.
+      // CV destacado: misma selección para pantalla y PDF, solo español.
+      document.documentElement.lang = "es";
       const SECTION_LABELS = {
-        profile: { es: "Perfil profesional", en: "Professional Summary" },
-        practices: { es: "Arquitectura y responsabilidad técnica", en: "Technical Architecture & Ownership" },
-        experience: { es: "Experiencia laboral", en: "Work Experience" },
-        education: { es: "Educación", en: "Education" },
-        skills: { es: "Habilidades técnicas", en: "Technical Skills" },
+        Profile: "Perfil profesional", Experience: "Experiencia y proyectos destacados",
+        Education: "Formación", Skills: "Habilidades técnicas"
       };
-      document.getElementById("labelProfile").textContent = SECTION_LABELS.profile[lang];
-      document.getElementById("labelPractices").textContent = SECTION_LABELS.practices[lang];
-      document.getElementById("labelExperience").textContent = SECTION_LABELS.experience[lang];
-      document.getElementById("labelEducation").textContent = SECTION_LABELS.education[lang];
-      document.getElementById("labelSkills").textContent = SECTION_LABELS.skills[lang];
+      Object.entries(SECTION_LABELS).forEach(([key, label]) => {
+        document.getElementById("label" + key).textContent = label;
+      });
 
       // Íconos inline estilo Lucide (stroke="currentColor", stroke-width="2",
       // round caps/joins) — misma convención del resto del sitio, sin CDN.
@@ -577,14 +543,14 @@
 
       document.getElementById("cvName").textContent = SITE_DATA.name;
       document.getElementById("cvTitle").textContent = SITE_DATA.title;
-      document.getElementById("cvSummary").textContent = pick(SITE_DATA.summaryLong, lang);
+      document.getElementById("cvSummary").textContent = SITE_DATA.summaryLong;
 
       const email = SITE_DATA.email.user + "@" + SITE_DATA.email.domain;
       const whatsapp = "+" + SITE_DATA.whatsappNumber.replace(/^(\d{2})/, "$1 ");
       const portfolioUrl = "https://frankgp.com" + SITE_DATA.links.portfolio;
       const contactRows = [
         [
-          [ICONS.pin, pick(SITE_DATA.location, lang), null],
+          [ICONS.pin, SITE_DATA.location, null],
           [ICONS.mail, email, "mailto:" + email],
           [ICONS.phone, whatsapp, "https://wa.me/" + SITE_DATA.whatsappNumber],
         ],
@@ -607,23 +573,21 @@
         )
         .join("");
 
-      document.getElementById("cvPractices").innerHTML = pick(SITE_DATA.technicalPractices, lang)
-        .map((t) => `<li>${t}</li>`)
-        .join("");
 
       function entryBullets(entry) {
-        const items = entry.bullets ? pick(entry.bullets, lang) : [pick(entry.desc, lang)];
+        const items = entry.cv.achievements;
         return `<ul class="cv-bullets">${items.map((b) => `<li>${b}</li>`).join("")}</ul>`;
       }
 
-      document.getElementById("cvExperience").innerHTML = SITE_DATA.experienceCV
+      document.getElementById("cvExperience").innerHTML = getCVProjects()
         .map(
           (job) => `
             <div class="entry">
               <div class="entry-head">
-                <div class="entry-role">${pick(job.role, lang)} <span class="entry-org">— ${pick(job.org, lang)}</span></div>
-                <div class="entry-date">${pick(job.date, lang)}</div>
+                <div class="entry-role">${job.role} <span class="entry-org">— ${job.name}</span></div>
+                <div class="entry-date">${job.date}</div>
               </div>
+              <p class="cv-project-summary">${job.cv.summary}</p>
               ${entryBullets(job)}
             </div>`,
         )
@@ -634,32 +598,31 @@
           (edu) => `
             <div class="entry">
               <div class="entry-head">
-                <div class="entry-role">${pick(edu.name, lang)} <span class="entry-org">— ${pick(edu.org, lang)}</span></div>
+                <div class="entry-role">${edu.name} <span class="entry-org">— ${edu.org}</span></div>
                 <div class="entry-date">${edu.year}</div>
               </div>
-              ${edu.bullets ? `<ul class="cv-bullets">${pick(edu.bullets, lang).map((b) => `<li>${b}</li>`).join("")}</ul>` : ""}
+              
             </div>`,
         )
         .join("");
 
-      document.getElementById("cvSkills").innerHTML = SITE_DATA.skills
+      document.getElementById("cvSkills").innerHTML = SITE_DATA.skills.filter(group => ["mobile", "cloud_devops", "backend", "languages", "testing"].includes(group.key))
         .map(
           (group) => `
             <div class="skills-group">
-              <div class="skills-label">${pick(group.label, lang)}</div>
+              <div class="skills-label">${group.label}</div>
               <div class="skills-tags">
-                ${group.items.map((i) => `<span class="skill-tag">${pick(i, lang)}</span>`).join("")}
+                ${group.items.map((i) => `<span class="skill-tag">${i}</span>`).join("")}
               </div>
             </div>`,
         )
         .join("");
 
-      // Botón de descarga de PDF — apunta al PDF del idioma que se está
-      // mostrando ahora mismo (ES o EN), no dos botones separados.
+      // Único PDF en español.
       const cvPdfLink = document.getElementById("cvPdfLink");
-      cvPdfLink.href = lang === "en" ? SITE_DATA.links.cvPdfEn : SITE_DATA.links.cvPdf;
+      cvPdfLink.href = SITE_DATA.links.cvPdf;
       cvPdfLink.setAttribute("download", "");
-      document.getElementById("cvPdfLinkText").textContent = lang === "en" ? "Download PDF" : "Descargar PDF";
+      document.getElementById("cvPdfLinkText").textContent = "Descargar PDF";
     </script>
   </body>
 </html>

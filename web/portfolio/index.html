@@ -477,12 +477,20 @@
           border-radius: 0;
         }
       }
+      #modalDesc ul { list-style: disc; padding-left: 20px; margin: 14px 0; }
+      #modalDesc li { margin-bottom: 8px; }
     </style>
   </head>
   <body>
-    <header>
+    <header class="site-header">
       <div class="nav">
         <a href="/" class="logo">FGP<span>_</span></a>
+        <nav class="nav-links site-nav" aria-label="Navegación principal">
+          <a href="/">Inicio</a>
+          <a href="/portfolio/" aria-current="page">Portafolio</a>
+          <a href="/services/">Servicios</a>
+          <a href="/cv/">CV</a>
+        </nav>
         <div style="display: flex; align-items: center; gap: 14px">
           <button class="theme-toggle" type="button" aria-label="Cambiar tema claro/oscuro" aria-pressed="false">
             <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
@@ -502,7 +510,7 @@
     <main>
       <section class="hero wrap">
         <h1>Apps móviles y <span class="hl">automatización</span></h1>
-        <p>Primero mobile: Mix&Match, Transpaservic y App Publisher. También infraestructura cloud y sistemas backend.</p>
+        <p>Proyectos del más reciente al más antiguo: apps móviles, herramientas, infraestructura cloud y sistemas backend. Filtra por destacados o por especialidad.</p>
       </section>
 
       <div class="wrap">
@@ -551,7 +559,7 @@
             <h2 id="modalTitle"></h2>
             <span class="badge badge-cyan" id="modalBadge"></span>
           </div>
-          <p id="modalDesc"></p>
+          <div id="modalDesc"></div>
           <div class="port-meta" id="modalMeta"></div>
           <div class="port-tags" id="modalTags"></div>
           <div class="port-links" id="modalLinks"></div>
@@ -561,6 +569,7 @@
 
     <script>
       const CATEGORY_LABELS = {
+        desktop: "Desktop",
         fullstack: "Full Stack",
         mobile: "Mobile",
         frontend: "Frontend",
@@ -568,6 +577,7 @@
         devops: "DevOps",
       };
       const ROLE_LABELS = {
+        ai_development: "Desarrollo con IA",
         backend: "Backend",
         frontend: "Frontend",
         mobile: "Mobile",
@@ -575,7 +585,18 @@
         design: "Diseño",
       };
 
-      const PROJECTS = SITE_DATA.projectsPortfolio;
+      // Ordenar una copia: no alterar la selección ni el orden de otras vistas.
+      function projectDateRank(project) {
+        const date = String(project.date || project.year || "").toUpperCase();
+        const years = date.match(/\d{4}/g);
+        const year = years ? Number(years[years.length - 1]) : 0;
+        const months = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
+        const names = date.match(/\b(?:ENE|FEB|MAR|ABR|MAY|JUN|JUL|AGO|SEP|OCT|NOV|DIC)\b/g);
+        const month = names ? months.indexOf(names[names.length - 1]) + 1 : 0;
+        return year * 100 + month;
+      }
+      const PROJECTS = [...SITE_DATA.projects].sort((a, b) => projectDateRank(b) - projectDateRank(a));
+      const isFeatured = project => Boolean(project.cv || project.featured);
 
       const linkIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path></svg>`;
 
@@ -585,23 +606,23 @@
 
       function cardHTML(p, i) {
         const roles = p.roles.map((r) => ROLE_LABELS[r] || r).join(" · ");
-        const tags = p.tech.map((t) => `<span class="tag">${t}</span>`).join("");
+        const tags = p.technologies.map((t) => `<span class="tag">${t}</span>`).join("");
         const links = p.links
           .map((l) => `<a href="${l.url}" target="_blank" rel="noopener">${linkIcon}${l.label}</a>`)
           .join("");
         const img = p.image
-          ? `<img src="${p.image}" alt="${p.title}" loading="lazy" />`
-          : `<div class="port-img-placeholder">${p.title}</div>`;
+          ? `<img src="${p.image}" alt="${p.name}" loading="lazy" />`
+          : `<div class="port-img-placeholder">${p.name}</div>`;
         return `
-          <div class="port-card" data-category="${p.category}" data-index="${i}">
+          <div class="port-card" data-category="${p.category}" data-featured="${isFeatured(p)}" data-index="${i}">
             <div class="port-img">${img}</div>
             <div class="port-body">
               <div class="port-top">
-                <span class="port-title">${p.title}</span>
+                <span class="port-title">${p.name}</span>
                 <span class="badge badge-cyan">${CATEGORY_LABELS[p.category]}</span>
               </div>
               <p class="port-desc">${p.description}</p>
-              <div class="port-meta">${roles} · ${p.duration} · ${p.year}</div>
+              <div class="port-meta">${roles} · ${p.duration} · ${p.date || p.year}</div>
               <div class="port-tags">${tags}</div>
               ${links ? `<div class="port-links">${links}</div>` : ""}
             </div>
@@ -610,12 +631,12 @@
 
       grid.innerHTML = PROJECTS.map(cardHTML).join("");
 
-      const categories = ["todos", ...new Set(PROJECTS.map((p) => p.category))];
+      const categories = ["todos", "destacados", ...new Set(PROJECTS.map((p) => p.category))];
       filtersEl.innerHTML = categories
         .map(
           (c, i) =>
-            `<button class="filter-chip${i === 0 ? " active" : ""}" data-filter="${c}">${
-              c === "todos" ? "Todos" : CATEGORY_LABELS[c]
+            `<button class="filter-chip${i === 0 ? " active" : ""}" data-filter="${c}" aria-pressed="${i === 0}">${
+              c === "todos" ? "Todos" : c === "destacados" ? "Destacados" : CATEGORY_LABELS[c]
             }</button>`,
         )
         .join("");
@@ -623,12 +644,16 @@
       filtersEl.addEventListener("click", function (e) {
         const btn = e.target.closest(".filter-chip");
         if (!btn) return;
-        filtersEl.querySelectorAll(".filter-chip").forEach((c) => c.classList.remove("active"));
+        filtersEl.querySelectorAll(".filter-chip").forEach((c) => {
+          c.classList.remove("active");
+          c.setAttribute("aria-pressed", "false");
+        });
         btn.classList.add("active");
+        btn.setAttribute("aria-pressed", "true");
         const filter = btn.dataset.filter;
         let visibleCount = 0;
         grid.querySelectorAll(".port-card").forEach((card) => {
-          const match = filter === "todos" || card.dataset.category === filter;
+          const match = filter === "todos" || (filter === "destacados" ? card.dataset.featured === "true" : card.dataset.category === filter);
           card.classList.toggle("hidden", !match);
           if (match) visibleCount++;
         });
@@ -654,13 +679,25 @@
       function openModal(p) {
         const roles = p.roles.map((r) => ROLE_LABELS[r] || r).join(" · ");
         modalImg.innerHTML = p.image
-          ? `<img src="${p.image}" alt="${p.title}" />`
-          : `<div class="port-img-placeholder">${p.title}</div>`;
-        modalTitle.textContent = p.title;
+          ? `<img src="${p.image}" alt="${p.name}" />`
+          : `<div class="port-img-placeholder">${p.name}</div>`;
+        modalTitle.textContent = p.name;
         modalBadge.textContent = CATEGORY_LABELS[p.category];
-        modalDesc.textContent = p.description;
+        modalDesc.replaceChildren();
+        const description = document.createElement("p");
+        description.textContent = p.description;
+        modalDesc.append(description);
+        if (p.details?.length) {
+          const list = document.createElement("ul");
+          p.details.forEach(text => {
+            const item = document.createElement("li");
+            item.textContent = text;
+            list.append(item);
+          });
+          modalDesc.append(list);
+        }
         modalMeta.textContent = `${roles} · ${p.duration} · ${p.year}`;
-        modalTags.innerHTML = p.tech.map((t) => `<span class="tag">${t}</span>`).join("");
+        modalTags.innerHTML = p.technologies.map((t) => `<span class="tag">${t}</span>`).join("");
         modalLinks.innerHTML = p.links
           .map((l) => `<a href="${l.url}" target="_blank" rel="noopener">${linkIcon}${l.label}</a>`)
           .join("");

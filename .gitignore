@@ -32,3 +32,9 @@ scripts/linkedin/.env
 # Favicon público incluido en el sitio
 !/web/favicon-512.webp
 /_site/
+
+# Miniatura SVG de App Publisher
+!/web/assets/images/app-publisher.svg
+
+# Miniatura del monitor serverless
+!/web/assets/images/uptime-monitor.svg
